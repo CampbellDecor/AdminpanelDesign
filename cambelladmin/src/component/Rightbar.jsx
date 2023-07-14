@@ -1,9 +1,8 @@
 
-
 export default function sidebar(){
     return(
-        <div >
-        
+        <div className="right-bar">
+        Hi
         </div>
     )
 }
