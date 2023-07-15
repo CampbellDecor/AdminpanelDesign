@@ -3,8 +3,7 @@ import Header from '../Header';
 import Sidebar from '../Sidebar';
 import '../../style/admin.scss'
 import Footer from  '../Footer';
-
-export default function Layout(){
+export function Layout(){
     return(
       <>
       <Sidebar/>
@@ -20,3 +19,11 @@ export default function Layout(){
            
     )
 }
+// export function SubLayout(){
+//   return(
+//     <>
+//     <BreadCrumb/>
+//     <Outlet/>
+//     </>
+//   )
+// }

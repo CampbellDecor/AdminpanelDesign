@@ -1,60 +1,65 @@
 import React from 'react';
-import '../style/user.css'
-export default function OneUser (){
-
+import '../style/user.css';
+import {BreadCrumb} from '../component/BreadCrumb';
+import { Link } from 'react-router-dom'
+export default function OneUser (props){
+    const {username,firstname,lastname,email,mobile,facebook,address,profile}=props.user;
+    const urlpath=[
+        {name:"User",path:"/users"},
+        {name:"1",path:"/users/id=1"}
+    ]
     return(
-
+        <>
+        <BreadCrumb path={urlpath}/>
         <section className="section about-section gray-bg" id="about">
             <div className="container">
                 <div className="row align-items-center flex-row-reverse">
                     <div className="col-lg-6">
                         <div className="about-text go-to">
-                            <h3 className="dark-color">About Me</h3>
-                            <h6 className="theme-color lead">A Lead UX &amp; UI designer based in Canada</h6>
+                            <h3 className="dark-color">{username}</h3>
+                            <h6 className="theme-color lead">{firstname+" " + lastname}</h6>
                             <p>I <mark>design and develop</mark> services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores. My passion is to design digital user experiences through the bold interface and meaningful interactions.</p>
                             <div className="row about-list">
                                 <div className="col-md-6">
                                     <div className="media">
-                                        <label>Birthday</label>
-                                        <p>4th april 1998</p>
-                                    </div>
-                                    <div className="media">
-                                        <label>Age</label>
-                                        <p>22 Yr</p>
-                                    </div>
-                                    <div className="media">
                                         <label>Residence</label>
-                                        <p>Canada</p>
+                                        <p>{address?.city}</p>
                                     </div>
                                     <div className="media">
                                         <label>Address</label>
-                                        <p>California, USA</p>
+                                        <p>{`${address?.line} , ${address?.city}`}</p>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="media">
                                         <label>E-mail</label>
-                                        <p>info@domain.com</p>
+                                        <p>{email}</p>
                                     </div>
                                     <div className="media">
                                         <label>Phone</label>
-                                        <p>820-885-3321</p>
-                                    </div>
-                                    <div className="media">
-                                        <label>Skype</label>
-                                        <p>skype.0404</p>
-                                    </div>
-                                    <div className="media">
-                                        <label>Freelance</label>
-                                        <p>Available</p>
+                                        <p>{mobile}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6">
-                        <div className="about-avatar">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png"  alt=""/>
+                        <div className="about-avatar position-relative">
+                            <img src={profile}  alt={username} className="image-fluid rounded"/>
+                            {facebook!=undefined?
+                                (<Link className='p-2 pill rounded-circle position-absolute' style={{top:'285px',right:'5px'}} onMouseEnter={e=>{
+                                    e.target.classList.add("bg-black");
+                                }}
+                                onMouseLeave={
+                                    e=>{
+                                        e.target.classList.remove("bg-black");
+                                    }
+                                }
+                                ><i class="fa-brands fa-facebook-f text-white"></i></Link>):<span/>
+                            }
+                            
+                         
+                           
                         </div>
                     </div>
                 </div>
@@ -88,7 +93,7 @@ export default function OneUser (){
                 </div>
             </div>
         </section>
-
+</>
     )
 
 }

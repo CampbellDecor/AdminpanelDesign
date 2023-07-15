@@ -1,33 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import {
     MDBBreadcrumb,
     MDBBreadcrumbItem,
     MDBContainer,
    
   } from 'mdb-react-ui-kit';
-export default function component (){
-
+export  function BreadCrumb ({path}){
     return(
- 
  <div className='p-5 bg-light mb-4'>
- <h1>Dashboard</h1>
+ <h1>Customer</h1>
  <MDBContainer fluid>
    <MDBBreadcrumb bold>
-     <MDBBreadcrumbItem>
-       <a href='' className='text-reset'>
-         Home
-       </a>
-     </MDBBreadcrumbItem>
-     <MDBBreadcrumbItem>
-       <a href='' className='text-reset'>
-         Analytics
-       </a>
-     </MDBBreadcrumbItem>
-     <MDBBreadcrumbItem>
-       <a href='' className='text-reset'>
-         <u>Dashboard</u>
-       </a>
-     </MDBBreadcrumbItem>
+    {path.map(({path,name,isactive})=>(
+      isactive?(
+      <MDBBreadcrumbItem active>
+        <Link to={path} className='text-black'>
+          {name}
+        </Link>
+      </MDBBreadcrumbItem>):(
+ <MDBBreadcrumbItem>
+ <Link to={path} className='text-reset'>
+   {name}
+ </Link>
+</MDBBreadcrumbItem>
+      )
+      
+    ))}
    </MDBBreadcrumb>
  </MDBContainer>
 </div>
