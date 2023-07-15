@@ -37,54 +37,31 @@ export default function Header (){
               </li>
             </ul>
           </li>
-
-          <li className="nav-item">
-            <Link className="nav-link me-3 me-lg-0" href="#">
-              <i className="fas fa-fill-drip text-white"></i>
-            </Link>
-          </li>
           <li className="nav-item me-3 me-lg-0">
             <Link className="nav-link" href="#">
-              <i className="fab fa-github"></i>
+            <i class="fab text-white fa-facebook-f"></i>
             </Link>
           </li>
           <li className="nav-item dropdown">
             <Link className="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdown" role="button"
               data-mdb-toggle="dropdown" aria-expanded="false">
-              <i className="united kingdom flag m-0"></i>
+              <i className="fas fa-fill-drip text-white"></i>
             </Link>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li>
-                <Link className="dropdown-item" href="#"><i className="united kingdom flag"></i>English
-                  <i className="fa fa-check text-success ms-2"></i></Link>
+                <Link className="dropdown-item" href="#"><i className="fas fa-fill-drip me-3"></i>Auto
+                  <i className=" text-success"></i></Link>
               </li>
               <li>
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <Link className="dropdown-item" href="#"><i className="poland flag"></i>Polski</Link>
+                <Link className="dropdown-item" href="#"><i class="fas fa-sun me-3"></i>Light</Link>
               </li>
               <li>
-                <Link className="dropdown-item" href="#"><i className="china flag"></i>中文</Link>
+                <Link className="dropdown-item" href="#"><i class="fas fa-moon me-3"></i>Dark</Link>
               </li>
-              <li>
-                <Link className="dropdown-item" href="#"><i className="japan flag"></i>日本語</Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#"><i className="germany flag"></i>Deutsch</Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#"><i className="france flag"></i>Français</Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#"><i className="spain flag"></i>Español</Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#"><i className="russia flag"></i>Русский</Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#"><i className="portugal flag"></i>Português</Link>
-              </li>
+              
             </ul>
           </li>
 
