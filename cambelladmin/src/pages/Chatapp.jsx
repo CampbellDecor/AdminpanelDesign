@@ -126,6 +126,33 @@ const mychats={
         time:"12:00 PM",
         date:"Aug 13"
       }
+    },
+    {
+      profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
+      
+      message:{
+        body:" dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.",
+        time:"12:00 PM",
+        date:"Aug 13"
+      }
+    },
+    {
+      profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
+      
+      message:{
+        body:" dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.",
+        time:"12:00 PM",
+        date:"Aug 13"
+      }
+    },
+    {
+      profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
+      
+      message:{
+        body:" dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.",
+        time:"12:00 PM",
+        date:"Aug 13"
+      }
     }
   ],
   reply:[
@@ -140,7 +167,16 @@ const mychats={
     },
     {
       profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
-      mesage:{
+     
+      message:{
+        body:" dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.",
+        time:"12:00 PM",
+        date:"Aug 13"
+      }
+    },
+    {
+      profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
+      message:{
         body:" dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.",
         time:"12:00 PM",
         date:"Aug 13"
@@ -174,18 +210,18 @@ export default function ChatApp(){
                 </div>
               </div>
               <div className="col-md-6 col-lg-7 col-xl-8 position-relative chatting">
-                <div className="pt-3 pe-3" data-mdb-perfect-scrollbar="true">
-{/*                  
+                <div className="pt-3 pe-3 h-100" data-mdb-perfect-scrollbar="true">
+                 
                   {
                    mychats.message.map(chat=>(<Message{...chat}/>))                  
                   }
                   {
                     mychats.reply.map(re=>(<Reply{...re}/>))
-                  } */}
+                  }
                 </div>
-                <div className="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2 position-absolute w-100 bottom-0">
+                <div className="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2 position-absolute bg-body-tertiary w-100 bottom-0 ">
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp" alt="avatar 3" style={{"width":"40px","height":"100%"}} />
-                  <input type="text" className="form-control form-control-lg" id="exampleFormControlInput2" placeholder="Type message" />
+                  <input type="text" className="form-control form-control-lg shadow shadow-1-soft" id="exampleFormControlInput2" placeholder="Type message" />
                   <a className="ms-1 text-muted" href="#!"><i className="fas fa-paperclip" /></a>
                   <a className="ms-3 text-muted" href="#!"><i className="fas fa-smile" /></a>
                   <a className="ms-3" href="#!"><i className="fas fa-paper-plane" /></a>

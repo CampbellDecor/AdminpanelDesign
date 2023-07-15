@@ -38,4 +38,31 @@ display: none;
     }
     .chatting{
         height: 83vh;
+        overflow: hidden;
+    }
+    .chatting>div{
+        overflow-y:auto;
+        scroll-behavior: smooth;
+        transition: all ease-in-out  0.2s;
+    }
+    .chatting>div::-webkit-scrollbar{
+       display: none;
+       cursor: pointer;
+    }
+    .editcon {
+        bottom:45px;
+        right: 40px;
+        font-size: smaller;
+        cursor: pointer;
+    }
+    .editcon:hover{
+        color:#fff !important;
+    }
+    .deleteicon:hover{
+        color: #fff !important;
+    }
+    .deleteicon{
+        font-size: smaller;
+        bottom:45px;
+        right: 20px;
     }

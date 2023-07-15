@@ -44,11 +44,14 @@ export function Reply({profile,message}){
 
   return(
     <div className="d-flex flex-row justify-content-end">
-    <div>
-      <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">{message.body}</p>
-      <p className="small me-3 mb-3 rounded-3 text-muted">{message?.time}|{message?.time}</p>
+    <div className='position-relative'>
+      <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">{message?.body}</p>
+      <p className="small me-3 mb-3 rounded-3 text-muted">{message?.time}|{message?.date}</p>
+      <i class="fa-solid fa-pen text-white-50 position-absolute editcon"></i>
+      <i class="fa-solid fa-trash text-white-50 position-absolute deleteicon"></i>
     </div>
-    <img src={profile} alt="avatar 1" style={{"width":"45px","height":"100%"}} />
+    <img src={profile} alt="avatar 1" style={{width:"45px",height:"100%"}} />
+    
   </div>
   )
 
