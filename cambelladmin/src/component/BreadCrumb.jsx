@@ -9,7 +9,7 @@ import {
 export  function BreadCrumb ({path}){
     return(
  <div className='p-5 bg-light mb-4'>
- <h1>Customer</h1>
+ <h2 className='pagename'>Customer</h2>
  <MDBContainer fluid>
    <MDBBreadcrumb bold>
     {path.map(({path,name,isactive})=>(

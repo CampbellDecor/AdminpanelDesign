@@ -5,6 +5,7 @@ import Login from '../../pages/Login';
 import Users from '../../pages/USers';
 import Chatapp from '../../pages/Chatapp';
 import OneUser  from '../../pages/OneUser'
+import Services  from '../../pages/Services'
 const user={
     username:"Thanu Mahee",
     firstname:"Mahendran",
@@ -37,6 +38,10 @@ const  router=createBrowserRouter(
                     {
                         path:"/chats",
                         element:<Chatapp/>
+                    },
+                    {
+                        path:"/services",
+                        element:<Services/>
                     }
                 ]
             },

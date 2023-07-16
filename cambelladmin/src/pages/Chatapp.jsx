@@ -196,7 +196,7 @@ export default function ChatApp(){
             <div className="row h-100">
               <div className="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0 chatusers h-100">
                 <div className="p-3 h-100">
-                  <div className="input-group rounded mb-3 bg-body-secondary">
+                  <div className="input-group rounded mb-3 shadow">
                     <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                     <span className="input-group-text border-0 searchbar" id="search-addon">
                       <i className="fas fa-search" />
