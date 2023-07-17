@@ -6,6 +6,7 @@ import Users from '../../pages/USers';
 import Chatapp from '../../pages/Chatapp';
 import OneUser  from '../../pages/OneUser'
 import Services  from '../../pages/Services'
+import {NotFound} from  '../../pages/Error/404';
 const user={
     username:"Thanu Mahee",
     firstname:"Mahendran",
@@ -48,6 +49,10 @@ const  router=createBrowserRouter(
             {
                 path:"/",
                 element:<Login/>
+            },
+            {
+                path:"/*",
+                element:<NotFound/>
             }
         ]
 );
