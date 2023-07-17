@@ -1,6 +1,6 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
-$primaryBack:#86c6f4;
-$secoundPrimary:#677bf1;
+$primaryBack:#bfc7f4;
+$secoundPrimary:#4c0bce;
 $sidehover:#60a6e8b4;
 @media (min-width: 991.98px) {
     main {
@@ -54,4 +54,7 @@ $sidehover:#60a6e8b4;
     padding-top: 0.5rem;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  .pagename{
+    text-shadow: 1px 1px 1px rgb(90, 90, 92);
   }
