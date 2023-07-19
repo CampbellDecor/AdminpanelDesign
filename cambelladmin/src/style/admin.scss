@@ -2,6 +2,15 @@
 $primaryBack:#bfc7f4;
 $secoundPrimary:#4c0bce;
 $sidehover:#60a6e8b4;
+*{
+  padding: 0;
+  margin: 0;
+  body{
+    #main-navbar{
+      
+    }
+  }
+}
 @media (min-width: 991.98px) {
     main {
       padding-left: 240px;

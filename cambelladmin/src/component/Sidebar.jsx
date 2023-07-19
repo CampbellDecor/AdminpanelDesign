@@ -6,7 +6,7 @@ export default function SideBar() {
     <nav id="sidebarMenu" className="collapse d-lg-block sidebar collapse">
     <div className="position-sticky">
       <div className="list-group list-group-flush mx-3 mt-4">
-        <Link to="#" className="list-group-item list-group-item-action py-2 ripple navlink" aria-current="true">
+        <Link to="/home" className="list-group-item list-group-item-action py-2 ripple navlink" aria-current="true">
           <i className="fas fa-tachometer-alt fa-fw me-3"></i>
           <span>Dashboard</span>
         </Link>
@@ -28,19 +28,19 @@ export default function SideBar() {
         <span>Chats </span>
         </Link>
         <Link to="#" className="list-group-item list-group-item-action py-2 ripple navlink">
-          <i class="fa fa-fw me-3 fa-puzzle-piece"></i>
+          <i className="fa fa-fw me-3 fa-puzzle-piece"></i>
           <span>Events</span>
         </Link>
         <Link to="#" className="list-group-item list-group-item-action py-2 ripple navlink">
-        <i class="fas fa-fw me-3 fa-cubes"></i>
+        <i className="fas fa-fw me-3 fa-cubes"></i>
         <span>Packages</span>
         </Link>
         <Link to="#" className="list-group-item list-group-item-action py-2 ripple navlink">
-        <i class="fas fa-fw me-3 fa-cog"></i>
+        <i className="fas fa-fw me-3 fa-cog"></i>
           <span>Setting</span>
         </Link>
-        <Link to="#" className="list-group-item list-group-item-action py-2 ripple navlink"><i
-            className="fas fa-building fa-fw me-3"></i><span>Partners</span></Link>
+        <Link to="/services" className="list-group-item list-group-item-action py-2 ripple navlink"><i
+            className="fas fa-building fa-fw me-3"></i><span>Services</span></Link>
         <Link to="#" className="list-group-item list-group-item-action py-2 ripple navlink"><i
             className="fas fa-calendar fa-fw me-3"></i><span>Shedule</span>
         </Link>

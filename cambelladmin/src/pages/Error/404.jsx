@@ -6,7 +6,7 @@ export  function NotFound (){
     return(
 
        <Container fluid>
-    
+    <h1>404</h1>
        </Container>
     )
 

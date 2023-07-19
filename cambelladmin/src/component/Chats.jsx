@@ -17,7 +17,7 @@ export function Chatuser ({profile,username,message,isOnline}){
           </div>
           <div className="pt-1">
             <p className="small text-muted mb-1">{message?.unread?.last?.time}</p>
-            <span className="badge bg-danger rounded-pill float-end">{message?.unread?.count}</span>
+            {message?.unread?.count>0?(<span className="badge bg-danger rounded-pill float-end">{message?.unread?.count}</span>):(<div/>)}
           </div>
         </a>
       </li>
@@ -47,8 +47,8 @@ export function Reply({profile,message}){
     <div className='position-relative'>
       <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">{message?.body}</p>
       <p className="small me-3 mb-3 rounded-3 text-muted">{message?.time}|{message?.date}</p>
-      <i class="fa-solid fa-pen text-white-50 position-absolute editcon"></i>
-      <i class="fa-solid fa-trash text-white-50 position-absolute deleteicon"></i>
+      <i className="fa-solid fa-pen text-white-50 position-absolute editcon"></i>
+      <i className="fa-solid fa-trash text-white-50 position-absolute deleteicon"></i>
     </div>
     <img src={profile} alt="avatar 1" style={{width:"45px",height:"100%"}} />
     

@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
-import '../style/Login.scss';
+import  '../style/Login.scss';
 
 
 
@@ -8,32 +8,27 @@ import '../style/Login.scss';
 // Log In Component
 export default function Login() {
   return (
-    <section className="h-100 gradient-form" style={{ backgroundColor: "#eee" }}>
+    <section className="h-100 gradient-form">
     <div className="container py-5 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
-        <div className="col-xl-10">
+        <div className="col-xl-9">
           <div className="card rounded-3 text-black">
             <div className="row g-0">
               <div className="col-lg-6">
                 <div className="card-body p-md-5 mx-md-4">
                   <div className="text-center">
                     <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                      style={{ width: '185px' }}
+                      src={require("../style/logo.jpg")}
+                      style={{ width: '155px'}}
                       alt="logo"
                     />
-                    <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
+                    <h4 className="mt-3 mb-5 pb-1">We are The campbell Team</h4>
                   </div>
                   <form>
                     <p>Please login to your account</p>
                     <div className="form-outline mb-4">
-                      <input
-                        type="email"
-                        id="form2Example11"
-                        className="form-control"
-                        placeholder="Phone number or email address"
-                      />
-                      <label className="form-label" htmlFor="form2Example11">
+                      <input type="email" id="form2Example11" className="form-control" placeholder="Phone number or email address" />
+                      <label className="form-label" >
                         Username
                       </label>
                     </div>
@@ -43,7 +38,7 @@ export default function Login() {
                         id="form2Example22"
                         className="form-control"
                       />
-                      <label className="form-label" htmlFor="form2Example22">
+                      <label className="form-label" >
                         Password
                       </label>
                     </div>
@@ -54,7 +49,7 @@ export default function Login() {
                       >
                         Log in
                       </button>
-                      <Link className="text-muted" href="#!">
+                      <Link to="/resetpw" className="text-muted" href="#!">
                         Forgot password?
                       </Link>
                     </div>
@@ -65,10 +60,8 @@ export default function Login() {
                 <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                   <h4 className="mb-4">We are more than just Link company</h4>
                   <p className="small mb-0">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat.
+                   Campbell Decor is here  for your any events
+                   decoration includes ballon garland,flower decrotion an.
                   </p>
                 </div>
               </div>

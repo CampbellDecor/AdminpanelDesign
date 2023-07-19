@@ -1,24 +1,26 @@
 import React from 'react';
 import {Link}  from 'react-router-dom';
-import '../style/admin.scss'
+import {Container,Button} from 'react-bootstrap'
+import '../style/admin.scss';
+
 export default function Header (){
  
     return(
       <nav id="main-navbar" className="navbar navbar-expand-lg navbar-light  fixed-top">
    
-      <div className="container-fluid">
-        <button className="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+      <Container fluid>
+        <Button className="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
           aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
           <i className="fas fa-bars text-white"></i>
-        </button>
-        <Link className="navbar-brand" href="#">
-          <img src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png" height="25" alt="" loading="lazy" />
+        </Button>
+        <Link className="navbar-brand" href="/home">
+          <img src={require("../style/logo.png")} height="40" alt="" loading="lazy" />
         </Link>
 
         <form className="d-none d-md-flex input-group w-auto my-auto">
-          <input autocomplete="off" type="search" className="form-control rounded"
-            placeholder='Search (ctrl + "/" to focus)' style={{minWidth: '225px'}} />
-          <span className="input-group-text border-0 text-white-50"><i className="fas fa-search"></i></span>
+          <input autoComplete="off" type="search" className="form-control rounded"
+            placeholder='Search..' style={{minWidth: '225px'}} />
+          <span className="input-group-text border-0 text-white"><i className="fas fa-search"></i></span>
         </form>
 
         <ul className="navbar-nav ms-auto d-flex flex-row">
@@ -39,7 +41,7 @@ export default function Header (){
           </li>
           <li className="nav-item me-3 me-lg-0">
             <Link className="nav-link" href="#">
-            <i class="fab text-white fa-facebook-f"></i>
+            <i className="fab text-white fa-facebook-f"></i>
             </Link>
           </li>
           <li className="nav-item dropdown">
@@ -56,10 +58,10 @@ export default function Header (){
                 <hr className="dropdown-divider" />
               </li>
               <li>
-                <Link className="dropdown-item" href="#"><i class="fas fa-sun me-3"></i>Light</Link>
+                <Link className="dropdown-item" href="#"><i className="fas fa-sun me-3"></i>Light</Link>
               </li>
               <li>
-                <Link className="dropdown-item" href="#"><i class="fas fa-moon me-3"></i>Dark</Link>
+                <Link className="dropdown-item" href="#"><i className="fas fa-moon me-3"></i>Dark</Link>
               </li>
               
             </ul>
@@ -78,7 +80,7 @@ export default function Header (){
             </ul>
           </li>
         </ul>
-      </div>
+      </Container>
     </nav>
     )
 

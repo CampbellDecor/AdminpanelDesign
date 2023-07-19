@@ -4,7 +4,7 @@ import {Chatuser,Message,Reply}from '../component/Chats';
 const userchats=[
   {
     profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
-    username:"Marie Horwitz",
+    username:"Thanu Mahee",
     message:{
       unread:{
         last:{
@@ -18,102 +18,47 @@ const userchats=[
   },
   {
     profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
-    username:"Marie Horwitz",
+    username:"Pinthu",
     message:{
       unread:{
         last:{
-          mes:"Hello, Are you there?",
-          time:"Just Now"
+          mes:"ok",
+          time:"10min ago"
         },
-        count:3
+        count:0
       }
     },
     isOnline:true
   },
   {
     profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
-    username:"Marie Horwitz",
+    username:"Gowsi",
     message:{
       unread:{
         last:{
-          mes:"Hello, Are you there?",
-          time:"Just Now"
+          mes:"i  am here",
+          time:"5 hrs ago"
         },
-        count:3
-      }
-    },
-    isOnline:true
-  },
-  {
-    profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
-    username:"Marie Horwitz",
-    message:{
-      unread:{
-        last:{
-          mes:"Hello, Are you there?",
-          time:"Just Now"
-        },
-        count:3
+        count:0
       }
     },
     isOnline:false
   },
   {
     profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
-    username:"Marie Horwitz",
+    username:"Saayu",
     message:{
       unread:{
         last:{
-          mes:"Hello, Are you there?",
-          time:"Just Now"
+          mes:"ok done",
+          time:"Yesterday"
         },
-        count:3
-      }
-    },
-    isOnline:false
-  },
-  {
-    profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
-    username:"Marie Horwitz",
-    message:{
-      unread:{
-        last:{
-          mes:"Hello, Are you there?",
-          time:"Just Now"
-        },
-        count:3
+        count:0
       }
     },
     isOnline:true
-  },
-  {
-    profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
-    username:"Marie Horwitz",
-    message:{
-      unread:{
-        last:{
-          mes:"Hello, Are you there?",
-          time:"Just Now"
-        },
-        count:3
-      }
-    },
-    isOnline:true
-  },
-  {
-    profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
-    username:"Marie Horwitz",
-    message:{
-      unread:{
-        last:{
-          mes:"Hello, Are you there?",
-          time:"Just Now"
-        },
-        count:3
-      }
-    },
-    isOnline:true
-  },
+  }
+ 
  
 ]
 const mychats={
