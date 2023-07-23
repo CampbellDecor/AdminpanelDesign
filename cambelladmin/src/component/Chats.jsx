@@ -1,10 +1,10 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 export function Chatuser ({profile,username,message,isOnline}){
 
     return(
         <li className="p-2 border-bottom useitem">
-        <a href="#!" className="d-flex justify-content-between">
+        <Link className="d-flex justify-content-between">
           <div className="d-flex flex-row">
             <div className='position-relative'>
               <img src={profile} alt="avatar" className="d-flex align-self-center me-3" width={60} />
@@ -19,7 +19,7 @@ export function Chatuser ({profile,username,message,isOnline}){
             <p className="small text-muted mb-1">{message?.unread?.last?.time}</p>
             {message?.unread?.count>0?(<span className="badge bg-danger rounded-pill float-end">{message?.unread?.count}</span>):(<div/>)}
           </div>
-        </a>
+        </Link>
       </li>
     )
 

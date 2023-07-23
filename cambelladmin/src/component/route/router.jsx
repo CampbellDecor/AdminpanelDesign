@@ -5,6 +5,7 @@ import Login from '../../pages/Login';
 import Users from '../../pages/USers';
 import Chatapp from '../../pages/Chatapp';
 import {NotFound} from  '../../pages/Error/404';
+import Analytics from "../../pages/Analytics";
 
 const  router=createBrowserRouter(
         [
@@ -24,6 +25,11 @@ const  router=createBrowserRouter(
                         path:"/chats",
                         element:<Chatapp/>
                     },
+                    {
+                        path:"/analsis",
+                        element:< Analytics/>
+
+                    }
                    
                 ]
             },
