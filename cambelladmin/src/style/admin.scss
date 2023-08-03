@@ -36,12 +36,10 @@ $thirdColor:#3565e898 ;
       box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
       width: $divitionline;
       z-index: 1000;
-      transition: $trans1s;
       background-color: $PrimaryColor;
       .logo {
         background-color: $SecoundaryColor;
         padding: 6.5px 5px;
-        transition: $trans1s;
 
         //logo image 
         .logo-img {
@@ -88,7 +86,6 @@ $thirdColor:#3565e898 ;
       position: relative;
       margin-top: 0px;
       padding-left: $divitionline;
-      transition: $trans1s;
 
       #main-navbar {
         background-color: $SecoundaryColor;
