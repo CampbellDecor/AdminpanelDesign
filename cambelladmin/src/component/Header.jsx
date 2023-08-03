@@ -1,85 +1,93 @@
-import React from 'react';
-import {Link}  from 'react-router-dom';
+import React,{useContext} from 'react';
+import ReactSwitch from 'react-switch';
+import { Navbar, Nav, Container, Badge, Form, FormControl, Button,Image} from 'react-bootstrap';
 import '../style/admin.scss';
+import {BsFillMoonFill,BsFillSunFill} from 'react-icons/bs'
+import {CambellContext} from '../component/AppContext';
 export default function Header (){
  
+const {mode,splittoggle,setmode}=useContext(CambellContext);
+const changeMode=()=>{
+  if(mode==="dark"){
+   setmode("light");
+   splittoggle.current.classList.remove("dark-page");
+  }else{
+   setmode("dark");
+   splittoggle.current.classList.add("dark-page");
+  }
+  
+  
+}
+
+     
     return(
-      <nav id="main-navbar" className="navbar navbar-expand-lg navbar-light  fixed-top">
-   
-      <div className="container-fluid">
-        <button className="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
-          aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-          <i className="fas fa-bars text-white"></i>
-        </button>
-        <Link className="navbar-brand" href="/home">
-          <img src={require("../style/logo.png")} height="40" alt="" loading="lazy" />
-        </Link>
+      <>
+        <Navbar id="main-navbar"  expand="sm" sticky="top">
+          <Container fluid>
+            <Form className="d-none d-md-flex input-group w-auto my-auto searchbar">
+              <FormControl
+                type="search"
+                placeholder="Search.."
+                style={{ minWidth: '225px' }}
+                autoComplete="off"
+              />
+              <Button variant="secondary" className='btn' >
+                <i className="fas fa-search text-dark fw-bolder"></i>
+              </Button>
+             
+            </Form>
+            <Nav className="ms-auto d-sm-flex  w-sm-100 w-md-25 justify-content-md-end justify-content-sm-around align-items-lg-center">
+              <Nav.Item className=" d-none  d-sm-block mx-sm-3" id="navbarDropdownMenuLink">
+                <span>
+                    <i className="fas fa-bell text-white"></i>
+                    <Badge className="badge-notification" pill bg="danger">1</Badge>
+                </span>
+              </Nav.Item>
+    
+              <Nav.Item className="d-none  d-sm-block mx-sm-3">
+              <ReactSwitch 
+              checked={mode==="light"}
+              checkedHandleIcon={<BsFillSunFill color="#ffff00" style={{marginLeft:"5px",marginBottom:"5px"}}/>}
+              uncheckedHandleIcon={<BsFillMoonFill color="#000"  style={{margin:"5px",marginBottom:"10px"}}/>}
+              onHandleColor="#250368"
+              offHandleColor="#969696"
+               onColor="#527DF3"
+               offColor="#000"
+               uncheckedIcon={false}
+               checkedIcon={true}
+               handleDiameter={25}
+               height={20}
+               width={48}
+               onChange={changeMode}
+               />
+              </Nav.Item>
+    
+              <Nav.Item className="d-sm-block mx-sm-3">
+                  <Image
+                    src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                    height="41"
+                    alt=""
+                    loading="lazy"
+                    roundedCircle
+                    className="d-none d-lg-block"
 
-        <form className="d-none d-md-flex input-group w-auto my-auto">
-          <input autocomplete="off" type="search" className="form-control rounded"
-            placeholder='Search..' style={{minWidth: '225px'}} />
-          <span className="input-group-text border-0 text-white"><i className="fas fa-search"></i></span>
-        </form>
-
-        <ul className="navbar-nav ms-auto d-flex flex-row">
+                  />
+                  <Image
+                    src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                    height="30"
+                    alt=""
+                    loading="lazy"
+                    roundedCircle
+                    className="d-block d-lg-none"
+                  />
+              </Nav.Item>
+            </Nav>
+          
+          </Container>
+         
+        </Navbar>
         
-          <li className="nav-item dropdown">
-            <Link className="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
-              role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-              <i className="fas fa-bell text-white"></i>
-              <span className="badge rounded-pill badge-notification bg-danger">1</span>
-            </Link>
-            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><Link className="dropdown-item" href="#">Some news</Link></li>
-              <li><Link className="dropdown-item" href="#">Another news</Link></li>
-              <li>
-                <Link className="dropdown-item" href="#">Something else</Link>
-              </li>
-            </ul>
-          </li>
-          <li className="nav-item me-3 me-lg-0">
-            <Link className="nav-link" href="#">
-            <i class="fab text-white fa-facebook-f"></i>
-            </Link>
-          </li>
-          <li className="nav-item dropdown">
-            <Link className="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdown" role="button"
-              data-mdb-toggle="dropdown" aria-expanded="false">
-              <i className="fas fa-fill-drip text-white"></i>
-            </Link>
-            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li>
-                <Link className="dropdown-item" href="#"><i className="fas fa-fill-drip me-3"></i>Auto
-                  <i className=" text-success"></i></Link>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#"><i class="fas fa-sun me-3"></i>Light</Link>
-              </li>
-              <li>
-                <Link className="dropdown-item" href="#"><i class="fas fa-moon me-3"></i>Dark</Link>
-              </li>
-              
-            </ul>
-          </li>
-
-          <li className="nav-item dropdown">
-            <Link className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
-              id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" className="rounded-circle" height="22"
-                alt="" loading="lazy" />
-            </Link>
-            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-              <li><Link className="dropdown-item" href="#">My profile</Link></li>
-              <li><Link className="dropdown-item" href="#">Settings</Link></li>
-              <li><Link className="dropdown-item" href="#">Logout</Link></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    )
+        </>
+      );
 
 }

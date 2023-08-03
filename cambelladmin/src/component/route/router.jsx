@@ -1,10 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import {Layout} from "./Layout";
 import Home from '../../pages/Home';
-import Login from '../../pages/Login';
 import Users from '../../pages/USers';
 import Chatapp from '../../pages/Chatapp';
-import {NotFound} from  '../../pages/Error/404';
 import Analytics from "../../pages/Analytics";
 
 const  router=createBrowserRouter(
@@ -22,7 +20,7 @@ const  router=createBrowserRouter(
                         element:<Users/>
                     },
                     {
-                        path:"/chats",
+                        path:"/",
                         element:<Chatapp/>
                     },
                     {
@@ -32,14 +30,6 @@ const  router=createBrowserRouter(
                     }
                    
                 ]
-            },
-            {
-                path:"/",
-                element:<Login/>
-            },
-            {
-                path:"/*",
-                element:<NotFound/>
             }
         ]
 );

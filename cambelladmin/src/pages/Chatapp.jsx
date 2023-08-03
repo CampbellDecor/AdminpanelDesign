@@ -3,6 +3,7 @@ import '../style/chat.css';
 import {Chatuser,Message,Reply}from '../component/Chats';
 const userchats=[
   {
+    id:1,
     profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
     username:"Thanu Mahee",
     message:{
@@ -17,6 +18,7 @@ const userchats=[
     isOnline:false
   },
   {
+    id:2,
     profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
     username:"Pinthu",
     message:{
@@ -31,6 +33,7 @@ const userchats=[
     isOnline:true
   },
   {
+    id:3,
     profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
     username:"Gowsi",
     message:{
@@ -45,6 +48,7 @@ const userchats=[
     isOnline:false
   },
   {
+    id:4,
     profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp",
     username:"Saayu",
     message:{
@@ -64,6 +68,7 @@ const userchats=[
 const mychats={
   message:[
     {
+      id:5,
       profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
       
       message:{
@@ -73,6 +78,7 @@ const mychats={
       }
     },
     {
+      id:6,
       profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
       
       message:{
@@ -82,6 +88,7 @@ const mychats={
       }
     },
     {
+      id:7,
       profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
       
       message:{
@@ -91,6 +98,7 @@ const mychats={
       }
     },
     {
+      id:8,
       profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
       
       message:{
@@ -103,7 +111,7 @@ const mychats={
   reply:[
     {
       profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
-     
+      id:9,
       message:{
         body:" dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.",
         time:"12:00 PM",
@@ -112,7 +120,7 @@ const mychats={
     },
     {
       profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
-     
+      id:10,
       message:{
         body:" dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.",
         time:"12:00 PM",
@@ -120,6 +128,7 @@ const mychats={
       }
     },
     {
+      id:11,
       profile:"https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp",
       message:{
         body:" dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.",
@@ -136,7 +145,7 @@ export default function ChatApp(){
   <div className="container py-3 h-100 mt-0">
     <div className="row h-100 mt-0">
       <div className="col-md-12 h-100 mt-0">
-        <div className="card h-100 shadow-lg mt-0" id="chat3" style={{"border-radius":"15px"}}>
+        <div className="card h-100 shadow-lg mt-0" id="chat3" style={{borderRaidus:"15px"}}>
           <div className="card-body h-100">
             <div className="row h-100">
               <div className="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0 chatusers h-100">

@@ -2,8 +2,6 @@ import React from 'react';
 import {
     MDBFooter,
     MDBContainer,
-    MDBIcon,
-    MDBInput,
     MDBCol,
     MDBRow,
     MDBRipple
@@ -11,7 +9,7 @@ import {
 export default function component (){
 
     return(
-<MDBFooter className='text-center text-white' style={{ backgroundColor: '#caced1' }}>
+<MDBFooter id="Footer" className='text-center text-white'>
       <MDBContainer className='p-4'>
         <section >
           <MDBRow>

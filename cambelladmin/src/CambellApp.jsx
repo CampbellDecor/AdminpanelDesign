@@ -4,15 +4,16 @@ import router from './component/route/router';
 import 'bootstrap/dist/css/bootstrap.css';
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'mdb-ui-kit/css/mdb.min.css'
-export default function CambellAdmin (){
+import Cambell from'./component/AppContext';
 
+
+export default function CambellAdmin (){
+   
     return(
         <>
-        <RouterProvider router={router}/>
-        
+      <Cambell childern={<RouterProvider router={router}/>}/>
         </>
        
-
     )
 
 }
