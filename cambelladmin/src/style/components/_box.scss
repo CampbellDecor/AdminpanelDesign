@@ -1,0 +1,18 @@
+@use "../abstract/variable" as var;
+
+@mixin centerBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin d($block:"block"){
+    @if($block:"block"){
+        display: block;
+    }
+    @if($block:"hide"){
+        display: none;
+    }
+    @if($block:"flex"){
+        display: flex;
+    }
+}

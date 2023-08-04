@@ -1,0 +1,8 @@
+@mixin click($type:"click"){
+    @if($type=="click"){
+        cursor: pointer;
+    }@if($type=="text"){
+        cursor:"text";
+    }
+    }
+    

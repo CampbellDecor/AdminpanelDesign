@@ -1,0 +1,42 @@
+@use "./ThemMix" as *;
+@use "../abstract/variable" as var;
+@use "../components/component" as component;
+
+.dark-page {
+  @include  baseTemplete("dark");   
+  #sidebarMenu {
+
+    .logo {
+      .logo-img {
+        box-shadow: 2px 2px 2px var.color("dark","w");
+      }
+      span {
+        @include component.CText("dark","w");
+      }
+
+    }
+
+    .navlink {
+      @include component.CText("dark","w");
+    }
+  }
+
+  .sidebar-toggole {
+    @include component.CText("dark","w");
+  }
+
+  main {
+    background-color: #5e5e5e28;
+
+    #main-navbar {
+      .searchbar {
+        .btn {
+          i {
+            @include component.CText("dark","w");
+          }
+
+        }
+      }
+  }
+}
+}

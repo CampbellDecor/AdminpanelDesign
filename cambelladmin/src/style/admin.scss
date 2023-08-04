@@ -1,223 +1,180 @@
-@use "./cambell" as *;
+@use "./cambell"as *;
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
-$rightmv:rightmv ease-in 1s;
-$leftmv:leftmv ease-in 1s;
 
-    //Side bar Split btn
-    .sidebar-toggole {
-      font-size: 25px;
-      transition: trans("t_2");
-      z-index: 10000;
-      left:calc(#{$divitionline} - 30px);
-      top: 25px;
-      cursor: pointer;
-      position: fixed;
-    }
-    .respon-btn{
-      z-index: 11000;
-      transition:$trans3s;
-      left:10px;
-       top:10px;
-       cursor: pointer;
-      
-    }
-    .closeres{
-      left:235px;
-    }
+//Side bar Split btn
+.sidebar-toggole {
+  @include fixedbtn(expandSidebar("splitbtn"), 25px, 10000);
+  font-size: 25px;
+  font-weight: 800;
+}
 
-    
-  
+.respon-btn {
+  @include fixedbtn(10px, 10px, 11000);
+}
 
-  .split-page {
-    #sidebarMenu {
-      width: 70px !important;
-      margin-left: 2px;
-      padding: 0px 0px 58px 0px;
+.closeres {
+  left: 235px;
+}
 
-      .logo {
-        position: relative;
+.split-page {
+  #sidebarMenu {
+    width: 70px !important;
+    margin-left: 2px;
+    padding: 0px 0px 58px 0px;
 
-        span {
-          display: none;
-        }
+    .logo {
+      position: relative;
 
+      span {
+        @include d("hide");
       }
 
-      .navlink {
+    }
+
+    .navlink {
+
+      span {
+        display: none;
+      }
+
+      &:hover {
+        //width:$divitionline;
+        @include d("flex");
 
         span {
-          display: none;
+          @include d("block");
         }
-        &:hover {
-          width:$divitionline;
-          display: flex;
-          span{
-            display: block;
-          }
-         
-        }
-      }
-    }
 
-    .sidebar-toggole {
-      position: absolute;
-      left: 85px;
-      top: 20px;
-    }
-
-    main {
-      padding-left: 70px;
-
-      .searchbar {
-        margin-left: 35px;
       }
     }
   }
-  .dark-page {
-    #sidebarMenu {
-      background-color:$darksecoundary;
 
-      .logo {
-        background-color: $darkPrimary;
-        .logo-img{
-          box-shadow: 2px 2px 1px #fff;
-        }
-        span{
-          color:#fff !important;
-        }
+  .sidebar-toggole {
+    position: absolute;
+    left: 85px;
+    top: 20px;
+  }
 
-      }
+  main {
+    padding-left: 70px;
 
-      .navlink {
-        color:#fff;
-        background-color: $darksecoundary;
-        &:hover {
-          span{
-
-          }
-         
-        }
-      }
-    }
-
-    .sidebar-toggole {
-      color:#fff !important;
-      font-weight: 800;
-    }
-
-    main {
-      background-color: #5e5e5e28;
-        #main-navbar{
-          background-color:$darkPrimary;
-          .searchbar {
-              .btn{
-                background-color: $darksecoundary !important;
-                i{
-                  color:#fff !important;
-                }
-                
-              }
-          }
-        }
-     
+    .searchbar {
+      margin-left: 35px;
     }
   }
+}
+
+
+
+
 
 @media (max-width: 768px) {
 
 
-    // body design
-      #sidebarMenu {
-        padding: 0px 0 58px 0px;
-        width: 70px !important;
-        margin-left: 2px;
-        .logo {
-          position: relative;
-          padding:5px 3px !important;
-            span{
-              display: none;
-            }
-          //logo image 
-          .logo-img {
-            height: 30px;
-            width: 30px;
-          }
+  // body design
+  #sidebarMenu {
+    padding: 0px 0 58px 0px;
+    width: 70px !important;
+    margin-left: 2px;
 
-        }
-        .navlink {
-          span {
-            display: none;
-          }
-          &:hover {
-            width:$divitionline;
-            display: flex;
-            span{
-              display: block;
-            }
-           
-          }
-        }
+    .logo {
+      position: relative;
+      padding: 5px 3px !important;
 
-      }
-      //Side bar Split btn
-      .sidebar-toggole {
+      span {
         display: none;
       }
-      main {
-        padding-left: 70px !important;
 
-        #main-navbar {
-
-
-        }
-
+      //logo image 
+      .logo-img {
+        height: 30px;
+        width: 30px;
       }
 
-      #Footer {
-        background-color: $SecoundaryColor;
-        margin-bottom: 0px;
+    }
+
+    .navlink {
+      span {
+        display: none;
+      }
+
+      &:hover {
+        // width:$divitionline;
+        display: flex;
+
+        span {
+          display: block;
+        }
+
       }
     }
-@media (max-width: 576px) {
-        main{
-          padding-left: 0px !important;
-        }
-        #sidebarMenu{
-          transition: $trans2s;
-          &.responsiveBlock{
-            display: block !important;
-            width: 60% !important;
-            z-index: 10500;
-            margin-left: 0px;
-            
-            .logo{
-              display: flex;
-              justify-content: center;
-              flex-direction: column;
-              padding: 10px 0px;
-                span{
-                  display: block;
-                }
-              .logo-img{
 
-              }
-            }
-           .navlink{
-            display: flex;
-            span{
-              display: block;
-            }
-           }
-          }
-          
-        }
-      
-        
+  }
+
+  //Side bar Split btn
+  .sidebar-toggole {
+    display: none;
+  }
+
+  main {
+    padding-left: 70px !important;
+
+    #main-navbar {}
+
+  }
+
+  #Footer {
+    //  background-color: $SecoundaryColor;
+    margin-bottom: 0px;
+  }
 }
+
+@media (max-width: 576px) {
+  main {
+    padding-left: 0px !important;
+  }
+
+  #sidebarMenu {
+
+    // transition: $trans2s;
+    &.responsiveBlock {
+      display: block !important;
+      width: 60% !important;
+      z-index: 10500;
+      margin-left: 0px;
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px 0px;
+
+        span {
+          display: block;
+        }
+
+        .logo-img {}
+      }
+
+      .navlink {
+        display: flex;
+
+        span {
+          display: block;
+        }
+      }
+    }
+
+  }
+
+
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

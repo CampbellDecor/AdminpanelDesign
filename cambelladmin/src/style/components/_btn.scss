@@ -1,0 +1,21 @@
+@use "../abstract/variable" as *;
+.button{
+    cursor: pointer;
+    transition: trans("t_2");
+}
+@mixin fixedbtn($left:0px,$top:0px,$ind:1000){
+    @extend .button;
+    position: fixed;
+    @if $left>0{
+        left:$left;
+    }@else{
+        right:$left;
+    }
+    @if $top>0{
+        top:$top;
+    }@else{
+        bottom:$top;
+    }
+    z-index: $ind;
+
+}

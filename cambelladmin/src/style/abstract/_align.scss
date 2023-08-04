@@ -1,7 +1,8 @@
 $Expandline:240px;
 $Collapseline:70px;
-
+$splitBtnPos:210px;
 $sidebar:(
     "expand":$Expandline,
-    "collapse":$Collapseline
+    "collapse":$Collapseline,
+    "splitbtn":$splitBtnPos
 )

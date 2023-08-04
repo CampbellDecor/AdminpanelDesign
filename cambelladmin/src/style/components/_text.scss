@@ -1,0 +1,4 @@
+@use "../abstract/variable" as var;
+@mixin CText($theme:"light",$color:"b"){
+    color:var.color($theme,$color) !important;
+}
