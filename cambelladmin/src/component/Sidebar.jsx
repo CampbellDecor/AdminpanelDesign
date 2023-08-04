@@ -3,7 +3,7 @@ import { FaTachometerAlt } from "react-icons/fa";
 import {TbDeviceAnalytics} from "react-icons/tb";
 import {Nav,Navbar,Image}  from 'react-bootstrap';
 import {CambellContext} from './AppContext';
-import "../style/admin.scss";
+//import "../style/admin.scss";
 
 
 const NavItems=[{

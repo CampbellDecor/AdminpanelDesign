@@ -1,0 +1,18 @@
+@use "./color" as clr;
+@use "./trans" as trns;
+@use "./align" as align;
+
+@function expandSidebar($satus){
+    @return map-get(align.$sidebar,$satus);
+}
+@function trans($trans){
+    @return map-get(trns.$trans,$trans);
+}
+@function color($them,$color){
+    @if($them=="dark"){
+        @return map-get(clr.$dark_color,$color);
+    }@else{
+        @return map-get(clr.$color,$color);
+    }
+   
+}

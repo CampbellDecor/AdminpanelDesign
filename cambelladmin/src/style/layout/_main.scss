@@ -1,0 +1,7 @@
+@use "../abstract/variable" as *;
+main {
+    position: relative;
+    margin-top: 0px;
+    padding-left:expandSidebar("expand");
+
+    }

@@ -1,0 +1,7 @@
+@use "../abstract/variable" as *;
+#main-navbar {
+    background-color:color("light","secoundary");
+
+    .searchbar {
+      transition: trns("t_1");
+    }}
