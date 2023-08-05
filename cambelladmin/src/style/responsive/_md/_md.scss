@@ -1,0 +1,14 @@
+@use "./Sidebarmd" as *;
+@use "./mainmd" as *;
+  
+@media (max-width: 768px) {
+  @include sidebar;
+  @include maincontent;
+    //Side bar Split btn
+    .sidebar-toggole {
+      display: none;
+    }
+  
+
+  }
+  

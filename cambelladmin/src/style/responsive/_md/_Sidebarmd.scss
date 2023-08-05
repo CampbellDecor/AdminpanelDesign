@@ -1,0 +1,40 @@
+@use "../../layout/basetempleteMixin" as *;
+@use "../../components/component" as compo;
+@use "../../abstract/variable" as var;
+@mixin sidebar {
+//Sidebar on normal stage
+  @include baseSidebar("min");
+  #sidebarMenu {
+    margin-left: 2px;
+
+    .logo {
+      @include compo.position;
+
+      span {
+        @include compo.hide;
+      }
+    }
+
+    .navlink {
+      span {
+        @include compo.hide;
+        transform:none;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      &:hover {
+        width: var.expandSidebar("expand");
+        @include compo.flex;
+        border-radius: 0px 5px 5px 0px;
+        span {
+          @include compo.show;
+
+        }
+      }
+    }
+  }
+
+  
+ 
+}

@@ -3,24 +3,34 @@ $Cambell_Primary:#527df385;
 $Cambell_dark_Secoundary:#181717ed;
 $Cambell_Secoundary:#4c0bce;
 $Cambell_dark_Primary:#353535d6;
-$Cambell_dark_Teriery:#5e5e5e28;
+$Cambell_dark_Teriery:#1a1a1a60;
 $sidehover:#60a6e8b4;
 $Cambell_black:#000;
 $Cambell_white:#fff;
 $Cambell_teritery:#3565e898 ;
+$Cambell_dark_bodybg: #51515113;
+$Cambell_bodybg:#99b2f529;
+$Cambell_text_primary:#04072d ;
+$Cambell_dark_text_primary:#ffffff ;
+
 
 $color:(
     "primary":$Cambell_Primary,
     "secoundary":$Cambell_Secoundary,
     "b":$Cambell_black,
     "w":$Cambell_white,
-    "tertery":$Cambell_teritery
+    "tertery":$Cambell_teritery,
+    "bodybg":$Cambell_bodybg,
+    "textprim":$Cambell_text_primary
 );
 $dark_color:(
     "primary":$Cambell_dark_Primary,
     "secoundary":$Cambell_dark_Secoundary,
     "b":$Cambell_black,
     "w":$Cambell_white,
-    "tertery":$Cambell_dark_Teriery
+    "tertery":$Cambell_dark_Teriery,
+    "bodybg":$Cambell_dark_bodybg,
+     "textprim":$Cambell_dark_text_primary
+
 
 )

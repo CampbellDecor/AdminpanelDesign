@@ -1,0 +1,11 @@
+@use "../../layout/basetempleteMixin" as *;
+
+@mixin maincontent {
+  
+@include base_main("min");
+
+main {
+  .searchbar {
+    margin-left: 35px;
+  }
+}}

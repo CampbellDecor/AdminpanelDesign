@@ -19,3 +19,7 @@
     z-index: $ind;
 
 }
+@mixin image($w:100%,$h:100%){
+    width: $w;
+    height: $w;
+}

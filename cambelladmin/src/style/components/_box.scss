@@ -1,18 +1,54 @@
-@use "../abstract/variable" as var;
+@use "../abstract/variable"as var;
 
-@mixin centerBox{
+@mixin centerBox {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-@mixin d($block:"block"){
-    @if($block:"block"){
-        display: block;
+
+@mixin hide {
+    display: none !important;
+}
+
+@mixin show {
+    display: block !important;
+}
+
+@mixin flex($justify: flex-start, $align: center, $dir: row) {
+    display: flex !important;
+    flex-direction: $dir;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin position($pos: "rel", $top: auto, $right: auto, $bottom: auto, $left: auto) {
+    @if ($pos=="abs") {
+        position: absolute;
+        top: $top;
+        right: $right;
+        left: $left;
+        bottom: $bottom;
     }
-    @if($block:"hide"){
-        display: none;
+
+    @else if($pos=="fix") {
+        top: $top;
+        position: fixed;
+        right: $right;
+        left: $left;
+        bottom: $bottom;
     }
-    @if($block:"flex"){
-        display: flex;
+
+    @else if($pos=="stik") {
+        position: sticky;
+        position: absolute;
+        top: $top;
+        right: $right;
+        left: $left;
+        bottom: $bottom;
+    }
+
+    @else {
+        position: relative;
+        margin: $top $right $bottom $left;
     }
 }

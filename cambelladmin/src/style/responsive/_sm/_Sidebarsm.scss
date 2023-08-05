@@ -1,0 +1,35 @@
+@use "../../components/component" as compo;
+@use "../../abstract/variable" as *;
+@media (max-width: 576px) {
+  
+    #sidebarMenu {
+      &.responsiveBlock {
+       @include compo.show;
+        width: 60% !important;
+        z-index: 10500;
+        margin-left: 0px;
+  
+        .logo {
+            @include compo.flex(center,center,column);
+            padding: 10px 0px;
+  
+          span {
+           @include compo.show;
+          }
+  
+        }
+  
+        .navlink {
+          display: flex;
+  
+          span {
+            @include compo.show;
+          }
+        }
+      }
+  
+    }
+  
+  
+  }
+  

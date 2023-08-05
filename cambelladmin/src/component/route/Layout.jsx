@@ -1,5 +1,5 @@
 import {Outlet} from 'react-router-dom';
-import React,{useContext} from 'react'
+import React,{useContext, useRef} from 'react'
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 //import '../../style/admin.scss'
@@ -8,13 +8,17 @@ import {CambellContext} from '../AppContext';
 import {ToggleBtn,ResponiveToggle} from '../ToggleBtns';
 
 
+
 export function Layout(){
   const {splittoggle,responsivetoggle}=useContext(CambellContext);
+  const bodyres=useRef(null);
   const responsiveAction=action=>{
     if(action){
       responsivetoggle.current.classList.add("responsiveBlock");
+      bodyres.current.classList.add("responsiveBlock");
     }else{
       responsivetoggle.current.classList.remove("responsiveBlock");
+      bodyres.current.classList.remove("responsiveBlock");
     }
   }
     return(
@@ -22,7 +26,7 @@ export function Layout(){
       <Sidebar/>
       <ToggleBtn/>
       <ResponiveToggle toggleAction={responsiveAction} className="d-block d-sm-none respon-btn fs-2 fw-bolder position-fixed text-white" />
-      <main >
+      <main className="main" ref={bodyres}>
       <Header/>
         <div className="container pt-4  main">
             <Outlet/>

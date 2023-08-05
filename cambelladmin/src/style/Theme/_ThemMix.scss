@@ -1,5 +1,5 @@
-@use "../abstract/variable" as var;
-@use "../components/component" as component;
+@use "../abstract/variable"as var;
+@use "../components/component"as component;
 
 @mixin baseTemplete($theme: "light") {
   #sidebarMenu {
@@ -7,19 +7,16 @@
 
     .logo {
       background-color: var.color($theme, "secoundary");
-
-      .logo-img {
-        box-shadow: 2px 2px 1px var.color($theme, "w");
-      }
     }
 
     .navlink {
+      @include component.CText($theme,"textprim");
       background-color: var.color($theme, "tertery");
     }
   }
 
   main {
-    background-color: #5e5e5e28;
+    background-color: var.color($theme,"bodybg");
 
     #main-navbar {
       background-color: var.color($theme, "secoundary");

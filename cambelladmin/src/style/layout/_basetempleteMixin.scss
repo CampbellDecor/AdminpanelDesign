@@ -1,0 +1,47 @@
+@use "../components/component" as compo;
+@use "../abstract/variable" as var;
+@mixin baseSidebar($split:"max"){
+#sidebarMenu {
+    margin-top: 0px;
+    @include compo.position("fix",0px,auto,0px, 0px);
+    padding: 0px 0 58px 0px;
+    transition: var.trans("t_1");
+
+    @if($split=="max"){
+      width: var.expandSidebar("expand");  
+    }@else{
+        width: var.expandSidebar("collapse") !important;  
+    }
+    /* Height of navbar */
+    z-index: 1000;
+    
+    .logo {
+      padding: 6.5px 5px;
+
+      //logo image 
+      .logo-img {
+       @include compo.image(45px,45px);
+      }
+      span{
+            font-weight: 900;
+      }
+
+    }
+
+  }
+ 
+}
+
+@mixin base_main($split:"max"){
+    main {
+      transition: var.trans("t_1");
+        @include compo.position;
+        margin-top: 0px;
+        @if($split=="max"){
+            padding-left: var.expandSidebar("expand");  
+          }@else{
+              padding-left: var.expandSidebar("collapse") !important;  
+          }
+    
+        }
+}
