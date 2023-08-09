@@ -14,3 +14,30 @@
     }
 
 }
+@include simpleHomeCalender;
+.home{
+    &-countpanel{
+      &-componet{
+        background-image: linear-gradient(to right top, #0b00ff, #6247ff, #8d73ff, #b19dff, #d2c7ff, #d5caff, #d7ccff, #dacfff, #c0abff, #a686ff, #8a60ff, #6c34ff);
+        &--identiy{
+            .icon{
+                color: var.color("light","textsecound");
+            }
+        }
+        &--des{
+          h5{
+            color: var.color("light","textsecound") ;
+          }
+          h6{
+            color: var.color("light","tertery");
+          }
+          
+        }
+      }
+  
+  }
+  @include SimpleRecentTable;
+ 
+}
+
+@include Footer;

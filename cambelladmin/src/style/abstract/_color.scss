@@ -3,6 +3,8 @@ $Cambell_Primary:#527df385;
 $Cambell_dark_Secoundary:#181717ed;
 $Cambell_Secoundary:#4c0bce;
 $Cambell_dark_Primary:#353535d6;
+$Cambell_dark_forth: #e6e6e6;
+$Cambell_forth: #dee7faf3;
 $Cambell_dark_Teriery:#1a1a1a60;
 $sidehover:#60a6e8b4;
 $Cambell_black:#000;
@@ -11,18 +13,33 @@ $Cambell_teritery:#3565e898 ;
 $Cambell_dark_bodybg: #51515113;
 $Cambell_bodybg:#99b2f529;
 $Cambell_text_primary:#04072d ;
+$Cambell_text_secoundary:#05093e ;
 $Cambell_dark_text_primary:#ffffff ;
-
-
-$color:(
+$Cambell_dark_text_secoundary:#333232 ;
+$Cambell_danger:#dc3545;
+$Cambell_warning:#fdca30;
+$Cambell_scuss:#17c92c;
+$Cambell_info:#0dcaf0;
+$Cambell_dark_danger:#670b14;
+$Cambel_dark_warning:#ad8407;
+$Cambell_dark_scuss:#094719;
+$Cambell_dark_info:#015464;
+$Color:(
     "primary":$Cambell_Primary,
     "secoundary":$Cambell_Secoundary,
     "b":$Cambell_black,
     "w":$Cambell_white,
     "tertery":$Cambell_teritery,
     "bodybg":$Cambell_bodybg,
-    "textprim":$Cambell_text_primary
+    "textprim":$Cambell_text_primary,
+    "textsecound":$Cambell_text_secoundary,
+    "forth":$Cambell_forth,
+    "danger":$Cambell_danger,
+    "warning":$Cambell_warning,
+    "scuss":$Cambell_scuss,
+    "info":$Cambell_info
 );
+
 $dark_color:(
     "primary":$Cambell_dark_Primary,
     "secoundary":$Cambell_dark_Secoundary,
@@ -30,7 +47,12 @@ $dark_color:(
     "w":$Cambell_white,
     "tertery":$Cambell_dark_Teriery,
     "bodybg":$Cambell_dark_bodybg,
-     "textprim":$Cambell_dark_text_primary
-
+     "textprim":$Cambell_dark_text_primary,
+     "forth":$Cambell_dark_forth,
+     "textsecound":$Cambell_dark_text_secoundary,
+     "danger":$Cambell_dark_danger,
+     "warning":$Cambel_dark_warning,
+     "scuss":$Cambell_dark_scuss,
+     "info":$Cambell_dark_info
 
 )

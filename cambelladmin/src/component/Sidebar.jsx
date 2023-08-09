@@ -8,13 +8,18 @@ import {CambellContext} from './AppContext';
 
 const NavItems=[{
   order:1,
-  path:'/',
+  path:'/home',
   itemname:"DashBoard",
   itemicon:<FaTachometerAlt  className="me-3"/>
 },{
   order:2,
   path:'/',
   itemname:"Analysis",
+  itemicon:<TbDeviceAnalytics  className="me-3"/>
+},{
+  order:3,
+  path:'/chats',
+  itemname:"Chats",
   itemicon:<TbDeviceAnalytics  className="me-3"/>
 }];
 

@@ -1,9 +1,11 @@
 @use "./Sidebarmd" as *;
 @use "./mainmd" as *;
+@use "./home" as *;
   
 @media (max-width: 768px) {
   @include sidebar;
   @include maincontent;
+  @include home;
     //Side bar Split btn
     .sidebar-toggole {
       display: none;
