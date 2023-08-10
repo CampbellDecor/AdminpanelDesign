@@ -1,9 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import {Layout} from "./Layout";
 import Home from '../../pages/Home';
-import Users from '../../pages/USers';
 import Chatapp from '../../pages/Chatapp';
-import Analytics from "../../pages/Analytics";
 
 const  router=createBrowserRouter(
         [
@@ -12,25 +10,17 @@ const  router=createBrowserRouter(
                 caseSensitive:false,
                 children:[
                     {
-                        path:"/home",
+                        path:"/",
                         element:<Home/>
                     },
                     {
-                        path:"/users",
-                        element:<Users/>
-                    },
-                    {
-                        path:"/",
+                        path:"/chats",
                         element:<Chatapp/>
-                    },
-                    {
-                        path:"/analsis",
-                        element:< Analytics/>
-
                     }
                    
                 ]
             }
         ]
 );
+
 export default router;

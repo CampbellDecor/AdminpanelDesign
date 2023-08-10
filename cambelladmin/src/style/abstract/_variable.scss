@@ -12,7 +12,7 @@
     @if($them=="dark"){
         @return map-get(clr.$dark_color,$color);
     }@else{
-        @return map-get(clr.$color,$color);
+        @return map-get(clr.$Color,$color);
     }
    
 }

@@ -3,7 +3,7 @@ import ReactSwitch from 'react-switch';
 import { Navbar, Nav, Container, Badge, Form, FormControl, Button,Image} from 'react-bootstrap';
 import '../style/admin.scss';
 import {BsFillMoonFill,BsFillSunFill} from 'react-icons/bs'
-import {CambellContext} from '../component/AppContext';
+import {CambellContext} from '../contexts/AppContext';
 export default function Header (){
  
 const {mode,splittoggle,setmode}=useContext(CambellContext);

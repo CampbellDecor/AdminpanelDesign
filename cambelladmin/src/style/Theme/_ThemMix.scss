@@ -29,3 +29,95 @@
     }
   }
 }
+@mixin simpleHomeCalender($theme:"light"){
+  .sidebar-right{
+    .simple-calender{
+      .icon{
+          color:var.color($theme,"textsecound");
+      }
+      .react-calendar__navigation button{
+        &:enabled{
+
+        &:hover,:focus {
+      background-color:var.color($theme,"forth");
+}}}
+       .react-calendar__tile{
+        &:enabled{
+            &:focus,&:hover{
+                background-color: var.color($theme,"forth");
+            }
+        }
+       &--now{
+        background-color: var.color($theme,"tertery");
+        color: var.color($theme,"textprim");
+        border-radius: 3px;
+        &:enabled{
+            &:hover,&:focus{
+                background-color:var.color($theme,"primary") ;
+                font-weight: 600;
+            }
+        }
+       }
+    }
+    }
+    .react-calendar__month-view__weekdays {
+        background-color: var.color($theme,"secoundary");
+        color:  var.color($theme,"w");
+      }
+      .simple-calender--tile{
+        .event-count{
+            height: min-content;
+            &--num{
+              &--1{
+              background-color:var.color($theme,"danger");
+            } &--2{
+              background-color:var.color($theme,"secoundary") !important;
+            } &--3{
+              background-color:var.color($theme,"primary") !important;
+            }
+          }
+        }
+      }
+}
+}
+@mixin Footer($theme:"light"){
+  #Footer {
+    background-color:var.color($theme,"secoundary");
+    .copyright{
+      background-color:var.color($theme,"tertery");
+    }
+  }
+}
+@mixin SimpleRecentTable($theme:"light"){
+  .home-maincontent{
+    .recent-updates{
+      .rdt{
+        &_TableRow{
+        &:hover{
+          background-color: var.color($theme,"forth");
+        }
+       
+      }
+      }
+      .rdt_TableHeadRow{
+        border-bottom: 1px ridge var.color($theme,"secoundary");
+      }
+        .status{
+            &-pending{
+              background-color:var.color($theme,"warning") !important;
+            }
+            &-reject{
+              background-color:var.color($theme,"danger") !important;
+            }
+            &-agree{
+              background-color:var.color($theme,"scuss") !important;
+            }
+            &-cancle{
+              background-color:var.color($theme,"info") !important;
+            }
+            
+          
+        }
+    }
+  }
+}

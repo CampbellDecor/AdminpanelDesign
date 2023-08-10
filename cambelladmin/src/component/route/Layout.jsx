@@ -4,7 +4,7 @@ import Header from '../Header';
 import Sidebar from '../Sidebar';
 //import '../../style/admin.scss'
 import Footer from  '../Footer';
-import {CambellContext} from '../AppContext';
+import {CambellContext} from '../../contexts/AppContext';
 import {ToggleBtn,ResponiveToggle} from '../ToggleBtns';
 
 

@@ -1,0 +1,11 @@
+
+    @media (max-width: 576px) {
+        .home{
+            width: 100%;
+            &-countpanel{
+              &-componet{
+               width:40% !important;
+              }
+          
+          }}}
+    
