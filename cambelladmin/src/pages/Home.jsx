@@ -110,19 +110,6 @@ export default function Home (){
        </Container>
        
     )
-
-}
-
-
-function RecentBooking({id,Title,body,date,time}){
-    return(
-        <Accordion.Item eventKey={id} className="recent-event">
-        <Accordion.Header>{Title}</Accordion.Header>
-        <Accordion.Body>
-          {body}
-        </Accordion.Body>
-      </Accordion.Item>
-    )
 }
 function CountComponents({index,idenity,title,count}){
     return (
