@@ -1,4 +1,4 @@
-import React,{useContext, useState} from 'react';
+import React,{useContext} from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale,
   LinearScale,
   PointElement,
@@ -55,7 +55,7 @@ export function SmallHomeDonut({labels,data}){
 }
 
 export function IncomeAnalyze(){
-  const [x_axis,serxaxis]=useState([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
+  const x_axis=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
   const {mode}=useContext(CambellContext);
   const color=randomcolor({
     count:2,

@@ -10,7 +10,9 @@ export default function CambellAdmin (){
    
     return(
         <>
+
       <Cambell childern={<RouterProvider router={router}/>}/>
+
         </>
        
     )

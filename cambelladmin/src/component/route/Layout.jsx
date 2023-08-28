@@ -2,7 +2,6 @@ import {Outlet} from 'react-router-dom';
 import React,{useContext, useRef} from 'react'
 import Header from '../Header';
 import Sidebar from '../Sidebar';
-//import '../../style/admin.scss'
 import Footer from  '../Footer';
 import {CambellContext} from '../../contexts/AppContext';
 import {ToggleBtn,ResponiveToggle} from '../ToggleBtns';
@@ -23,6 +22,7 @@ export function Layout(){
   }
     return(
       <div ref={splittoggle}>
+    
       <Sidebar/>
       <ToggleBtn/>
       <ResponiveToggle toggleAction={responsiveAction} className="d-block d-sm-none respon-btn fs-2 fw-bolder position-fixed text-white" />
@@ -32,9 +32,9 @@ export function Layout(){
             <Outlet/>
         </div>
         <Footer/>
-      </main>
-           
-      </div>    
+      </main>  
+      </div>  
+
            
     )
 }

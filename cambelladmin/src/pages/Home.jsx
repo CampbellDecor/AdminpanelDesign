@@ -7,18 +7,24 @@ import {Link} from "react-router-dom"
 import {FaCalendarDay,FaUsers,FaCoins} from "react-icons/fa"
 import {TbPackages} from "react-icons/tb"
 import {MDBListGroup,MDBListGroupItem,MDBBtn} from "mdb-react-ui-kit";
+
+
 export default function Home() {
+ 
 
-
+const countpanel=[
+    { index: 1, title: "Users", idenity: <FaUsers className="icon" />, count: 10},
+    { index: 1, title: "Earn", idenity: <FaCoins className="icon" />, count: 12 },
+    { index: 1, title: "Booking", idenity: <FaCalendarDay className="icon" />,count: 20},
+    { index: 1, title: "Packages", idenity: <TbPackages className="icon" />, count: 5}
+]
     return (
         <Container fluid className="home">
             <Row className='home-countpanel my-3'>
                 <div className="w-100  d-flex justify-content-around flex-sm-nowrap flex-wrap">
-
-                    <CountComponents {...{ index: 1, title: "Users", idenity: <FaUsers className="icon" />, count: 10 }} />
-                    <CountComponents {...{ index: 1, title: "Earn", idenity: <FaCoins className="icon" />, count: 10 }} />
-                    <CountComponents {...{ index: 1, title: "Booking", idenity: <FaCalendarDay className="icon" />, count: 10 }} />
-                    <CountComponents {...{ index: 1, title: "Packages", idenity: <TbPackages className="icon" />, count: 10 }} />
+                    {
+                             countpanel.map(panel=>(<CountComponents {...panel} />))
+                    }
                 </div>
 
             </Row>

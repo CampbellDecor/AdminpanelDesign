@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {BsFillCaretLeftFill,BsFillCaretRightFill} from "react-icons/bs";
 import {TiArrowRightThick,TiArrowLeftThick} from "react-icons/ti";
 import Calender from 'react-calendar';

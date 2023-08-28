@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useEffect} from 'react';
 import ReactSwitch from 'react-switch';
 import { Navbar, Nav, Container, Badge, Form, FormControl, Button,Image} from 'react-bootstrap';
 import '../style/admin.scss';
@@ -6,7 +6,10 @@ import {BsFillMoonFill,BsFillSunFill} from 'react-icons/bs'
 import {CambellContext} from '../contexts/AppContext';
 export default function Header (){
  
-const {mode,splittoggle,setmode}=useContext(CambellContext);
+const {mode,splittoggle,setmode,currentuser}=useContext(CambellContext);
+useEffect(()=>{
+  console.log(currentuser?.currentUser.firstname);
+})
 const changeMode=()=>{
   if(mode==="dark"){
    setmode("light");
@@ -61,10 +64,9 @@ const changeMode=()=>{
                onChange={changeMode}
                />
               </Nav.Item>
-    
               <Nav.Item className="d-sm-block mx-sm-3">
                   <Image
-                    src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                    src={currentuser?.currentUser.profile||"https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"}
                     height="41"
                     alt=""
                     loading="lazy"
