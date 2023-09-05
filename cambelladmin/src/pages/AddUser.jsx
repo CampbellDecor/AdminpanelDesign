@@ -3,6 +3,8 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
 import AutoComplete from "../component/AutoComplete";
 import { AvatarGenerator } from "random-avatar-generator";
 import { GiAutoRepair } from "react-icons/gi";
+import { auth } from "../Fire";
+import { createUserWithEmailAndPassword ,sendEmailVerification} from "firebase/auth";
 export default function AddUSer ()
 {
     const generator = new AvatarGenerator();
@@ -14,9 +16,23 @@ export default function AddUSer ()
         email: "@gmail.com",
         profile: generator.generateRandomAvatar()
     } );
+
     const OnChangehandle = e =>
     {
         setUser( pre => ( { ...pre, [ e.target.name ]: e.target.value } ))
+    }
+    const handleSubmit = async () =>
+    {
+        try
+        {
+            // const user = await createUserWithEmailAndPassword( auth, "cst19007@std.uwu.ac.lk", "Thanush126" );
+            // sendEmailVerification( user.user );
+            
+        } catch (error) {
+            console.log(error);
+        }
+      
+        
     }
     return (
         <MDBContainer className="py-5 vh-75 my-4">
@@ -73,7 +89,7 @@ export default function AddUSer ()
                                         <MDBTextArea label='address' name='address' id='textAreaExample' rows={ 3 } onChange={OnChangehandle} />
                                     </MDBCol>
                                     <MDBRow>
-                                        <MDBBtn className='w-50 mx-auto'>
+                                        <MDBBtn className='w-50 mx-auto' onClick={handleSubmit}>
                                            save 
                                     </MDBBtn>
                                     </MDBRow>

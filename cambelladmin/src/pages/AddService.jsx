@@ -3,15 +3,14 @@ import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
 export default function AddService() {
-    const [ description, setdescription ] = useState( "" );
-  const [ inputs, setinputs ] = useState( {
-    images: []
-    } );
+  const [ description, setdescription ] = useState( "" );
+  const [serviceImg,setserviceImg]=useState(null)
+  const [ inputs, setinputs ] = useState( {} );
     
     const onChange = e=>
     {
       
-        setinputs(pre=>(e.target.name==="images"?{...pre,[e.target.name]:e.target.files}:{...pre,[e.target.name]:e.target.value}))
+        setinputs(pre=>(e.target.name==="images"?{...pre,[e.target.name]:e.target.files[0]}:{...pre,[e.target.name]:e.target.value}))
     }
   const onSaveEvent = e => {
     e.preventDefault();
@@ -26,7 +25,7 @@ export default function AddService() {
             <Image
               width="100%"
               src={
-                inputs.images[0]?.name??"https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
+                URL.createObjectURL(inputs.images)??"https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
               }
             />
           </Row>
@@ -74,7 +73,7 @@ export default function AddService() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Price</Form.Label>
-              <Form.Control type="price" placeholder="00000.000" onChange={onChange} name="price" required />
+              <Form.Control type="number" placeholder="00000.000" onChange={onChange} name="price" required />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
@@ -89,7 +88,7 @@ export default function AddService() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Services Images</Form.Label>
-              <Form.Control type="file" onChange={onChange} name="images"  />
+              <Form.Control type="file" onChange={onChange} name="images" accept="images/*" />
             </Form.Group>
             <Button type="submit"  onClick={onSaveEvent}  className="me-2">
               Save

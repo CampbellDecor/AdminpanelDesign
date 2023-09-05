@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Container,Row } from 'react-bootstrap';
+import { Container, Row, ButtonGroup, Button } from 'react-bootstrap';
+import { MdBlockFlipped } from "react-icons/md";
 import axios from "axios";
 import { MDBCol, MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn } from 'mdb-react-ui-kit';
 export default function Admins (){
   const [admins,setAdmins]=useState([]);
   useEffect( () =>
   {
-    setAdmins( [
+    axios.get( "/api/admin/" )
+      .then(
+        fetchedadmins =>
+        {
+          setAdmins( fetchedadmins.data );
+        console.log(fetchedadmins);
+        }
+
+    ).catch(
+      err =>
       {
-        profile: null,
-        username: "Thanush",
-        email: "gfgfdgfdg",
-        working: 5
-      },
-      {
-        profile: null, username: "Thanush", email: "gfgfdgfdg", working: 6
-       }
-    
-    ] );
+        console.log(err);
+      }
+    )
 },[])
     return(
 <Container className="vh-100">
@@ -34,9 +37,9 @@ export default function Admins (){
 
 }
 
-function Admin({profile,username,email,working}){
+function Admin({profile,username,email,working,mobile,aid}){
     return (
-        <MDBCol md="9" lg="6" xl="4" className="mt-5">
+        <MDBCol md="9" lg="6" xl="4" className="mt-5" key={aid} >
             <MDBCard style={{ borderRadius: '15px' }}>
               <MDBCardBody className="p-4">
                 <div className="d-flex text-black">
@@ -44,12 +47,14 @@ function Admin({profile,username,email,working}){
                     <MDBCardImage
                       style={{ width: '100px', borderRadius: '10px' }}
                       src={profile??'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp'}
-                      alt='Generic placeholder image'
-                      fluid />
+                  alt='Generic placeholder image'
+                  fluid />
                   </div>
                   <div className="flex-grow-1 ms-3">
                     <MDBCardTitle className='text-capitalize'>{username}</MDBCardTitle>
-                    <MDBCardText>{email}</MDBCardText>
+                <MDBCardText>{ email } <br />
+                  {mobile}
+                </MDBCardText>
 
                     <div className="d-flex justify-content-start rounded-3 p-2 mb-2"
                       style={{ backgroundColor: '#efefef' }}>
@@ -68,7 +73,10 @@ function Admin({profile,username,email,working}){
                     </div>
                     <div className="d-flex pt-1">
                       <MDBBtn outline className="me-1 flex-grow-1">Edit</MDBBtn>
-                      <MDBBtn className="flex-grow-1">Contact</MDBBtn>
+                      <ButtonGroup aria-label="Basic example">
+      <Button variant="danger" className="mx-1"><MdBlockFlipped /></Button>
+      <Button variant="secondary" className="mx-1">Middle</Button>
+    </ButtonGroup>
                     </div>
                   </div>
                 </div>

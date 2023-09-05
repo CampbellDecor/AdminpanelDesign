@@ -1,5 +1,8 @@
 import React,{useContext, useState} from 'react';
 import {useCookies} from "react-cookie";
+import { auth } from "../Fire";
+import { signInWithEmailAndPassword,signOut,sendEmailVerification } from "firebase/auth";
+
 import {
   MDBBtn,
   MDBContainer,
@@ -19,9 +22,9 @@ import {CambellContext} from "../contexts/AppContext";
 function Login() {
   const {setLogin}=useContext(CambellContext);
   const navigate=useNavigate();
-
-    const [loginUser,setloginUser]=useState({});
-    const [message,setMessage]=useState(null);
+  const [loginUser,setloginUser]=useState({email:"",password:""});
+  const [ message, setMessage ] = useState( null );
+  const [error,Seterror]=useState(null);
     const onChange=e=>{
        const name = e.target.name;
       const value = e.target.value;
@@ -30,17 +33,23 @@ function Login() {
 
     const onSubmit=async e=>{
       e.preventDefault();
-      const Login = await axios.post( "/api/admin/login", loginUser );
-      const { auth,...current } = Login.data;
-      if ( auth )
+      try
       {
-        setLogin( true );
-        sessionStorage.setItem( "current", JSON.stringify( current ) );
-      setMessage("Login ScussFully");
-      navigate("/home");
-    }else{
-      setLogin(false);
-    }
+        const isVerfied = axios.post( "/api/admin/emailverify", loginUser );
+        const login = await signInWithEmailAndPassword( auth, loginUser?.email, loginUser?.password );     
+        if ( !login.user.emailVerified )
+        {
+          await signOut( auth );
+          sendEmailVerification( login.user );
+          Seterror( "Email Must be Verified" );
+        } else
+        {
+          navigate( "/home" );
+        }
+      } catch (err) {
+        Seterror( err.code );
+      }
+     
     }
   return (
     <MDBContainer fluid className="vh-100">
@@ -53,7 +62,8 @@ function Login() {
             <Image src="https://play-lh.googleusercontent.com/WCwcq3DvY0pbaTqUfU1ToySB2s5mmqAUxcLcTN3Y2J5l-sDwS2L2z6_qmCYNX9wdXg" roundedCircle width={100}/>
             <h3 className='mt-1 mb-3' >Campbell Decor</h3>
           </div>
-          {message!=null?(<Alert>Hi</Alert>):""}
+          { message != null ? ( <Alert>Hi</Alert> ) : "" }
+          { error != null ? ( <Alert>{ error}</Alert>):""}
           <MDBValidation>
           <MDBValidationItem feedback='Please choose correct email' invalid className='py-2' >
           <MDBValidationItem feedback='email is correct' valid >
