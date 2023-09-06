@@ -1,17 +1,31 @@
+// @ts-nocheck
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Image, Button,InputGroup } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
-export default function AddService() {
+import { BiUpload } from "react-icons/bi";
+export default function AddService ()
+{
   const [ description, setdescription ] = useState( "" );
-  const [serviceImg,setserviceImg]=useState(null)
+  const [ serviceImg, setserviceImg ] = useState( null );
   const [ inputs, setinputs ] = useState( {} );
     
-    const onChange = e=>
-    {
+  const onChange = e =>
+  {
       
-        setinputs(pre=>(e.target.name==="images"?{...pre,[e.target.name]:e.target.files[0]}:{...pre,[e.target.name]:e.target.value}))
+    if ( e.target.name === "images" )
+    {
+      setinputs( pre => ( { ...pre, images: e.target.files[ 0 ] } ) );
+      setserviceImg( URL.createObjectURL( e.target.files[ 0 ] ) );
+    } else
+    {
+      setinputs( pre => ( { ...pre, [ e.target.name ]: e.target.value } ) );
     }
+  }
+  const UploadImg =  () =>
+  {
+  
+  }
   const onSaveEvent = e => {
     e.preventDefault();
     console.log(inputs);
@@ -25,9 +39,10 @@ export default function AddService() {
             <Image
               width="100%"
               src={
-                URL.createObjectURL(inputs.images)??"https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
+                serviceImg??"https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
               }
             />
+            {process}
           </Row>
           {/* <Row>{
             inputs.images.slice( 1 ).map( img => (
@@ -88,7 +103,13 @@ export default function AddService() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Services Images</Form.Label>
-              <Form.Control type="file" onChange={onChange} name="images" accept="images/*" />
+              <InputGroup className="mb-3">
+                <Form.Control type="file" onChange={ onChange } name="images" accept="images/*" />
+                <Button variant="secoundary" onClick={UploadImg}>
+                  <BiUpload size={20}/>
+                </Button>
+              </InputGroup>
+             
             </Form.Group>
             <Button type="submit"  onClick={onSaveEvent}  className="me-2">
               Save

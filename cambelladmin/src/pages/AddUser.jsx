@@ -3,12 +3,12 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
 import AutoComplete from "../component/AutoComplete";
 import { AvatarGenerator } from "random-avatar-generator";
 import { GiAutoRepair } from "react-icons/gi";
-import { auth } from "../Fire";
-import { createUserWithEmailAndPassword ,sendEmailVerification} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export default function AddUSer ()
 {
     const generator = new AvatarGenerator();
-
+    const navigate = useNavigate();
     // Simply get a random avatar
     const [ user, setUser ] = useState( {
         username: "User",
@@ -21,12 +21,17 @@ export default function AddUSer ()
     {
         setUser( pre => ( { ...pre, [ e.target.name ]: e.target.value } ))
     }
-    const handleSubmit = async () =>
+    const handleSubmit = async e =>
     {
         try
         {
-            // const user = await createUserWithEmailAndPassword( auth, "cst19007@std.uwu.ac.lk", "Thanush126" );
-            // sendEmailVerification( user.user );
+            e.preventDefault();
+        console.log(user);
+            axios.post( "/api/user/add",user )
+                .then( res =>
+                {
+                    if ( res.data.aid ) navigate( "/admins" );
+                });
             
         } catch (error) {
             console.log(error);

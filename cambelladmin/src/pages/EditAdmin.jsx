@@ -71,6 +71,7 @@ export default function Addadmin ()
     const SubmitHandle = e =>
     {
         e.preventDefault();
+        alert( "Hi" );
         axios.post( "/api/admin/add", admin )
             .then( res =>
             {

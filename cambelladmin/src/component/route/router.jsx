@@ -10,7 +10,8 @@ import AddService from "../../pages/AddService";
 import AddAdmin from "../../pages/AddAdmins";
 import AddEvent from "../../pages/AddEvents"
 import AddPackage from "../../pages/AddPackages"
-import AddUser from "../../pages/AddUser"
+import AddUser from "../../pages/AddUser";
+import EditAdmin from "../../pages/EditAdmin";
 const  router=createBrowserRouter(
         [
             {
@@ -54,7 +55,11 @@ const  router=createBrowserRouter(
                     }, {
                         path: "/add_user",
                         element:<AddUser/>
-                    }
+                    },
+                    ,{
+                        path: "/edit_admin",
+                        element:<EditAdmin/>
+                    },
                     
                    
                 ]
