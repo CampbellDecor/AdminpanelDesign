@@ -48,12 +48,13 @@ function UserRows ( { username, profile, isBlock, isOnline, email, religion, uid
 }
 export default function Users ()
 {
-  const [ user, setUser ] = useState( [] );
-  useEffect( () =>
-  {
-    axios.get("/api/user/")
-    .then(users=>setUser(users))
-  }, [] );
+  const [ user, setUser ] = useState( [
+    {
+      uid: 1212, username: "ThanuMahee",
+      mobile:"+9477746327424",email:""
+}
+  ] );
+ 
     return(
     <Container className="position-relative">
         <Row>
