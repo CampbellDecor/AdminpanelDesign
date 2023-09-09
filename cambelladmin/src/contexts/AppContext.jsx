@@ -1,11 +1,12 @@
-import React,{createContext,useState,useRef} from 'react';
+import React, { createContext, useState, useRef } from 'react';
+import logo from "../images/logo.png";
 
 export const CambellContext=createContext();
 
 export default function AppContext ({childern}){
 const [cambell,setcambell]=useState({
         Appname:"CampbellDecor",
-        Applogo:"../style/logo.png"
+        Applogo:logo
     });
 
     const[mode,setmode]=useState("light");

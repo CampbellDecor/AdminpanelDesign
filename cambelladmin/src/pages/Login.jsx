@@ -1,4 +1,4 @@
-import React,{useContext, useState} from 'react';
+import React,{useContext, useRef, useState} from 'react';
 
 
 import {
@@ -13,15 +13,15 @@ import {
 }
 from 'mdb-react-ui-kit';
 import {Alert, Image} from 'react-bootstrap';
-import {Link,useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {CambellContext} from "../contexts/AppContext";
-
-function Login() {
-  const {setLogin}=useContext(CambellContext);
-  const navigate=useNavigate();
+function Login ()
+{
+  const {cambell } = useContext( CambellContext );
   const [loginUser,setloginUser]=useState({email:"",password:""});
   const [ message, setMessage ] = useState( null );
-  const [error,Seterror]=useState(null);
+  const [ error, Seterror ] = useState( null );
+
     const onChange=e=>{
        const name = e.target.name;
       const value = e.target.value;
@@ -39,14 +39,14 @@ function Login() {
      
     }
   return (
-    <MDBContainer fluid className="vh-100">
+    <MDBContainer fluid className="vh-100 login">
 
       <div className="p-5 bg-image" style={{backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', height: '300px'}}></div>
 
       <MDBCard className='mx-auto p-5 shadow-5 col-12 col-sm-10 col-md-8 col-lg-5' style={{marginTop: '-150px', background: 'hsla(0, 0%, 100%, 0.8)', backdropFilter: 'blur(30px)'}}>
         <MDBCardBody className='p-5 text-center'>
           <div>
-            <Image src="https://play-lh.googleusercontent.com/WCwcq3DvY0pbaTqUfU1ToySB2s5mmqAUxcLcTN3Y2J5l-sDwS2L2z6_qmCYNX9wdXg" roundedCircle width={100}/>
+            <Image src={cambell.Applogo} roundedCircle width={100}/>
             <h3 className='mt-1 mb-3' >Campbell Decor</h3>
           </div>
           { message != null ? ( <Alert>Hi</Alert> ) : "" }
