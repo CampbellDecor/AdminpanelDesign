@@ -1,10 +1,14 @@
+// @ts-nocheck
 import React, {  useState } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon, MDBInput, MDBTextArea, MDBBtn } from 'mdb-react-ui-kit';
 import AutoComplete from "../component/AutoComplete";
 import { AvatarGenerator } from "random-avatar-generator";
 import { GiAutoRepair } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 import axios from "axios";
+import PhoneInput from 'react-phone-number-input';
+import { WarningPopUp} from "../component/BlockPopUp";
 export default function AddUSer ()
 {
     const generator = new AvatarGenerator();
@@ -14,9 +18,20 @@ export default function AddUSer ()
         username: "User",
         password: "",
         email: "@gmail.com",
-        profile: generator.generateRandomAvatar()
+        profile: generator.generateRandomAvatar(),
+        mobile: "",
+        religion: "",
+        address:""
     } );
-
+    const [ isLoading, setisLoading ] = useState( false );
+    const [ message, setmessage ] = useState( null );
+    const [error, seterror ] = useState( null );
+    const validating = () =>
+    {
+        if ( user?.mobile === "" ) throw new Error( "Invalid Mobile" );
+        else if ( user?.email === "" || user?.email === "@gmail.com" ) throw new Error( "Inavalid Email" );
+        else return true;
+}
     const OnChangehandle = e =>
     {
         setUser( pre => ( { ...pre, [ e.target.name ]: e.target.value } ))
@@ -26,12 +41,17 @@ export default function AddUSer ()
         try
         {
             e.preventDefault();
-        console.log(user);
-            axios.post( "/api/user/add",user )
-                .then( res =>
-                {
-                    if ( res.data.aid ) navigate( "/admins" );
-                });
+           
+            if ( validating() )
+            {
+               
+                //const userdata = await axios.post( "/api/user/add", user );
+                setisLoading( true );
+                
+                setisLoading( false );
+                
+               }
+            
             
         } catch (error) {
             console.log(error);
@@ -42,6 +62,7 @@ export default function AddUSer ()
     return (
         <MDBContainer className="py-5 vh-75 my-4">
             <MDBRow className="justify-content-center align-items-center h-100">
+            <WarningPopUp open={true} />
                 <MDBCol lg="6" className="mb-4 mb-lg-0">
                     <MDBCard className="mb-3" style={ { borderRadius: '.5rem' } }>
                         <MDBRow className="g-0">
@@ -57,6 +78,7 @@ export default function AddUSer ()
                                 } }
                                 size={30}
                                 />
+                            
                                 <div className="d-none justify-content-center">
                                         <a href="#!"><MDBIcon fab icon="facebook me-3" size="md" /></a>
                                     <a href="#!"><MDBIcon fab icon="google me-3" size="md" /></a>
@@ -74,7 +96,10 @@ export default function AddUSer ()
                                         </MDBCol>
                                         <MDBCol size="6" className="mb-3">
                                             <MDBTypography tag="h6">Phone</MDBTypography>
-                                            <MDBInput label='mobile' name="mobile" type='tel' onChange={OnChangehandle}/>
+                                            <PhoneInput className="border-0" onChange={ value =>
+                                {
+                                    setUser( pre => ( { ...pre, mobile: value } ) );
+                                }} placeholder="Mobile" />
                                         </MDBCol>
                                     </MDBRow>
                                     <hr className="mt-0 mb-4" />
@@ -94,8 +119,8 @@ export default function AddUSer ()
                                         <MDBTextArea label='address' name='address' id='textAreaExample' rows={ 3 } onChange={OnChangehandle} />
                                     </MDBCol>
                                     <MDBRow>
-                                        <MDBBtn className='w-50 mx-auto' onClick={handleSubmit}>
-                                           save 
+                                        <MDBBtn className='w-50 mx-auto' disabled={isLoading}  onClick={handleSubmit}>
+                                          {isLoading?<Spinner animation="border" />:"Save"} 
                                     </MDBBtn>
                                     </MDBRow>
                                     
@@ -105,6 +130,7 @@ export default function AddUSer ()
                     </MDBCard>
                 </MDBCol>
             </MDBRow>
+           
         </MDBContainer>
     );
 }

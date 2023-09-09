@@ -1,7 +1,8 @@
 import React,{ useState,useReducer} from 'react';
 import { Container,Row,Form,Col} from 'react-bootstrap';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody,MDBInputGroup,MDBInput,MDBIcon} from 'mdb-react-ui-kit';
-import {FaUserSlash,FaUserCheck} from "react-icons/fa";
+import { FaUserSlash, FaUserCheck } from "react-icons/fa";
+import Block from '../component/BlockPopUp';
 import axios from "axios";
 
 function UserRows ( { username, profile, isBlock, isOnline, email, religion, uid, mobile } ){
@@ -41,7 +42,8 @@ function UserRows ( { username, profile, isBlock, isOnline, email, religion, uid
         </MDBBtn>
         {
           isBlock?(   <MDBBtn color='link' rounded size='sm'>
-          UnBlock
+            UnBlock
+            <Block/>
         </MDBBtn>):(<MDBBtn color='link' rounded size='sm'>
           Block
         </MDBBtn>)

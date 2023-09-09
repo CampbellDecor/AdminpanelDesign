@@ -1,7 +1,5 @@
 import React,{useContext, useState} from 'react';
-import {useCookies} from "react-cookie";
-import { auth } from "../Fire";
-import { signInWithEmailAndPassword,signOut,sendEmailVerification } from "firebase/auth";
+
 
 import {
   MDBBtn,
@@ -16,7 +14,6 @@ import {
 from 'mdb-react-ui-kit';
 import {Alert, Image} from 'react-bootstrap';
 import {Link,useNavigate} from "react-router-dom";
-import axios from "axios";
 import {CambellContext} from "../contexts/AppContext";
 
 function Login() {
@@ -35,17 +32,7 @@ function Login() {
       e.preventDefault();
       try
       {
-        const isVerfied = axios.post( "/api/admin/emailverify", loginUser );
-        const login = await signInWithEmailAndPassword( auth, loginUser?.email, loginUser?.password );     
-        if ( !login.user.emailVerified )
-        {
-          await signOut( auth );
-          sendEmailVerification( login.user );
-          Seterror( "Email Must be Verified" );
-        } else
-        {
-          navigate( "/home" );
-        }
+       
       } catch (err) {
         Seterror( err.code );
       }

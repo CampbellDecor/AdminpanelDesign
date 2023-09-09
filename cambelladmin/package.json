@@ -12,6 +12,8 @@
     "bootstrap": "^5.3.1",
     "chartjs": "^0.3.24",
     "firebase": "^9.18.0",
+    "jquery": "^3.6.4",
+    "jquery-ui": "^1.13.2",
     "mdb-react-ui-kit": "^6.2.0",
     "mdb-ui-kit": "^6.4.1",
     "mdbreact": "^5.2.0",
@@ -32,6 +34,7 @@
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "react-switch": "^7.0.0",
+    "reactjs-popup": "^2.0.5",
     "redux": "^4.2.1",
     "styled-components": "^6.0.7",
     "uuid": "^9.0.0",
@@ -62,6 +65,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.18",
     "@types/randomcolor": "^0.5.7",
     "@types/uuid": "^9.0.3",
     "jest-html-reporter": "^3.10.2"

@@ -3,7 +3,7 @@ import React,{createContext,useState,useRef} from 'react';
 export const CambellContext=createContext();
 
 export default function AppContext ({childern}){
-    const [cambell,setcambell]=useState({
+const [cambell,setcambell]=useState({
         Appname:"CampbellDecor",
         Applogo:"../style/logo.png"
     });
@@ -21,7 +21,7 @@ export default function AppContext ({childern}){
 
     return(
         <CambellContext.Provider value={{
-        authfun,
+authfun,
         cambell,
         setcambell,
         mode,
