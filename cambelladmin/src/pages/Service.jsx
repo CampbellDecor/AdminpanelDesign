@@ -1,4 +1,6 @@
-import {
+import React from "react";
+import
+  {
     MDBContainer,
     MDBRow,
     MDBCol,
@@ -8,14 +10,11 @@ import {
     MDBIcon,
     MDBRipple,
     MDBBtn,
-    MDBCardTitle
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { Image } from "react-bootstrap";
 import { MdAdd } from "react-icons/md";
   export default function Service(){
-    const [myservice,setService]=useState([]);
 
     return (
         <MDBContainer fluid>

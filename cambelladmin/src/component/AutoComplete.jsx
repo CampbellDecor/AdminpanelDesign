@@ -14,7 +14,7 @@ const AutoComplete = (props) => {
     if (!props.dataSource || !Array.isArray(props.dataSource)) {
       throw new Error('Autocomplete requires a dataSource[] prop')
     }
-  }, [])
+  }, [props.dataSource ])
 
   const handleOnChange = (e) => {
     const val = e.target.value

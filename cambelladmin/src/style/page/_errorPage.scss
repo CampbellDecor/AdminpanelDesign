@@ -1,0 +1,17 @@
+@use "../abstract/variable" as var;
+
+.error-page{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../../images/errorpage/2.jpg");
+    
+        .inner-error{
+            width: max-content;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        
+    
+}

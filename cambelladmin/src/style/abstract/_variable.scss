@@ -1,6 +1,7 @@
 @use "./color" as clr;
 @use "./trans" as trns;
 @use "./align" as align;
+@use "./images" as *;
 
 @function expandSidebar($satus){
     @return map-get(align.$sidebar,$satus);
@@ -14,5 +15,8 @@
     }@else{
         @return map-get(clr.$Color,$color);
     }
+   
+}
+@function randombackground(){
    
 }

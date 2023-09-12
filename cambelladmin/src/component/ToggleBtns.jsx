@@ -27,7 +27,7 @@ export const ToggleBtn=()=>{
     </>
     )
   }
- export  function ResponiveToggle({toggleAction,className}){
+ export  function SplitToggle({toggleAction,className}){
     const [respons,setrespons]=useState(true);
     const onToggle=e=>{
           if(respons){

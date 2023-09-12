@@ -12,10 +12,9 @@ const [cambell,setcambell]=useState({
     const[mode,setmode]=useState("light");
     const splittoggle=useRef(null);
     const responsivetoggle=useRef(null);
-    
+    const [ isSuper, setSuper ] = useState( false );
     const [ islogin, setLogin ] = useState( false );
-    const user = sessionStorage.getItem( "current" ) || null;
-    const [ currentuser, setCurrentUser ] = useState( user !== null ? JSON.parse( user ) : null );
+    const [ currentuser, setCurrentUser ] = useState({} );
     const  authfun=(path)=>{
         return islogin?path:"/";
     }
@@ -32,7 +31,8 @@ authfun,
         islogin,
         setLogin,
             currentuser,
-            setCurrentUser
+            setCurrentUser,
+            isSuper, setSuper
         } }>
             
             {childern}

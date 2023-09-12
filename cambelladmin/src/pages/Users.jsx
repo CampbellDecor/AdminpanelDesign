@@ -1,9 +1,18 @@
-import React,{ useState,useReducer} from 'react';
-import { Container,Row,Form,Col} from 'react-bootstrap';
+import React, {
+  useState
+  , useReducer,
+  //useContext
+} from 'react';
+import {
+   Container,
+  Row,
+  Form,
+  Col} from 'react-bootstrap';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody,MDBInputGroup,MDBInput,MDBIcon} from 'mdb-react-ui-kit';
 import { FaUserSlash, FaUserCheck } from "react-icons/fa";
-import Block from '../component/BlockPopUp';
-import axios from "axios";
+
+//import {CambellContext} from '../contexts/AppContext';
+
 
 function UserRows ( { username, profile, isBlock, isOnline, email, religion, uid, mobile } ){
   return (
@@ -43,7 +52,6 @@ function UserRows ( { username, profile, isBlock, isOnline, email, religion, uid
         {
           isBlock?(   <MDBBtn color='link' rounded size='sm'>
             UnBlock
-            <Block/>
         </MDBBtn>):(<MDBBtn color='link' rounded size='sm'>
           Block
         </MDBBtn>)
@@ -55,9 +63,14 @@ function UserRows ( { username, profile, isBlock, isOnline, email, religion, uid
 }
 export default function Users ()
 {
-  const [searchText, setSearchText] = useState('');
+  const [ searchText, setSearchText ] = useState( '' );
+  // const {islogin} = useContext( CambellContext );
+
+
+
   const userdata = {
-   userEx: [
+    userEx:
+    [
     {
       uid: 1212, username: "ThanuMahee",
       mobile: "+9477746327424", email: "fdsfsdfds", isOnline: false, isBlock: false,
@@ -127,6 +140,7 @@ export default function Users ()
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value);
   };
+  
     return(
     <Container className="position-relative vh-100">
         <Row >

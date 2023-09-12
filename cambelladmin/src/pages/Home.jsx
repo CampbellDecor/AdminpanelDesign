@@ -1,13 +1,21 @@
-import React,{useState,useEffect} from 'react';
+import React, {
+    useState,
+    useEffect,
+    //useContext
+} from 'react';
 import { Container,Row,Col,Badge,Stack,Image } from 'react-bootstrap';
 import {IncomeAnalyze,SmallHomeDonut} from "../component/Graph"
 import {SimpleHomeCalender} from "../component/Calender"
 import {NewAppoint} from "../component/Table";
-import {Link} from "react-router-dom"
+import
+    {
+        Link
+   //     , Navigate
+    } from "react-router-dom";
 import {FaCalendarDay,FaUsers,FaCoins} from "react-icons/fa"
 import {TbPackages} from "react-icons/tb"
 import {MDBListGroup,MDBListGroupItem,MDBBtn} from "mdb-react-ui-kit";
-
+//import {CambellContext} from '../contexts/AppContext';
 
 export default function Home() {
  
@@ -17,7 +25,8 @@ const countpanel=[
     { index: 1, title: "Earn", idenity: <FaCoins className="icon" />, count: 12 },
     { index: 1, title: "Booking", idenity: <FaCalendarDay className="icon" />,count: 20},
     { index: 1, title: "Packages", idenity: <TbPackages className="icon" />, count: 5}
-]
+    ]
+
     return (
         <Container fluid className="home">
             <Row className='home-countpanel my-3'>

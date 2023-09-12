@@ -13,7 +13,6 @@ export default function Addadmin ()
 {
     const [ demoProfile, setdemoProfile ] = useState( "" );
     const adminimg = useRef( null );
-    const adminupload = useRef( null );
     const navigate=useNavigate()
     const imageUpload =async () =>
     {

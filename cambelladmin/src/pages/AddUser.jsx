@@ -4,15 +4,13 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
 import AutoComplete from "../component/AutoComplete";
 import { AvatarGenerator } from "random-avatar-generator";
 import { GiAutoRepair } from "react-icons/gi";
-import { useNavigate } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-import axios from "axios";
+
 import PhoneInput from 'react-phone-number-input';
-import { WarningPopUp} from "../component/BlockPopUp";
 export default function AddUSer ()
 {
     const generator = new AvatarGenerator();
-    const navigate = useNavigate();
+
     // Simply get a random avatar
     const [ user, setUser ] = useState( {
         username: "User",
@@ -24,8 +22,6 @@ export default function AddUSer ()
         address:""
     } );
     const [ isLoading, setisLoading ] = useState( false );
-    const [ message, setmessage ] = useState( null );
-    const [error, seterror ] = useState( null );
     const validating = () =>
     {
         if ( user?.mobile === "" ) throw new Error( "Invalid Mobile" );
@@ -62,7 +58,6 @@ export default function AddUSer ()
     return (
         <MDBContainer className="py-5 vh-75 my-4">
             <MDBRow className="justify-content-center align-items-center h-100">
-            <WarningPopUp open={true} />
                 <MDBCol lg="6" className="mb-4 mb-lg-0">
                     <MDBCard className="mb-3" style={ { borderRadius: '.5rem' } }>
                         <MDBRow className="g-0">
