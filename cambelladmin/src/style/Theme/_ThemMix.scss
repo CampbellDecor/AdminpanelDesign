@@ -121,3 +121,28 @@
     }
   }
 }
+@mixin Login($theme:"light"){
+  .login{
+    @if($theme:"dark"){
+      background-color:var.color($theme, "bodybg") ;
+    }@else{
+      background-color:var.color($theme, "w") ;
+    }
+  
+    .bg-image{
+      @if($theme:"dark"){
+        background-image: url("../../images/LoginBg/LoginDark.jpg");
+      }@else{
+        background-image: url("../../images/LoginBg/LoginWallpaper2.jpg");
+      }
+        
+    }
+    &-container{
+background: var.color($theme, "w");
+
+&-btn{
+background-color: var.color($theme, "secoundary") !important;
+}
+    }
+}
+}

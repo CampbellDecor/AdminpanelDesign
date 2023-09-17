@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {Outlet} from 'react-router-dom';
+import {Outlet,Navigate} from 'react-router-dom';
 import React,{useContext, useRef} from 'react'
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -10,7 +10,7 @@ import {ToggleBtn,SplitToggle} from '../ToggleBtns';
 
 
 export function Layout(){
-  const {splittoggle,responsivetoggle}=useContext(CambellContext);
+  const {splittoggle,responsivetoggle,islogin}=useContext(CambellContext);
   const bodyres=useRef(null);
   const responsiveAction=action=>{
     if(action){
@@ -23,7 +23,7 @@ export function Layout(){
   }
 
 
-    return(
+    return !islogin?( <Navigate to="/" replace={ true } /> ):(
       <div ref={splittoggle}>
     
       <Sidebar/>
@@ -41,4 +41,3 @@ export function Layout(){
            
     )
 }
-

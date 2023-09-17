@@ -1,38 +1,19 @@
-import React, {
-    useState,
-    useEffect,
-    //useContext
-} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Container,Row,Col,Badge,Stack,Image } from 'react-bootstrap';
 import {IncomeAnalyze,SmallHomeDonut} from "../component/Graph"
 import {SimpleHomeCalender} from "../component/Calender"
 import {NewAppoint} from "../component/Table";
-import
-    {
-        Link
-   //     , Navigate
-    } from "react-router-dom";
-import {FaCalendarDay,FaUsers,FaCoins} from "react-icons/fa"
-import {TbPackages} from "react-icons/tb"
+import {Navigate} from "react-router-dom";
+
 import {MDBListGroup,MDBListGroupItem,MDBBtn} from "mdb-react-ui-kit";
-//import {CambellContext} from '../contexts/AppContext';
-
+import {countpanel} from "../Data/Countpanel";
 export default function Home() {
- 
-
-const countpanel=[
-    { index: 1, title: "Users", idenity: <FaUsers className="icon" />, count: 10},
-    { index: 1, title: "Earn", idenity: <FaCoins className="icon" />, count: 12 },
-    { index: 1, title: "Booking", idenity: <FaCalendarDay className="icon" />,count: 20},
-    { index: 1, title: "Packages", idenity: <TbPackages className="icon" />, count: 5}
-    ]
-
     return (
         <Container fluid className="home">
             <Row className='home-countpanel my-3'>
                 <div className="w-100  d-flex justify-content-around flex-sm-nowrap flex-wrap">
                     {
-                             countpanel.map(panel=>(<CountComponents {...panel} />))
+                        countpanel.map( ( panel, index ) => ( <CountComponents { ...panel } index={ index} />))
                     }
                 </div>
 
@@ -91,17 +72,18 @@ const countpanel=[
             </Container>
        )
        }
-             function CountComponents({index,idenity,title,count}){
+function CountComponents ( { index, idenity, title, count, path } )
+{
     return (
-      <div className='d-flex  flex-md-row flex-column align-items-center justify-content-lg-around  shadow rounded mx-2 my-2 py-4 my-sm-0 py-sm-2 py-md-5 border-1 home-countpanel-componet'  key={index}>
+        <div className='d-flex  flex-md-row flex-column align-items-center justify-content-lg-around  shadow rounded mx-2 my-2 py-4 my-sm-0 py-sm-2 py-md-5 border-1 home-countpanel-componet' key={ index } onClick={()=>(<Navigate to={path}/>)} >
         <div className="home-countpanel-componet--identiy">
             {idenity}
         </div>
         <div className="home-countpanel-componet--des text-center">
-        <Link><h5 className='fw-bolder'>{title}</h5></Link>
+        <h5 className='fw-bolder'>{title}</h5>
            <h6>{count}</h6> 
         </div>
-      </div>
+            </div>
     )
   } 
 

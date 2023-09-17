@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, {  useState } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon, MDBInput, MDBTextArea, MDBBtn } from 'mdb-react-ui-kit';
-import AutoComplete from "../component/AutoComplete";
+import AutoComplete from "../component/Util/Inputs/AutoComplete";
 import { AvatarGenerator } from "random-avatar-generator";
 import { GiAutoRepair } from "react-icons/gi";
 import { Spinner } from "react-bootstrap";

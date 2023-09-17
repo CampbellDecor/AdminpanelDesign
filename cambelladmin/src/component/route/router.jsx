@@ -16,7 +16,7 @@ import AddEvent from "../../pages/AddEvents";
 import AddPackage from "../../pages/AddPackages";
 import AddUser from "../../pages/AddUser";
 import EditAdmin from "../../pages/EditAdmin";
-import Error from "../../pages/Error/Error";
+import Error from "../../pages/Bugs/Error";
 //import { userLoader } from "../../store/Loaders";
 const router = createBrowserRouter([
   {

@@ -7,60 +7,15 @@ import {
    Container,
   Row,
   Form,
-  Col} from 'react-bootstrap';
+  Col,Pagination} from 'react-bootstrap';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody,MDBInputGroup,MDBInput,MDBIcon} from 'mdb-react-ui-kit';
 import { FaUserSlash, FaUserCheck } from "react-icons/fa";
-
+import { RiUserAddFill } from "react-icons/ri";
+import {UserRows} from "../component/User";
 //import {CambellContext} from '../contexts/AppContext';
 
 
-function UserRows ( { username, profile, isBlock, isOnline, email, religion, uid, mobile } ){
-  return (
-      <tr key={uid}>
-        <td>
-          <div className='d-flex align-items-center'>
-            <img
-              src={profile}
-              alt=''
-              style={{ width: '45px', height: '45px' }}
-              className='rounded-circle'
-            />
-            <div className='ms-3'>
-            <p className='fw-bold mb-1'>{ username}</p>
-            <p className='text-muted mb-0'>{email}</p>
-            </div>
-          </div>
-        </td>
-        <td>
-        <p className='fw-normal mb-1'>{religion }</p>
-        <p className='text-muted mb-0'>{ mobile}</p>
-        </td>
-      <td>{
-        isBlock ? ( <MDBBadge color='danger' pill>
-          Blocked/{isOnline?"Online":"Offline"}
-        </MDBBadge> ) : ( <MDBBadge color='warning' pill>
-            unBlocked/{isOnline?"Online":"Offline"}
-          </MDBBadge>)
-      }
-        
-        </td>
-        <td>{Math.floor(Math.random()*20)}</td>
-        <td>
-          <MDBBtn color='link' rounded size='sm'>
-            Edit
-        </MDBBtn>
-        {
-          isBlock?(   <MDBBtn color='link' rounded size='sm'>
-            UnBlock
-        </MDBBtn>):(<MDBBtn color='link' rounded size='sm'>
-          Block
-        </MDBBtn>)
-        }
-       
-        </td>
-      </tr>
-  )
-}
+
 export default function Users ()
 {
   const [ searchText, setSearchText ] = useState( '' );
@@ -144,15 +99,15 @@ export default function Users ()
     return(
     <Container className="position-relative vh-100">
         <Row >
-            <Col lg={4}>
+            <Col>
             <MDBInputGroup>
-      <MDBInput label='Search'   onChange={handleSearchTextChange} />
+      <MDBInput label='Search'   onChange={handleSearchTextChange} className='w-75' />
       <MDBBtn rippleColor='dark'>
         <MDBIcon icon='search' />
       </MDBBtn>
     </MDBInputGroup>
             </Col>
-            <Col lg={8} className="d-flex w-100 justify-content-end align-items-center">
+            <Col className="d-flex w-100 justify-content-end align-items-center">
       <span>
       <div>
           <Form.Check
@@ -170,7 +125,10 @@ export default function Users ()
           />
         </div>
       </span>
-            </Col>
+          </Col>
+          <Col>
+          <RiUserAddFill/>
+          </Col>
         </Row>
 <MDBTable align='middle' >
       <MDBTableHead >
@@ -187,7 +145,29 @@ export default function Users ()
               filteredUsers.map( userdataset => ( <UserRows {...userdataset} />))
         }
        
-      </MDBTableBody>
+          </MDBTableBody>
+          <MDBTableBody>
+            <tr>
+              <td colSpan={ 5 }>
+                <div className='w-100 d-flex justify-content-center align-items-center'>
+              <Pagination className='p-2'>
+              <Pagination.First />
+              <Pagination.Prev />
+              <Pagination.Item>1</Pagination.Item>
+              <Pagination.Item>1</Pagination.Item>
+              <Pagination.Ellipsis />
+              <Pagination.Item>9</Pagination.Item>
+              <Pagination.Item>10</Pagination.Item>
+              <Pagination.Next />
+              <Pagination.Last />
+                  </Pagination>
+                  </div>
+              </td>
+           
+            </tr>
+          
+          </MDBTableBody>
+         
     </MDBTable>
     </Container>
 

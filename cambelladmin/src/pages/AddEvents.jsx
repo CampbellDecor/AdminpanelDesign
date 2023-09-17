@@ -1,15 +1,52 @@
+// @ts-nocheck
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Image, Button,InputGroup } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "../../node_modules/react-quill/dist/quill.snow.css";
+import { BiUpload} from "react-icons/bi";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {Storage} from "../Fire";
+import { toast } from "react-toastify";
 export default function AddEvents() {
     const [ description, setdescription ] = useState( "" );
-    const [ inputs, setinputs ] = useState( {} );
-    
+  const [ inputs, setinputs ] = useState( {} );
+  const [ images, setImages ] = useState( [] );
+ 
     const onChange = e=>
     {
         setinputs(pre=>({...pre,[e.target.name]:e.target.value}))
-    }
+  }
+  const uploadImage = async() =>
+  {
+    const urls = [];
+    await images.forEach( async imag =>
+    {
+      try {
+        const filename = "Events/"+new Date().getTime() + imag.name;
+      const storageref = await ref( Storage, filename );
+        const upload =  uploadBytesResumable( storageref, imag );
+        upload.on( "state_changed", snapshot =>
+        {
+          const progress = ( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
+          console.log( progress );
+        }, error =>
+        {
+          console.error(error);
+        }, () =>
+        {
+          getDownloadURL( upload.snapshot.ref ).then( url =>
+          {
+            urls.unshift( url );
+          })
+        } );
+        await toast.success( "upload scussFully" );
+        await setinputs( pre => ( { ...pre, images: urls } ) );
+      } catch (error) {
+        console.log( error );
+      }
+      
+    } )
+  }
   const onSaveEvent = e => {
     e.preventDefault();
     console.log(inputs);
@@ -19,43 +56,27 @@ export default function AddEvents() {
       <Row>
         <Col md="6">
           <Row>
+            { images.map( ( img, index ) => (
+            index===0?( <><Col sm='12' key={index}> 
             <Image
               width="100%"
-              src="https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
+              src={ URL.createObjectURL(img)}
             />
-          </Row>
-          <Row>
-            <Col lg="3" md="4" sm="6">
-              <Image
-                width="100%"
-                src="https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
-              />
-            </Col>
-            <Col lg="3" md="4" sm="6">
-              <Image
-                width="100%"
-                src="https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
-              />
-            </Col>
-            <Col lg="3" md="4" sm="6">
-              <Image
-                width="100%"
-                src="https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
-              />
-            </Col>
-            <Col lg="3" md="4" sm="6">
-              <Image
-                width="100%"
-                src="https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
-              />
-            </Col>
+            </Col><div className="gap-2"></div></>):(<Col lg="3" md="4" sm="6" key={index}>
+            <Image
+              width="100%"
+              src={ URL.createObjectURL(img)}
+            />
+          </Col>)
+            ))}
+
           </Row>
         </Col>
         <Col md="6">
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>Event Id</Form.Label>
-              <Form.Control type="text" placeholder="Service Id" name="serviceid" onChange={onChange} required />
+              <Form.Control type="text" placeholder="Event Id" name="eventid" onChange={onChange} required />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Title</Form.Label>
@@ -78,8 +99,20 @@ export default function AddEvents() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Event Images</Form.Label>
-              <Form.Control type="file" onChange={onChange} name="images" multiple />
+              
+              <InputGroup>
+              <Form.Control type="file" onChange={ e =>
+              {
+                const Files=[]
+                for ( const file of ( e.target.files )){
+                  Files.push(file);
+                }
+                setImages( Files );
+                } } name="images" multiple />
+                 <Button onClick={uploadImage}><BiUpload/></Button>
+            </InputGroup>
             </Form.Group>
+           
             <Button type="submit"  onClick={onSaveEvent}  className="me-2">
               Save
                       </Button>
