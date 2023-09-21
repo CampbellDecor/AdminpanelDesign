@@ -1,19 +1,19 @@
 import React, {useState,useEffect} from 'react';
-import { Container,Row,Col,Badge,Stack,Image } from 'react-bootstrap';
-import {IncomeAnalyze,SmallHomeDonut} from "../component/Graph"
-import {SimpleHomeCalender} from "../component/Calender"
-import {NewAppoint} from "../component/Table";
-import {Navigate} from "react-router-dom";
-
+import { Container,Row,Col} from 'react-bootstrap';
+import {IncomeAnalyze,SmallHomeDonut} from "../component/Util/Graph"
+import {SimpleHomeCalender} from "../component/Util/Calender"
+import {NewAppoint} from "../component/Util/Table";
+import {CountPanel,ListPanel } from "../component/Panels";
 import {MDBListGroup,MDBListGroupItem,MDBBtn} from "mdb-react-ui-kit";
 import {countpanel} from "../Data/Countpanel";
 export default function Home() {
+    
     return (
         <Container fluid className="home">
             <Row className='home-countpanel my-3'>
                 <div className="w-100  d-flex justify-content-around flex-sm-nowrap flex-wrap">
                     {
-                        countpanel.map( ( panel, index ) => ( <CountComponents { ...panel } index={ index} />))
+                        countpanel.map( ( panel, index ) => ( <CountPanel { ...panel } index={ index} />))
                     }
                 </div>
 
@@ -23,7 +23,7 @@ export default function Home() {
                     <IncomeAnalyze />
                     <NewAppoint />
                     <Row className="justify-content-between">
-                        <ListOfContent {...{
+                        <ListPanel {...{
                             title: "Cambell Events", items: [
                                 {
                                     content: "Mankalaya", count: 3,
@@ -39,7 +39,7 @@ export default function Home() {
                                 }
                             ]
                         }} />
-                        <ListOfContent {...{
+                        <ListPanel {...{
                             title: "Cambell Services", items: [
                                 {
                                     content: "Foods", count: 3,
@@ -72,44 +72,9 @@ export default function Home() {
             </Container>
        )
        }
-function CountComponents ( { index, idenity, title, count, path } )
-{
-    return (
-        <div className='d-flex  flex-md-row flex-column align-items-center justify-content-lg-around  shadow rounded mx-2 my-2 py-4 my-sm-0 py-sm-2 py-md-5 border-1 home-countpanel-componet' key={ index } onClick={()=>(<Navigate to={path}/>)} >
-        <div className="home-countpanel-componet--identiy">
-            {idenity}
-        </div>
-        <div className="home-countpanel-componet--des text-center">
-        <h5 className='fw-bolder'>{title}</h5>
-           <h6>{count}</h6> 
-        </div>
-            </div>
-    )
-  } 
 
-            function ListOfContent({title, items}){
-                return   (
-            <Col md={5} className="my-3 mx-3 count-panel">
-                <h5>Events Bookings</h5>
-                <Stack gap={2}>
-                    {
-                        items.map(item =>
-                        (
-                            <div className="d-flex justify-content-between count-panel-component border p-2 rounded rounded-2">
-                                <div className="d-flex count-panel-component--name bg-image hover-zoom">
-                                    <Image className="count-panel-component--name--img" src={item?.url} />
-                                    <h6 className="count-panel-component--name--text text-muted ms-2" >{item?.content}</h6>
-                                </div>
-                                <div><Badge pill className="count-panel-component--count my-2">{item?.count}</Badge></div>
 
-                            </div>
-                        )
-                        )
-                    }
-                </Stack>
-            </Col>
-            )
-  }
+  
 
             function ReveiwPanel(){
     const [reviews,setReveiw]=useState([]);

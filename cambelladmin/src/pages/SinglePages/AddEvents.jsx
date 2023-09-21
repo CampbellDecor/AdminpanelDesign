@@ -2,10 +2,9 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Image, Button,InputGroup } from "react-bootstrap";
 import ReactQuill from "react-quill";
-import "../../node_modules/react-quill/dist/quill.snow.css";
 import { BiUpload} from "react-icons/bi";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import {Storage} from "../Fire";
+import {Storage} from "../../Fire";
 import { toast } from "react-toastify";
 export default function AddEvents() {
     const [ description, setdescription ] = useState( "" );

@@ -6,7 +6,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale,
   Title,   Filler,} from 'chart.js';
 import { Doughnut,Line } from 'react-chartjs-2';
 import randomcolor from 'randomcolor';
-import {CambellContext} from '../contexts/AppContext';
+import {CambellContext} from '../../contexts/AppContext';
 
 
 

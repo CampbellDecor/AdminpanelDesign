@@ -6,7 +6,7 @@ import {
     MDBRow,
     MDBRipple
 } from 'mdb-react-ui-kit';
-import {FooterImg} from "../../Data/Images";
+import {FooterImg} from "../Data/Images";
 export default function component (){
 
     return(

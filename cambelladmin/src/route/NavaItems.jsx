@@ -26,7 +26,7 @@ export const NavItems = [ {
     itemicon: <BsFillChatFill size={ is } className="me-3" />
   }, {
     path: "/event",
-    itemname: "events",
+    itemname: "Events",
     itemicon: <MdEventSeat size={ is } className="me-3" />
   },
   {
@@ -39,6 +39,11 @@ export const NavItems = [ {
     itemname: "Packages",
     itemicon: <TbPackages size={ is } className="me-3" />
   },
+  {
+    path: "/service/cat",
+    itemname: "ServiceCategory",
+    itemicon: <MdHomeRepairService size={ is } className="me-3" />
+  }, 
   {
     path: "/service",
     itemname: "Services",

@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React, { useEffect } from "react";
+import React from "react";
 import
   {
     MDBContainer,
@@ -9,27 +8,18 @@ import
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { MdAdd } from "react-icons/md";
-import {getservice} from '../Slice/ServiceSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import {ServiceRow } from "../component/Service";
-  export default function Service(){
-    const Dispatcher = useDispatch();
-    const { services, loading, result } = useSelector( state => state.service );
-    useEffect( () =>
-    {
-      Dispatcher( getservice() );
-    }, [Dispatcher] );
-    return loading?(<h1>.....</h1>):(
+import { EventRow } from "../component/Event";
+import {events } from "../store/FakeData";
+  export default function Events(){
+
+    return (
         <MDBContainer fluid>
           <MDBRow className="w-100">
-          <MDBCol  md="12" lg="9">
-            {
-              result === "fetched" && services.map( (service,index) => ( <ServiceRow {...service} key={index} />))
-          }
-              
+            <MDBCol md="7" lg="9">
+           {events.map(e=>(<EventRow {...e} />))} 
               </MDBCol> 
             
-             <MDBCol md="none" lg="3">
+             <MDBCol md="5" lg="3">
               <OneService/>
              </MDBCol>
           </MDBRow>

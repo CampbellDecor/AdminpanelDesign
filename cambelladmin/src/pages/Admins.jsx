@@ -1,32 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row, ButtonGroup, Button } from 'react-bootstrap';
 import { MdBlockFlipped } from "react-icons/md";
-import axios from "axios";
 import { MDBCol, MDBCard, MDBCardTitle, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn } from 'mdb-react-ui-kit';
-export default function Admins (){
-  const [admins,setAdmins]=useState([]);
+import { getadmin } from '../Slice/AdminSlice';
+import {useDispatch,useSelector } from 'react-redux';
+
+export default function Admins ()
+{
+  const { admins,result } = useSelector( state =>state.admin );
+  const dispatcher = useDispatch();
   useEffect( () =>
   {
-    axios.get( "/api/admin/" )
-      .then(
-        fetchedadmins =>
-        {
-          setAdmins( fetchedadmins.data );
-        console.log(fetchedadmins);
-        }
-
-    ).catch(
-      err =>
-      {
-        console.log(err);
-      }
-    )
+    dispatcher( getadmin() );
 },[])
     return(
 <Container className="vh-100">
 <Row>
   {
-            admins.map( ad => ( <Admin {...ad} />))
+          result==="fetched"? ( admins.map( ad => ( <Admin {...ad} />))):("......................")
   }
         
 

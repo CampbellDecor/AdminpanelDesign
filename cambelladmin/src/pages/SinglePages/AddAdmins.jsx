@@ -5,7 +5,6 @@ import { GiAutoRepair } from "react-icons/gi";
 import { BiSolidPhoneCall, BiLogoGmail, BiSolidEditLocation,BiUpload } from "react-icons/bi";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { AvatarGenerator } from "random-avatar-generator";
-import '../../node_modules/react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

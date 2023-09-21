@@ -1,135 +1,29 @@
+// @ts-nocheck
 import React, {
-  useState
-  , useReducer,
-  //useContext
+  useEffect,
 } from 'react';
-import {
-   Container,
-  Row,
-  Form,
-  Col,Pagination} from 'react-bootstrap';
-import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody,MDBInputGroup,MDBInput,MDBIcon} from 'mdb-react-ui-kit';
-import { FaUserSlash, FaUserCheck } from "react-icons/fa";
-import { RiUserAddFill } from "react-icons/ri";
+import {Container,Pagination} from 'react-bootstrap';
+import {  MDBTable, MDBTableHead, MDBTableBody} from 'mdb-react-ui-kit';
 import {UserRows} from "../component/User";
-//import {CambellContext} from '../contexts/AppContext';
-
-
+import {getUser,blockfilter} from '../Slice/UserSlice';
+import {useDispatch,useSelector } from 'react-redux';
 
 export default function Users ()
 {
-  const [ searchText, setSearchText ] = useState( '' );
-  // const {islogin} = useContext( CambellContext );
-
-
-
-  const userdata = {
-    userEx:
-    [
-    {
-      uid: 1212, username: "ThanuMahee",
-      mobile: "+9477746327424", email: "fdsfsdfds", isOnline: false, isBlock: false,
-      religion: "Hindu", profile: "https://static.thenounproject.com/png/363633-200.png"
-    }, {
-      uid: 1212, username: "ThanuMahee",
-      mobile: "+9477746327424", email: "fdsfsdfds", isOnline: true, isBlock: false,
-      religion: "Hindu", profile: "https://static.thenounproject.com/png/363633-200.png"
-    },
-    {
-      uid: 1212, username: "Yuka",
-      mobile: "+9477746327424", email: "fdsfsdfds", isOnline: true, isBlock: true,
-      religion: "Hindu", profile: "https://static.thenounproject.com/png/363633-200.png"
-    },
-    {
-      uid: 1212, username: "ThanuMahee",
-      mobile: "+9477746327424", email: "fdsfsdfds", isOnline: true, isBlock: false,
-      religion: "Hindu", profile: "https://static.thenounproject.com/png/363633-200.png"
-    },
-    {
-      uid: 1212, username: "ThanuMahee",
-      mobile: "+9477746327424", email: "fdsfsdfds", isOnline: true, isBlock: true,
-      religion: "Hindu", profile: "https://static.thenounproject.com/png/363633-200.png"
-    }
-    ],
-    showBlocked: false,
-    showUnblocked: false,
-  };
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'TOGGLE_SHOW_BLOCKED':
-        return {
-          ...state,
-          showBlocked: !state.showBlocked,
-          showUnblocked: state.showBlocked ? state.showUnblocked : false,
-        };
-      case 'TOGGLE_SHOW_UNBLOCKED':
-        return {
-          ...state,
-          showUnblocked: !state.showUnblocked,
-          showBlocked: state.showUnblocked ? state.showBlocked : false,
-        };
-      default:
-        return state;
-    }
-  };
-  const [ user, dispatch ] = useReducer(reducer,userdata );
-  const filteredUsers = user.userEx.filter( ( userp ) =>
+  const { result,loading,displayData } = useSelector( state =>state.user );
+  const dispatcher = useDispatch();
+  useEffect( () =>
   {
-    const nameIncludesSearchText = userp.username.toLowerCase().includes(searchText.toLowerCase()) || userp.email.toLowerCase().includes(searchText.toLowerCase());
-    if (user.showBlocked && !user.showUnblocked) {
-      return userp.isBlock;
-    } else if (!user.showBlocked && user.showUnblocked) {
-      return !userp.isBlock;
-    } else {
-      return nameIncludesSearchText;
-    }
-  });
-
-  const toggleShowBlocked = () => {
-    dispatch({ type: 'TOGGLE_SHOW_BLOCKED' });
-  };
-
-  const toggleShowUnblocked = () => {
-    dispatch({ type: 'TOGGLE_SHOW_UNBLOCKED' });
-  };
-  const handleSearchTextChange = (e) => {
-    setSearchText(e.target.value);
-  };
+    dispatcher( getUser() );
   
-    return(
-    <Container className="position-relative vh-100">
-        <Row >
-            <Col>
-            <MDBInputGroup>
-      <MDBInput label='Search'   onChange={handleSearchTextChange} className='w-75' />
-      <MDBBtn rippleColor='dark'>
-        <MDBIcon icon='search' />
-      </MDBBtn>
-    </MDBInputGroup>
-            </Col>
-            <Col className="d-flex w-100 justify-content-end align-items-center">
-      <span>
-      <div>
-          <Form.Check
-            inline
-                  label={ <FaUserCheck /> }
-                  checked={user.showUnblocked}
-                  onChange={toggleShowUnblocked}
-     
-          />
-          <Form.Check
-            inline
-            label={<FaUserSlash/>}  checked={user.showBlocked}
-            onChange={toggleShowBlocked}
-           
-          />
-        </div>
-      </span>
-          </Col>
-          <Col>
-          <RiUserAddFill/>
-          </Col>
-        </Row>
+  },[dispatcher]);
+  
+    return loading?(<h1>Loading</h1>):(
+      <Container className="position-relative vh-100">
+        <button onClick={ () =>
+        {
+          dispatcher( blockfilter() );
+        }}>b</button>
 <MDBTable align='middle' >
       <MDBTableHead >
         <tr>
@@ -142,7 +36,7 @@ export default function Users ()
       </MDBTableHead>
       <MDBTableBody>
             {
-              filteredUsers.map( userdataset => ( <UserRows {...userdataset} />))
+              result === "fetched" ? ( displayData.map( ( userdataset, index ) => ( <UserRows { ...userdataset } key={ index } /> ) ) ) : ( <h1>{result}</h1>)
         }
        
           </MDBTableBody>
@@ -174,3 +68,5 @@ export default function Users ()
     )
 
 }
+
+

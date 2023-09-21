@@ -1,6 +1,6 @@
 import React,{useState,useContext} from 'react'
 import {FiMinimize,FiMaximize} from "react-icons/fi";
-import {CambellContext} from '../contexts/AppContext';
+import {CambellContext} from '../../contexts/AppContext';
 import {BsThreeDotsVertical} from "react-icons/bs"
 import {AiOutlineClose} from "react-icons/ai"
   

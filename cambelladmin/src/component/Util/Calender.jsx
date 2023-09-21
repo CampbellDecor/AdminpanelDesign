@@ -3,7 +3,7 @@ import {BsFillCaretLeftFill,BsFillCaretRightFill} from "react-icons/bs";
 import {TiArrowRightThick,TiArrowLeftThick} from "react-icons/ti";
 import Calender from 'react-calendar';
 import {Badge} from 'react-bootstrap';
-import '../../node_modules/react-calendar/dist/Calendar.css';
+import '../../../node_modules/react-calendar/dist/Calendar.css';
 export function SimpleHomeCalender (){
     return(
             <Calender

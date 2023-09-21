@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 
 import { Nav, Navbar, Image } from 'react-bootstrap';
-import { CambellContext } from '../../contexts/AppContext';
-import { NavItems } from "../../Data/NavaItems";
+import { CambellContext } from '../contexts/AppContext';
+import { NavItems } from "../route/NavaItems";
 
 
 
@@ -22,7 +22,7 @@ export default function SideBar ()
       <div className="position-sticky">
         <div className="list-group mx-auto mx-md-0 list-group-flush mt-2">
           { NavItems.map( ( item, index ) => (
-            <NavItem { ...item } order={ index } />
+            <NavItem { ...item } key={index} />
           )
           )
           }
@@ -32,10 +32,10 @@ export default function SideBar ()
   );
 }
 
-function NavItem ( { order, path, itemname, itemicon } )
+function NavItem ( { path, itemname, itemicon } )
 {
   return (
-    <Nav.Link href={ path } className="list-group-item list-group-item-action py-3 ripple navlink" aria-current="true" key={ order }>
+    <Nav.Link href={ path } className="list-group-item list-group-item-action py-3 ripple navlink" aria-current="true" >
       { itemicon }
       <span>{ itemname }</span>
     </Nav.Link>

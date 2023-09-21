@@ -4,19 +4,21 @@ import {
   // redirect
 } from "react-router-dom";
 import { Layout } from "../Layout/Layout";
-import Home from "../../pages/Home";
-import Chatapp from "../../pages/Chatapp";
-import Login from "../../pages/Login";
-import Users from "../../pages/Users";
-import Service from "../../pages/Service";
-import Admin from "../../pages/Admins";
-import AddService from "../../pages/AddService";
-import AddAdmin from "../../pages/AddAdmins";
-import AddEvent from "../../pages/AddEvents";
-import AddPackage from "../../pages/AddPackages";
-import AddUser from "../../pages/AddUser";
-import EditAdmin from "../../pages/EditAdmin";
-import Error from "../../pages/Bugs/Error";
+import Home from "../pages/Home";
+import Chatapp from "../pages/Chatapp";
+import Login from "../pages/Login";
+import Users from "../pages/Users";
+import Service from "../pages/Service";
+import Admin from "../pages/Admins";
+import AddService from "../pages/AddService";
+import AddAdmin from "../pages/SinglePages/AddAdmins";
+import AddEvent from "../pages/SinglePages/AddEvents";
+import AddPackage from "../pages/AddPackages";
+import AddUser from "../pages/AddUser";
+import EditAdmin from "../pages/EditAdmin";
+import Error from "../pages/Bugs/Error";
+import Events from "../pages/Events";
+import ServiceCat from "../pages/Category";
 //import { userLoader } from "../../store/Loaders";
 const router = createBrowserRouter([
   {
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/users",
-          element: <Users />,
+        element: <Users />
       },
       {
         path: "/service",
@@ -67,6 +69,13 @@ const router = createBrowserRouter([
       {
         path: "/edit_admin",
         element: <EditAdmin />
+      },
+      {
+        path: "/event/*",
+        element: <Events />
+      }, {
+        path: "/service/cat",
+        element:<ServiceCat/>
       }
     ]
   },

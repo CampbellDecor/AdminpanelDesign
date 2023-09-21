@@ -4,8 +4,8 @@ import React,{useContext, useRef} from 'react'
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from  './Footer';
-import {CambellContext} from '../../contexts/AppContext';
-import {ToggleBtn,SplitToggle} from '../ToggleBtns';
+import {CambellContext} from '../contexts/AppContext';
+import {ToggleBtn,SplitToggle} from '../component/Util/ToggleBtns';
 
 
 

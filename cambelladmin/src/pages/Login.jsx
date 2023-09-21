@@ -33,7 +33,7 @@ import { CambellContext } from "../contexts/AppContext";
 export default function Login ()
 {
   const { cambell, islogin,LoginFunction } = useContext( CambellContext );
-  const [ loginUser, setloginUser ] = useState( { email: "", password: "" } );
+  const [ loginUser, setloginUser ] = useState(JSON.parse(localStorage.getItem("user"))??{ email: "", password: "" } );
   const [ rememberme, setremberme ] = useState( true );
   const navigate = useNavigate();
 
