@@ -2,15 +2,15 @@
 import React, {
   useEffect,
 } from 'react';
-import {Container,Pagination} from 'react-bootstrap';
+import {Container,Form,Pagination, Row,Button,Col} from 'react-bootstrap';
 import {  MDBTable, MDBTableHead, MDBTableBody} from 'mdb-react-ui-kit';
 import {UserRows} from "../component/User";
-import {getUser,blockfilter} from '../Slice/UserSlice';
+import {getUser,getBlockUser} from '../Slice/UserSlice';
 import {useDispatch,useSelector } from 'react-redux';
 
 export default function Users ()
 {
-  const { result,loading,displayData } = useSelector( state =>state.user );
+  const { result,loading,users } = useSelector( state =>state.user );
   const dispatcher = useDispatch();
   useEffect( () =>
   {
@@ -20,10 +20,40 @@ export default function Users ()
   
     return loading?(<h1>Loading</h1>):(
       <Container className="position-relative vh-100">
-        <button onClick={ () =>
-        {
-          dispatcher( blockfilter() );
-        }}>b</button>
+        <Row className='sticky-top pb-3'>
+          <Col md='5'>
+          <Form.Select className="w-50">
+            <option>sfgfg</option>
+            <option>sfgfg</option>
+            <option>sfgfg</option>
+            <option>sfgfg</option>
+          </Form.Select>
+          </Col>
+          <Col className="text-md-right d-flex justify-content-end" md="7">
+            <div className='w-50 mr-0'>
+            <Form.Check
+            inline
+            label="block"
+            name="block"
+            type="checkbox"
+            />
+            <Form.Check
+            inline
+            label="unblock"
+            name="block"
+            type="checkbox"
+              />
+
+               <Button>
+            Add
+            </Button>
+            </div>
+        
+         
+            
+          </Col>
+         
+        </Row>
 <MDBTable align='middle' >
       <MDBTableHead >
         <tr>
@@ -36,7 +66,7 @@ export default function Users ()
       </MDBTableHead>
       <MDBTableBody>
             {
-              result === "fetched" ? ( displayData.map( ( userdataset, index ) => ( <UserRows { ...userdataset } key={ index } /> ) ) ) : ( <h1>{result}</h1>)
+              result === "fetched" ? ( users.map( ( userdataset, index ) => ( <UserRows { ...userdataset } key={ index } /> ) ) ) : ( <h1>{result}</h1>)
         }
        
           </MDBTableBody>

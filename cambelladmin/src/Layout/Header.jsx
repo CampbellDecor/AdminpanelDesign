@@ -1,12 +1,15 @@
 import React,{useContext} from 'react';
 import ReactSwitch from 'react-switch';
 import { Navbar, Nav, Container, Badge, Form, FormControl, Button,Image} from 'react-bootstrap';
-import {BsFillMoonFill,BsFillSunFill} from 'react-icons/bs'
+import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
+import { useLocation } from 'react-router-dom';
 import {CambellContext} from '../contexts/AppContext';
 export default function Header (){
- 
+  const location = useLocation();
+
 const {currentuser}=useContext(CambellContext);
- 
+
+  
     return(
       <>
         <Navbar id="main-navbar"  expand="sm" sticky="top">

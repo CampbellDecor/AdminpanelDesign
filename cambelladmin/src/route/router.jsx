@@ -19,6 +19,8 @@ import EditAdmin from "../pages/EditAdmin";
 import Error from "../pages/Bugs/Error";
 import Events from "../pages/Events";
 import ServiceCat from "../pages/Category";
+
+import ToDo from "../pages/TodoList";
 //import { userLoader } from "../../store/Loaders";
 const router = createBrowserRouter([
   {
@@ -33,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/chats",
         element: <Chatapp />
+      },
+      {
+        path: "/todo",
+        element: <ToDo />
       },
       {
         path: "/users",
