@@ -1,17 +1,18 @@
 // @ts-nocheck
 import React, {
-  useEffect,
+  useEffect, useState,
 } from 'react';
 import {Container,Form,Pagination, Row,Button,Col} from 'react-bootstrap';
 import {  MDBTable, MDBTableHead, MDBTableBody} from 'mdb-react-ui-kit';
 import {UserRows} from "../component/User";
-import {getUser,getBlockUser} from '../Slice/UserSlice';
+import { getUser,getBlockUser } from '../Slice/UserSlice';
 import {useDispatch,useSelector } from 'react-redux';
 
 export default function Users ()
 {
-  const { result,loading,users } = useSelector( state =>state.user );
+  const { result, loading, users } = useSelector( state => state.user );
   const dispatcher = useDispatch();
+  const [ blockuser, setblockuser ] = useState( { block: false, unblock: false } );
   useEffect( () =>
   {
     dispatcher( getUser() );
@@ -22,12 +23,13 @@ export default function Users ()
       <Container className="position-relative vh-100">
         <Row className='sticky-top pb-3'>
           <Col md='5'>
-          <Form.Select className="w-50">
-            <option>sfgfg</option>
-            <option>sfgfg</option>
-            <option>sfgfg</option>
-            <option>sfgfg</option>
-          </Form.Select>
+              
+          
+            <Form.Select className="w-50">
+                   <option value="unknown" selected>UnKnow</option>
+              <option value="Hindu">Hindu</option>
+              </Form.Select>
+               
           </Col>
           <Col className="text-md-right d-flex justify-content-end" md="7">
             <div className='w-50 mr-0'>
@@ -35,13 +37,25 @@ export default function Users ()
             inline
             label="block"
             name="block"
-            type="checkbox"
+                type="checkbox"
+                onChange={ () =>
+                {
+                  dispatcher( getBlockUser( "block" ) );
+                  setblockuser( { block: true, unblock: false } );
+                } }
+                checked={blockuser.block}
             />
             <Form.Check
-            inline
+                inline
+                 checked={blockuser.block}
             label="unblock"
             name="block"
-            type="checkbox"
+                type="checkbox"
+                onChange={ () =>
+                {
+                  dispatcher( getBlockUser( "unblocked" ) )
+                  setblockuser( { block: false, unblock: true } );
+                }}
               />
 
                <Button>

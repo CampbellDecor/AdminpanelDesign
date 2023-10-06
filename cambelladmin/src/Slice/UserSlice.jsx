@@ -5,7 +5,8 @@ import axios from "axios";
 export const getUser = createAsyncThunk( "gets/user", async () =>
 {
     return axios.get( "/api/user" ).then( response => { return response.data; } );
-})
+} );
+
 
 export const getBlockUser = createAsyncThunk( "gets/blockuser", async (block) =>
 {
@@ -34,7 +35,7 @@ export const UserSlier = createSlice( {
             state.users=[];
             state.result = action.error;
         } )
-            .addCase( getBlockUser.pending, ( state, action ) =>
+        .addCase( getBlockUser.pending, ( state, action ) =>
             {
                 state.loading = true;
                 state.users = [];
@@ -55,7 +56,7 @@ export const UserSlier = createSlice( {
             state.result =action.error;
         }
         )
-            .addDefaultCase( getUser.pending, ( state, action ) =>
+        .addDefaultCase( getUser.pending, ( state, action ) =>
         {
             state.loading = true;
             state.users=[];
