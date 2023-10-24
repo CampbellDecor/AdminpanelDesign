@@ -15,12 +15,13 @@ import AddAdmin from "../pages/SinglePages/AddAdmins";
 import AddEvent from "../pages/SinglePages/AddEvents";
 import AddPackage from "../pages/AddPackages";
 import AddUser from "../pages/AddUser";
+import Test from '../function/test';
 import EditAdmin from "../pages/EditAdmin";
 import Error from "../pages/Bugs/Error";
 import Events from "../pages/Events";
 import ServiceCat from "../pages/Category";
-
 import ToDo from "../pages/TodoList";
+import ResetPassword from "../pages/ResetPassword";
 //import { userLoader } from "../../store/Loaders";
 const router = createBrowserRouter([
   {
@@ -87,8 +88,18 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Login />
+    element: <Login />,
+    ErrorBoundary:<Error/>
+  },
+    {
+    path: "/resetpw",
+      element: <ResetPassword />,
+    ErrorBoundary: <Error />
+  },{
+      path: "/test",
+    element:<Test/>
   }
+
 ]);
 
 export default router;

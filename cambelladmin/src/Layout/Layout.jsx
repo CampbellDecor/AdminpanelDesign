@@ -1,16 +1,19 @@
 // @ts-nocheck
 import {Outlet,Navigate} from 'react-router-dom';
-import React,{useContext, useRef} from 'react'
+import React,{ useRef} from 'react'
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from  './Footer';
-import {CambellContext} from '../contexts/AppContext';
+import { useAuthContext } from '../contexts/AuthContext';
+import { useUIContext } from '../contexts/UiContext'
+
 import {ToggleBtn,SplitToggle} from '../component/Util/ToggleBtns';
 
 
 
 export function Layout(){
-  const {splittoggle,responsivetoggle,islogin}=useContext(CambellContext);
+  const { islogin } = useAuthContext();
+  const { splittoggle, responsivetoggle } = useUIContext();
   const bodyres=useRef(null);
   const responsiveAction=action=>{
     if(action){
@@ -25,7 +28,7 @@ export function Layout(){
 
     return !islogin?( <Navigate to="/" replace={ true } /> ):(
       <div ref={splittoggle}>
-    
+
       <Sidebar/>
       <ToggleBtn/>
       <SplitToggle toggleAction={responsiveAction} className="d-block d-sm-none respon-btn fs-2 fw-bolder position-fixed text-white" />
@@ -35,9 +38,9 @@ export function Layout(){
             <Outlet/>
         </div>
         <Footer/>
-      </main>  
-      </div>  
+      </main>
+      </div>
 
-           
+
     )
 }

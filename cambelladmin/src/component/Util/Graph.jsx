@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useEffect} from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale,
   LinearScale,
   PointElement,
@@ -7,7 +7,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale,
 import { Doughnut,Line } from 'react-chartjs-2';
 import randomcolor from 'randomcolor';
 import {CambellContext} from '../../contexts/AppContext';
-
+import { getreligions } from '../../Slice/ReligionSlice';
+import { useSelector ,useDispatch} from 'react-redux';
 
 
 ChartJS.register(
@@ -20,14 +21,26 @@ ChartJS.register(
     LineElement,
     Title,
     Filler
-    );
-export function SmallHomeDonut({labels,data}){
-  const {mode}=useContext(CambellContext);
+);
+
+export function SmallHomeDonut ()
+{
+
+  const { mode } = useContext(CambellContext);
+  const dispatcher = useDispatch();
+  const { loading, result } = useSelector(state => state.religionname);
+
+  useEffect(() =>
+  {
+    dispatcher(getreligions());
+  }, [dispatcher])
+  const [labels,data] =[["hi","Hello"],[12,34]];
   const colors=randomcolor({
     count:labels?.length,
     luminosity:mode==="light"?"bright":"dark",
     hue:"light"?"blue":"#0b0d75"
   })
+
     const datas = {
         labels:labels,
         datasets: [
@@ -48,9 +61,11 @@ export function SmallHomeDonut({labels,data}){
             position: 'bottom',
           }}
       };
-    
-    return(<div className="my-3 w-100 chart-container">
-        <Doughnut data={datas} options={options} />
+
+    return loading?("Loading"):(<div className="my-3 w-100 chart-container">
+      {
+result==='fetched'?(<Doughnut data={datas} options={options} />):("error")
+      }
     </div>);
 }
 
@@ -106,4 +121,3 @@ export function IncomeAnalyze(){
     </div>
   )
 }
-

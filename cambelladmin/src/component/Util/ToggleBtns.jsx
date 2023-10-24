@@ -1,13 +1,13 @@
-import React,{useState,useContext} from 'react'
+import React,{useState} from 'react'
 import {FiMinimize,FiMaximize} from "react-icons/fi";
-import {CambellContext} from '../../contexts/AppContext';
+import {useUIContext} from '../../contexts/UiContext';
 import {BsThreeDotsVertical} from "react-icons/bs"
 import {AiOutlineClose} from "react-icons/ai"
-  
+
 
 
 export const ToggleBtn=()=>{
-    const {splittoggle}=useContext(CambellContext);
+    const {splittoggle}=useUIContext();
     const [toggle,setToggle]=useState(true);
     const toggleChange=(e)=>{
       e.preventDefault();
@@ -20,7 +20,7 @@ export const ToggleBtn=()=>{
         splittoggle.current.classList.remove("split-page");
   }
       }
-     
+
     return (
       <>
     {!toggle?(<FiMaximize className="sidebar-toggole text-white-50" onClick={toggleChange}/>):(<FiMinimize  onClick={toggleChange} className="sidebar-toggole text-white-50"/> )}
@@ -37,12 +37,12 @@ export const ToggleBtn=()=>{
           }
           toggleAction(respons);
     }
-  
+
     return(
       <>
     {respons?(<BsThreeDotsVertical className={className} onClick={onToggle}/>):(<AiOutlineClose className={className+" closeres"} onClick={onToggle}/>)}
       </>
-     
+
     )
-    
+
   }

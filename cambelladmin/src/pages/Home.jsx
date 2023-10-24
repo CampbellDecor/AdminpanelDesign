@@ -5,9 +5,10 @@ import {SimpleHomeCalender} from "../component/Util/Calender"
 import {NewAppoint} from "../component/Util/Table";
 import {CountPanel,ListPanel } from "../component/Panels";
 import {MDBListGroup,MDBListGroupItem,MDBBtn} from "mdb-react-ui-kit";
-import {countpanel} from "../Data/Countpanel";
-export default function Home() {
-    
+import { countpanel } from "../Data/Countpanel";
+
+export default function Home ()
+{
     return (
         <Container fluid className="home">
             <Row className='home-countpanel my-3'>
@@ -74,7 +75,7 @@ export default function Home() {
        }
 
 
-  
+
 
             function ReveiwPanel(){
     const [reviews,setReveiw]=useState([]);
@@ -145,5 +146,4 @@ export default function Home() {
 
             </MDBListGroup>
             );
-        } 
-        
+        }

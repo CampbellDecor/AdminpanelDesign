@@ -1,15 +1,16 @@
-import React,{useContext} from 'react';
+import React from 'react';
 import ReactSwitch from 'react-switch';
 import { Navbar, Nav, Container, Badge, Form, FormControl, Button,Image} from 'react-bootstrap';
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
-import { useLocation } from 'react-router-dom';
-import {CambellContext} from '../contexts/AppContext';
+import { useUserContext } from '../contexts/UserContext';
+import { useThemeContext } from '../contexts/ThemeContext'
+import { useUIContext } from '../contexts/UiContext'
+
 export default function Header (){
-  const location = useLocation();
 
-const {currentuser}=useContext(CambellContext);
+const {currentuser}=useUserContext();
 
-  
+
     return(
       <>
         <Navbar id="main-navbar"  expand="sm" sticky="top">
@@ -24,7 +25,7 @@ const {currentuser}=useContext(CambellContext);
               <Button variant="secondary" className='btn' >
                 <i className="fas fa-search text-dark fw-bolder"></i>
               </Button>
-             
+
             </Form>
             <Nav className="ms-auto d-sm-flex  w-sm-100 w-md-25 justify-content-md-end justify-content-sm-around align-items-lg-center">
               <Nav.Item className=" d-none  d-sm-block mx-sm-3" id="navbarDropdownMenuLink">
@@ -33,7 +34,7 @@ const {currentuser}=useContext(CambellContext);
                     <Badge className="badge-notification" pill bg="danger">1</Badge>
                 </span>
               </Nav.Item>
-    
+
               <Nav.Item className="d-none  d-sm-block mx-sm-3">
               <ModeChangeBtn/>
               </Nav.Item>
@@ -49,11 +50,11 @@ const {currentuser}=useContext(CambellContext);
                   />
               </Nav.Item>
             </Nav>
-          
+
           </Container>
-         
+
         </Navbar>
-        
+
         </>
       );
 
@@ -61,7 +62,9 @@ const {currentuser}=useContext(CambellContext);
 
 function ModeChangeBtn ()
 {
-  const {mode,splittoggle,setmode}=useContext(CambellContext);
+  const { mode, setmode } = useThemeContext();
+  const { splittoggle } = useUIContext();
+
   const changeMode=()=>{
     if(mode==="dark"){
      setmode("light");
@@ -70,12 +73,12 @@ function ModeChangeBtn ()
      setmode("dark");
      splittoggle.current.classList.add("dark-page");
     }
-    
-    
+
+
   }
-  
+
   return (
-    <ReactSwitch 
+    <ReactSwitch
     checked={mode==="light"}
     checkedHandleIcon={<BsFillSunFill color="#ffff00" style={{marginLeft:"5px",marginBottom:"5px"}}/>}
     uncheckedHandleIcon={<BsFillMoonFill color="#000"  style={{margin:"5px",marginBottom:"10px"}}/>}

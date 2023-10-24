@@ -12,14 +12,14 @@ export default function Admins ()
   useEffect( () =>
   {
     dispatcher( getadmin() );
-},[])
+},[dispatcher])
     return(
 <Container className="vh-100">
 <Row>
   {
           result==="fetched"? ( admins.map( ad => ( <Admin {...ad} />))):("......................")
   }
-        
+
 
 </Row>
 </Container>
