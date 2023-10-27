@@ -4,7 +4,8 @@ import {
 } from '../Fire'
 import {
     signInWithEmailAndPassword,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    signOut
 } from 'firebase/auth'
 import {
     getDoc,
@@ -12,7 +13,7 @@ import {
     updateDoc
 } from 'firebase/firestore'
 import {addCookie,delteCookie,getCookie,isexist} from './CookieHandler'
-import { createStorageSession} from '../function/SessionStorage';
+import { createStorageSession,deleteStorageSession} from '../function/SessionStorage';
 
 
 export default async function Authentication (user)
@@ -28,13 +29,32 @@ export default async function Authentication (user)
             isOnline: true
         })
         const User = await getDoc(admincol);
-        createStorageSession('current', { ...User.data() });
+        createStorageSession('current', {
+            uid: loguser.user.uid,
+            ...User.data()
+        });
         return true;
     } catch (error) {
        throw error;
     }
 }
 
+
+export async function LogOut(user) {
+    try {
+        await signOut(auth);
+        alert(user.uid)
+        const admincol = await doc(fstore, 'admins', user.uid)
+        await updateDoc(admincol, {
+            isOnline: false
+        })
+        Remeberme(user, false);
+        deleteStorageSession('current');
+        return true;
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 
@@ -85,7 +105,7 @@ export const loginreducer = (state, action) => {
     }
 }
 
-export const Remeberme = (user, remind) =>
+export const Remeberme = (user={}, remind) =>
 {
 
    remind ? addCookie('rememberme', user, 2) : delteCookie('rememberme');

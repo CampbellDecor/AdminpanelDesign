@@ -1,20 +1,20 @@
-import React from 'react';
+import React from 'react'
 import {
-    MDBFooter,
-    MDBContainer,
-    MDBCol,
-    MDBRow,
-    MDBRipple
-} from 'mdb-react-ui-kit';
-import {FooterImg} from "../Data/Images";
-export default function component (){
-
-    return(
-<MDBFooter id="Footer" className='text-center text-white'>
+  MDBFooter,
+  MDBContainer,
+  MDBCol,
+  MDBRow,
+  MDBRipple
+} from 'mdb-react-ui-kit'
+import { FooterImg } from '../../Data/Images'
+export default function component () {
+  return (
+    <MDBFooter id='Footer' className='text-center text-white'>
       <MDBContainer className='p-4'>
-        <section >
-            <MDBRow>
-              { FooterImg && FooterImg.map( (img,index) => (
+        <section>
+          <MDBRow>
+            {FooterImg &&
+              FooterImg.map((img, index) => (
                 <MDBCol lg='2' md='12' className='mb-4 mb-md-0' key={index}>
                   <MDBRipple
                     rippleColor='light'
@@ -24,12 +24,12 @@ export default function component (){
                     <a href='#!'>
                       <div
                         className='mask'
-                        style={ { backgroundColor: 'rgba(251, 251, 251, 0.2)' } }
+                        style={{ backgroundColor: 'rgba(251, 251, 251, 0.2)' }}
                       ></div>
                     </a>
                   </MDBRipple>
                 </MDBCol>
-              ) ) }
+              ))}
           </MDBRow>
         </section>
       </MDBContainer>
@@ -41,7 +41,5 @@ export default function component (){
         </a>
       </div>
     </MDBFooter>
-
-    )
-
+  )
 }

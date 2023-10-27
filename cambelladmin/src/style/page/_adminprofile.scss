@@ -1,0 +1,44 @@
+.adminprofile{
+    &-header{
+        background-position: center;
+        background-size: cover;
+        height: 200px;
+        &_user{
+            height: 150px;
+            div{
+                width: 100%;
+                height: max-content;
+                position: relative;
+            }
+            &--img
+            { width: 150px;
+                z-index: 1;
+                height: 150px;
+            }
+            &--badge
+            {
+                z-index: 100;
+                position: absolute;
+                bottom: 10px;
+                right: 0px;
+                font-size: 20px;
+            }
+            &--btn{
+                height: 36px;
+                overflow: visible;
+            }
+        }
+    &_userdetails{
+        margin-top: 130px;
+    }
+
+    }
+}
+.gradient-custom-2 {
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+}

@@ -31,14 +31,32 @@
           h6{
             color: var.color("light","tertery");
           }
-          
+
         }
       }
-  
+
   }
   @include SimpleRecentTable;
- 
+
 }
 @include Login;
-
+.adminprofile{
+ &-header{
+  background-image: url('../../images/uselightprofile.jpg');
+  &_user{
+    &--badge{
+       @include Adminbadge;
+    }
+    &--btn{
+      outline: ridge 1.2px var.color('light','info');
+        &:hover{
+          background-color: var.color('light','info') !important;
+        }
+    }
+  }
+  &_userdetails{
+        color:var.color("light","textprim");
+    }
+ }
+}
 @include Footer;

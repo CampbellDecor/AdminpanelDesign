@@ -3,8 +3,8 @@
 @use "../components/component" as component;
 
 .dark-page {
-  @include  baseTemplete("dark");   
-  
+  @include  baseTemplete("dark");
+
   #sidebarMenu {
     box-shadow: 0 2px 5px 0 rgba(177, 177, 177, 0.292), 0 2px 10px 0 rgb(177, 177, 177, 0.292);
     .logo {
@@ -53,14 +53,34 @@
         h6{
           color: rgb(154, 153, 153);
         }
-        
+
       }
     }
 
 }}
 @include SimpleRecentTable("dark");
 @include Footer("dark");
+.adminprofile{
+ &-header{
+  background-image: url('../../images/uselightprofile.jpg');
+  filter: grayscale(100%);
+  &_user{
+    &--badge{
+      @include Adminbadge("dark");
+    }
+    &--btn{
+      outline: ridge 1.2px var.color('dark','info');
+      &:hover{
+  background-color: var.color('dark','info') !important;
+      }
+
+    }
+  }
+   &_userdetails{
+        color:var.color("dark","textprim");
+    }
+ }
+}
 @include Login("dark");
 
 }
-

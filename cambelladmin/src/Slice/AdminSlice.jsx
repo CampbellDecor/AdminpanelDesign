@@ -20,21 +20,21 @@ export const adminslier = createSlice( {
     },
     extraReducers: builder =>
     {
-        builder.addCase( getadmin.fulfilled, ( state, action ) =>
-        {
-            state.loading = false;
-            state.admins= action.payload ;
-            state.result = "fetched";
-        } ).addCase( getadmin.rejected, ( state, action ) =>
+        builder.addCase( getadmin.rejected, ( state, action ) =>
         {
             state.loading = false;
             state.admins=[];
             state.result = action.error;
-        }).addDefaultCase( getadmin.pending, (state,action) =>
+        }).addCase( getadmin.fulfilled, ( state, action ) =>
         {
-            state.loading = true;
+            state.loading = false;
+            state.admins= action.payload ;
+            state.result = "fetched";
+        } ).addCase( getadmin.pending, (state,action) =>
+        {
+            state.loading= true;
             state.admins=[];
-            state.result = "....";
+            state.result = "loading";
         });
     }
 } );

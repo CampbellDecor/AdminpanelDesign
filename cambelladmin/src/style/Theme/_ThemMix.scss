@@ -96,7 +96,7 @@
         &:hover{
           background-color: var.color($theme,"forth");
         }
-       
+
       }
       }
       .rdt_TableHeadRow{
@@ -115,8 +115,8 @@
             &-cancle{
               background-color:var.color($theme,"info") !important;
             }
-            
-          
+
+
         }
     }
   }
@@ -128,14 +128,14 @@
     }@else{
       background-color:var.color($theme, "w") ;
     }
-  
+
     .bg-image{
       @if($theme:"dark"){
         background-image: url("../../images/LoginBg/LoginDark.jpg");
       }@else{
         background-image: url("../../images/LoginBg/LoginWallpaper2.jpg");
       }
-        
+
     }
     &-container{
 background: var.color($theme, "w");
@@ -145,4 +145,7 @@ background-color: var.color($theme, "secoundary") !important;
 }
     }
 }
+}
+@mixin Adminbadge($theme:"light"){
+  color: var.color($theme, "warning") !important
 }

@@ -39,4 +39,18 @@ export const addSessionitem = (name,item) =>
     }
     sessionStorage.setItem(name, newdata);
 }
-
+export const getSessionStorage = (name) =>
+{
+    const exist = sessionStorage.getItem(name);
+    if (exist !== null)
+    {
+        try {
+            return JSON.parse(exist);
+        } catch (error) {
+            return exist;
+        }
+    } else
+    {
+        throw new Error(name + ' Not Found!');
+    }
+}
