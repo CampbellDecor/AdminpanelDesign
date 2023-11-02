@@ -5,7 +5,7 @@ import { GiAutoRepair } from "react-icons/gi";
 import { BiSolidPhoneCall, BiLogoGmail, BiSolidEditLocation,BiUpload } from "react-icons/bi";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { AvatarGenerator } from "random-avatar-generator";
-import '../../node_modules/react-phone-number-input/style.css'
+import '../../../node_modules/react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -48,7 +48,7 @@ export default function Addadmin ()
                 adminimg.current.value = avthar;
                 setdemoProfile(avthar)
                                             setAdmin( pre => ( { ...pre, profile: avthar } ) );
-                                            
+
 
 
                                         } } />
@@ -58,7 +58,7 @@ export default function Addadmin ()
     {
         return (
             <BiUpload onClick={ imageUpload } />
-            
+
         )
     }
     const [ profiletn, setProfilebtn ] = useState( <Avathargen /> );
@@ -66,7 +66,7 @@ export default function Addadmin ()
     {
         setAdmin( pre => ( { ...pre, [ e.target.name ]: e.target.value } ) );
     };
-  
+
     const SubmitHandle = e =>
     {
         e.preventDefault();
@@ -76,9 +76,9 @@ export default function Addadmin ()
             {
                 if ( res.data.aid ) navigate( "/admins" );
             });
-        
-    }  
-  
+
+    }
+
     return (
         <Container
             fluid
@@ -135,7 +135,7 @@ export default function Addadmin ()
                                 </Form.Group>
                             </Col>
                             <Col sm="6">
-                               
+
                                 <Form.Group className="mb-3">
                                 <PhoneInput className="border-0" onChange={ value =>
                                 {
@@ -163,7 +163,7 @@ export default function Addadmin ()
                                         setAdmin( pre => ( { ...pre, profile: e.target.files[ 0 ] } ) );
                                         setdemoProfile( URL.createObjectURL( e.target?.files[ 0 ] ) );
                                         setProfilebtn(<FileUpload/>)
-                                       
+
                                         }} />
                                     <InputGroup.Text>
                                         {profiletn}

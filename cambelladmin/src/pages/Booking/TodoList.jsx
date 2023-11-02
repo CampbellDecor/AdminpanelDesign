@@ -10,7 +10,7 @@ import {
   MDBTooltip,
 } from "mdb-react-ui-kit";
 import { Form } from "react-bootstrap";
-import Todo from "../component/todo";
+import Todo from "../../component/todo";
 export default function ToDoList() {
   return (
     <MDBContainer className="py-5 w-75">
@@ -84,9 +84,9 @@ export default function ToDoList() {
               </div>
 
               <Todo />
-              
+
               <Todo />
-              
+
             <Todo/>
             </MDBCardBody>
           </MDBCard>

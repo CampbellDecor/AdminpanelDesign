@@ -23,7 +23,8 @@ export const NavItems = [ {
 
     path: '/chats',
     itemname: "Chats",
-    itemicon: <BsFillChatFill size={ is } className="me-3" />
+    itemicon:<BsFillChatFill size={is} className="me-3"/>
+
   }, {
     path: "/event",
     itemname: "Events",
@@ -43,7 +44,7 @@ export const NavItems = [ {
     path: "/service/cat",
     itemname: "ServiceCategory",
     itemicon: <MdHomeRepairService size={ is } className="me-3" />
-  }, 
+  },
   {
     path: "/service",
     itemname: "Services",

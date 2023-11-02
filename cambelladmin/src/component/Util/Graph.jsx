@@ -1,4 +1,4 @@
-import React,{useContext, useEffect} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale,
   LinearScale,
   PointElement,
@@ -7,9 +7,9 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale,
 import { Doughnut,Line } from 'react-chartjs-2';
 import randomcolor from 'randomcolor';
 import {CambellContext} from '../../contexts/AppContext';
-import { getreligions } from '../../Slice/ReligionSlice';
+import { getreligions } from '../../redux/Slice/ReligionSlice';
 import { useSelector ,useDispatch} from 'react-redux';
-
+import axios from 'axios';
 
 ChartJS.register(
   ArcElement,
@@ -70,7 +70,8 @@ result==='fetched'?(<Doughnut data={datas} options={options} />):("error")
 }
 
 export function IncomeAnalyze(){
-  const x_axis=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+  const x_axis = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  const [loading, setloading] = useState(false);
   const {mode}=useContext(CambellContext);
   const color=randomcolor({
     count:2,
@@ -115,9 +116,36 @@ export function IncomeAnalyze(){
       },
     },
   };
-  return (
+  useEffect(() =>
+  {
+    setloading(true)
+    axios.get(`/api/payment/history/year/${new Date().getFullYear()}`)
+      .then(result =>
+      {
+        console.log(result);
+        setloading(false)
+      })
+      .catch(error =>
+      {
+        console.log(error);
+        setloading(false)
+    })
+  },[])
+  return loading?<h1>.......</h1>:(
     <div className='chart-container'>
-    <Line options={options} data={datas} />
+    <Line options={options} data={{
+    labels:x_axis,
+    datasets: [
+      {
+        fill: true,
+        label: 'profits',
+        data: [12,345,65,45,656,867,6,45,345,65,45,656,12,23,453],
+        borderColor:color[0],
+      backgroundColor:color[1],
+        tension: 0.3
+      },
+    ],
+  }} />
     </div>
   )
 }

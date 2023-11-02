@@ -5,7 +5,8 @@ import {
 import {
     signInWithEmailAndPassword,
     sendPasswordResetEmail,
-    signOut
+    signOut,
+    getIdToken
 } from 'firebase/auth'
 import {
     getDoc,
@@ -24,6 +25,8 @@ export default async function Authentication (user)
             user.email,
             user.password
         )
+        const token = await getIdToken(loguser.user);
+        addCookie('access_token', token, 0.5, '/');
         const admincol = await doc(fstore, 'admins',  loguser.user.uid)
         await updateDoc(admincol, {
             isOnline: true
@@ -33,6 +36,7 @@ export default async function Authentication (user)
             uid: loguser.user.uid,
             ...User.data()
         });
+
         return true;
     } catch (error) {
        throw error;
@@ -43,7 +47,6 @@ export default async function Authentication (user)
 export async function LogOut(user) {
     try {
         await signOut(auth);
-        alert(user.uid)
         const admincol = await doc(fstore, 'admins', user.uid)
         await updateDoc(admincol, {
             isOnline: false

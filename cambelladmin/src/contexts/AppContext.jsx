@@ -1,6 +1,4 @@
 // @ts-nocheck
-import { Provider } from 'react-redux'
-import { Store} from "../store/store";
 import React, { createContext, useState,useContext } from 'react';
 import logo from "../images/logo.png";
 
@@ -17,9 +15,7 @@ export default function AppContext ({childern}){
 
 
 } }>
-            <Provider store={Store}>
             {childern}
-            </Provider>
 
         </CambellContext.Provider>
 

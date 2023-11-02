@@ -1,5 +1,6 @@
 @media (max-width: 576px) {
 .adminprofile{
+    background-color: green !important;
     &-header{
         display: block;
         &_user{
@@ -22,5 +23,15 @@
             }
         }
     }
+}
+.adminshow{
+    &-action{
+         &_add{
+        &--btn{
+            font-size: 30px;
+        }
+    }
+    }
+
 }
 }

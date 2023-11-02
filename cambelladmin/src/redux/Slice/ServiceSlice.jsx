@@ -1,10 +1,6 @@
 // @ts-nocheck
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-export const getservice = createAsyncThunk( "gets/service", async () =>
-{
-    return axios.get( "/api/service" ).then( response => { return response.data; } );
-})
+import { createSlice } from '@reduxjs/toolkit';
+import {getservice}from '../Thunks/Service'
 export const serviceSlier = createSlice( {
     name: "service",
     initialState: {
@@ -14,7 +10,7 @@ export const serviceSlier = createSlice( {
         result: "",
     },
     reducers: {
-        
+
     },
     extraReducers: builder =>
     {

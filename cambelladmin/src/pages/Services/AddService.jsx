@@ -2,17 +2,16 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Image, Button,InputGroup } from "react-bootstrap";
 import ReactQuill from "react-quill";
-import "../../node_modules/react-quill/dist/quill.snow.css";
 import { BiUpload } from "react-icons/bi";
 export default function AddService ()
 {
   const [ description, setdescription ] = useState( "" );
   const [ serviceImg, setserviceImg ] = useState( null );
   const [ inputs, setinputs ] = useState( {} );
-    
+
   const onChange = e =>
   {
-      
+
     if ( e.target.name === "images" )
     {
       setinputs( pre => ( { ...pre, images: e.target.files[ 0 ] } ) );
@@ -24,7 +23,7 @@ export default function AddService ()
   }
   const UploadImg =  () =>
   {
-  
+
   }
   const onSaveEvent = e => {
     e.preventDefault();
@@ -34,7 +33,7 @@ export default function AddService ()
     <Container fluid className="vh-100">
       <Row>
         <Col md="6">
-          
+
           <Row>
             <Image
               width="100%"
@@ -54,8 +53,8 @@ export default function AddService ()
             </Col>
            ))
           }
-            
-           
+
+
             <Col lg="3" md="4" sm="6">
               <Image
                 width="100%"
@@ -109,7 +108,7 @@ export default function AddService ()
                   <BiUpload size={20}/>
                 </Button>
               </InputGroup>
-             
+
             </Form.Group>
             <Button type="submit"  onClick={onSaveEvent}  className="me-2">
               Save

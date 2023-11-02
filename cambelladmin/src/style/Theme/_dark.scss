@@ -81,6 +81,17 @@
     }
  }
 }
+.adminshow{
+    &-action{
+         &_add{
+       background-color: var.color("dark","secoundary") !important;
+        &--btn{
+            font-size: var.color("dark","textprim") !important;
+        }
+    }
+    }
+
+}
 @include Login("dark");
 
 }

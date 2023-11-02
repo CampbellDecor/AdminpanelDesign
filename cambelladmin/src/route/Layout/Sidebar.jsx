@@ -1,6 +1,6 @@
-import React, { useId } from 'react'
-
-import { Nav, Navbar, Image } from 'react-bootstrap'
+import React, { useId} from 'react'
+import axios from 'axios';
+import { Nav, Navbar, Image} from 'react-bootstrap'
 import { useAppContext } from '../../contexts/AppContext'
 import { useUIContext } from '../../contexts/UiContext'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
@@ -44,8 +44,11 @@ export default function SideBar () {
   )
 }
 
-function NavItem ({ path, itemname, itemicon, Class = '', onClick = null }) {
+function NavItem ({ path, itemname, itemicon, Class = '', onClick = null })
+{
+
   return (
+
     <Nav.Link
       href={path}
       className={
@@ -55,7 +58,10 @@ function NavItem ({ path, itemname, itemicon, Class = '', onClick = null }) {
       onClick={onClick}
     >
       {itemicon}
+
       <span>{itemname}</span>
+
+
     </Nav.Link>
   )
 }

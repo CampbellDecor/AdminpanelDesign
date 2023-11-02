@@ -59,4 +59,15 @@
     }
  }
 }
+.adminshow{
+    &-action{
+         &_add{
+       background-color: var.color("light","secoundary") !important;
+        &--btn{
+            font-size: var.color("light","textprim") !important;
+        }
+    }
+    }
+
+}
 @include Footer;
