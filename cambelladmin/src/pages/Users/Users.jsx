@@ -25,9 +25,7 @@ const paginate =useCallback(pageNumber => setCurrentPage(pageNumber),[currentPag
     userDispatcher(getUser())
   },[getUser,userDispatcher])
 
-  return loading ? (
-    <Loading/>
-  ) : (
+  return  (
     <Container className='position-relative min-vh-100'>
       <Row className='pb-3'>
           <Col md='5'>
@@ -63,34 +61,36 @@ const paginate =useCallback(pageNumber => setCurrentPage(pageNumber),[currentPag
                 unblock?userDispatcher(getUser()):userDispatcher(getunBlockUser())}}
             />
 
-            <Button>Add</Button>
+            <Button as='a' href='users/add'>Add</Button>
           </div>
         </Col>
       </Row>
-      <MDBTable align='middle'>
-        <MDBTableHead>
-          <tr>
-            <th scope='col'>User</th>
-            <th scope='col'>Info</th>
-            <th scope='col'>Status</th>
-            <th scope='col'>Bookings</th>
-            <th scope='col'>Actions</th>
-          </tr>
-        </MDBTableHead>
-        <MDBTableBody>
-          {result === 'fetched' ? (
-            currentItems.map((userdataset, index) => (
-              <UserRows {...userdataset} key={index} />
-            ))
-          ) : (
-            <h1>{result}</h1>
-          )}
-        </MDBTableBody>
-        <MDBTableBody>
-          <tr>
-            <td colSpan={5}>
-              <div className='w-100 d-flex justify-content-center align-items-center'>
-                  {result==='fetched' && users.length>=itemsPerPage &&(<Pagination>
+        {loading ? (
+    <Loading/>
+  ) :(<MDBTable align='middle'>
+          <MDBTableHead>
+            <tr>
+              <th scope='col'>User</th>
+              <th scope='col'>Info</th>
+              <th scope='col'>Status</th>
+              <th scope='col'>Bookings</th>
+              <th scope='col'>Actions</th>
+            </tr>
+          </MDBTableHead>
+          <MDBTableBody>
+            {result === 'fetched' ? (
+              currentItems.map((userdataset, index) => (
+                <UserRows {...userdataset} key={index} />
+              ))
+            ) : (
+              <h1>{result}</h1>
+            )}
+          </MDBTableBody>
+          <MDBTableBody>
+            <tr>
+              <td colSpan={5}>
+                <div className='w-100 d-flex justify-content-center align-items-center'>
+                  {result === 'fetched' && users.length >= itemsPerPage && (<Pagination>
                     {Array.from({ length: Math.ceil(users?.length / itemsPerPage) }).map(
                       (_, index) => (
                         <Pagination.Item
@@ -104,11 +104,12 @@ const paginate =useCallback(pageNumber => setCurrentPage(pageNumber),[currentPag
                     )}
                   </Pagination>)}
 
-              </div>
-            </td>
-          </tr>
-        </MDBTableBody>
-      </MDBTable>
+                </div>
+              </td>
+            </tr>
+          </MDBTableBody>
+        </MDBTable>
+       ) }
     </Container>
   )
 }
