@@ -1,17 +1,34 @@
 // @ts-nocheck
 import { Outlet, Navigate } from 'react-router-dom'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import Footer from './Footer'
 import { useAuthContext } from '../../contexts/AuthContext'
+import {toast} from 'react-toastify'
 import { useUIContext } from '../../contexts/UiContext'
-
 import { ToggleBtn, SplitToggle } from '../../component/Util/ToggleBtns'
 import CambellBreadCrumb from './BreadCrumb'
+import { isexist } from '../../function/CookieHandler'
+import { useNavigate } from 'react-router-dom'
+import {deleteStorageSession} from '../../function/SessionStorage'
+export function Layout ()
+{
+  const access_token = isexist('access_token')
+  const { islogin, setLogin } = useAuthContext()
+const navigate = useNavigate()
+  setInterval(() =>
+  {
+    if (islogin && !access_token)
+    {
+      setLogin(false);
+      deleteStorageSession('current');
+      toast.warn('Session Timeout');
+      navigate('/');
 
-export function Layout () {
-  const { islogin } = useAuthContext()
+    }
+  }, 1000 * 60 * 60 * 6);
+
   const { splittoggle, responsivetoggle } = useUIContext()
   const bodyres = useRef(null)
   const responsiveAction = action => {
@@ -23,7 +40,13 @@ export function Layout () {
       bodyres?.current.classList.remove('responsiveBlock')
     }
   }
+  useEffect(() =>
+  {
+    setInterval(() =>
+    {
 
+    }, 1000 * 60 * 60);
+  })
   return !islogin ? (
     <Navigate to='/' replace={true} />
   ) : (

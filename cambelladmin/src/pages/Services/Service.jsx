@@ -7,6 +7,9 @@ import { MdAdd } from 'react-icons/md'
 import { useServiceStore } from '../../redux/ServiceStore'
 import { useDispatch, useSelector } from 'react-redux'
 import { ServiceRow } from '../../component/Service'
+import Loading from '../Bugs/FetchedLoading'
+import APIerror from '../Bugs/FetchedError'
+
 export default function Service () {
   const { getservice } = useServiceStore()
   const Dispatcher = useDispatch()
@@ -15,7 +18,7 @@ export default function Service () {
     Dispatcher(getservice())
   }, [Dispatcher])
   return loading ? (
-    <h1>.....</h1>
+    <Loading/>
   ) : (
     <MDBContainer fluid>
       <MDBRow className='w-100'>

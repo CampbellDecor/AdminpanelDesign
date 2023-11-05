@@ -16,6 +16,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../contexts/AppContext'
 import { useAuthContext } from '../contexts/AuthContext'
 import { toast } from 'react-toastify';
+import { useUserContext } from '../contexts/UserContext'
 
 
 
@@ -31,7 +32,7 @@ export default function Login ()
   //context api
   const { Appname, Applogo } = useAppContext();
   const { islogin, rememberme, setremberme,setLogin } = useAuthContext();
-
+const { setCurrentUser,setisSuper } = useUserContext()
   //State
   const [loginUser, Dispatcher] = useReducer(loginreducer, { email: '', password: '' });
   const [loading, setloading] = useState(false);
@@ -64,9 +65,11 @@ export default function Login ()
     try
     {
       setloading(true);
-      const login=await Authuntication(loginUser);
+      const login = await Authuntication(loginUser);
+      setCurrentUser(login.user)
+      setisSuper(login.user?.isSuper ?? false);
       setloading(false);
-      if (login)
+      if (login.login)
       {
         setLogin(true)
         toast.success("Login Successfully.")
@@ -74,13 +77,14 @@ export default function Login ()
       navigate('/home')
       } else
       {
-
+        setloading(false);
         Dispatcher({ type: 'AUTHERROR' })
         toast.error("login failed !")
       }
 
     } catch (error)
     {
+      setLogin(false)
       Dispatcher({ type: 'ERROR' })
       toast.error('login failed !')
       console.error(error);

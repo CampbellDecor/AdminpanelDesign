@@ -5,7 +5,7 @@ import { FaTachometerAlt,FaUsers } from "react-icons/fa";
 import { TbPackages, TbDeviceAnalytics } from "react-icons/tb";
 
 const is=25;
-export const NavItems = [ {
+export const SuperNavItems = [ {
     path: '/',
     itemname: "DashBoard",
     itemicon: <FaTachometerAlt size={ is } className="me-3" />
@@ -16,12 +16,12 @@ export const NavItems = [ {
     itemicon: <MdAdminPanelSettings size={ is } className="me-3" />
   },
   {
-    path: '/',
+    path: '/analysis',
     itemname: "Analysis",
     itemicon: <TbDeviceAnalytics size={ is } className="me-3" />
   }, {
 
-    path: '/chats',
+    path: '/chats/admin',
     itemname: "Chats",
     itemicon:<BsFillChatFill size={is} className="me-3"/>
 
@@ -41,7 +41,7 @@ export const NavItems = [ {
     itemicon: <TbPackages size={ is } className="me-3" />
   },
   {
-    path: "/service/cat",
+    path: "/servicecat",
     itemname: "ServiceCategory",
     itemicon: <MdHomeRepairService size={ is } className="me-3" />
   },
@@ -54,4 +54,51 @@ export const NavItems = [ {
     itemname: "Users",
     itemicon: <FaUsers size={ is } className="me-3" />
   }
-  ]
+]
+  export const NavItems = [
+  {
+    path: '/',
+    itemname: 'DashBoard',
+    itemicon: <FaTachometerAlt size={is} className='me-3' />
+  },
+  {
+    path: '/analysis',
+    itemname: 'Analysis',
+    itemicon: <TbDeviceAnalytics size={is} className='me-3' />
+  },
+  {
+    path: '/chats/normal',
+    itemname: 'Chats',
+    itemicon: <BsFillChatFill size={is} className='me-3' />
+  },
+  {
+    path: '/event',
+    itemname: 'Events',
+    itemicon: <MdEventSeat size={is} className='me-3' />
+  },
+  {
+    path: '/book',
+    itemname: 'Orders',
+    itemicon: <BsFillCalendarDateFill size={is} className='me-3' />
+  },
+  {
+    path: '/pack',
+    itemname: 'Packages',
+    itemicon: <TbPackages size={is} className='me-3' />
+  },
+  {
+    path: '/servicecat',
+    itemname: 'ServiceCategory',
+    itemicon: <MdHomeRepairService size={is} className='me-3' />
+  },
+  {
+    path: '/service',
+    itemname: 'Services',
+    itemicon: <MdHomeRepairService size={is} className='me-3' />
+  },
+  {
+    path: '/users',
+    itemname: 'Users',
+    itemicon: <FaUsers size={is} className='me-3' />
+  }
+]

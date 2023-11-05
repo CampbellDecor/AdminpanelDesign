@@ -2,7 +2,7 @@ export function getallAdmin (status)
 {
     switch (status)
     {
-        case -11:return (state, action) => {
+        case -1:return (state, action) => {
   state.loading = false
   state.admins = []
   state.result = action.error

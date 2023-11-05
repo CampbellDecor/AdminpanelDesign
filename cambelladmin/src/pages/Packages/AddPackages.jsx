@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Image, Button } from "react-bootstrap";
 import ReactQuill from "react-quill";
-import "../../node_modules/react-quill/dist/quill.snow.css";
 export default function AddPackages() {
     const [ description, setdescription ] = useState( "" );
     const [ inputs, setinputs ] = useState( {} );
-    
+
     const onChange = e=>
     {
         setinputs(pre=>({...pre,[e.target.name]:e.target.value}))

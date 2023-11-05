@@ -22,7 +22,7 @@ export function usersChatList (status)
         }
         default: return (state, action) =>
         {
-            return state.result='invalid action';
+            return state.result='invalid ction';
         }
     }
 }

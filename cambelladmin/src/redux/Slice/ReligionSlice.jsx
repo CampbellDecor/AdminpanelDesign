@@ -1,14 +1,11 @@
 // @ts-nocheck
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-export const getreligions = createAsyncThunk( "gets/religion", async () =>
-{
-    return axios.get( "/api/user/religion" ).then( response => { return response.data; } );
-})
+import { createSlice } from "@reduxjs/toolkit";
+import {getReligions } from '../Thunks/Root'
+import {ReligionName} from '../Extrareducer/Root'
 export const religionnameslier = createSlice( {
     name: "religionname",
     initialState: {
-        religionnames: [[],[]],
+        religions: [],
         loading: false,
         result: ""
     },
@@ -17,24 +14,9 @@ export const religionnameslier = createSlice( {
     },
     extraReducers: builder =>
     {
-        builder.addCase( getreligions.fulfilled, ( state, action ) =>
-        {
-            state.loading = false;
-            state.religionnames= action.payload ;
-            state.result = "fetched";
-        })
-            .addCase(getreligions.rejected, (state, action) =>
-        {
-            state.loading = false;
-            state.religionnames=[[],[]];
-            state.result = action.error;
-            })
-            .addDefaultCase(getreligions.pending, (state, action) =>
-        {
-            state.loading = true;
-            state.religionnames=[[],[]];
-            state.result = "....";
-        });
+        builder.addCase( getReligions.fulfilled, ReligionName(1))
+            .addCase(getReligions.rejected, ReligionName(-1))
+            .addDefaultCase(getReligions.pending,ReligionName(0));
     }
 } );
 export default religionnameslier.reducer;

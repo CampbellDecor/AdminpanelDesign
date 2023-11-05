@@ -15,8 +15,27 @@ export default function BreadCrumb ()
   const { pathname} = location;
   useEffect(() =>
   {
-    if(location.pathname.split('/').includes('self'))
-      SetBearcrumbs({ type: "SELFADMIN", payload:pathname})
+    if (location.pathname.split('/').includes('self'))
+      SetBearcrumbs({ type: "SELFADMIN", payload: pathname });
+    else if (location.pathname.includes('admins') && !location.pathname.includes('self') && location.pathname.includes('profile')
+
+)
+    {
+      SetBearcrumbs({ type: 'ONEADMIN', payload:pathname })
+
+    }else if (location.pathname.includes('admins') && !location.pathname.includes('self')
+
+)
+    {
+      SetBearcrumbs({ type: 'EDITADMIN', payload:pathname })
+
+    }
+    else if (location.pathname.includes('admins') && location.pathname.includes('add')
+)
+    {
+      SetBearcrumbs({ type: 'AddADMIN', payload:pathname })
+
+    }
     else
     {
       SetBearcrumbs({ type: 'NONE', payload:pathname })

@@ -15,93 +15,7 @@ import {
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import {useAdminChatStore } from '../redux/AdminChatStore';
-const mychats = {
-  message: [
-    {
-      id: 5,
-      profile:
-        'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp',
-
-      message: {
-        body:
-          ' dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.',
-        time: '12:00 PM',
-        date: 'Aug 13'
-      }
-    },
-    {
-      id: 6,
-      profile:
-        'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp',
-
-      message: {
-        body:
-          ' dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.',
-        time: '12:00 PM',
-        date: 'Aug 13'
-      }
-    },
-    {
-      id: 7,
-      profile:
-        'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp',
-
-      message: {
-        body:
-          ' dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.',
-        time: '12:00 PM',
-        date: 'Aug 13'
-      }
-    },
-    {
-      id: 8,
-      profile:
-        'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp',
-
-      message: {
-        body:
-          ' dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.',
-        time: '12:00 PM',
-        date: 'Aug 13'
-      }
-    }
-  ],
-  reply: [
-    {
-      profile:
-        'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp',
-      id: 9,
-      message: {
-        body:
-          ' dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.',
-        time: '12:00 PM',
-        date: 'Aug 13'
-      }
-    },
-    {
-      profile:
-        'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp',
-      id: 10,
-      message: {
-        body:
-          ' dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.',
-        time: '12:00 PM',
-        date: 'Aug 13'
-      }
-    },
-    {
-      id: 11,
-      profile:
-        'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp',
-      message: {
-        body:
-          ' dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor magna aliqua.',
-        time: '12:00 PM',
-        date: 'Aug 13'
-      }
-    }
-  ]
-}
+import { useLoaderData } from 'react-router-dom';
 export default function ChatApp ()
 {
   return (
@@ -205,23 +119,13 @@ function SearchOption ()
 
 function ChatList ()
 {
-  const {result, chats, loading } = useSelector(state => state.adminchat);
-  const Dispatch = useDispatch();
-  const { getadminchatChats } = useAdminChatStore();
-  useEffect(() =>
-  {
-    Dispatch(getadminchatChats());
-  }, [Dispatch]);
-  if (loading)
-  {
-    return <h1>....</h1>
-  }
+  const loader = useLoaderData();
   return (
      <div className='userlist'>
                         <ul className='list-unstyled h-100'>
-                          {result==='fetched'?chats.map(chat => (
+                          {loader.map(chat => (
                             <Chatuser {...chat} />
-                          )):<h2>Err</h2>}
+                          ))}
                         </ul>
                       </div>
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useUserContext } from '../contexts/UserContext'
 import { Chatuser, Message, Reply } from '../component/Chats'
 import { BiSearchAlt } from 'react-icons/bi'
-
+import {chatlistLoading} from './Bugs/ComponentLoading';
 import {
   Button,
   Container,
@@ -15,6 +15,7 @@ import {
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useUserChatStore } from '../redux/ChatStore'
+import { useLoaderData } from 'react-router-dom';
 const mychats = {
   message: [
     {
@@ -204,7 +205,9 @@ function SearchOption () {
   )
 }
 
-function ChatList () {
+function ChatList ()
+{
+  const loader = useLoaderData();
   const {
     getUserChatList,
     UserChatDispatcher,
@@ -215,17 +218,17 @@ function ChatList () {
             result} = userChatList;
   useEffect(() => {
     UserChatDispatcher(getUserChatList());
-    console.log(chatslist);
   }, [])
-  if (loading) {
-    return <h1>....</h1>
+  if (loading)
+  {
+return <chatlistLoading />
   }
   return (
     <div className='userlist'>
       <ul className='list-unstyled h-100'>
+        <Chatuser {...loader}/>
         {result === 'fetched' ? (
-          //chatslist.map(chat => <Chatuser {...chat} />)
-        <h1>effdf</h1>
+          chatslist.map(chat => <Chatuser {...chat} />)
         ) : (
           <h2>Err</h2>
         )}

@@ -1,6 +1,5 @@
 import {
-    auth,
-    fstore
+    auth
 } from '../Fire'
 import {
     signInWithEmailAndPassword,
@@ -8,17 +7,14 @@ import {
     signOut,
     getIdToken
 } from 'firebase/auth'
-import {
-    getDoc,
-    doc,
-    updateDoc
-} from 'firebase/firestore'
+import axios from 'axios';
 import {addCookie,delteCookie,getCookie,isexist} from './CookieHandler'
-import { createStorageSession,deleteStorageSession} from '../function/SessionStorage';
+import { createStorageSession,deleteStorageSession} from './SessionStorage';
 
 
 export default async function Authentication (user)
 {
+
     try {
         const loguser = await signInWithEmailAndPassword(
             auth,
@@ -26,18 +22,12 @@ export default async function Authentication (user)
             user.password
         )
         const token = await getIdToken(loguser.user);
-        addCookie('access_token', token, 0.5, '/');
-        const admincol = await doc(fstore, 'admins',  loguser.user.uid)
-        await updateDoc(admincol, {
-            isOnline: true
-        })
-        const User = await getDoc(admincol);
-        createStorageSession('current', {
-            uid: loguser.user.uid,
-            ...User.data()
-        });
+        addCookie('access_token', token,1, '/');
+        const response = await axios.get('/api/admin/login');
+        const User = response.data;
 
-        return true;
+        createStorageSession('current',User.user);
+        return User;
     } catch (error) {
        throw error;
     }
@@ -47,13 +37,19 @@ export default async function Authentication (user)
 export async function LogOut(user) {
     try {
         await signOut(auth);
-        const admincol = await doc(fstore, 'admins', user.uid)
-        await updateDoc(admincol, {
-            isOnline: false
-        })
-        Remeberme(user, false);
-        deleteStorageSession('current');
-        return true;
+        const admincol = await axios.get('/api/admin/logout');
+        console.log(admincol);
+        if (admincol)
+        {
+           Remeberme(user, false);
+            deleteStorageSession('current');
+            delteCookie('access_token');
+           return true;
+        } else
+        {
+            return false;
+        }
+
     } catch (error) {
         throw error;
     }

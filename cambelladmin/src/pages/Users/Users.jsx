@@ -1,32 +1,44 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Container, Form, Pagination, Row, Button, Col } from 'react-bootstrap'
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit'
 import { UserRows } from '../../component/User'
-import { useUserStore } from '../../redux/UserStore'
-import { useDispatch, useSelector } from 'react-redux'
+import { useUserStore } from '../../redux/UserStore';
+import Loading from '../Bugs/FetchedLoading'
 
 export default function Users () {
-  const { getUser, getBlockUser } = useUserStore()
-  const { result, loading, users } = useSelector(state => state.user)
-  const dispatcher = useDispatch()
-  const [blockuser, setblockuser] = useState({ block: false, unblock: false })
-  useEffect(() => {
-    dispatcher(getUser())
-  }, [dispatcher])
+  const { getUser, getBlockUser, userData, userDispatcher, getunBlockUser } = useUserStore();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8);
+  const { result, loading, users, block, unblock } = userData
+  const indexOfLastItem = currentPage * itemsPerPage
+const indexOfFirstItem = indexOfLastItem - itemsPerPage
+const currentItems = users?.slice(indexOfFirstItem, indexOfLastItem)
+const paginate =useCallback(pageNumber => setCurrentPage(pageNumber),[currentPage])
+  const SlectOnchange =useCallback((e) =>
+  {
+    alert(e.target.value)
+  },[])
+  useEffect(() =>
+  {
+    userDispatcher(getUser())
+  },[getUser,userDispatcher])
 
   return loading ? (
-    <h1>Loading</h1>
+    <Loading/>
   ) : (
-    <Container className='position-relative vh-100'>
-      <Row className='sticky-top pb-3'>
-        <Col md='5'>
-          <Form.Select className='w-50'>
-            <option value='unknown' selected>
-              UnKnow
-            </option>
-            <option value='Hindu'>Hindu</option>
-          </Form.Select>
+    <Container className='position-relative min-vh-100'>
+      <Row className='pb-3'>
+          <Col md='5'>
+            <Form.Select className='w-50' onChange={SlectOnchange} >
+              <option value='*'>All</option>
+              <option value='hindu'>Hindu</option>
+              <option value='christian'>Christian</option>
+              <option value='muslim'>Muslim</option>
+              <option value='buddist'>Buddist</option>
+            </Form.Select>
+
         </Col>
         <Col className='text-md-right d-flex justify-content-end' md='7'>
           <div className='w-50 mr-0'>
@@ -35,22 +47,20 @@ export default function Users () {
               label='block'
               name='block'
               type='checkbox'
-              onChange={() => {
-                dispatcher(getBlockUser('block'))
-                setblockuser({ block: true, unblock: false })
+                onChange={() =>
+                {
+                  block ? userDispatcher(getUser()):userDispatcher(getBlockUser()) ;
               }}
-              checked={blockuser.block}
+              checked={block}
             />
             <Form.Check
               inline
-              checked={blockuser.block}
+              checked={unblock}
               label='unblock'
               name='block'
               type='checkbox'
               onChange={() => {
-                dispatcher(getBlockUser('unblocked'))
-                setblockuser({ block: false, unblock: true })
-              }}
+                unblock?userDispatcher(getUser()):userDispatcher(getunBlockUser())}}
             />
 
             <Button>Add</Button>
@@ -69,7 +79,7 @@ export default function Users () {
         </MDBTableHead>
         <MDBTableBody>
           {result === 'fetched' ? (
-            users.map((userdataset, index) => (
+            currentItems.map((userdataset, index) => (
               <UserRows {...userdataset} key={index} />
             ))
           ) : (
@@ -80,17 +90,20 @@ export default function Users () {
           <tr>
             <td colSpan={5}>
               <div className='w-100 d-flex justify-content-center align-items-center'>
-                <Pagination className='p-2'>
-                  <Pagination.First />
-                  <Pagination.Prev />
-                  <Pagination.Item>1</Pagination.Item>
-                  <Pagination.Item>1</Pagination.Item>
-                  <Pagination.Ellipsis />
-                  <Pagination.Item>9</Pagination.Item>
-                  <Pagination.Item>10</Pagination.Item>
-                  <Pagination.Next />
-                  <Pagination.Last />
-                </Pagination>
+                  {result==='fetched' && users.length>=itemsPerPage &&(<Pagination>
+                    {Array.from({ length: Math.ceil(users?.length / itemsPerPage) }).map(
+                      (_, index) => (
+                        <Pagination.Item
+                          key={index}
+                          active={index + 1 === currentPage}
+                          onClick={() => paginate(index + 1)}
+                        >
+                          {index + 1}
+                        </Pagination.Item>
+                      )
+                    )}
+                  </Pagination>)}
+
               </div>
             </td>
           </tr>

@@ -15,13 +15,10 @@ import { BsShieldLockFill } from 'react-icons/bs';
 export default function AdminProfile ()
 {
   const profiledata = useLoaderData()
-  const { firstname, lastname, username, isSuper, email, mobile, address,discription
+  const { firstname, lastname, username, isSuper, email, mobile, address,discription,aid
  } = profiledata;
-  const addressdata=address.split(',')
-  useEffect(() =>
-  {
+  const addressdata = address ? address.split(',') : '';
 
-},[])
   return (
     <div className='adminprofile w-100' >
       <MDBContainer className='py-2 h-100 '>
@@ -50,7 +47,8 @@ export default function AdminProfile ()
                   <MDBBtn
                     outline
                     color='dark'
-                    className = 'adminprofile-header_user--btn'
+                    className='adminprofile-header_user--btn'
+                    href={'/admins/'+aid}
                   >
                     Edit profile
                   </MDBBtn>
@@ -136,7 +134,7 @@ adminprofile-header_userdetails">
                   </div>
 
                 </div>
-                <div className='d-flex justify-content-between align-items-center mb-4'>
+                {/* <div className='d-flex justify-content-between align-items-center mb-4'>
                   <MDBCardText className='lead fw-normal mb-0'>
                     Recent Activities
                   </MDBCardText>
@@ -145,8 +143,8 @@ adminprofile-header_userdetails">
                       Show all
                     </a>
                   </MDBCardText>
-                </div>
-                <MDBRow>
+                </div> */}
+                {/* <MDBRow>
                   <MDBCol className='mb-2'>
                     <MDBCardImage
                       src='https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp'
@@ -177,7 +175,7 @@ adminprofile-header_userdetails">
                       className='w-100 rounded-3'
                     />
                   </MDBCol>
-                </MDBRow>
+                </MDBRow> */}
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

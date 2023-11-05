@@ -35,7 +35,9 @@ export default function Logout () {
       if (logout) {
         navigate('/')
       }
-    } catch (error) {
+    } catch (error)
+    {
+      setloading(false)
       setlououtstatus('WRONG');
       console.error(error)
     }

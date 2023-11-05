@@ -16,7 +16,7 @@ export default function Admins () {
   return (
     <Container className='vh-100 w-100 adminshow'>
       <Row className='adminshow-action'>
-        <Button className='adminshow-action_add' as='a' href='/admins/add'>
+        <Button className='adminshow-action_add' as='a' href='/admins/add?action=add'>
           <BsPersonFillAdd className='adminshow-action_add--btn' />
         </Button>
 

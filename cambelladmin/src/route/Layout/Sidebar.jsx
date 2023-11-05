@@ -1,15 +1,16 @@
-import React, { useId} from 'react'
-import axios from 'axios';
-import { Nav, Navbar, Image} from 'react-bootstrap'
+import React, { useId } from 'react'
+import axios from 'axios'
+import { Nav, Navbar, Image } from 'react-bootstrap'
 import { useAppContext } from '../../contexts/AppContext'
 import { useUIContext } from '../../contexts/UiContext'
+import { useUserContext } from '../../contexts/UserContext'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
-import { NavItems } from '../NavaItems'
+import { SuperNavItems, NavItems } from '../NavaItems'
 
 export default function SideBar () {
   const { Appname, Applogo } = useAppContext()
   const { responsivetoggle } = useUIContext()
-
+  const { isSuper } = useUserContext()
   return (
     <Nav
       id='sidebarMenu'
@@ -28,9 +29,11 @@ export default function SideBar () {
       </Navbar.Brand>
       <div className='position-sticky'>
         <div className='list-group mx-auto mx-md-0 list-group-flush mt-2'>
-          {NavItems.map((item, index) => (
-            <NavItem {...item} key={index} />
-          ))}
+          {isSuper
+            ? SuperNavItems.map((item, index) => (
+                <NavItem {...item} key={index} />
+              ))
+            : NavItems.map((item, index) => <NavItem {...item} key={index} />)}
           <NavItem
             Class='sticky-bottom'
             path='/logout'
@@ -44,11 +47,8 @@ export default function SideBar () {
   )
 }
 
-function NavItem ({ path, itemname, itemicon, Class = '', onClick = null })
-{
-
+function NavItem ({ path, itemname, itemicon, Class = '', onClick = null }) {
   return (
-
     <Nav.Link
       href={path}
       className={
@@ -60,8 +60,6 @@ function NavItem ({ path, itemname, itemicon, Class = '', onClick = null })
       {itemicon}
 
       <span>{itemname}</span>
-
-
     </Nav.Link>
   )
 }

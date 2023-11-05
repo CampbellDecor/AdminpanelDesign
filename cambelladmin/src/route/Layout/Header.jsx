@@ -14,10 +14,11 @@ import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 import { useUserContext } from '../../contexts/UserContext'
 import { useThemeContext } from '../../contexts/ThemeContext'
 import { useUIContext } from '../../contexts/UiContext'
+import {useLocation} from 'react-router-dom'
 
 export default function Header () {
   const { currentuser } = useUserContext()
-
+  const location = useLocation();
   return (
     <>
       <Navbar id='main-navbar' expand='sm' sticky='top'>
@@ -29,6 +30,12 @@ export default function Header () {
               style={{ minWidth: '225px' }}
               autoComplete='off'
             />
+            <FormControl
+  type='hidden'
+  value={location.pathname}
+  autoComplete='off'
+/>
+
             <Button variant='secondary' className='btn'>
               <i className='fas fa-search text-dark fw-bolder'></i>
             </Button>
@@ -57,7 +64,7 @@ export default function Header () {
             >
               <Image
                 src={
-                  currentuser?.profile ||
+                  currentuser?.profile ??
                   'https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg'
                 }
                 height='41'

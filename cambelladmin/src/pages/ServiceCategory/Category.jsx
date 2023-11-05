@@ -4,11 +4,11 @@ import {
   MDBContainer,
   MDBRow,MDBBtn
 } from "mdb-react-ui-kit";
-import Categorey from "../component/category";
-import { useServiceCategoryStore } from '../redux/ServiceCategoryStore';
-import FetchedError from './Bugs/FetchedError'
-import FetchedLoading from './Bugs/FetchedLoading'
-import { useAppContext } from '../contexts/AppContext'
+import Categorey from "../../component/category";
+import { useServiceCategoryStore } from '../../redux/ServiceCategoryStore';
+import FetchedError from '../Bugs/FetchedError'
+import FetchedLoading from '../Bugs/FetchedLoading'
+import { useAppContext } from '../../contexts/AppContext'
 
 export default function Category ()
 {

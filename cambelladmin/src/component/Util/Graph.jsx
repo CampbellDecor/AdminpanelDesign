@@ -7,7 +7,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale,
 import { Doughnut,Line } from 'react-chartjs-2';
 import randomcolor from 'randomcolor';
 import {CambellContext} from '../../contexts/AppContext';
-import { getreligions } from '../../redux/Slice/ReligionSlice';
 import { useSelector ,useDispatch} from 'react-redux';
 import axios from 'axios';
 
@@ -28,11 +27,11 @@ export function SmallHomeDonut ()
 
   const { mode } = useContext(CambellContext);
   const dispatcher = useDispatch();
-  const { loading, result } = useSelector(state => state.religionname);
+  const { loading, result } = useSelector(state => state.religion);
 
   useEffect(() =>
   {
-    dispatcher(getreligions());
+
   }, [dispatcher])
   const [labels,data] =[["hi","Hello"],[12,34]];
   const colors=randomcolor({

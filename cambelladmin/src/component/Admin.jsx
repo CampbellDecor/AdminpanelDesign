@@ -10,11 +10,17 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit'
 import { ButtonGroup, Button } from 'react-bootstrap'
-
+import {useNavigate } from 'react-router-dom';
 export default function Admin ({ profile, username, email, working, mobile, aid })
 {
+  const navigate = useNavigate();
+  const onClickHandle = () =>
+  {
+    navigate('/admins/profile/' + aid);
+  }
   return (
-    <MDBCol md='9' lg='6' xl='4' className='mt-5' key={aid}>
+    <MDBCol md='9' lg='6' xl='4' className='mt-5' key={aid}
+      onClick={onClickHandle}>
       <MDBCard style={{ borderRadius: '15px' }}>
         <MDBCardBody className='p-4'>
           <div className='d-flex text-black'>
@@ -22,7 +28,7 @@ export default function Admin ({ profile, username, email, working, mobile, aid 
               <MDBCardImage
                 style={{ width: '100px', borderRadius: '10px' }}
                 src={
-                  profile ??
+                  profile??
                   'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp'
                 }
                 alt='Generic placeholder image'

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {useUserContext} from '../contexts/UserContext'
-export function Chatuser ({aid,profile,username,lastchat,isOnline,unread}){
+export function Chatuser ({id,profile,username,lastchat,isOnline,unread}){
 
     return(
-        <li className="p-2 border-bottom useitem" key={aid}>
+        <li className="p-2 border-bottom useitem" key={id}>
         <Link className="d-flex justify-content-between">
           <div className="d-flex flex-row">
             <div className='position-relative'>
@@ -19,7 +19,7 @@ export function Chatuser ({aid,profile,username,lastchat,isOnline,unread}){
           </div>
           <div className="pt-1">
             <p className="small text-muted mb-1">{lastchat?.dateTime}</p>
-            {unread>0?(<span className="badge bg-danger rounded-pill float-end">{unread}</span>):(<div/>)}
+            {unread>0&&(<span className="badge bg-danger rounded-pill float-end">{unread}</span>)}
           </div>
         </Link>
       </li>
