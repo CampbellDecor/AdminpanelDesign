@@ -90,6 +90,7 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
         }
       }
     } catch (error) {
+      toast.error('Action Failed')
       console.error(error)
     }
   }
