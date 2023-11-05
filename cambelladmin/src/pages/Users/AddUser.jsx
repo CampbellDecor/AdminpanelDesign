@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useCallback, useReducer, useState,useMemo } from 'react'
+import React, { useCallback, useReducer, useState} from 'react'
 import {
   MDBCol,
   MDBContainer,
@@ -18,7 +18,10 @@ import { AvatarGenerator } from 'random-avatar-generator'
 import { GiAutoRepair } from 'react-icons/gi'
 import { Spinner } from 'react-bootstrap'
 import PhoneInput from 'react-phone-number-input'
-import {useAppContext} from '../../contexts/AppContext'
+import { useAppContext } from '../../contexts/AppContext'
+import axios from 'axios'
+import {toast} from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 const Reducer = (state,action) =>
 {
   switch (action.type)
@@ -44,7 +47,9 @@ const Reducer = (state,action) =>
     default: return state;
   }
 }
-export default function AddUSer () {
+export default function AddUSer ()
+{
+  const navigate = useNavigate();
 
   const { Applogo} = useAppContext();
   // Simply get a random avatar
@@ -73,14 +78,19 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
     try {
       e.preventDefault()
 
-      if (validating()) {
+      if (validating())
+      {
         setisLoading(true)
-        //const userdata = await axios.post( "/api/user/add", user );
-
+        const userdata = await axios.post("/api/user/add", user);
         setisLoading(false)
+        if (userdata)
+        {
+          toast.success('Scussfully added User');
+          navigate('/users');
+        }
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
   return (
