@@ -5,41 +5,21 @@ import {
   Nav,
   Container,
   Badge,
-  Form,
-  FormControl,
-  Button,
   Image
 } from 'react-bootstrap'
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 import { useUserContext } from '../../contexts/UserContext'
 import { useThemeContext } from '../../contexts/ThemeContext'
 import { useUIContext } from '../../contexts/UiContext'
-import {useLocation} from 'react-router-dom'
-
+import SearchBox from '../../component/Util/SearchBox';
 export default function Header () {
   const { currentuser } = useUserContext()
-  const location = useLocation();
   return (
     <>
       <Navbar id='main-navbar' expand='sm' sticky='top'>
         <Container fluid>
-          <Form className='d-none d-md-flex input-group w-auto my-auto searchbar'>
-            <FormControl
-              type='search'
-              placeholder='Search..'
-              style={{ minWidth: '225px' }}
-              autoComplete='off'
-            />
-            <FormControl
-  type='hidden'
-  value={location.pathname}
-  autoComplete='off'
-/>
+          <SearchBox/>
 
-            <Button variant='secondary' className='btn'>
-              <i className='fas fa-search text-dark fw-bolder'></i>
-            </Button>
-          </Form>
           <Nav className='ms-auto d-sm-flex  w-sm-100 w-md-25 justify-content-md-end justify-content-sm-around align-items-lg-center'>
             <Nav.Item
               className=' d-none  d-sm-block mx-sm-3'

@@ -1,19 +1,16 @@
-import {
-    createAsyncThunk
-} from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
 
-export const getUser = createAsyncThunk("gets/user", async () => {
-    return axios.get("/api/user").then(response => {
-        return response.data;
-    });
-});
+export const getUser = createAsyncThunk('gets/user', async () => {
+  return axios.get('/api/user').then(response => {
+    return response.data
+  })
+})
 
-
-export const getBlockUser = createAsyncThunk("gets/blockuser", async () => {
-    return axios.get(`/api/user/block/block`).then(response => {
-        return response.data;
-    });
+export const getBlockUser = createAsyncThunk('gets/blockuser', async () => {
+  return axios.get(`/api/user/block/block`).then(response => {
+    return response.data
+  })
 })
 export const getunBlockUser = createAsyncThunk('gets/unblockuser', async () => {
   return axios.get(`/api/user/block/unblock`).then(response => {
@@ -25,3 +22,14 @@ export const getReligion = createAsyncThunk('gets/unreligionr', async () => {
     return response.data
   })
 })
+export const getsearchUser = createAsyncThunk(
+  'gets/search',
+  async searchtext =>
+  {
+
+
+    return axios.get('/api/user/search/'+"pi").then(response => {
+      return response.data
+    })
+  }
+)

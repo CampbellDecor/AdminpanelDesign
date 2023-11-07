@@ -6,17 +6,17 @@ export function CountPanel ( { index, idenity, title, count, path } )
 {
     const navigate=useNavigate();
     return (
-        <div className='d-flex  flex-md-row flex-column align-items-center justify-content-lg-around  shadow rounded mx-2 my-2 py-4 my-sm-0 py-sm-2 py-md-5 border-1 home-countpanel-componet' key={ index } onClick={()=>navigate(path)} >
+        <div className='d-flex  flex-md-row flex-column align-items-center justify-content-lg-around  shadow rounded mx-2 my-2 py-3 my-sm-0 py-sm-2 py-md-5 border-1 home-countpanel-componet' key={ index } onClick={()=>navigate(path)} >
         <div className="home-countpanel-componet--identiy">
             {idenity}
         </div>
         <div className="home-countpanel-componet--des text-center">
         <h5 className='fw-bolder'>{title}</h5>
-           <h6>{count}</h6> 
+           <h6>{count}</h6>
         </div>
             </div>
     )
-  } 
+  }
 
  export function ListPanel({title, items}){
     return   (

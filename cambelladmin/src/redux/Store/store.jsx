@@ -6,8 +6,8 @@ import Admin from "../Slice/AdminSlice.jsx";
 import ServiceCat from "../Slice/ServiceCategorySlice.jsx";
 import Service from "../Slice/ServiceSlice.jsx";
 import Religion from "../Slice/ReligionSlice.jsx";
-import adminChat from '../Slice/AdminChatSlice.jsx';
-import userchatlist from '../Slice/UserChatSlice.jsx';
+import adminChatlist from '../Slice/AdminChatListSlice.jsx';
+import userchatlist from '../Slice/NormalChatlistSlice.jsx';
 export const Store = configureStore({
     reducer: {
         "user": User,
@@ -15,7 +15,7 @@ export const Store = configureStore({
         "ServiceCat": ServiceCat,
         "service": Service,
         "religion": Religion,
-        "adminchat": adminChat,
+        "adminchatlist": adminChatlist,
         'userchatlist':userchatlist
     }
 });

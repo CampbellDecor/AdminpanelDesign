@@ -1,5 +1,5 @@
 import React from 'react'
-import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit'
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdb-react-ui-kit'
 import { Link } from 'react-router-dom'
 import { Image } from 'react-bootstrap'
 import { MdAdd } from 'react-icons/md'
@@ -8,6 +8,13 @@ import { events } from '../../store/FakeData'
 export default function Events () {
   return (
     <MDBContainer fluid>
+      <MDBRow>
+        <MDBCol>
+          <MDBBtn>
+            fgdgfdgfdgd
+        </MDBBtn>
+        </MDBCol>
+      </MDBRow>
       <MDBRow className='w-100'>
         <MDBCol md='7' lg='9'>
           {events.map(e => (

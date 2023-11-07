@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { createSlice } from '@reduxjs/toolkit';
-import { getUser, getBlockUser,getunBlockUser } from '../Thunks/User';
-import { GetAll, GetBlock, GetunBlock } from '../Extrareducer/User';
+import { getUser, getBlockUser,getunBlockUser,getsearchUser } from '../Thunks/User';
+import { GetAll, GetBlock, GetunBlock,SearchUsers} from '../Extrareducer/User';
 export const UserSlier = createSlice({
     name: "user",
     initialState: {
@@ -25,6 +25,9 @@ export const UserSlier = createSlice({
             .addCase(getunBlockUser.fulfilled, GetunBlock(1))
             .addCase(getunBlockUser.rejected, GetunBlock(-1))
             .addCase(getunBlockUser.pending, GetunBlock(0))
+             .addCase(getsearchUser.fulfilled, SearchUsers(1))
+            .addCase(getsearchUser.rejected, SearchUsers(-1))
+            .addCase(getsearchUser.pending, SearchUsers(0))
             .addDefaultCase(getUser.pending, GetAll(0));
     }
 });

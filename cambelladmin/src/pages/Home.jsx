@@ -5,8 +5,7 @@ import { SimpleHomeCalender } from '../component/Util/Calender'
 import { NewAppoint } from '../component/Util/Table'
 import { CountPanel, ListPanel } from '../component/Panels'
 import { MDBListGroup, MDBListGroupItem, MDBBtn } from 'mdb-react-ui-kit'
-import { FaCalendarDay, FaUsers, FaCoins } from 'react-icons/fa'
-import { TbPackages } from 'react-icons/tb'
+import { FaCalendarDay, FaUsers, FaCoins,FaRegThumbsUp } from 'react-icons/fa'
 import axios from 'axios';
 
 const countReducer = (state,action) =>
@@ -72,7 +71,7 @@ export default function Home ()
           <CountPanel
             {...{
               title: 'Packages',
-              idenity: <TbPackages className='icon' />,
+              idenity: <FaRegThumbsUp className='icon' />,
               count: countpanel?.Packages,
               path: '/users'
             }}

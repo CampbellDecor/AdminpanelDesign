@@ -31,7 +31,7 @@ export const SuperNavItems = [ {
     itemicon: <MdEventSeat size={ is } className="me-3" />
   },
   {
-    path: "/book",
+    path: "/booking",
     itemname: "Orders",
     itemicon: <BsFillCalendarDateFill size={ is } className="me-3" />
   },
@@ -77,7 +77,7 @@ export const SuperNavItems = [ {
     itemicon: <MdEventSeat size={is} className='me-3' />
   },
   {
-    path: '/book',
+    path: '/booking',
     itemname: 'Orders',
     itemicon: <BsFillCalendarDateFill size={is} className='me-3' />
   },

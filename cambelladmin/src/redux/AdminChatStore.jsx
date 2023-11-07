@@ -1,15 +1,11 @@
-import {
-    getadminchatHints,
-    getadminchatChats,
-    getadminchats
-} from './Thunks/AdminChat';
-
-export function useAdminChatStore ()
-{
-    return {
-            getadminchatHints,
-            getadminchatChats,
-            getadminchats
-        };
-
+import { getadminchatList } from './Thunks/AdminChat'
+import { useSelector, useDispatch } from 'react-redux'
+export function useAdminChatStore () {
+  const adminchatlist = useSelector(state => state.adminchatlist)
+  const adminChatDispatcher = useDispatch()
+  return {
+    adminchatlist,
+    adminChatDispatcher,
+    getadminchatList
+  }
 }

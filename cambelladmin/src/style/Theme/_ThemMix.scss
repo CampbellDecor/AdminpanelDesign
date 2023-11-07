@@ -149,3 +149,56 @@ background-color: var.color($theme, "secoundary") !important;
 @mixin Adminbadge($theme:"light"){
   color: var.color($theme, "warning") !important
 }
+@mixin BookingCalender($theme:"light"){
+  .booking{
+    .sheduler{
+      background-color: var.color($theme,'primary');
+    .simple-calender{
+      .icon{
+          color:var.color($theme,"textsecound");
+      }
+      .react-calendar__navigation button{
+        &:enabled{
+
+        &:hover,:focus {
+      background-color:var.color($theme,"forth");
+}}}
+       .react-calendar__tile{
+        &:enabled{
+            &:focus,&:hover{
+                background-color: var.color($theme,"forth");
+            }
+        }
+       &--now{
+        background-color: var.color($theme,"tertery");
+        color: var.color($theme,"textprim");
+        border-radius: 3px;
+        &:enabled{
+            &:hover,&:focus{
+                background-color:var.color($theme,"primary") ;
+                font-weight: 600;
+            }
+        }
+       }
+    }
+    }
+    .react-calendar__month-view__weekdays {
+        background-color: var.color($theme,"secoundary");
+        color:  var.color($theme,"w");
+      }
+      .simple-calender--tile{
+        .event-count{
+            height: min-content;
+            &--num{
+              &--1{
+              background-color:var.color($theme,"danger");
+            } &--2{
+              background-color:var.color($theme,"secoundary") !important;
+            } &--3{
+              background-color:var.color($theme,"primary") !important;
+            }
+          }
+        }
+      }
+}
+}}

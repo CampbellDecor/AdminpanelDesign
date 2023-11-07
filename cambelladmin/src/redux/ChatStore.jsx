@@ -5,5 +5,5 @@ export const useUserChatStore = () =>
     const UserChatDispatcher = useDispatch();
     const userChatList = useSelector(state => state.userchatlist);
 
-    return {getUserChatList,UserChatDispatcher,userChatList}
+    return { getUserChatList, UserChatDispatcher, userChatList };
 }

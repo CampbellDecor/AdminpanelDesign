@@ -4,7 +4,7 @@
   width: 100%;
   &-countpanel{
     &-componet{
-      width: 25%;
+      width: 20%;
        &:hover{
         .icon{
           transform: scale(1.1);
@@ -13,12 +13,12 @@
       &--identiy{
           .icon{
             transition: trans("t_2");
-            font-size:60px;
+            font-size:50px;
           }
       }
       &--des{
         h6{
-          font-size: 25px;
+          font-size: 20px;
           font-weight: 600;
         }
       }
@@ -43,7 +43,7 @@
       .status{
         font-size: 12px;
         padding: 6px;
-        
+
       }
   }
 }
@@ -76,7 +76,7 @@
           }
         }
     }
-   
+
 }
 &-maincontent{
   .chart-container{

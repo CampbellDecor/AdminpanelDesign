@@ -1,62 +1,77 @@
 // @ts-nocheck
-import React, { useCallback, useReducer, useState} from 'react'
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardText,
-  MDBCardBody,
-  MDBCardImage,
-  MDBTypography,
-  MDBIcon,
-  MDBInput,
-  MDBTextArea,
-  MDBBtn
-} from 'mdb-react-ui-kit'
-import { AvatarGenerator } from 'random-avatar-generator'
-import { GiAutoRepair } from 'react-icons/gi'
-import { Spinner } from 'react-bootstrap'
-import PhoneInput from 'react-phone-number-input'
-import { useAppContext } from '../../contexts/AppContext'
-import axios from 'axios'
-import {toast} from 'react-toastify'
-import { useNavigate } from 'react-router-dom';
-const Reducer = (state,action) =>
+import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import
+  {
+    MDBCol,
+    MDBContainer,
+    MDBRow,
+    MDBCard,
+    MDBCardText,
+    MDBCardBody,
+    MDBCardImage,
+    MDBTypography,
+    MDBIcon,
+    MDBInput,
+    MDBTextArea,
+    MDBBtn
+  } from 'mdb-react-ui-kit';
+import { AvatarGenerator } from 'random-avatar-generator';
+import { GiAutoRepair } from 'react-icons/gi';
+import { Spinner } from 'react-bootstrap';
+import PhoneInput from 'react-phone-number-input';
+import { useAppContext } from '../../contexts/AppContext';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+const Reducer = (state, action) =>
 {
   switch (action.type)
   {
     case 'CHANGEINPUT': {
       return {
-        ...state, [action.name]: action.value
-      }
+        ...state,
+        [action.name]: action.value
+      };
     }
     case 'RESET': {
-      return {}
+      return {};
     }
     case 'MOBILECHANEGE': {
       return {
-        ...state,mobile:action.value
-      }
+        ...state,
+        mobile: action.value
+      };
     }
     case 'PROFILECHANEGE': {
       return {
-        ...state, profile: action.payload
-      }
+        ...state,
+        profile: action.payload
+      };
     }
-    default: return state;
+    case 'SETDATA': {
+      return action.payload;
+    }
+    default:
+      return state;
   }
-}
+};
 export default function AddUSer ()
 {
   const navigate = useNavigate();
-
-  const { Applogo} = useAppContext();
-  // Simply get a random avatar
-  const [user, setUser] = useReducer(Reducer
-,{
-    })
-  const [isLoading, setisLoading] = useState(false)
+  const { Applogo } = useAppContext();
+  const [user, setUser] = useReducer(Reducer, {});
+  const [isLoading, setisLoading] = useState(false);
+  const userData = useLoaderData();
+  useEffect(() =>
+  {
+    if (userData !== null)
+    {
+      setUser({
+        type: 'SETDATA'
+        , payload: userData
+      });
+    }
+  }, [userData]);
   const validating = useCallback(() =>
   {
     if (user?.mobile === '') throw new Error('Invalid Mobile');
@@ -67,33 +82,64 @@ export default function AddUSer ()
   const OnChangehandle = useCallback(e =>
   {
     setUser({ type: 'CHANGEINPUT', name: e.target.name, value: e.target.value });
-  },[])
+  }, []);
   const ProfileChange = useCallback(() =>
-  {const generator = new AvatarGenerator()
+  {
+    const generator = new AvatarGenerator();
 
-    setUser({type:'PROFILECHANEGE',payload:generator.generateRandomAvatar()})
-  },[])
-const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[])
-  const handleSubmit = async e => {
-    try {
-      e.preventDefault()
+    setUser({
+      type: 'PROFILECHANEGE',
+      payload: generator.generateRandomAvatar()
+    });
+  }, []);
+  const OnMobileChange = useCallback(
+    value => setUser({ type: 'MOBILECHANEGE', value }),
+    []
+  );
+
+  const handleSubmit = async e =>
+  {
+    try
+    {
+      e.preventDefault();
 
       if (validating())
       {
-        setisLoading(true)
-        const userdata = await axios.post("/api/user/add", user);
-        setisLoading(false)
+        setisLoading(true);
+        const userdata = await axios.post('/api/user/add', user);
+        setisLoading(false);
         if (userdata)
         {
           toast.success('Scussfully added User');
           navigate('/users');
         }
       }
-    } catch (error) {
-      toast.error('Action Failed')
-      console.error(error)
+    } catch (error)
+    {
+      toast.error('Action Failed');
+      console.error(error);
     }
+  };
+  const EditHandle = async e =>
+  {
+    e.preventDefault();
+    try
+    {
+if (validating()) {
+  setisLoading(true)
+  const userdata = await axios.put('/api/user/edit', user);
+  setisLoading(false)
+  if (userdata) {
+    toast.success('Scussfully Edited User')
+    navigate('/users')
   }
+}
+
+    } catch (error)
+    {
+      console.error(error);
+    }
+  };
   return (
     <MDBContainer className='py-5 vh-75'>
       <MDBRow className='justify-content-center align-items-center h-100'>
@@ -109,20 +155,19 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
                 }}
               >
                 <MDBCardImage
-                  src={
-                    user?.profile??Applogo
-                  }
+                  src={user?.profile ?? Applogo}
                   alt='Avatar'
                   className='my-5'
                   style={{ width: '80px' }}
                   fluid
                 />
-                <MDBTypography tag='h5'>{user?.username??'Cambelluser'}</MDBTypography>
-                <MDBCardText className='fs-6'>{user?.email??'Cambellmail@mail.com'}</MDBCardText>
-                <GiAutoRepair
-                  onClick={ProfileChange}
-                  size={30}
-                />
+                <MDBTypography tag='h5'>
+                  {user?.username ?? 'Cambelluser'}
+                </MDBTypography>
+                <MDBCardText className='fs-6'>
+                  {user?.email ?? 'Cambellmail@mail.com'}
+                </MDBCardText>
+                <GiAutoRepair onClick={ProfileChange} size={30} />
 
                 <div className='d-none justify-content-center'>
                   <a href='#!'>
@@ -145,7 +190,7 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
                         name='email'
                         type='email'
                         required
-                        value={user?.email??""}
+                        value={user?.email ?? ''}
                         onChange={OnChangehandle}
                       />
                     </MDBCol>
@@ -155,7 +200,7 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
                         className='border-0'
                         onChange={OnMobileChange}
                         placeholder='Mobile'
-                        value={user?.mobile??""}
+                        value={user?.mobile ?? ''}
                       />
                     </MDBCol>
                   </MDBRow>
@@ -164,13 +209,12 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
                     <MDBCol size='6' className='mb-3'>
                       <MDBTypography tag='h6'>Religion</MDBTypography>
                       <MDBInput
-  label='religion'
+                        label='religion'
                         name='religion'
-  type='text'
-  value={user?.religion ?? ''}
-  onChange={OnChangehandle}
-/>
-
+                        type='text'
+                        value={user?.religion ?? ''}
+                        onChange={OnChangehandle}
+                      />
                     </MDBCol>
                     <MDBCol size='6' className='mb-3'>
                       <MDBTypography tag='h6'>Username</MDBTypography>
@@ -178,7 +222,7 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
                         label='username'
                         name='username'
                         type='text'
-                        value={user?.username??""}
+                        value={user?.username ?? ''}
                         onChange={OnChangehandle}
                       />
                     </MDBCol>
@@ -190,7 +234,7 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
                       name='address'
                       id='textAreaExample'
                       rows={3}
-                      value={user?.address??""}
+                      value={user?.address ?? ''}
                       onChange={OnChangehandle}
                     />
                   </MDBCol>
@@ -198,9 +242,11 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
                     <MDBBtn
                       className='w-50 mx-auto'
                       disabled={isLoading}
-                      onClick={handleSubmit}
+                      onClick={userData !== null
+                        ? EditHandle : handleSubmit}
                     >
-                      {isLoading ? <Spinner animation='border' /> : 'Save'}
+                      {isLoading ? <Spinner animation='border' /> : userData !== null ? 'Edit' :
+                        'Save'}
                     </MDBBtn>
                   </MDBRow>
                 </MDBCardBody>
@@ -210,5 +256,5 @@ const OnMobileChange=useCallback(value=>setUser({type:'MOBILECHANEGE',value}),[]
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-  )
+  );
 }

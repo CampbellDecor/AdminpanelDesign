@@ -40,7 +40,9 @@ import {
   ProfileLoader,
   addAdminLoader,
   editAdminLoader,
-  adminchatList
+  adminchatList,
+  adduserLoader,
+  edituserLoader,normalchatList
 } from '../function/RouteFunLoader'
 const router = createBrowserRouter([
   {
@@ -62,7 +64,9 @@ const router = createBrowserRouter([
       {
         //normal adminchat
         path: 'chats/normal',
-        element: <NormalChatapp />
+        element: <NormalChatapp />,
+        loader:normalchatList
+
       },
       {
         //user
@@ -128,7 +132,13 @@ const router = createBrowserRouter([
           {
             //user add
             path: '/users/add',
-            element: <AddUser />
+            element: <AddUser />,
+            loader:adduserLoader
+          },
+          {//user edit
+            path: '/users/:uid',
+            element: <AddUser />,
+            loader:edituserLoader
           },
           {
             //package add

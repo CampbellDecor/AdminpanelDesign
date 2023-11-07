@@ -1,16 +1,23 @@
 
-import React from 'react'
-import {createStorageSession} from './SessionStorage'
+import React, { useEffect } from 'react'
+import {useUserChatStore} from '../redux/ChatStore'
+import { UseSelector, } from 'react-redux/es/hooks/useSelector';
 export default function Test ()
 {
-    const onclik =  () =>
-    {
-      createStorageSession('fdfdsfsdfghgh', {name: "Hi"});
-    }
-
+  const { userChatList, UserChatDispatcher, getUserChatList } = useUserChatStore();
+  const {result,chatlist } = userChatList;
+  useEffect(() =>
+  {
+    UserChatDispatcher(getUserChatList());
+  },[])
   return (
     <div>
-      <button onClick={onclik} >hi</button>
-    </div>
-  )
+      <ul>
+        {result === "fetched" && chatlist.map((item, idex) =>
+        {
+
+        })}
+      </ul>
+  </div>
+)
 }

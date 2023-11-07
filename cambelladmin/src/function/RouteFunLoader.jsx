@@ -20,10 +20,21 @@ console.error(error);
 
 
 }
-export async function addAdminLoader ({ parmas })
+export async function addAdminLoader ({ params })
 {
 return null;
 }
+export async function adduserLoader ({ parmas }) {
+  return null
+}
+export async function edituserLoader ({ params })
+{
+    const uid = params.uid;
+    const user = await axios.get('/api/user/'+uid);
+    return user.data;
+}
+
+
 
 export async function adminchatList ()
 {
@@ -37,7 +48,7 @@ export async function adminchatList ()
 export async function normalchatList () {
     try
     {
-        const chat = await axios.get('/api/adminchat');
+        const chat = await axios.get('/api/userchat');
     return chat.data
   } catch (error) {
     throw error
