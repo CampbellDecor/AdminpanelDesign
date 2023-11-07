@@ -35,7 +35,7 @@ import Test from '../function/test'
 import Error from '../pages/Bugs/Error'
 //Bookings
 import Bookings from '../pages/Booking/Bookings'
-
+import OneBooking from '../pages/Booking/OneBooking'
 import {
   ProfileLoader,
   addAdminLoader,
@@ -144,6 +144,9 @@ const router = createBrowserRouter([
             //package add
             path: '/pack/add',
             element: <AddPackage />
+          }, {
+            path: "/booking/:bookcode",
+            element:<OneBooking/>
           }
         ]
       }
