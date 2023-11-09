@@ -40,8 +40,8 @@ export default function AddService ()
               src={
                 serviceImg??"https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
               }
+              height="600px"
             />
-            {process}
           </Row>
           {/* <Row>{
             inputs.images.slice( 1 ).map( img => (

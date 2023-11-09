@@ -1,9 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback,  useState } from 'react'
 import { useUserContext } from '../contexts/UserContext'
 import { Button } from 'react-bootstrap'
-import {UseuserChatContext} from '../contexts/ChatContext'
 import {Message,Reply } from './Chats';
-import axios from 'axios'
 
 export default function Chatting () {
   const { currentuser } = useUserContext()
@@ -45,7 +43,7 @@ export default function Chatting () {
 
 export function ChatPanel ()
 {
-  const {loading,chat}=UseuserChatContext()
+  const  loading = false,chat=[];
 
   return loading?(<h1>Loading</h1>):(< div className = 'pt-3 pe-3 h-100' data-mdb-perfect-scrollbar='true' >
     {chat.map(ele => ele.type === 'sent' ? <Reply {...ele}/>:<Message {...ele}/>)}
@@ -54,10 +52,3 @@ export function ChatPanel ()
   }
 
 
-export function ChatList ({chatlist=[]})
-{
-
-  return (
-<div/>
-  )
-}

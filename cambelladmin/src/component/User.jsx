@@ -2,6 +2,7 @@ import { MDBBadge, MDBBtn } from 'mdb-react-ui-kit'
 import React from 'react'
 import { BlockUnBlock } from './Util/Model'
 import { FaUserPen } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 export function UserRows ({
   username,
   profile,
@@ -12,9 +13,17 @@ export function UserRows ({
   uid,
   mobile,
   booking
-}) {
+})
+{
+  const navigate = useNavigate();
+  const onClickEvent = (e) =>
+  {
+    e.preventDefault();
+    navigate('/user/profile/' + uid)
+
+  }
   return (
-    <tr key={uid}>
+    <tr onClick={onClickEvent}>
       <td>
         <div className='d-flex align-items-center'>
           <img

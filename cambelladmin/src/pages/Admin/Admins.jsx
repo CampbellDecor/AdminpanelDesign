@@ -12,7 +12,7 @@ export default function Admins () {
   const { loading, result, admins } = Admins
   useEffect(() => {
     Admindispatcher(getadmin())
-  }, [])
+  }, [Admindispatcher,getadmin])
   return (
     <Container className='vh-100 w-100 adminshow'>
       <Row className='adminshow-action'>
@@ -27,7 +27,7 @@ export default function Admins () {
       ) : (
         <Row className='mh-75'>
           {result === 'fetched' ? (
-            admins.map((admindata, index) => (
+            admins?.length>0 && admins?.map((admindata, index) => (
               <Admin key={index} {...admindata} />
             ))
           ) : (

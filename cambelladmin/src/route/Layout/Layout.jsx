@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Outlet, Navigate } from 'react-router-dom';
-import React, { useCallback, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
@@ -33,7 +33,7 @@ export function Layout ()
       bodyres?.current.classList.remove('responsiveBlock');
     }
   };
-  const Timeout=useCallback(() =>
+  useEffect(() =>
   {
     setInterval(() =>
     {
@@ -44,10 +44,9 @@ export function Layout ()
         toast.warn('Session Timeout');
         navigate('/');
       }
-    }, 1000 * 60 * 60 * 0.5);
+    }, 1000 * 60 * 60);
 
-  }, [new Date()]);
-  Timeout();
+  }, [setLogin]);
   return !islogin ? (
     <Navigate to='/' replace={true} />
   ) : (

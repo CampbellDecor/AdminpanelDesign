@@ -124,6 +124,7 @@ const { setCurrentUser,setisSuper } = useUserContext()
                   name='email'
                   ref = { emailref }
                   defaultValue={loginUser.email}
+                  value={loginUser?.email}
                 type='email'
                 onChange={onChange}
               />

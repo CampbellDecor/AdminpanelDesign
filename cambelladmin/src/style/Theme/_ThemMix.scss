@@ -187,16 +187,11 @@ background-color: var.color($theme, "secoundary") !important;
         color:  var.color($theme,"w");
       }
       .simple-calender--tile{
-        .event-count{
-            height: min-content;
-            &--num{
-              &--1{
-              background-color:var.color($theme,"danger");
-            } &--2{
-              background-color:var.color($theme,"secoundary") !important;
-            } &--3{
-              background-color:var.color($theme,"primary") !important;
-            }
+        .events{
+            &-set{
+              &_one{
+
+              }
           }
         }
       }

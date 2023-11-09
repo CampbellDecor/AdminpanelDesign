@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from 'react'
 import {
-  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCardHeader,
@@ -8,78 +7,99 @@ import {
   MDBContainer,
   MDBIcon,
   MDBRow,
-  MDBTooltip,
-} from "mdb-react-ui-kit";
-import { Form } from "react-bootstrap";
-import Todo from "../../component/todo";
-import AddToDo from './AddTodo';
-export default function ToDoList() {
+  MDBTooltip
+} from 'mdb-react-ui-kit'
+import { Form } from 'react-bootstrap'
+import Todo from '../../component/todo'
+import AddToDo from './AddTodo'
+export default function ToDoList ({bookid})
+{
+
+  const date = new Date('July 21, 2024 01:15:00')
+
+  const [Tasks, setTasks] = useState([]);
+  const [loading, setloading] = useState(false);
+  const Duration = useMemo(() => {
+    const now = new Date()
+    if (date.getFullYear() - now.getFullYear() > 0) {
+      if (date.getMonth() - now.getMonth() > 0) {
+        const day = date.getDate() - date.getDate()
+        return <h5 className='text-center text-lead text-warning'>{ day > 0 ? `Just ${day} days More` : `Done ${day}`}</h5>
+      } else {
+        return <h5 className='text-center text-lead text-info'>More the One Month Done it</h5>
+      }
+    } else {
+      return <h5 className='text-center text-lead text-info'>More Then ! year Done</h5>
+    }
+  }, [date])
+  useEffect(() =>
+  {
+
+  },[])
   return (
-    <MDBContainer className="py-5 w-75">
-      <MDBRow className="d-flex justify-content-center align-items-center h-100">
+    <MDBContainer className='py-5 w-75 todo'>
+      <MDBRow className='d-flex justify-content-center align-items-center h-100'>
         <MDBCol>
           <MDBCard
-            id="list1"
-            style={{ borderRadius: ".75rem", backgroundColor: "#eff1f2" }}
+            className='todolist'
           >
-            <MDBCardBody className="p-2 px-md-5">
-              <p className="h3 text-center mt-1 mb-2 pb-1 text-primary">
-                <MDBIcon fas icon="check-square" className="me-1" />
+            <MDBCardBody className='p-2 px-md-5'>
+              <p className='h3 text-center mt-1 mb-2 pb-1 text-primary'>
+                <MDBIcon fas icon='check-square' className='me-1' />
                 <u>My Todo-s</u>
               </p>
-              <div className="pb-1">
+              <div>
                 <MDBCard>
                   <MDBCardHeader>
-                    <div className="w-100 d-flex justify-content-end">
-                      <MDBTooltip tag='a' wrapperProps={{ href: '#!' }} title='Add New Task'>
-<AddToDo />
+                    <div className='w-100 d-flex justify-content-between'>
+                      {Duration}
 
-</MDBTooltip>
-
-
+                      <MDBTooltip
+                        tag='a'
+                        wrapperProps={{ href: '#!' }}
+                        title='Add New Task'
+                      >
+                        <AddToDo />
+                      </MDBTooltip>
                     </div>
-
                   </MDBCardHeader>
                 </MDBCard>
               </div>
-              <hr className="my-2" />
+              <hr className='my-2' />
 
-              <div className="d-flex justify-content-end align-items-center mb-4 pt-3 pb-3">
-                <p className="small mb-0 me-2 text-muted">Filter</p>
+              <div className='d-flex justify-content-end align-items-center mb-4 pt-2 pb-1'>
+                <p className='small mb-0 me-2 text-muted'>Filter</p>
                 <Form.Select>
                   <option>All</option>
-                  <option value="">Completed</option>
-                  <option value="">Active</option>
-                  <option value="">Has due Date</option>
+                  <option value='complete'>Completed</option>
+                  <option value='active'>Active</option>
+                  <option value='pending'>Has due Date</option>
                 </Form.Select>
-                <p className="small mb-0 ms-4 me-2 text-muted">Sort</p>
+                <p className='small mb-0 ms-4 me-2 text-muted'>Sort</p>
                 <Form.Select>
-                  <option value="">Added Date</option>
-                  <option value="">Due Date</option>
+                  <option value=''>Added Date</option>
+                  <option value=''>Due Date</option>
                 </Form.Select>
                 <MDBTooltip
-                  tag="a"
-                  wrapperProps={{ href: "#!" }}
-                  title="Ascending"
+                  tag='a'
+                  wrapperProps={{ href: '#!' }}
+                  title='Ascending'
                 >
                   <MDBIcon
                     fas
-                    icon="sort-amount-down-alt"
-                    className="ms-2"
-                    style={{ color: "#23af89" }}
+                    icon='sort-amount-down-alt'
+                    className='ms-2'
+                    style={{ color: '#23af89' }}
                   />
                 </MDBTooltip>
               </div>
-
-              <Todo />
-
-              <Todo />
-
-            <Todo/>
+              {
+                Tasks.length>0 && Tasks.map(task=>(<Todo/>))
+}
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
       </MDBRow>
     </MDBContainer>
-  );
+  )
 }

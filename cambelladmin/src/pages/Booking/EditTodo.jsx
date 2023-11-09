@@ -11,45 +11,44 @@ import {
   MDBTextArea,
   MDBInput,
   MDBTooltip,
-  MDBIcon
+    MDBIcon
+
 } from 'mdb-react-ui-kit'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { AiOutlineAppstoreAdd } from 'react-icons/ai'
 import DatePicker from 'react-date-picker'
-export default function AddTodo ({ date }) {
+export default function EditTodo ({taskDoc,date}) {
   const DisabledTodo = useMemo(() => date < new Date(), [date])
 
   const [varyingModal, setVaryingModal] = useState(false)
   const [value, setValue] = useState(new Date())
-  const [task, setTask] = useState({})
+  const [task, setTask] = useState(taskDoc)
   const onChangeInput = useCallback(
     event => {
-      setTask(pre => ({ ...pre, [event.target.name]: event.target.value }))
+      setTask(pre => ({ ...pre, [event?.target?.name]: event?.target?.value }))
     },
     [setTask]
   )
   const onClickMOdel = useCallback(() => setVaryingModal(!varyingModal), [
     varyingModal
   ])
-  const Disabled = useMemo(() => !task.task || value < new Date(), [
+  const Disabled = useMemo(() => !task.task || value < new Date() || taskDoc===task, [
     task,
-    value
+    value,taskDoc
   ])
 
-  const AddTask = useCallback(async e => {
-    e.preventDefault()
+  const AddTask = useCallback(async (e) => {
+
     task.dueDate = value
-    task.bookid = "APedgnvVkSWJl3elTIz2";
+    task.bookid = 'APedgnvVkSWJl3elTIz2'
     try {
-     const add = await axios.post('/api/booking/todoTask',task)
-      if (add) {
+      const add = await axios.post('/api/booking/todoTask', task)
+      if (add.data) {
         toast.success('Scussfully Added New Task')
         onChangeInput()
       } else {
         toast.error('Failed to Add Task Try Again')
       }
-
     } catch (error) {
       console.error(error)
     }
@@ -57,14 +56,17 @@ export default function AddTodo ({ date }) {
 
   return (
     <>
-      <MDBBtn onClick={onClickMOdel} rounded size='sm' disabled={DisabledTodo}>
-        <AiOutlineAppstoreAdd size={24} />
+      <MDBBtn onClick={onClickMOdel} color='link' rounded size='sm' disabled={DisabledTodo}>
+        <MDBTooltip tag='a' wrapperProps={{ href: '#!' }} title='Edit todo'>
+  <MDBIcon fas icon='pencil-alt' className='me-3' color='info' />
+</MDBTooltip>
+
       </MDBBtn>
       <MDBModal show={varyingModal} setShow={setVaryingModal} tabIndex='-1'>
         <MDBModalDialog>
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle>Add New Task</MDBModalTitle>
+              <MDBModalTitle>Edit Task</MDBModalTitle>
               <MDBBtn
                 className='btn-close'
                 color='none'
@@ -81,7 +83,8 @@ export default function AddTodo ({ date }) {
                         label='Task'
                         required
                         name='task'
-                        onChange={onChangeInput}
+                                              onChange={onChangeInput}
+                                              value={task?.task}
                       />
                     </div>
                   )}
@@ -95,7 +98,7 @@ export default function AddTodo ({ date }) {
                         title='Set due date'
                       >
                         <DatePicker
-                          value={value}
+                          value={task?.dueDate}
                           calendarIcon={
                             <MDBIcon
                               fas
@@ -120,11 +123,13 @@ export default function AddTodo ({ date }) {
                       onChange={onChangeInput}
                       labelClass='col-form-label'
                       label='Description'
-                      name='desc'
+                                          name='desc'
+                                          value={task?.desc}
                       placeholder='Description...'
                     />
                   )}
-                </div>
+                            </div>
+
               </form>
             </MDBModalBody>
             <MDBModalFooter>
@@ -132,7 +137,7 @@ export default function AddTodo ({ date }) {
                 Close
               </MDBBtn>
               <MDBBtn disabled={Disabled} onClick={AddTask}>
-                Add
+                Edit
               </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>

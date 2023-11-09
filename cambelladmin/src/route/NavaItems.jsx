@@ -15,11 +15,12 @@ export const SuperNavItems = [ {
     itemname: "Admin",
     itemicon: <MdAdminPanelSettings size={ is } className="me-3" />
   },
+  // {
+  //   path: '/analysis',
+  //   itemname: "Analysis",
+  //   itemicon: <TbDeviceAnalytics size={ is } className="me-3" />
+  // },
   {
-    path: '/analysis',
-    itemname: "Analysis",
-    itemicon: <TbDeviceAnalytics size={ is } className="me-3" />
-  }, {
 
     path: '/chats/admin',
     itemname: "Chats",
@@ -61,11 +62,12 @@ export const SuperNavItems = [ {
     itemname: 'DashBoard',
     itemicon: <FaTachometerAlt size={is} className='me-3' />
   },
-  {
-    path: '/analysis',
-    itemname: 'Analysis',
-    itemicon: <TbDeviceAnalytics size={is} className='me-3' />
-  },
+  // {
+  //   path: '/analysis',
+  //   itemname: 'Analysis',
+  //   itemicon: <TbDeviceAnalytics size={is} className='me-3' />
+  //   }
+   // ,
   {
     path: '/chats/normal',
     itemname: 'Chats',

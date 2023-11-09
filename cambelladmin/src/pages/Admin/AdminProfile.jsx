@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   MDBCol,
   MDBContainer,
@@ -10,10 +10,13 @@ import {
   MDBBtn,
   MDBTypography
 } from 'mdb-react-ui-kit'
+import {DeleteBox} from '../../component/Admin'
 import { Link, useLoaderData } from 'react-router-dom'
 import { BsShieldLockFill } from 'react-icons/bs';
+import Table from 'react-data-table-component';
 export default function AdminProfile ()
 {
+  const [activity,setActivity]=useState([])
   const profiledata = useLoaderData()
   const { firstname, lastname, username, isSuper, email, mobile, address,discription,aid
  } = profiledata;
@@ -129,12 +132,12 @@ adminprofile-header_userdetails">
 
                   </div>
                   <div className='w-100 d-flex justify-content-end'>
-                      <MDBBtn color='danger'>Delete Account</MDBBtn>
+                      <DeleteBox aid={aid} username={username} color='danger' html='Delete Account'/>
 
                   </div>
 
                 </div>
-                {/* <div className='d-flex justify-content-between align-items-center mb-4'>
+                <div className='d-flex justify-content-between align-items-center mb-4'>
                   <MDBCardText className='lead fw-normal mb-0'>
                     Recent Activities
                   </MDBCardText>
@@ -143,39 +146,25 @@ adminprofile-header_userdetails">
                       Show all
                     </a>
                   </MDBCardText>
-                </div> */}
-                {/* <MDBRow>
-                  <MDBCol className='mb-2'>
-                    <MDBCardImage
-                      src='https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp'
-                      alt='image 1'
-                      className='w-100 rounded-3'
-                    />
-                  </MDBCol>
-                  <MDBCol className='mb-2'>
-                    <MDBCardImage
-                      src='https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp'
-                      alt='image 1'
-                      className='w-100 rounded-3'
-                    />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow className='g-2'>
-                  <MDBCol className='mb-2'>
-                    <MDBCardImage
-                      src='https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp'
-                      alt='image 1'
-                      className='w-100 rounded-3'
-                    />
-                  </MDBCol>
-                  <MDBCol className='mb-2'>
-                    <MDBCardImage
-                      src='https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp'
-                      alt='image 1'
-                      className='w-100 rounded-3'
-                    />
-                  </MDBCol>
-                </MDBRow> */}
+                </div>
+                <Table
+                  columns={[
+                    {
+name: 'Activity',
+selector:row=>row.activity
+                    }, {
+                      name: 'Date',
+                      selector: row => row.dateTime,
+                      sortable:true
+                    }, {
+                      name: 'otherAction',
+                      selector:row=>row.other
+                    }
+                  ]}
+                  pagination={true}
+                  paginationPerPage={8}
+                  data={activity}
+                />
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

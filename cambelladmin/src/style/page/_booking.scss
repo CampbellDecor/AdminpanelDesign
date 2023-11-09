@@ -1,19 +1,41 @@
-.booking{
-    .sheduler{
-             .simple-calender{
-        border-radius: 6px;
-        .simple-calender--tile{
-            height: 110px;
-            font-size: 20px;
-          .event-count{
-              height: min-content;
-              &--num{
-                padding: 1px 3px;
-                font-size: 10px;
-                font-weight: 300;
+.booking {
+  .sheduler {
+    .simple-calender {
+      border-radius: 6px;
+
+      .simple-calender--tile {
+        height   : 110px;
+        font-size: 20px;
+
+        .events {
+          height   : min-content;
+          display  : flex;
+          flex-wrap: wrap;
+
+          &-set {
+            display:flex;
+            flex-wrap: wrap;
+            &_one {
+              padding: 10px;
+
+              &--name {
+                font-size: 12px;
+                padding: 5px;
               }
+
+
+
+            }
           }
+
         }
+      }
     }
+  }
 }
+
+.addtododatepicker {
+  border-radius: 20px;
+  outline      : none;
+  border       : none;
 }

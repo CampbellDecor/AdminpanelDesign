@@ -1,56 +1,64 @@
-import axios from 'axios';
-export async function ProfileLoader ({ params })
-{
-    try {
-const aid = params.aid === 'self' ? 'self' : params.aid
-        const admin = await axios.get('/api/admin/' + aid);
-        return admin.data;
-    } catch (error) {
-        console.error(error);
-    }
+import axios from 'axios'
+export async function ProfileLoader ({ params }) {
+  try {
+    const aid = params.aid === 'self' ? 'self' : params.aid
+    const admin = await axios.get('/api/admin/' + aid)
+    return admin.data
+  } catch (error) {
+    console.error(error)
+  }
 }
-export async function editAdminLoader ({params})
-{
-try {
+export async function editAdminLoader ({ params }) {
+  try {
     const admin = await axios.get('/api/admin/' + params.aid)
-    return admin.data;
-} catch (error) {
-console.error(error);
+    return admin.data
+  } catch (error) {
+    console.error(error)
+  }
 }
-
-
-}
-export async function addAdminLoader ({ params })
-{
-return null;
+export async function addAdminLoader ({ params }) {
+  return null
 }
 export async function adduserLoader ({ parmas }) {
   return null
 }
-export async function edituserLoader ({ params })
-{
-    const uid = params.uid;
-    const user = await axios.get('/api/user/'+uid);
-    return user.data;
+export async function edituserLoader ({ params }) {
+  const uid = params.uid
+  const user = await axios.get('/api/user/' + uid)
+  return user.data
 }
 
-
-
-export async function adminchatList ()
-{
-    try {
-        const chat = await axios.get('/api/adminchat');
-        return chat.data;
-    } catch (error) {
-        throw error;
-    }
-}
-export async function normalchatList () {
-    try
-    {
-        const chat = await axios.get('/api/userchat');
+export async function adminchatList () {
+  try {
+    const chat = await axios.get('/api/adminchat')
     return chat.data
   } catch (error) {
     throw error
+  }
+}
+export async function normalchatList () {
+  try {
+    const chat = await axios.get('/api/userchat')
+    return chat.data
+  } catch (error) {
+    throw error
+  }
+}
+export async function bookings () {
+  try {
+    const booking = await axios.get('/api/booking/all')
+    return booking.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export async function UserLoader ({ params }) {
+  try {
+    const uid = params=params.uid
+    const user= await axios.get('/api/user/' + uid)
+    return user.data
+  } catch (error) {
+    console.error(error)
   }
 }

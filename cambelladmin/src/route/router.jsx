@@ -13,6 +13,7 @@ import OperateAdmin from '../pages/Admin/OperateAdmins'
 import AdminProfile from '../pages/Admin/AdminProfile'
 //User
 import Users from '../pages/Users/Users'
+import UserProfile from '../pages/Users/UserProfile'
 import AddUser from '../pages/Users/AddUser'
 //Auth
 import Login from '../pages/Login'
@@ -42,7 +43,8 @@ import {
   editAdminLoader,
   adminchatList,
   adduserLoader,
-  edituserLoader,normalchatList
+  edituserLoader, normalchatList, bookings,
+  UserLoader
 } from '../function/RouteFunLoader'
 const router = createBrowserRouter([
   {
@@ -96,7 +98,8 @@ const router = createBrowserRouter([
       {
         //Bookings
         path: '/booking',
-        element: <Bookings />
+        element: <Bookings />,
+        loader:bookings
       },
       {
         element: <InnerLayout />,
@@ -124,6 +127,11 @@ const router = createBrowserRouter([
             path: '/service/add',
             element: <AddService />
           },
+{
+            //service edit
+            path: '/service/edit',
+            element: <AddService />
+          },
           {
             //event add
             path: '/event/add',
@@ -147,6 +155,10 @@ const router = createBrowserRouter([
           }, {
             path: "/booking/:bookcode",
             element:<OneBooking/>
+          }, {
+            path: "/user/profile/:uid",
+            element: <UserProfile />,
+            loader:UserLoader
           }
         ]
       }

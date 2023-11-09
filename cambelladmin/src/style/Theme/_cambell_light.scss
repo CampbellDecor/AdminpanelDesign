@@ -71,4 +71,9 @@
 
 }
 @include Footer;
- @include BookingCalender
+ @include BookingCalender;
+.Onebook{
+  .todo{
+    border-radius: 75rem;
+  }
+}

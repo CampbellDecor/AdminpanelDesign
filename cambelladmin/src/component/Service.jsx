@@ -3,7 +3,10 @@ import React from "react";
 import { MDBImageComponent } from "./Util/CardImg";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
-export function ServiceRow ( { servicecode,intro, image, servicename, rating=2, numberofBooking=0,Culture=["common"],description,price=0.00,Prioed,subTotal=0,relatedevent=0} ) {
+export function ServiceRow ({ servicecode, intro, url, servicename, rating = 2, numberofBooking = Math.floor(Math.random() * 10), Culture = ["common"], description, price = 0.00, period, subTotal = 0, relatedEvents = 0 })
+{
+
+
     return (
       <MDBRow className="justify-content-center mb-0 w-100" key={servicecode}>
         <MDBCol sm="10" md="11" lg="12">
@@ -16,7 +19,7 @@ export function ServiceRow ( { servicecode,intro, image, servicename, rating=2, 
                     rippleTag="div"
                     className="bg-image rounded hover-zoom hover-overlay"
                   >
-                    <MDBImageComponent src={image} className="w-100" fluid />
+                    <MDBImageComponent src={url} className="w-100" fluid />
                     <a href="#!">
                       <div
                         className="mask"
@@ -37,18 +40,18 @@ export function ServiceRow ( { servicecode,intro, image, servicename, rating=2, 
                                         value={rating}
                         size={ 25 }
                         half={true}
-                                      
+
       activeColor="#ffd700"
     />
                     </div>
-          
+
                                     <span>{rating} </span>
                   </div>
                   <div className="mt-1 mb-0 text-muted small">
                                     <span>{10}</span>
                     <span className="text-primary"> • </span>
                     <span>
-                    <Link className="text-muted text-decoration-none" to={ "" }>{numberofBooking} Events</Link>
+                    <Link className="text-muted text-decoration-none" to={ "" }>{relatedEvents} Events</Link>
                                     </span>
                     <span className="text-primary"> • </span>
                     <span>
@@ -61,7 +64,7 @@ export function ServiceRow ( { servicecode,intro, image, servicename, rating=2, 
                       <span>{ cul}</span>
                     <span className="text-primary"> • </span>
                     </> ) ) }
-                  
+
                   </div>
                   <p className="text-truncate mb-4 mb-md-0">
                     {description}
@@ -75,7 +78,7 @@ export function ServiceRow ( { servicecode,intro, image, servicename, rating=2, 
                   <div className="d-flex flex-row align-items-center mb-1">
                                     <h4 className="mb-1 me-1">${ price}</h4>
                     <span className="text-danger">
-                                        <s>{ Prioed}</s>
+                                        <s>{ period}</s>
                     </span>
                   </div>
                                 <h6 className="text-success">Earning:{ subTotal}</h6>
@@ -95,4 +98,3 @@ export function ServiceRow ( { servicecode,intro, image, servicename, rating=2, 
       </MDBRow>
     );
   }
-  

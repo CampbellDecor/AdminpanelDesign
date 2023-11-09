@@ -3,6 +3,8 @@
 @import url('../../node_modules/react-phone-number-input/style.css');
 @import url("../../node_modules/react-quill/dist/quill.snow.css");
 @import url("../../node_modules/sweetalert2/dist/sweetalert2.min.css");
+@import url("../../node_modules/react-date-picker/dist/DatePicker.css");
+@import url("../../node_modules/animate.css");
 //Side bar Split btn
 .sidebar-toggole {
   @include fixedbtn(expandSidebar("splitbtn"), 25px, 10000);

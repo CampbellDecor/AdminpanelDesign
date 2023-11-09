@@ -3,6 +3,19 @@
         background-position: center;
         background-size: cover;
         height: 200px;
+        position: relative;
+        &-blockbage{
+            position: absolute;
+            right: 30px;
+            top:40px;
+                h6{
+                    position: absolute;
+                    transform: rotate(45deg);
+                    top:70px;
+                    left:51px;
+                }
+
+        }
         &_user{
             height: 150px;
             div{

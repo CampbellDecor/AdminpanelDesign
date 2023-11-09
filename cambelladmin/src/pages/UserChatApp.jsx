@@ -11,18 +11,13 @@ import Chatting, { ChatPanel } from '../component/ChatComponent';
 import SearchOption from '../component/Util/SearchPanel';
 import { useLoaderData } from 'react-router-dom';
 import { Chatuser } from '../component/Chats';
-import {UseuserChatContext} from '../contexts/ChatContext'
 export default function ChatApp ()
 {
-  const {setSender } = UseuserChatContext();
+
   const loader = useLoaderData();
 
 
-  useEffect(() =>
-  {
 
-    setSender(loader[0].id);
-},[])
   return (
     <section className='vh-100 mt-0'>
       <Container className='py-3 h-100 mt-0'>
