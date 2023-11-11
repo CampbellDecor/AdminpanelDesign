@@ -9,14 +9,20 @@ import
   } from 'react-bootstrap';
 import Chatting from '../component/ChatComponent';
 import SearchOption from '../component/Util/SearchPanel';
-import { useLoaderData } from 'react-router-dom';
-import { Chatuser } from '../component/Chats';
+import { useUserChatStore } from '../redux/ChatStore';
+import { Chatuser,Message,Reply } from '../component/Chats';
 export default function ChatApp ()
 {
 
-  const loader = useLoaderData();
-
-
+  const {
+    getUserChatList, UserChatDispatcher, userChatList,userChatsall
+  }
+    = useUserChatStore();
+  const { chatslist } = userChatList;
+  const { chats } = userChatsall;
+useEffect(()=>{
+  UserChatDispatcher(getUserChatList());
+},[UserChatDispatcher,getUserChatList])
 
   return (
     <section className='vh-100 mt-0'>
@@ -36,15 +42,22 @@ export default function ChatApp ()
                       <SearchOption />
                       <div className='userlist'>
                         <ul className='list-unstyled h-100'>
-                          {loader?.map(chat => (<Chatuser {...chat}/>))}
+                          {chatslist?.map(chat => (<Chatuser {...chat} isAdmin={ false} />))}
                         </ul>
                       </div>
 
                     </div>
                   </Col>
                   <div className='col-md-6 col-lg-7 col-xl-8 position-relative chatting'>
-             ///sdfsdfsdfsddfdgfgfd
-                    <Chatting />
+             <div className='pt-3 pe-3 h-100' data-mdb-perfect-scrollbar='true'>
+  {chats?.length > 0 &&
+    chats.map(ele =>
+      ele.type === 'sent' ? <Message {...ele} /> : <Reply {...ele} />
+    )}
+</div>
+
+                    <Chatting isAdmin={false} aid={chats?.length > 0 ? chats[0].uid : 0} userdata={chats?.length > 0 ? chats[0].username :""
+} />
                   </div>
                 </Row>
               </CardBody>

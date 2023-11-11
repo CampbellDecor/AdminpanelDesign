@@ -2,7 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const getUserChatList = createAsyncThunk('usechat/getChat', async () => {
-  const response = await axios.get('http://localhost:5000/api/userchat')
+  const response = await axios.get('/api/userchat')
     return response.data
 
+})
+export const getuChats = createAsyncThunk("userchat/one", async (uid) =>
+{
+  const response = await axios.get("/api/userchat/"+uid)
+  return response.data;
 })

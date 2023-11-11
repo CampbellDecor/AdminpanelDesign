@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAdminChatStore } from '../redux/AdminChatStore';
+import { useUserChatStore } from '../redux/ChatStore';
 import {useUserContext} from '../contexts/UserContext'
+
 export function Chatuser ({
   id,
   profile,
@@ -10,20 +12,27 @@ export function Chatuser ({
   type,
   isOnline,
   unread,
-  onClick
+  onClick,
+  isAdmin=true
 })
 {
-
   const { adminChatDispatcher,getachat} = useAdminChatStore();
+  const {getuChats
+} = useUserChatStore();
   const onHandleChange =e =>
     {
     e.preventDefault();
     adminChatDispatcher(getachat(id));
   }
+  const onHandleUserChange =e =>
+    {
+    e.preventDefault();
+    adminChatDispatcher(getuChats(id));
+  }
 
   return (
     <li className='p-2 border-bottom useitem' key={id} >
-      <Link className='d-flex justify-content-between' as='button' onClick={onHandleChange}>
+      <Link className='d-flex justify-content-between' as='button' onClick={isAdmin?onHandleChange:onHandleUserChange}>
         <div className='d-flex flex-row'>
           <div className='position-relative'>
             <img
@@ -34,7 +43,7 @@ export function Chatuser ({
 
             />
             <img
-              src={profile}
+              src={profile??"https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="}
               alt='avatar'
               className='d-flex d-block d-lg-none align-self-center me-3'
               width={40}
@@ -63,13 +72,13 @@ export function Chatuser ({
   );
 }
 
-export function Message ({ chatid, profile,message, dateTime, status })
+export function Message ({ chatid, profile,message, time, status })
 {
 
   return (
     <div className='d-flex flex-row justify-content-start' key={chatid}>
       <img
-        src={profile}
+        src={profile??"https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="}
         alt='avatar 1'
         style={{ width: '45px', height: '100%' }}
       />
@@ -81,7 +90,7 @@ export function Message ({ chatid, profile,message, dateTime, status })
           {message}
         </p>
         <p className='small ms-3 mb-3 rounded-3 text-muted float-end'>
-          {dateTime?.substring(0,7)} | {dateTime?.substring(dateTime.indexOf('T')+1,dateTime?.lastIndexOf(':'))}
+          {time}
         </p>
       </div>
     </div>
@@ -99,11 +108,11 @@ export function Reply ({ chatid, message,time,date })
           {message}
         </p>
         <p className='small me-3 mb-3 rounded-3 text-muted'>
-          {time.substring(0,time.indexOf("GMT"))}
+          {time}
         </p>
       </div>
       <img
-        src={currentuser.profile}
+        src={currentuser?.profile??"https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="}
         alt='avatar 1'
         style={{ width: '45px', height: '100%' }}
       />

@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 import {addCookie,delteCookie,getCookie,isexist} from './CookieHandler'
 import { createStorageSession,deleteStorageSession} from './SessionStorage';
-
+import Swal  from 'sweetalert2'
 
 export default async function Authentication (user)
 {
@@ -28,7 +28,17 @@ export default async function Authentication (user)
 
         createStorageSession('current',User.user);
         return User;
-    } catch (error) {
+    } catch (error)
+    {
+        if (error.code===`auth/user-disabled`)
+        {
+           Swal.fire({
+  title: 'Account locked',
+  text: `Sorry! ,${user?.email} is Locked please contact with High Authority`,
+  icon: 'error'
+})
+
+        }
        throw error;
     }
 }
@@ -65,7 +75,9 @@ export async function ResetPasswordApi(email) {
     try
     {
         await sendPasswordResetEmail(auth, email);
-    } catch (error) {
+    } catch (error)
+    {
+        console.log(error)
         throw error;
     }
 

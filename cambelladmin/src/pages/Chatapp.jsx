@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
-import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
+import { Container, Row, Col, Card, CardBody } from 'react-bootstrap';
 
-import Chatting from '../component/ChatComponent'
-import SearchOption from '../component/Util/SearchPanel'
-import { Chatuser, Message, Reply } from '../component/Chats'
-import { useAdminChatStore } from '../redux/AdminChatStore'
+import Chatting from '../component/ChatComponent';
+import SearchOption from '../component/Util/SearchPanel';
+import { Chatuser, Message, Reply } from '../component/Chats';
+import { useAdminChatStore } from '../redux/AdminChatStore';
 export default function ChatApp ()
 {
 
@@ -13,9 +13,10 @@ export default function ChatApp ()
 
   const { chatlist } = adminchatlist;
   const { chats } = admichats;
-  useEffect(() => {
+  useEffect(() =>
+  {
     adminChatDispatcher(getadminchatList());
-  }, [adminChatDispatcher])
+  }, [adminChatDispatcher]);
 
   return (
     <section className='vh-100'>
@@ -35,8 +36,8 @@ export default function ChatApp ()
                       <SearchOption />
                       <div className='userlist'>
                         <ul className='list-unstyled h-100'>
-                          {chatlist.length>0 &&
-                            chatlist?.map(chat => <Chatuser {...chat} id={chat?.aid}/>)}
+                          {chatlist.length > 0 &&
+                            chatlist?.map(chat => <Chatuser {...chat} id={chat?.aid} />)}
                         </ul>
                       </div>
                     </div>
@@ -47,18 +48,18 @@ export default function ChatApp ()
                       data-mdb-perfect-scrollbar='true'
                     >
                       {chats
-?.length > 0 &&
+                        ?.length > 0 &&
                         chats
-.map(ele =>
-                          ele.type === 'sent' ? (
-                            <Message {...ele} />
-                          ) : (
-                            <Reply {...ele} />
-                          )
-                        )}
+                          .map(ele =>
+                            ele.type === 'sent' ? (
+                              <Message {...ele} />
+                            ) : (
+                              <Reply {...ele} />
+                            )
+                          )}
                     </div>
 
-                    <Chatting isAdmin={true} aid={chats?.length>0?chats[0].aid:0}/>
+                    <Chatting isAdmin={true} aid={chats?.length > 0 ? chats[0].aid : 0} />
                   </div>
                 </Row>
               </CardBody>
@@ -67,5 +68,5 @@ export default function ChatApp ()
         </Row>
       </Container>
     </section>
-  )
+  );
 }

@@ -66,18 +66,22 @@ const { setCurrentUser,setisSuper } = useUserContext()
     {
       setloading(true);
       const login = await Authuntication(loginUser);
+      setloading(false);
       setCurrentUser(login.user)
       setisSuper(login.user?.isSuper ?? false);
-      setloading(false);
+
       if (login.login)
       {
         setLogin(true)
+
         toast.success("Login Successfully.")
         Remeberme(loginUser, rememberme);
       navigate('/home')
       } else
       {
         setloading(false);
+        setloading(false)
+
         Dispatcher({ type: 'AUTHERROR' })
         toast.error("login failed !")
       }
@@ -85,6 +89,7 @@ const { setCurrentUser,setisSuper } = useUserContext()
     } catch (error)
     {
       setLogin(false)
+      setloading(false)
       Dispatcher({ type: 'ERROR' })
       toast.error('login failed !')
       console.error(error);

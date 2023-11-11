@@ -42,7 +42,7 @@ import {
   addAdminLoader,
   editAdminLoader,
   adduserLoader,
-  edituserLoader, normalchatList, bookings,
+  edituserLoader,  bookings,
   UserLoader,
   OneBookloads
 } from '../function/RouteFunLoader'
@@ -65,8 +65,7 @@ const router = createBrowserRouter([
       {
         //normal adminchat
         path: 'chats/normal',
-        element: <NormalChatapp />,
-        loader:normalchatList
+        element: <NormalChatapp />
 
       },
       {

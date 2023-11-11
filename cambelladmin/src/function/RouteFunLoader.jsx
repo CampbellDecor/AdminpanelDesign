@@ -29,14 +29,7 @@ export async function edituserLoader ({ params }) {
 }
 
 
-export async function normalchatList () {
-  try {
-    const chat = await axios.get('/api/userchat')
-    return chat.data
-  } catch (error) {
-    throw error
-  }
-}
+
 export async function bookings () {
   try {
     const booking = await axios.get('/api/booking/all')
