@@ -6,7 +6,8 @@ export function Chatuser ({
   id,
   profile,
   username,
-  lastchat,
+  message,
+  type,
   isOnline,
   unread,
   onClick
@@ -46,11 +47,11 @@ export function Chatuser ({
           </div>
           <div className='pt-1'>
             <p className='fw-bold mb-0'>{username}</p>
-            <p className='small text-muted'>{lastchat?.message}</p>
+            <p className='small text-muted'>{message}</p>
           </div>
         </div>
         <div className='pt-1'>
-          <p className='small text-muted mb-1'>{lastchat?.dateTime}</p>
+          <p className='small text-muted mb-1'>{""}</p>
           {unread > 0 && (
             <span className='badge bg-danger rounded-pill float-end'>
               {unread}
