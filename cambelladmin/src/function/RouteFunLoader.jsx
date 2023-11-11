@@ -28,14 +28,7 @@ export async function edituserLoader ({ params }) {
   return user.data
 }
 
-export async function adminchatList () {
-  try {
-    const chat = await axios.get('/api/adminchat')
-    return chat.data
-  } catch (error) {
-    throw error
-  }
-}
+
 export async function normalchatList () {
   try {
     const chat = await axios.get('/api/userchat')
@@ -60,5 +53,15 @@ export async function UserLoader ({ params }) {
     return user.data
   } catch (error) {
     console.error(error)
+  }
+}
+
+export async function OneBookloads ({ params })
+{
+  try {
+    const response = await axios.get('/api/booking/one/'+params.bookcode);
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
 }

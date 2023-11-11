@@ -22,7 +22,8 @@ import {
   BiSolidEditLocation,
   BiUpload
 } from 'react-icons/bi'
-import { MdAdminPanelSettings } from 'react-icons/md'
+import { MdAdminPanelSettings,MdOutlinePassword
+ } from 'react-icons/md'
 import { AvatarGenerator } from 'random-avatar-generator'
 import PhoneInput from 'react-phone-number-input'
 import { useNavigate, useLoaderData, useParams } from 'react-router-dom'
@@ -74,21 +75,17 @@ export default function Opreateadmin ()
     e.preventDefault()
     try {
       if (progrss < 1 || progrss === 100) {
-          const response = await axios.put('/api/admin/', {admin
+          const response = await axios.put('/api/admin/', {...admin,aid:adminid.aid
           });
-          if (response.ok)
-          {
-         navigate('/admins/profile'+response.data)
+         navigate('/admins/profile/'+response.data)
           toast.success('ScussFully Edited')
-
-        } else {
-          toast.error('Editing Failed')
-        }
       } else {
         toast.warning('profile not uploaded')
       }
     } catch (error)
     {
+      toast.error(error?.code);
+
         console.error(error);
     }
   }
@@ -192,7 +189,7 @@ export default function Opreateadmin ()
                   </div>
                 </Stack>
               </Card.Text>
-              <Button variant='primary'>Go somewhere</Button>
+              <Button variant='info' as='a' href='/resetpw'><MdOutlinePassword size={29}/></Button>
             </Card.Body>
           </Card>
         </Col>

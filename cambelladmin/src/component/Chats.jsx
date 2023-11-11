@@ -1,22 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useUserContext } from '../contexts/UserContext';
-
+import { useAdminChatStore } from '../redux/AdminChatStore';
+import {useUserContext} from '../contexts/UserContext'
 export function Chatuser ({
   id,
   profile,
   username,
   lastchat,
   isOnline,
-  unread
-
+  unread,
+  onClick
 })
 {
 
-
+  const { adminChatDispatcher,getachat} = useAdminChatStore();
   const onHandleChange =e =>
     {
     e.preventDefault();
+    adminChatDispatcher(getachat(id));
   }
 
   return (
@@ -86,21 +87,19 @@ export function Message ({ chatid, profile,message, dateTime, status })
   );
 }
 
-export function Reply ({ chatid, message, dateTime,status })
+export function Reply ({ chatid, message,time,date })
 {
   const { currentuser } = useUserContext()
 
   return (
-    <div className='d-flex flex-row justify-content-end' key={chatid}>
+    <div className='d-flex flex-row justify-content-end p-1' key={chatid}>
       <div className='position-relative'>
         <p className='small p-2 me-3 mb-1 text-white rounded-3 bg-primary'>
           {message}
         </p>
         <p className='small me-3 mb-3 rounded-3 text-muted'>
-          {dateTime?.substring(0,7)} | {dateTime?.substring(dateTime.indexOf('T')+1,dateTime?.lastIndexOf(':'))}
+          {time.substring(0,time.indexOf("GMT"))}
         </p>
-        <i className='fa-solid fa-pen text-white-50 position-absolute editcon'></i>
-        <i className='fa-solid fa-trash text-white-50 position-absolute deleteicon'></i>
       </div>
       <img
         src={currentuser.profile}

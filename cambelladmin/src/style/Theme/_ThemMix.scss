@@ -197,3 +197,66 @@ background-color: var.color($theme, "secoundary") !important;
       }
 }
 }}
+@mixin OneBooking($theme:"light"){
+.Onebook {
+  .todo {
+    border-radius: 75rem;
+  }
+
+  .bookEvent {
+    .simple-calender {
+  .icon {
+    color: var.color($theme, "textsecound");
+  }
+
+  .react-calendar__navigation button {
+    &:enabled {
+
+      &:hover,
+      :focus {
+        background-color: var.color($theme, "forth");
+      }
+    }
+  }
+
+  .react-calendar__tile {
+    &:enabled {
+
+      &:focus,
+      &:hover {
+        background-color: var.color($theme, "forth");
+      }
+    }
+
+    &--now {
+      background-color: var.color($theme, "tertery");
+      color           : var.color($theme, "textprim");
+      border-radius   : 3px;
+
+      &:enabled {
+
+        &:hover,
+        &:focus {
+          background-color: var.color($theme, "primary");
+          font-weight     : 600;
+        }
+      }
+    }
+  }
+}
+
+.react-calendar__month-view__weekdays {
+  background-color: var.color($theme, "secoundary");
+  color           : var.color($theme, "w");
+}
+
+.simple-calender--tile {
+  .events {
+    &-set {
+      &_one {}
+    }
+  }
+}
+}
+  }
+}

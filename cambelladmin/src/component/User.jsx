@@ -23,8 +23,8 @@ export function UserRows ({
 
   }
   return (
-    <tr onClick={onClickEvent}>
-      <td>
+    <tr >
+      <td onClick = { onClickEvent }>
         <div className='d-flex align-items-center'>
           <img
             src={profile}
@@ -38,11 +38,11 @@ export function UserRows ({
           </div>
         </div>
       </td>
-      <td>
+      <td onClick = { onClickEvent }>
         <p className='fw-normal mb-1'>{religion}</p>
         <p className='text-muted mb-0'>{mobile}</p>
       </td>
-      <td>
+      <td onClick = { onClickEvent }>
         {isBlock ? (
           <MDBBadge color='danger' pill>
             Blocked/{isOnline ? 'Online' : 'Offline'}

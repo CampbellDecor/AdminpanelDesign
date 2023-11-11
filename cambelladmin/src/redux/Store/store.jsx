@@ -8,6 +8,7 @@ import Service from "../Slice/ServiceSlice.jsx";
 import Religion from "../Slice/ReligionSlice.jsx";
 import adminChatlist from '../Slice/AdminChatListSlice.jsx';
 import userchatlist from '../Slice/NormalChatlistSlice.jsx';
+import adminchats from '../Slice/AdminChats.jsx'
 export const Store = configureStore({
     reducer: {
         "user": User,
@@ -16,6 +17,7 @@ export const Store = configureStore({
         "service": Service,
         "religion": Religion,
         "adminchatlist": adminChatlist,
+        "adminchats":adminchats,
         'userchatlist':userchatlist
     }
 });

@@ -7,7 +7,7 @@ import
     Card,
     CardBody
   } from 'react-bootstrap';
-import Chatting, { ChatPanel } from '../component/ChatComponent';
+import Chatting from '../component/ChatComponent';
 import SearchOption from '../component/Util/SearchPanel';
 import { useLoaderData } from 'react-router-dom';
 import { Chatuser } from '../component/Chats';
@@ -43,7 +43,7 @@ export default function ChatApp ()
                     </div>
                   </Col>
                   <div className='col-md-6 col-lg-7 col-xl-8 position-relative chatting'>
-                    <ChatPanel />
+             ///sdfsdfsdfsddfdgfgfd
                     <Chatting />
                   </div>
                 </Row>

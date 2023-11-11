@@ -44,7 +44,7 @@ export function Layout ()
         toast.warn('Session Timeout');
         navigate('/');
       }
-    }, 1000 * 60 * 60);
+    }, 1000 *60);
 
   }, [setLogin]);
   return !islogin ? (

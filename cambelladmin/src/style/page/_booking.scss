@@ -15,12 +15,16 @@
           &-set {
             display:flex;
             flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
             &_one {
-              padding: 10px;
+              padding: 5px;
 
               &--name {
                 font-size: 12px;
-                padding: 5px;
+                padding: 10px;
+                font-weight: 600;
+                text-decoration: none;
               }
 
 
@@ -39,3 +43,13 @@
   outline      : none;
   border       : none;
 }
+.Onebook {
+  .todo {
+    border-radius: 75rem;
+  }
+
+  .bookEvent {
+    .simple-calender {
+
+      
+    }}}

@@ -252,7 +252,9 @@ export function UnBlocked ({ aid, profile, username }) {
   )
 }
 
-export function DeleteBox ({ aid, username,html,color }) {
+export function DeleteBox ({ aid, username, html, color })
+{
+  const navigate = useNavigate();
   const deleteAction = useCallback(async () => {
     const result = await Swal.fire({
       title: 'Are you sure?',
@@ -265,13 +267,24 @@ export function DeleteBox ({ aid, username,html,color }) {
     })
     if (result.isConfirmed) {
       const admin = await axios.delete('/api/admin/' + aid)
-      if (admin.ok) {
+      if (admin)
+      {
+
         Swal.fire({
           title: 'Deleted!',
           text: 'Your file has been deleted.',
           icon: 'success',
-          timer: 2000
         })
+        navigate("/admins")
+
+      } else
+      {
+Swal.fire({
+  title: 'failed!',
+  text: 'You Haven"t delete',
+  icon: 'error',
+})
+
       }
     }
   }, [])

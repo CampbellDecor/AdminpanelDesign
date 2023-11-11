@@ -21,9 +21,8 @@ export default async function Authentication (user)
             user.email,
             user.password
         )
-        const exp = 1 / 24;
         const token = await getIdToken(loguser.user);
-        addCookie('access_token', token,exp, '/');
+        addCookie('access_token', token,1000*60, '/');
         const response = await axios.get('/api/admin/login');
         const User = response.data;
 

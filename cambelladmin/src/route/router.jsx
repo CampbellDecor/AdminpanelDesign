@@ -41,10 +41,10 @@ import {
   ProfileLoader,
   addAdminLoader,
   editAdminLoader,
-  adminchatList,
   adduserLoader,
   edituserLoader, normalchatList, bookings,
-  UserLoader
+  UserLoader,
+  OneBookloads
 } from '../function/RouteFunLoader'
 const router = createBrowserRouter([
   {
@@ -60,8 +60,7 @@ const router = createBrowserRouter([
       {
         //superadminchat
         path: '/chats/admin',
-        element: <Chatapp />,
-        loader: adminchatList
+        element: <Chatapp />
       },
       {
         //normal adminchat
@@ -154,7 +153,9 @@ const router = createBrowserRouter([
             element: <AddPackage />
           }, {
             path: "/booking/:bookcode",
-            element:<OneBooking/>
+            element: <OneBooking />,
+            loader:OneBookloads
+
           }, {
             path: "/user/profile/:uid",
             element: <UserProfile />,
