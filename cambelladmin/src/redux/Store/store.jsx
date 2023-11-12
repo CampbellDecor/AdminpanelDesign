@@ -8,6 +8,8 @@ import adminChatlist from '../Slice/AdminChatListSlice.jsx'
 import userchatlist from '../Slice/NormalChatlistSlice.jsx'
 import adminchats from '../Slice/AdminChats'
 import userchats from '../Slice/UserChats'
+import Events from '../Slice/EventsSlice'
+import Packages from '../Slice/Packages.jsx'
 export const Store = configureStore({
   reducer: {
     user: User,
@@ -18,6 +20,8 @@ export const Store = configureStore({
     adminchatlist: adminChatlist,
     adminchats: adminchats,
     userchatlist: userchatlist,
-    userChats: userchats
+    userChats: userchats,
+    events: Events,
+    packs:Packages
   }
 })

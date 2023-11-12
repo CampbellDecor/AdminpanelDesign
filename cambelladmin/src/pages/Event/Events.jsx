@@ -1,49 +1,30 @@
-import React from 'react'
-import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdb-react-ui-kit'
-import { Link } from 'react-router-dom'
-import { Image } from 'react-bootstrap'
-import { MdAdd } from 'react-icons/md'
-import { EventRow } from '../../component/Event'
-import { events } from '../../store/FakeData'
-export default function Events () {
+import React, { useEffect } from 'react'
+import {
+  MDBContainer,
+  MDBRow
+} from 'mdb-react-ui-kit'
+import {useEventStore} from '../../redux/EventStore'
+import Event from '../../component/Event'
+export default function Events ()
+{
+  const { getEvents, EventDispatcher, EventData
+
+  } = useEventStore();
+  const {events } = EventData;
+  useEffect(() =>
+  {
+    EventDispatcher(getEvents());
+  },[EventDispatcher,getEvents])
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid className='my-5 text-center min-vh-100'>
+      <h4 className='mt-4 mb-5'>
+        <strong>Campbell Decor Events</strong>
+      </h4>
+
       <MDBRow>
-        <MDBCol>
-          <MDBBtn>
-            fgdgfdgfdgd
-        </MDBBtn>
-        </MDBCol>
-      </MDBRow>
-      <MDBRow className='w-100'>
-        <MDBCol md='7' lg='9'>
-          {events.map(e => (
-            <EventRow {...e} />
-          ))}
-        </MDBCol>
 
-        <MDBCol md='5' lg='3'>
-          <OneService />
-        </MDBCol>
+        {events && events.map((ev,index) => <Event {...ev} index={index} />)}
       </MDBRow>
-      <Link>
-        <MdAdd />
-      </Link>
     </MDBContainer>
-  )
-}
-
-function OneService () {
-  return (
-    <MDBRow className='mt-3'>
-      <div className='sigleService d-flex d-lg-block w-100'>
-        <Image
-          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0XsUFZgRQYsDnY_vKWmTGBdmQmET-a6R35g&usqp=CAU'
-          className='w-100'
-        />
-        <div className='flex'></div>
-        <div></div>
-      </div>
-    </MDBRow>
   )
 }

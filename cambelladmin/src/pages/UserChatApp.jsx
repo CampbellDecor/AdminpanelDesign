@@ -49,7 +49,7 @@ useEffect(()=>{
                     </div>
                   </Col>
                   <div className='col-md-6 col-lg-7 col-xl-8 position-relative chatting'>
-             <div className='pt-3 pe-3 h-100' data-mdb-perfect-scrollbar='true'>
+             <div className='py-3 pe-3 h-100' data-mdb-perfect-scrollbar='true'>
   {chats?.length > 0 &&
     chats.map(ele =>
       ele.type === 'sent' ? <Message {...ele} /> : <Reply {...ele} />

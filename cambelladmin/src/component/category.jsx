@@ -7,9 +7,9 @@ export default function Categorey ({cid,imgURL,name,price,rating=0}){
 
     return(
 
-        <MDBCol sm="12" md="6" lg="4" className="mb-4 mb-lg-0">
+        <MDBCol sm="12" md="6" lg="4" className="mb-5 mb-lg-3">
           <MDBCard>
-           <MDBImageComponent src={imgURL}/>
+           <MDBImageComponent style={{height:"220px"}} src={imgURL}/>
             <MDBCardBody>
               <div className="d-flex justify-content-between">
                 <p className="small">

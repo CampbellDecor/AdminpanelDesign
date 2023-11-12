@@ -1,191 +1,56 @@
-import {
-  MDBBtn,
+import React from 'react'
+
+import
+  {
+  MDBCol,
   MDBCard,
   MDBCardBody,
-  MDBCol,
-  MDBRipple,
-  MDBRow
-} from "mdb-react-ui-kit";
-import React from "react";
-import { MDBImageComponent } from "./Util/CardImg";
-import ReactStars from "react-rating-stars-component";
-import logo from "../images/logo.png";
-export function Event ( { eventcode, image={logo}, name, rating=0, numberofBooking=0,Culture="common",description,Price=0,Prioed="unknown",subTotal=0,relatedServices=0,index} ) {
-  return (
-    <MDBRow className="justify-content-center mb-0" >
-      <MDBCol md="12" xl="10">
-        <MDBCard className="shadow-0 border rounded-3 mt-3 mb-3">
-          <MDBCardBody>
-            <MDBRow>
-              <MDBCol md="12" lg="3" className="mb-4 mb-lg-0">
-                <MDBRipple
-                  rippleColor="light"
-                  rippleTag="div"
-                  className="bg-image rounded hover-zoom hover-overlay"
-                >
-                  <MDBImageComponent src={image} className="w-100" fluid />
-                  <a href="#!">
-                    <div
-                      className="mask"
-                      style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-                    />
-                  </a>
-                </MDBRipple>
-              </MDBCol>
-              <MDBCol md="6">
-                <h5>
-                  {name}
-                </h5>
-                <div className="d-flex flex-row">
-                <ReactStars
-    count={5}
-                                      edit={ false }
-                                      value={rating}
-                                      size={ 24 }
-                                    
-    activeColor="#ffd700"
-  />
-                                  <span>{numberofBooking} </span>
-                </div>
-                <div className="mt-1 mb-0 text-muted small">
-                                  <span>{ Culture}</span>
-                  <span className="text-primary"> • </span>
-                                  <span>{ relatedServices} Services</span>
-                  <span className="text-primary"> • </span>
-                  <span>
-                    Best finish
-                    <br />
-                  </span>
-                </div>
-                <div className="mb-2 text-muted small">
-                  <span>Unique design</span>
-                  <span className="text-primary"> • </span>
-                  <span>For men</span>
-                  <span className="text-primary"> • </span>
-                  <span>
-                    Casual
-                    <br />
-                  </span>
-                </div>
-                <p className="text-truncate mb-4 mb-md-0">
-                  {description}
-                </p>
-              </MDBCol>
-              <MDBCol
-                md="6"
-                lg="3"
-                className="border-sm-start-none border-start"
-              >
-                <div className="d-flex flex-row align-items-center mb-1">
-                                  <h4 className="mb-1 me-1">${ Price}</h4>
-                  <span className="text-danger">
-                                      <s>{ Prioed}</s>
-                  </span>
-                </div>
-                              <h6 className="text-success">Earning:{ subTotal}</h6>
-                <div className="d-flex flex-column mt-4">
-                  <MDBBtn color="primary" size="sm">
-                    Details
-                  </MDBBtn>
-                  <MDBBtn outline color="primary" size="sm" className="mt-2">
-                    Edit
-                  </MDBBtn>
-                </div>
-              </MDBCol>
-            </MDBRow>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-    </MDBRow>
-  );
-}
+  MDBCardImage,
+  MDBRipple
+} from 'mdb-react-ui-kit'
 
-export function EventRow ( { eventcode, image, eventname, rating, numberofBooking,Culture,description,Price,Prioed,subTotal,relatedServices} ) {
+export default function Event({index,imgURL,eventid,name,added,price=0}) {
   return (
-    <MDBRow className="justify-content-center mb-0" key={eventcode}>
-      <MDBCol md="12" xl="10">
-        <MDBCard className="shadow-0 border rounded-3 mt-3 mb-3">
-          <MDBCardBody>
-            <MDBRow>
-              <MDBCol md="12" lg="3" className="mb-4 mb-lg-0">
-                <MDBRipple
-                  rippleColor="light"
-                  rippleTag="div"
-                  className="bg-image rounded hover-zoom hover-overlay"
-                >
-                  <MDBImageComponent src={image} className="w-100" fluid />
-                  <a href="#!">
-                    <div
-                      className="mask"
-                      style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-                    />
-                  </a>
-                </MDBRipple>
-              </MDBCol>
-              <MDBCol md="6">
-                <h5>
-                  {eventname}
-                </h5>
-                <div className="d-flex flex-row">
-                <ReactStars
-    count={5}
-                                      edit={ false }
-                                      value={rating}
-                                      size={ 24 }
-                                    
-    activeColor="#ffd700"
-  />
-                                  <span>{numberofBooking} </span>
-                </div>
-                <div className="mt-1 mb-0 text-muted small">
-                                  <span>{ Culture}</span>
-                  <span className="text-primary"> • </span>
-                                  <span>{ relatedServices} Services</span>
-                  <span className="text-primary"> • </span>
-                  <span>
-                    Best finish
-                    <br />
-                  </span>
-                </div>
-                <div className="mb-2 text-muted small">
-                  <span>Unique design</span>
-                  <span className="text-primary"> • </span>
-                  <span>For men</span>
-                  <span className="text-primary"> • </span>
-                  <span>
-                    Casual
-                    <br />
-                  </span>
-                </div>
-                <p className="text-truncate mb-4 mb-md-0">
-                  {description}
-                </p>
-              </MDBCol>
-              <MDBCol
-                md="6"
-                lg="3"
-                className="border-sm-start-none border-start"
-              >
-                <div className="d-flex flex-row align-items-center mb-1">
-                                  <h4 className="mb-1 me-1">${ Price}</h4>
-                  <span className="text-danger">
-                                      <s>{ Prioed}</s>
-                  </span>
-                </div>
-                              <h6 className="text-success">Earning:{ subTotal}</h6>
-                <div className="d-flex flex-column mt-4">
-                  <MDBBtn color="primary" size="sm">
-                    Details
-                  </MDBBtn>
-                  <MDBBtn outline color="primary" size="sm" className="mt-2">
-                    Edit
-                  </MDBBtn>
-                </div>
-              </MDBCol>
-            </MDBRow>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-    </MDBRow>
-  );
+    <MDBCol md={((index+1)*3-1)!==0 || (index+1) % 3 === 0?'6':'12'} lg='4' className='mb-4' >
+  <MDBCard>
+    <MDBRipple
+      rippleColor='light'
+      rippleTag='div'
+      className='bg-image rounded hover-zoom'
+    >
+      <MDBCardImage
+        src={imgURL}
+        fluid
+            className='w-100'
+            style={{height:"200px"}}
+      />
+      <a href='#!'>
+        <div className='mask'>
+          <div className='d-flex justify-content-start align-items-end h-100'>
+            <h5>
+              <span className='badge bg-primary ms-2'>New</span>
+            </h5>
+          </div>
+        </div>
+        <div className='hover-overlay'>
+          <div
+            className='mask'
+            style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}
+          ></div>
+        </div>
+      </a>
+    </MDBRipple>
+    <MDBCardBody>
+      <a href='#!' className='text-reset'>
+            <h5 className='card-title mb-3'>{ name}</h5>
+      </a>
+      <a href='#!' className='text-reset'>
+            <p>added:{ added}</p>
+      </a>
+          <h6 className='mb-3'>$ { price}</h6>
+    </MDBCardBody>
+  </MDBCard>
+</MDBCol>
+
+  )
 }

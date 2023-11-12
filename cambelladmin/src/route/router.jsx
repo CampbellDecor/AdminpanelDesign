@@ -31,6 +31,7 @@ import Events from '../pages/Event/Events'
 
 //packages
 import AddPackage from '../pages/Packages/AddPackages'
+import Package from '../pages/Packages/Packages'
 
 import Test from '../function/test'
 import Error from '../pages/Bugs/Error'
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
         path: '/booking',
         element: <Bookings />,
         loader:bookings
+      },
+      {
+        path: "/pack",
+        element:<Package/>
       },
       {
         element: <InnerLayout />,

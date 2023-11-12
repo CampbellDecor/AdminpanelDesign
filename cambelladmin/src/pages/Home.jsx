@@ -49,14 +49,14 @@ export default function Home ()
               title: 'Users',
               idenity: <FaUsers className='icon' />,
                           path: '/users',
-              count:countpanel?.users
+              count:3
             }}
           />
           <CountPanel
             {...{
               title: 'Earn',
               idenity: <FaCoins className='icon' />,
-              count: countpanel?.payment,
+              count: 345,
               path: '/users'
             }}
           />
@@ -64,7 +64,7 @@ export default function Home ()
             {...{
               title: 'Booking',
               idenity: <FaCalendarDay className='icon' />,
-              count: countpanel?.booking,
+              count: 20,
               path: '/users'
             }}
           />
@@ -72,7 +72,7 @@ export default function Home ()
             {...{
               title: 'Packages',
               idenity: <FaRegThumbsUp className='icon' />,
-              count: countpanel?.Packages,
+              count: 10,
               path: '/users'
             }}
           />
