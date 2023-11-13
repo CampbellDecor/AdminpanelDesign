@@ -12,6 +12,8 @@ import {
   MDBCardImage,
   MDBBtn
 } from 'mdb-react-ui-kit'
+import { MdOutlinePassword } from 'react-icons/md'
+
 import { ButtonGroup, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
@@ -60,16 +62,16 @@ export default function Admin ({
                 onClick={onClickHandle}
               >
                 <div>
-                  <p className='small text-muted mb-1'>Experience</p>
-                  <p className='mb-0'>{working}</p>
+                  <p className='small text-muted mb-1'>Join</p>
+                  <p className='mb-0 small'>11/11</p>
                 </div>
                 <div className='px-3'>
-                  <p className='small text-muted mb-1'>Followers</p>
-                  <p className='mb-0'>976</p>
+                  <p className='small text-muted mb-1'>Last Online</p>
+                  <p className='mb-0 small'>12 Nov</p>
                 </div>
                 <div>
                   <p className='small text-muted mb-1'>Rating</p>
-                  <p className='mb-0'>8.5</p>
+                  <p className='mb-0'>{ Math.floor(Math.random()*10)}</p>
                 </div>
               </div>
               <div className='d-flex pt-1'>
@@ -112,7 +114,7 @@ export function Blocked ({ aid, profile, username }) {
         imageHeight: 200,
         imageAlt: username,
         showCancelButton: true,
-        confirmButtonText: 'Yes, Blocked it!',
+        confirmButtonText: 'Yes, Block it!',
         cancelButtonText: 'No, cancel!',
         reverseButtons: true
       })
@@ -120,13 +122,13 @@ export function Blocked ({ aid, profile, username }) {
         if (result.isConfirmed) {
           swalWithBootstrapButtons
             .fire({
-              title: 'Why do you Blocked Him/Her',
+              title: 'Why do you Block Him/Her',
               input: 'text',
               inputAttributes: {
                 autocapitalize: 'off'
               },
               showCancelButton: true,
-              confirmButtonText: 'Blocked',
+              confirmButtonText: 'Block',
               showLoaderOnConfirm: true,
               preConfirm: async reason => {
                 try {
@@ -291,6 +293,43 @@ Swal.fire({
   return (
     <Button variant={color??'warning'} onClick={deleteAction}>
       {html??<MdDelete color='white' />}
+    </Button>
+  )
+}
+
+export function ResetPassword ({ username,aid}) {
+
+  const deleteAction = useCallback(async () => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to Reset Password " + username,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    })
+    if (result.isConfirmed) {
+      const admin = await axios.delete('/api/admin/' + aid)
+      if (admin) {
+        Swal.fire({
+          title: 'Sent Mail',
+          text: 'Your file has been deleted.',
+          icon: 'success'
+        })
+      } else {
+        Swal.fire({
+          title: 'failed!',
+          text: 'You Haven"t Rest',
+          icon: 'error'
+        })
+      }
+    }
+  }, [])
+  return (
+    <Button variant='info' as='a' href='/resetpw' disabled={aid===undefined}>
+      <MdOutlinePassword size={29} />
+
     </Button>
   )
 }

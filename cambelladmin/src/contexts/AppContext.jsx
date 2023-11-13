@@ -6,7 +6,7 @@ import logo from "../images/logo.png";
 export const CambellContext=createContext();
 
 export default function AppContext ({childern}){
-    const [Appname, setAppname] = useState("Cambell Decor");
+    const [Appname, setAppname] = useState("Campbell Decor");
     const [Applogo, setApplogo] = useState(logo);
 
 

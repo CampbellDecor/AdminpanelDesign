@@ -14,13 +14,13 @@ export default function BreadCrumb ()
 
     return(
  <div className='px-5 py-2 bg-light mb-4'>
-        <h2 className='pagename'>Cambell</h2>
+        <h2 className='pagename'>Campbell</h2>
  <MDBContainer fluid>
    <MDBBreadcrumb bold>
 
       <MDBBreadcrumbItem active>
         <Link to={location.pathname} className='text-black text-capitalize text-decoration-none'>
-          Pages
+
         </Link>
       </MDBBreadcrumbItem>
 ;<MDBBreadcrumbItem>
@@ -28,7 +28,7 @@ export default function BreadCrumb ()
     to={location.pathname}
     className='text-black text-capitalize text-decoration-none'
   >
-    Pages
+   
   </Link>
 </MDBBreadcrumbItem>
 

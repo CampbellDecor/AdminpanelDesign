@@ -6,6 +6,11 @@ export const getUser = createAsyncThunk('gets/user', async () => {
     return response.data
   })
 })
+export const getBookUser = createAsyncThunk('gets/bookuser', async (uid) => {
+  return axios.get('/api/user/bookDetails/'+uid).then(response => {
+    return response.data
+  })
+})
 
 export const getBlockUser = createAsyncThunk('gets/blockuser', async () => {
   return axios.get(`/api/user/block/block`).then(response => {
@@ -22,6 +27,12 @@ export const getReligion = createAsyncThunk('gets/unreligionr', async () => {
     return response.data
   })
 })
+export const getUSerOne = createAsyncThunk('gets/oneUser', async (uid) => {
+  return axios.get(`/api/user/${uid}`).then(response => {
+    return response.data
+  })
+})
+
 export const getsearchUser = createAsyncThunk(
   'gets/search',
   async searchtext =>

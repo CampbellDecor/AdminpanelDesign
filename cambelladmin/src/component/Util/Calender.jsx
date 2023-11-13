@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import {
   BsFillCaretLeftFill,
   BsFillCaretRightFill,
@@ -10,14 +10,24 @@ import Calender from 'react-calendar'
 import { Badge, Container, Spinner } from 'react-bootstrap'
 import axios from 'axios'
 import { MDBTooltip } from 'mdb-react-ui-kit'
-
+const calenderReducer = (state,action) =>
+{
+  const now = new Date();
+  switch (action.type)
+  {
+    case "MONTHCHANGE": return action.payload;
+    default:return now.getMonth()+1
+  }
+}
 export function SimpleHomeCalender () {
   const [loading, setLoading] = useState(false)
+  const mon = new Date().getMonth() + 1;
+  const [value,setvalue]=useReducer(calenderReducer,mon)
   const [events, setEvents] = useState([])
   useEffect(() => {
     setLoading(true)
     axios
-      .get('/api/booking')
+      .get('/api/booking/count/month/'+value)
       .then(result => {
         setEvents(result.data)
       })
@@ -40,9 +50,10 @@ export function SimpleHomeCalender () {
       next2Label={<TiArrowRightThick className='icon' />}
       tileContent={({ date }) => {
         const evcount = events.find(
-          ele => ele.eventdate === date.toLocaleDateString()
+          ele => ele.date === date.toLocaleDateString()
         )
         return (
+
           <span className='w-100 d-flex justify-content-center align-items-center event-count'>
             {evcount && (
               <Badge pill className='event-count--num event-count--num--1'>

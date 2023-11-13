@@ -32,7 +32,7 @@ ChartJS.register(
 export function SmallHomeDonut () {
   const { mode } = useContext(CambellContext)
   const dispatcher = useDispatch()
-  const { loading, result } = useSelector(state => state.religion)
+  //const { loading, result } = useSelector(state => state.religion)
 
   useEffect(() => {}, [dispatcher])
   const [labels, data] = [

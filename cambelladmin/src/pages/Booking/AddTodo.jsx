@@ -17,21 +17,22 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import { AiOutlineAppstoreAdd } from 'react-icons/ai'
 import DatePicker from 'react-date-picker'
-export default function AddTodo ({ date }) {
+import {useBookingStore} from '../../redux/BookStore'
+export default function AddTodo ({ date })
+{
+  const { OneBookingData } = useBookingStore();
+  const { book} = OneBookingData;
   const DisabledTodo = useMemo(() => date < new Date(), [date])
 
   const [varyingModal, setVaryingModal] = useState(false)
   const [value, setValue] = useState(new Date())
   const [task, setTask] = useState({})
-  const onChangeInput = useCallback(
-    event => {
+  const onChangeInput =event =>
+    {
+      console.log(task)
       setTask(pre => ({ ...pre, [event.target.name]: event.target.value }))
-    },
-    [setTask]
-  )
-  const onClickMOdel = useCallback(() => setVaryingModal(!varyingModal), [
-    varyingModal
-  ])
+    }
+  const onClickMOdel = useCallback(() => setVaryingModal(!varyingModal), [varyingModal])
   const Disabled = useMemo(() => !task.task || value < new Date(), [
     task,
     value
@@ -40,14 +41,15 @@ export default function AddTodo ({ date }) {
   const AddTask = useCallback(async e => {
     e.preventDefault()
     task.dueDate = value
-    task.bookid = "APedgnvVkSWJl3elTIz2";
+    task.bookid = book?.bookid;
     try {
      const add = await axios.post('/api/booking/todoTask',task)
       if (add) {
         toast.success('Scussfully Added New Task')
-        onChangeInput()
+        onClickMOdel()
       } else {
         toast.error('Failed to Add Task Try Again')
+        onClickMOdel()
       }
 
     } catch (error) {
@@ -58,6 +60,7 @@ export default function AddTodo ({ date }) {
   return (
     <>
       <MDBBtn onClick={onClickMOdel} rounded size='sm' disabled={DisabledTodo}>
+
         <AiOutlineAppstoreAdd size={24} />
       </MDBBtn>
       <MDBModal show={varyingModal} setShow={setVaryingModal} tabIndex='-1'>

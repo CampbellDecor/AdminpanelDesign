@@ -47,6 +47,10 @@ import {
   UserLoader,
   OneBookloads
 } from '../function/RouteFunLoader'
+import {
+OneBookingaction
+} from '../function/Routeraction'
+
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -158,7 +162,8 @@ const router = createBrowserRouter([
           }, {
             path: "/booking/:bookcode",
             element: <OneBooking />,
-            loader:OneBookloads
+            action: OneBookingaction,
+           loader:OneBookloads
 
           }, {
             path: "/user/profile/:uid",

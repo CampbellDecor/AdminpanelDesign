@@ -80,8 +80,8 @@ export default function Users () {
               }}
             />
 
-            <Button as='a' href='users/add'>
-              Add
+            <Button as='a' href='/chats/normal'>
+              go To Chats
             </Button>
           </div>
         </Col>

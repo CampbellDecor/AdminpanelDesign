@@ -169,3 +169,66 @@ export function SearchUsers (status) {
       }
   }
 }
+export function OneUser (status) {
+  switch (status) {
+    case 1:
+      return (state, action) => {
+        state.loading = false
+        state.user =action.payload??{}
+        state.result = 'fetched'
+      }
+
+    case 0:
+      return (state, action) => {
+        state.loading = true
+        state.user ={}
+        state.result = 'loading'
+      }
+
+    case -1:
+      return (state, action) => {
+        state.loading = false
+        state.users = {}
+        state.result = action.payload
+      }
+
+    default:
+      return (state, action) => {
+        state.loading = false
+        state.users = null
+        state.result = 'Invalid Action'
+      }
+  }
+}
+
+export function OneBookUser (status) {
+  switch (status) {
+    case 1:
+      return (state, action) => {
+        state.loading = false
+        state.user = action.payload ?? {}
+        state.result = 'fetched'
+      }
+
+    case 0:
+      return (state, action) => {
+        state.loading = true
+        state.user = {}
+        state.result = 'loading'
+      }
+
+    case -1:
+      return (state, action) => {
+        state.loading = false
+        state.users = {}
+        state.result = action.payload
+      }
+
+    default:
+      return (state, action) => {
+        state.loading = false
+        state.users = null
+        state.result = 'Invalid Action'
+      }
+  }
+}

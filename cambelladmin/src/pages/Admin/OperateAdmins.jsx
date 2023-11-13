@@ -22,14 +22,14 @@ import {
   BiSolidEditLocation,
   BiUpload
 } from 'react-icons/bi'
-import { MdAdminPanelSettings,MdOutlinePassword
+import { MdAdminPanelSettings
  } from 'react-icons/md'
 import { AvatarGenerator } from 'random-avatar-generator'
 import PhoneInput from 'react-phone-number-input'
 import { useNavigate, useLoaderData, useParams } from 'react-router-dom'
 import { AdminFormReducer } from '../../function/AdminHandle'
 import axios from 'axios'
-
+import {ResetPassword} from '../../component/Admin'
 export default function Opreateadmin ()
 {
     const adminid = useParams();
@@ -189,7 +189,8 @@ export default function Opreateadmin ()
                   </div>
                 </Stack>
               </Card.Text>
-              <Button variant='info' as='a' href='/resetpw'><MdOutlinePassword size={29}/></Button>
+              <ResetPassword/>
+            
             </Card.Body>
           </Card>
         </Col>

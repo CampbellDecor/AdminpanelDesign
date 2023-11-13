@@ -55,7 +55,7 @@ export function UserRows ({
       </td>
       <td>{booking}</td>
       <td>
-        <MDBBtn color='link' href={'/users/' + uid} rounded size='sm'>
+        <MDBBtn color='link' href={'/user/profile/'+uid} rounded size='sm'>
           <FaUserPen size={20} color='navy'/>
         </MDBBtn >
           <BlockUnBlock {...{uid,username,isBlock}}/>

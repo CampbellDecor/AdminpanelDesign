@@ -1,30 +1,38 @@
 import React from 'react';
 import Table from 'react-data-table-component';
 import {Badge,Image} from 'react-bootstrap';
-import {Link} from "react-router-dom";
-export  function NewAppoint (){
+import { Link } from "react-router-dom";
+import {useBookingStore} from '../../redux/BookStore'
+export function NewAppoint ()
+{
+    const { BookData } = useBookingStore();
     const onrowclick=(row,event)=>{
 
     }
-    const column=[
-        { 
+    const column = [
+        {
+            bookid: "BookCode",
+            selector: row => row.bookid,
+            omit:true
+    },
+        {
             name: 'Event',
-            selector: row => row.title,
+            selector: row => row.name,
         },
-        { 
+        {
             name: 'User',
             selector: row => row.user,
             cell: row => {
-            
-                return <div><Link to={`user/${row.user?.uid}`}><Image className="user" src={row.user?.profile} title={row.user?.username}/></Link></div>
+
+                return <div><Link to={`user/${row.user?.uid}`}><Image className="user" src={row.user?.profile??"https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="} title={row.user?.username}/></Link></div>
             }
         },
-        { 
+        {
             name: 'Date',
-            selector: row => row.date,
+            selector: row => row.eventDate,
             sortable: true,
         },
-        { 
+        {
             name: 'status',
             selector: row => row.status,
             cell: row => {
@@ -33,27 +41,20 @@ export  function NewAppoint (){
                     case "pending":badge="status-pending";break;
                     case "reject" :badge="status-reject" ;break;
                     case "accept" :badge="status-agree" ;break;
-                    case "cancel" :badge="status-cancel" ;break;
+                    case "expired":badge="status-reject" ;break;
                     default:badge="warning";
                 }
-                return <Badge className={`status ${badge}`}>{row.status}</Badge>
+                return <Badge title={`${row.bookdate}`} className={`status ${badge}`}>{row.status}</Badge>
             }
         }
     ];
-    const datas=[{
-        title:"dsfds",
-        user:{username:"Thanumahee",uid:1,profile:"https://www.pinkvilla.com/images/2023-07/755764970_ajith-thunivu-1280-min.jpg"},
-        date:"12/2/34",
-        status:"pending"
-    }]
-    return(
+    return !BookData?.loading&&(
         <div className="recent-updates my-3">
-            <h3>Recent Updates</h3>
+            <h3>Recent Bookings</h3>
        <Table
-       
-       data={datas}
+
+       data={BookData?.bookings}
        columns={column}
-    selectableRows
     responsive={true}
     striped={true}
     onRowClicked={onrowclick}
@@ -61,5 +62,3 @@ export  function NewAppoint (){
        </div>
 
     )}
-
-  

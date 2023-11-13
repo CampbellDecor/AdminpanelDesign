@@ -12,13 +12,14 @@ import {
 import { Form } from 'react-bootstrap'
 import Todo from '../../component/todo'
 import AddToDo from './AddTodo'
-export default function ToDoList ({bookid})
+import { useBookingStore } from '../../redux/BookStore'
+export default function ToDoList ()
 {
+  const { TodoListData } = useBookingStore()
+  const { todo } = TodoListData;
 
   const date = new Date('July 21, 2024 01:15:00')
 
-  const [Tasks, setTasks] = useState([]);
-  const [loading, setloading] = useState(false);
   const Duration = useMemo(() => {
     const now = new Date()
     if (date.getFullYear() - now.getFullYear() > 0) {
@@ -32,10 +33,7 @@ export default function ToDoList ({bookid})
       return <h5 className='text-center text-lead text-info'>More Then ! year Done</h5>
     }
   }, [date])
-  useEffect(() =>
-  {
 
-  },[])
   return (
     <MDBContainer className='py-5 w-75 todo'>
       <MDBRow className='d-flex justify-content-center align-items-center h-100'>
@@ -94,7 +92,7 @@ export default function ToDoList ({bookid})
                 </MDBTooltip>
               </div>
               {
-                Tasks.length>0 && Tasks.map(task=>(<Todo/>))
+                todo && todo?.map(task => (<Todo {...task} />))
 }
             </MDBCardBody>
           </MDBCard>

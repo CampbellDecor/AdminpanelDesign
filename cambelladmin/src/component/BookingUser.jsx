@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FaRocketchat } from 'react-icons/fa'
 
 import {
@@ -10,31 +10,35 @@ import {
   MDBBtn,
   MDBBadge
 } from 'mdb-react-ui-kit'
+import {toast} from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify';
-import axios from 'axios'
-export default function BookingUser ({ uid })
+import { useUserChatStore } from '../redux/ChatStore'
+import {useUserStore} from '../redux/UserStore'
+export default function BookingUser ({ userdata })
 {
-  const [user,setUser]=useState({})
+  const { UserChatDispatcher, getuChats } = useUserChatStore()
+  const { OneUserdata } = useUserStore();
+  const {user } = OneUserdata;
   const navigate = useNavigate()
-  const onClickHandle = () => {
-    navigate('/user/profile/' + uid)
-  }
-  useEffect(() =>
+  const OnClick = () =>
   {
-    axios.get('/api/user/bookDetails/' + uid)
-      .then(result =>
-      {
-        setUser(result.data);
-      })
-      .catch(err =>
-      {
-        toast.error(err?.messages);
-        console.log(err);
-    })
-  })
+    if (user)
+    {
+UserChatDispatcher(getuChats(user?.uid))
+navigate('/chats/normal')
+
+    } else
+    {
+      toast.warning('User Not Found!')
+    }
+
+  }
+  const onClickHandle = () => {
+    navigate('/user/profile/'+user?.uid)
+  }
+
   return (
-      <MDBCard style={{ borderRadius: '15px'}}>
+    <MDBCard style={{ borderRadius: '15px' }}>
         <MDBCardBody className='p-4'>
           <div className='d-flex flex-column text-black align-items-center'>
             <div onClick={onClickHandle} className='position-relative'>
@@ -42,7 +46,7 @@ export default function BookingUser ({ uid })
                 style={{ width: '100px', borderRadius: '10px' }}
                 src={
                   user?.profile ??
-                  'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp'
+                  'https://firebasestorage.googleapis.com/v0/b/campbelldecor-c2d1f.appspot.com/o/Users%2Fuser.png?alt=media&token=af8768f7-68e4-4961-892f-400eee8bae5d'
                 }
                 alt='Generic placeholder image'
                 fluid
@@ -61,10 +65,10 @@ border border-light rounded-circle'
             </div>
             <div className='mt-2'>
               <MDBCardTitle className='text-capitalize text-center'>
-                {user?.username}
+                {user?.username??'suganthy'}
               </MDBCardTitle>
-              <MDBCardText className='text-lead text-center text-nowrap' href={`mailto:${user?.email}`}>
-                {user?.email}
+              <MDBCardText className='text-lead text-center text-nowrap' href={`mailto:${user?.email??'./'}`}>
+                {user?.email??'Suganthy@gmail.com'}
               </MDBCardText>
               <MDBCardText className='text-lead text-center'>{user?.mobile}</MDBCardText>
 
@@ -75,18 +79,18 @@ border border-light rounded-circle'
               >
                 <div>
                   <p className='small text-muted mb-1'>Experience</p>
-                  <p className='mb-0 text-center'>{user?.No_book}</p>
+                  <p className='mb-0 text-center'>{user?.No_book??1}</p>
                 </div>
                 <div className='px-3'>
                   <p className='small text-muted mb-1'>Join With Us</p>
-                                  <p className='mb-0 small text-wrap'>{user?.join}</p>
+                                  <p className='mb-0 small text-wrap'>{user?.join??'11/10/2023'}</p>
                 </div>
               </div>
               <div className='d-flex pt-1'>
                 <MDBBtn
                   outline
                   className='me-1 flex-grow-1'
-                  href={'chats/normal'}
+                  onClick={OnClick}
                 >
                   Chat <FaRocketchat className='ms-2' />
                 </MDBBtn>

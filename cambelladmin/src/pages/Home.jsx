@@ -5,11 +5,13 @@ import { SimpleHomeCalender } from '../component/Util/Calender'
 import { NewAppoint } from '../component/Util/Table'
 import { CountPanel, ListPanel } from '../component/Panels'
 import { MDBListGroup, MDBListGroupItem, MDBBtn } from 'mdb-react-ui-kit'
-import { FaCalendarDay, FaUsers, FaCoins,FaRegThumbsUp } from 'react-icons/fa'
+import { FaCalendarDay, FaUsers, FaCoins, FaRegThumbsUp } from 'react-icons/fa'
+import {useBookingStore} from '../redux/BookStore'
 import axios from 'axios';
 
 const countReducer = (state,action) =>
 {
+
     switch (action.type)
     {
         case "APICALL": {
@@ -20,6 +22,7 @@ const countReducer = (state,action) =>
 }
 export default function Home ()
 {
+  const { getrecentbookings,CampbellDispatcher} = useBookingStore();
     const { countpanel, setCountpanel } = useReducer(countReducer, {
         loading: false,
         users: 0,
@@ -29,17 +32,11 @@ export default function Home ()
     });
     useEffect(() =>
     {
-        axios.get('/api/users/count')
-            .then(result =>
-            {
-
-            }).catch(error =>
-            {
-                console.error(error);
-            })
+      CampbellDispatcher(getrecentbookings())
 
 
-    }, [countpanel]);
+
+    }, []);
   return (
     <Container fluid className='home'>
       <Row className='home-countpanel my-3'>
@@ -70,7 +67,7 @@ export default function Home ()
           />
           <CountPanel
             {...{
-              title: 'Packages',
+              title: 'Likes',
               idenity: <FaRegThumbsUp className='icon' />,
               count: 10,
               path: '/users'
