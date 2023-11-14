@@ -75,7 +75,7 @@ export default function Admin ({
                 </div>
               </div>
               <div className='d-flex pt-1'>
-                <MDBBtn outline className='me-1 flex-grow-1' href={'admins/'+aid}>
+                <MDBBtn outline className='me-1 flex-grow-1' href={'/admins/'+aid}>
                   Edit
                 </MDBBtn>
                 <ButtonGroup aria-label='Basic example'>

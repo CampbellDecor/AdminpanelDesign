@@ -5,8 +5,10 @@ import {
 } from 'react-router-dom'
 import { Layout, InnerLayout } from './Layout/Layout'
 import Home from '../pages/Home'
-import Chatapp from '../pages/Chatapp'
-import NormalChatapp from '../pages/UserChatApp'
+
+//chats
+import Chatapp from '../pages/chats/Chatapp'
+import NormalChatapp from '../pages/chats/UserChatApp'
 //Admin
 import Admin from '../pages/Admin/Admins'
 import OperateAdmin from '../pages/Admin/OperateAdmins'
@@ -48,14 +50,14 @@ import {
   OneBookloads
 } from '../function/RouteFunLoader'
 import {
-OneBookingaction
+OneBookingaction,OneUserAction
 } from '../function/Routeraction'
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: <Layout/>,
     caseSensitive: false,
-    errorElement: <Error />,
+    errorElement: <Error/>,
     children: [
       {
         //home
@@ -168,7 +170,8 @@ const router = createBrowserRouter([
           }, {
             path: "/user/profile/:uid",
             element: <UserProfile />,
-            loader:UserLoader
+            loader: UserLoader,
+          action:OneUserAction
           }
         ]
       }
@@ -177,12 +180,12 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Login />,
-    ErrorBoundary: <Error />
+    ErrorBoundary: <Error/>
   },
   {
     path: '/resetpw',
     element: <ResetPassword />,
-    ErrorBoundary: <Error />
+    ErrorBoundary: <Error/>
   },
   {
     path: '/logout',

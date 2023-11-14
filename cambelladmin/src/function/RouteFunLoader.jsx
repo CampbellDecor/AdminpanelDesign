@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useSearchParams } from 'react-router-dom';
 export async function ProfileLoader ({ params }) {
   try {
     const aid = params.aid === 'self' ? 'self' : params.aid
@@ -40,9 +41,10 @@ export async function bookings () {
 }
 
 export async function UserLoader ({ params }) {
-  try {
+  try
+  {
     const uid = params=params.uid
-    const user= await axios.get('/api/user/' + uid)
+    const user = await axios.get('/api/user/' + uid)
     return user.data
   } catch (error) {
     console.error(error)

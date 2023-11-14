@@ -10,7 +10,8 @@ import {
 export function useUserStore () {
   const userDispatcher = useDispatch()
   const userData = useSelector(state => state.user)
-  const OneUserdata=useSelector(state=>state.userOne)
+  const OneUserdata = useSelector(state => state.userOne)
+  const CampbellDispatcher = useDispatch()
   return {
     getBlockUser,
     getUser,
@@ -18,6 +19,7 @@ export function useUserStore () {
     userDispatcher,getBookUser,
     userData,
     getUSerOne,
-    getsearchUser,OneUserdata
+    getsearchUser, OneUserdata,
+    CampbellDispatcher
   }
 }

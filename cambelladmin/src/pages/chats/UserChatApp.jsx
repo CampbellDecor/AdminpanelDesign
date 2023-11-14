@@ -7,10 +7,10 @@ import
     Card,
     CardBody
   } from 'react-bootstrap';
-import Chatting from '../component/ChatComponent';
-import SearchOption from '../component/Util/SearchPanel';
-import { useUserChatStore } from '../redux/ChatStore';
-import { Chatuser,Message,Reply } from '../component/Chats';
+import Chatting from '../../component/ChatComponent';
+import SearchOption from '../../component/Util/SearchPanel';
+import { useUserChatStore } from '../../redux/ChatStore';
+import { Chatuser,Message,Reply } from '../../component/Chats';
 export default function ChatApp ()
 {
 
