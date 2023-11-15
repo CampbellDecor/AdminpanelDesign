@@ -1,25 +1,17 @@
 // @ts-nocheck
-import React, { useEffect } from 'react'
+import React from 'react'
 import { MDBContainer, MDBRow, MDBCol,MDBBtn } from 'mdb-react-ui-kit'
 import { Link } from 'react-router-dom'
 import { MdAdd } from 'react-icons/md'
-import { useServiceStore } from '../../redux/ServiceStore'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { ServiceRow } from '../../component/Service'
 import Loading from '../Bugs/FetchedLoading'
 import APIerror from '../Bugs/FetchedError'
 import { MdHomeRepairService} from 'react-icons/md';
 
 
-export default function Service ()
-{
-
-  const { getservice } = useServiceStore();
-  const Dispatcher = useDispatch()
+export default function Service (){
   const { services, loading, result } = useSelector(state => state.service)
-  useEffect(() => {
-    Dispatcher(getservice());
-  }, [Dispatcher])
 
 
   return loading ? (

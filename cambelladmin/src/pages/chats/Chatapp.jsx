@@ -3,21 +3,23 @@ import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
 import SearchOption from '../../component/Util/SearchPanel'
 import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
 import { useAdminChatStore } from '../../redux/AdminChatStore'
-import { getLocalStorage } from '../../function/LocalStorageHandler'
+import { getLocalStorage,createStorageLocal } from '../../function/LocalStorageHandler'
 export default function ChatApp () {
-  const { getadminchatList, getachat, CampbellDispatcher } = useAdminChatStore()
+  const {getachat, CampbellDispatcher } = useAdminChatStore()
 
   useEffect(() => {
-    CampbellDispatcher(getadminchatList()).then(res => {
+
       try {
         const chatsave = getLocalStorage('chat')
         if (chatsave) {
           CampbellDispatcher(getachat(chatsave))
         }
-      } catch (error) {
+      } catch (error)
+      {
+        createStorageLocal('chat', '');
         console.error(error)
       }
-    })
+
   }, [])
 
   return (

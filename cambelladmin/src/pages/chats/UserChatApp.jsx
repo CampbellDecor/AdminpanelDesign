@@ -5,10 +5,9 @@ import { useUserChatStore } from '../../redux/ChatStore'
 import { getLocalStorage } from '../../function/LocalStorageHandler'
 import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
 export default function ChatApp () {
-  const { getUserChatList, getuChats, CampbellDispatcher } = useUserChatStore()
+  const {getuChats, CampbellDispatcher } = useUserChatStore()
 
   useEffect(() => {
-    CampbellDispatcher(getUserChatList()).then(res => {
       try {
         const chatsave = getLocalStorage('chat')
         if (chatsave) {
@@ -17,7 +16,6 @@ export default function ChatApp () {
       } catch (error) {
         console.error(error)
       }
-    })
   }, [])
 
   return (

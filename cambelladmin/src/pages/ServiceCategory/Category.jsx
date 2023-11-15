@@ -13,14 +13,10 @@ import { useAppContext } from '../../contexts/AppContext';
 
 export default function Category ()
 {
-  const { getServiceCat, ServiceCategories, CategoryDispatcher } = useServiceCategoryStore();
+  const {ServiceCategories } = useServiceCategoryStore();
   const { loading, result, ServiceCats } = ServiceCategories;
   const { Appname } = useAppContext();
 
-  useEffect(() =>
-  {
-    CategoryDispatcher(getServiceCat());
-  }, []);
   return loading ? (<FetchedLoading />) : (
     <MDBContainer fluid className="my-5">
       <MDBRow className='adminshow-action'>

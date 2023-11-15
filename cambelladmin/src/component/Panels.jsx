@@ -46,3 +46,4 @@ export function ListPanel ({ title, items }) {
     </Col>
   )
 }
+

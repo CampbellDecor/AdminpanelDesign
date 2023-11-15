@@ -68,4 +68,4 @@ export const SuperNavItems =[...navbar.slice(0,1) ,{
     path: '/admins',
     itemname: 'Admin',
     itemicon: <MdAdminPanelSettings size={is} className='me-3' />
-},...navbar.slice(1,navbar.length-1)]
+},...navbar.slice(1,navbar.length)]

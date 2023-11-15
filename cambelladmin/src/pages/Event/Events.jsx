@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   MDBContainer,
   MDBRow
@@ -7,14 +7,11 @@ import {useEventStore} from '../../redux/EventStore'
 import Event from '../../component/Event'
 export default function Events ()
 {
-  const { getEvents, EventDispatcher, EventData
+  const { EventData
 
   } = useEventStore();
   const {events } = EventData;
-  useEffect(() =>
-  {
-    EventDispatcher(getEvents());
-  },[EventDispatcher,getEvents])
+
   return (
     <MDBContainer fluid className='my-5 text-center min-vh-100'>
       <h4 className='mt-4 mb-5'>

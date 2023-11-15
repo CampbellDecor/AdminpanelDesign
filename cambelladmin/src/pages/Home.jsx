@@ -1,35 +1,15 @@
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useState, useEffect} from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { IncomeAnalyze, SmallHomeDonut } from '../component/Util/Graph'
 import { SimpleHomeCalender } from '../component/Util/Calender'
 import { NewAppoint } from '../component/Util/Table'
-import { CountPanel, ListPanel } from '../component/Panels'
+import {ListPanel } from '../component/Panels'
+import {HomeCountPanel} from '../component/Home'
 import { MDBListGroup, MDBListGroupItem, MDBBtn } from 'mdb-react-ui-kit'
-import { FaCalendarDay, FaUsers, FaCoins, FaRegThumbsUp } from 'react-icons/fa'
 import {useBookingStore} from '../redux/BookStore'
-import axios from 'axios';
-
-const countReducer = (state,action) =>
-{
-
-    switch (action.type)
-    {
-        case "APICALL": {
-            return action.payload
-        }
-        default: return state;
-    }
-}
 export default function Home ()
 {
   const { getrecentbookings,CampbellDispatcher} = useBookingStore();
-    const { countpanel, setCountpanel } = useReducer(countReducer, {
-        loading: false,
-        users: 0,
-        booking: 0,
-        Packages: 0,
-        payment: 0,
-    });
     useEffect(() =>
     {
       CampbellDispatcher(getrecentbookings())
@@ -40,40 +20,7 @@ export default function Home ()
   return (
     <Container fluid className='home'>
       <Row className='home-countpanel my-3'>
-        <div className='w-100  d-flex justify-content-around flex-sm-nowrap flex-wrap'>
-          <CountPanel
-            {...{
-              title: 'Users',
-              idenity: <FaUsers className='icon' />,
-                          path: '/users',
-              count:3
-            }}
-          />
-          <CountPanel
-            {...{
-              title: 'Earn',
-              idenity: <FaCoins className='icon' />,
-              count: 345,
-              path: '/users'
-            }}
-          />
-          <CountPanel
-            {...{
-              title: 'Booking',
-              idenity: <FaCalendarDay className='icon' />,
-              count: 20,
-              path: '/users'
-            }}
-          />
-          <CountPanel
-            {...{
-              title: 'Likes',
-              idenity: <FaRegThumbsUp className='icon' />,
-              count: 10,
-              path: '/users'
-            }}
-          />
-        </div>
+      <HomeCountPanel/>
       </Row>
       <Row>
         <Col md={6} lg={9} className='home-maincontent'>

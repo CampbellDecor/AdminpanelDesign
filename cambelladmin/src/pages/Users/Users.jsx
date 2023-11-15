@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useCallback, useEffect, useState, useMemo } from 'react'
+import React, { useCallback, useState, useMemo } from 'react'
 import { Container, Form, Pagination, Row, Button, Col } from 'react-bootstrap'
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit'
 import { UserRows } from '../../component/User'
@@ -38,9 +38,7 @@ export default function Users () {
     alert(indexOfLastItem)
   }, [])
 
-  useEffect(() => {
-    userDispatcher(getUser())
-  }, [])
+
   return (
     <Container className='position-relative min-vh-100'>
       <Row className='pb-3'>

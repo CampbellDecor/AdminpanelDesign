@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   MDBBtn,
   MDBContainer
@@ -8,13 +8,9 @@ import { Packages } from '../../component/Packages'
 import { IoMdAddCircle } from 'react-icons/io'
 export default function PackagePages ()
 {
-  const { getPack, PackData, PackDis
+  const {PackData
   } = UsePackStoe();
   const { packs } = PackData;
-  useEffect(() =>
-  {
-    PackDis(getPack());
-  },[PackDis,getPack])
   return (
     <MDBContainer className='min-vh-100'>
       <MDBBtn href='/pack/add' className='position-fixed' style={{right:"10px"}}>

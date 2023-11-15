@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Container, Row, Button } from 'react-bootstrap'
 import Admin from '../../component/Admin'
 import { useAdminStore } from '../../redux/AdminStore'
@@ -7,12 +7,9 @@ import FetchedLoading from '../Bugs/FetchedLoading'
 import { BsPersonFillAdd } from 'react-icons/bs'
 import { useAppContext } from '../../contexts/AppContext'
 export default function Admins () {
-  const { getadmin, Admindispatcher, Admins } = useAdminStore()
+  const {Admins } = useAdminStore()
   const { Appname } = useAppContext()
   const { loading, result, admins } = Admins
-  useEffect(() => {
-    Admindispatcher(getadmin())
-  }, [Admindispatcher,getadmin])
   return (
     <Container className='vh-100 w-100 adminshow'>
       <Row className='adminshow-action'>
