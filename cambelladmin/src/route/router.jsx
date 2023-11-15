@@ -26,13 +26,13 @@ import ServiceCat from '../pages/ServiceCategory/Category'
 
 //Services
 import Service from '../pages/Services/Service'
-import AddService from '../pages/Services/AddService'
+import OprateService from '../pages/Services/OperateService'
 //Events
 import AddEvent from '../pages/Event/AddEvents'
 import Events from '../pages/Event/Events'
 
 //packages
-import AddPackage from '../pages/Packages/AddPackages'
+import OpratePackage from '../pages/Packages/OperatePackages'
 import Package from '../pages/Packages/Packages'
 
 import Test from '../function/test'
@@ -134,12 +134,12 @@ const router = createBrowserRouter([
           {
             //service add
             path: '/service/add',
-            element: <AddService />
+            element: <OprateService />
           },
 {
             //service edit
             path: '/service/edit',
-            element: <AddService />
+            element: <OprateService />
           },
           {
             //event add
@@ -160,7 +160,7 @@ const router = createBrowserRouter([
           {
             //package add
             path: '/pack/add',
-            element: <AddPackage />
+            element: <OpratePackage />
           }, {
             path: "/booking/:bookcode",
             element: <OneBooking />,

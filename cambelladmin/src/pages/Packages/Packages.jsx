@@ -17,7 +17,7 @@ export default function PackagePages ()
   },[PackDis,getPack])
   return (
     <MDBContainer className='min-vh-100'>
-      <MDBBtn className='position-fixed' style={{right:"10px"}}>
+      <MDBBtn href='/pack/add' className='position-fixed' style={{right:"10px"}}>
 <IoMdAddCircle size={25}/>
       </MDBBtn>
       {packs.map(p => <Packages {...p} />)}

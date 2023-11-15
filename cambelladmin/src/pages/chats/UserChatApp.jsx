@@ -7,11 +7,16 @@ import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
 export default function ChatApp () {
   const { getUserChatList, getuChats, CampbellDispatcher } = useUserChatStore()
 
-  
   useEffect(() => {
     CampbellDispatcher(getUserChatList()).then(res => {
-      const chatsave = getLocalStorage('chat')
-      CampbellDispatcher(getuChats(chatsave))
+      try {
+        const chatsave = getLocalStorage('chat')
+        if (chatsave) {
+          CampbellDispatcher(getuChats(chatsave))
+        }
+      } catch (error) {
+        console.error(error)
+      }
     })
   }, [])
 

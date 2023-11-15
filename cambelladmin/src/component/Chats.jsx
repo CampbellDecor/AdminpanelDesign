@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAdminChatStore } from '../redux/AdminChatStore'
 import { useUserChatStore } from '../redux/ChatStore'
 import { useUserContext } from '../contexts/UserContext'
-import { changeLocalStorage } from '../function/LocalStorageHandler'
+import { changeLocalStorage,getLocalStorage } from '../function/LocalStorageHandler'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
@@ -24,7 +24,7 @@ export default function Chatting () {
       myid = isSuper ? chats[0].aid : chats[0].uid
       myuser = isSuper ? username : chats[0]?.username
     }
-    setid(myid)
+    setid(myid===0&&getLocalStorage('chat'))
     setuserdata(myuser)
   }, [setid])
 
@@ -89,7 +89,7 @@ export default function Chatting () {
       <Button
         className='ms-3'
         onClick={isSuper ? OnSentAdmin : UserChat}
-        disabled={!Boolean(message) || !Boolean(id)}
+        disabled={message==='' || id===0}
       >
         <i className='fas fa-paper-plane' />
       </Button>
@@ -103,23 +103,21 @@ export function Chatuser ({
   profile,
   username,
   message,
-  type,
   isOnline,
   unread,
-  onClick,
   isAdmin = true
 }) {
-  const { adminChatDispatcher, getachat } = useAdminChatStore()
+  const { CampbellDispatcher, getachat } = useAdminChatStore()
   const { getuChats } = useUserChatStore()
   const onHandleChange = e => {
     e.preventDefault()
     changeLocalStorage('chat', id)
-    adminChatDispatcher(getachat(id))
+   CampbellDispatcher(getachat(id))
   }
   const onHandleUserChange = e => {
     e.preventDefault()
     changeLocalStorage('chat', id)
-    adminChatDispatcher(getuChats(id))
+    CampbellDispatcher(getuChats(id))
   }
 
   return (
@@ -195,7 +193,7 @@ export function Message ({ chatid, profile, message, time, status }) {
   )
 }
 //Reply
-export function Reply ({ chatid, message, time, date }) {
+export function Reply ({ chatid, message, time }) {
   const { currentuser } = useUserContext()
 
   return (

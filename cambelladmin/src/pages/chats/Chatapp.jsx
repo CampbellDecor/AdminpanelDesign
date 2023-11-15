@@ -9,9 +9,13 @@ export default function ChatApp () {
 
   useEffect(() => {
     CampbellDispatcher(getadminchatList()).then(res => {
-      const chatsave = getLocalStorage('chat')
-      if (chatsave) {
-        CampbellDispatcher(getachat(chatsave))
+      try {
+        const chatsave = getLocalStorage('chat')
+        if (chatsave) {
+          CampbellDispatcher(getachat(chatsave))
+        }
+      } catch (error) {
+        console.error(error)
       }
     })
   }, [])

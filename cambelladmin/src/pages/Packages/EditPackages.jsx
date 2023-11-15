@@ -14,9 +14,9 @@ import { BiUpload } from 'react-icons/bi'
 import { reducer } from '../../function/ServiceHandle'
 import { useServiceCategoryStore } from '../../redux/ServiceCategoryStore'
 
-export default function AddEvent () {
-  const [event, setevent] = useReducer(reducer, {})
-  const [eventImg, seteventImg] = useState(null)
+export default function AddPackage () {
+  const [pack, setpack] = useReducer(reducer, {})
+  const [packImg, setpackImg] = useState(null)
   const {
     CampbellDispatcher,
     getServiceCat,
@@ -24,7 +24,7 @@ export default function AddEvent () {
   } = useServiceCategoryStore()
   const { ServiceCats } = CategoryData
   const onChange = e => {
-    setevent({
+    setpack({
       type: 'CHANGEINPUT',
       name: e.target.name,
       value: e.target.value
@@ -34,9 +34,9 @@ export default function AddEvent () {
     e.preventDefault()
   }
   const changeImage = e => {
-    seteventImg(e.target.files[0])
+    setpackImg(e.target.files[0])
     const img = URL.createObjectURL(e.target.files[0])
-    setevent({ type: 'IMGCHANGE', value: img })
+    setpack({ type: 'IMGCHANGE', value: img })
   }
   useEffect(() => {
     CampbellDispatcher(getServiceCat())
@@ -50,20 +50,20 @@ export default function AddEvent () {
               <Card.Img
                 variant='top'
                 src={
-                  event?.eventImg ??
+                  pack?.packImg ??
                   'https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg'
                 }
               />
               <Card.Body>
                 <Card.Title className='text-center'>
-                  {event?.eventname ?? 'event Name'}
+                  {pack?.packname ?? 'pack Name'}
                 </Card.Title>
                 <Card.Text className='text-center'>
-                  $ {event?.price ?? 0}
+                  $ {pack?.price ?? 0}
                 </Card.Text>
                 <ReactQuill
                   theme='bubble'
-                  value={event?.desc ?? 'decription...'}
+                  value={pack?.desc ?? 'decription...'}
                   readOnly
                 />
               </Card.Body>
@@ -73,11 +73,11 @@ export default function AddEvent () {
         <Col md='6'>
           <Form>
             <Form.Group className='mb-3'>
-              <Form.Label>event Name</Form.Label>
+              <Form.Label>pack Name</Form.Label>
               <Form.Control
                 type='title'
-                placeholder='event Name'
-                name='eventname'
+                placeholder='pack Name'
+                name='packname'
                 onChange={onChange}
                 required
               />
@@ -104,12 +104,12 @@ export default function AddEvent () {
               <Form.Label>Description</Form.Label>
               <ReactQuill
                 theme='snow'
-                onChange={value => setevent({ type: 'CHANGEDES', value })}
+                onChange={value => setpack({ type: 'CHANGEDES', value })}
                 placeholder='description'
               />
             </Form.Group>
             <Form.Group className='mb-3'>
-              <Form.Label>events Images</Form.Label>
+              <Form.Label>packs Images</Form.Label>
               <InputGroup className='mb-3'>
                 <Form.Control
                   type='file'

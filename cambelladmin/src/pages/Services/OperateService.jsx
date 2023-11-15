@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useReducer, useState, useEffect } from 'react'
+import React, { useReducer, useState ,useEffect} from 'react'
 import {
   Container,
   Row,
@@ -12,19 +12,17 @@ import {
 import ReactQuill from 'react-quill'
 import { BiUpload } from 'react-icons/bi'
 import { reducer } from '../../function/ServiceHandle'
-import { useServiceCategoryStore } from '../../redux/ServiceCategoryStore'
+import {useServiceCategoryStore} from '../../redux/ServiceCategoryStore'
 
-export default function AddEvent () {
-  const [event, setevent] = useReducer(reducer, {})
-  const [eventImg, seteventImg] = useState(null)
-  const {
-    CampbellDispatcher,
-    getServiceCat,
-    CategoryData
-  } = useServiceCategoryStore()
-  const { ServiceCats } = CategoryData
-  const onChange = e => {
-    setevent({
+export default function AddService () {
+  const [service, setService] = useReducer(reducer, {})
+  const [serviceImg, setserviceImg] = useState(null)
+  const { CampbellDispatcher,getServiceCat,CategoryData
+} = useServiceCategoryStore();
+const {ServiceCats}=CategoryData
+  const onChange = e =>
+  {
+    setService({
       type: 'CHANGEINPUT',
       name: e.target.name,
       value: e.target.value
@@ -32,15 +30,18 @@ export default function AddEvent () {
   }
   const onSaveEvent = e => {
     e.preventDefault()
+
   }
-  const changeImage = e => {
-    seteventImg(e.target.files[0])
-    const img = URL.createObjectURL(e.target.files[0])
-    setevent({ type: 'IMGCHANGE', value: img })
+  const changeImage = e =>
+  {
+    setserviceImg(e.target.files[0]);
+    const img = URL.createObjectURL(e.target.files[0]);
+    setService({ type: "IMGCHANGE", value: img })
   }
-  useEffect(() => {
-    CampbellDispatcher(getServiceCat())
-  }, [])
+  useEffect(() =>
+  {
+    CampbellDispatcher(getServiceCat());
+  },[])
   return (
     <Container fluid className='vh-75 pb-5 mb-3' style={{ width: '80%' }}>
       <Row className='h-100'>
@@ -50,22 +51,23 @@ export default function AddEvent () {
               <Card.Img
                 variant='top'
                 src={
-                  event?.eventImg ??
+                  service?.serviceImg??
                   'https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg'
                 }
               />
               <Card.Body>
-                <Card.Title className='text-center'>
-                  {event?.eventname ?? 'event Name'}
-                </Card.Title>
-                <Card.Text className='text-center'>
-                  $ {event?.price ?? 0}
-                </Card.Text>
-                <ReactQuill
-                  theme='bubble'
-                  value={event?.desc ?? 'decription...'}
-                  readOnly
-                />
+                  <Card.Title className='text-center'>
+                    {service?.servicename ?? 'Service Name'}
+                  </Card.Title>
+                  <Card.Text className='text-center'>
+  $ {service?.price??0}
+                  </Card.Text>
+<ReactQuill
+  theme='bubble'
+  value={service?.desc??'decription...'}
+  readOnly
+/>
+
               </Card.Body>
             </Card>
           </Row>
@@ -73,11 +75,11 @@ export default function AddEvent () {
         <Col md='6'>
           <Form>
             <Form.Group className='mb-3'>
-              <Form.Label>event Name</Form.Label>
+              <Form.Label>Service Name</Form.Label>
               <Form.Control
                 type='title'
-                placeholder='event Name'
-                name='eventname'
+                placeholder='Service Name'
+                name='servicename'
                 onChange={onChange}
                 required
               />
@@ -96,20 +98,25 @@ export default function AddEvent () {
               <Form.Select aria-label='Category' required>
                 <option>Category</option>
 
-                {ServiceCats?.length > 0 &&
-                  ServiceCats?.map(ele => <option value='1'>One</option>)}
-              </Form.Select>
+                {
+                  ServiceCats?.length > 0 && ServiceCats?.map(ele => (
+                    <option value='1'>One</option>
+))
+                }
+
+</Form.Select>
+
             </Form.Group>
             <Form.Group className='mb-3'>
               <Form.Label>Description</Form.Label>
               <ReactQuill
                 theme='snow'
-                onChange={value => setevent({ type: 'CHANGEDES', value })}
+                onChange={value => setService({ type: 'CHANGEDES', value })}
                 placeholder='description'
               />
             </Form.Group>
             <Form.Group className='mb-3'>
-              <Form.Label>events Images</Form.Label>
+              <Form.Label>Services Images</Form.Label>
               <InputGroup className='mb-3'>
                 <Form.Control
                   type='file'

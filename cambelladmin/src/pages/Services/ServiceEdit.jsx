@@ -1,92 +1,83 @@
 // @ts-nocheck
-import React, { useState } from 'react'
+import React, { useReducer, useState, useEffect } from 'react'
 import {
   Container,
   Row,
   Col,
   Form,
-  Image,
   Button,
-  InputGroup
+  InputGroup,
+  Card
 } from 'react-bootstrap'
 import ReactQuill from 'react-quill'
 import { BiUpload } from 'react-icons/bi'
-export default function AddService () {
-  const [description, setdescription] = useState('')
-  const [serviceImg, setserviceImg] = useState(null)
-  const [inputs, setinputs] = useState({})
+import { reducer } from '../../function/ServiceHandle'
+import { useServiceCategoryStore } from '../../redux/ServiceCategoryStore'
 
+export default function AddService () {
+  const [service, setService] = useReducer(reducer, {})
+  const [serviceImg, setserviceImg] = useState(null)
+  const {
+    CampbellDispatcher,
+    getServiceCat,
+    CategoryData
+  } = useServiceCategoryStore()
+  const { ServiceCats } = CategoryData
   const onChange = e => {
-    if (e.target.name === 'images') {
-      setinputs(pre => ({ ...pre, images: e.target.files[0] }))
-      setserviceImg(URL.createObjectURL(e.target.files[0]))
-    } else {
-      setinputs(pre => ({ ...pre, [e.target.name]: e.target.value }))
-    }
+    setService({
+      type: 'CHANGEINPUT',
+      name: e.target.name,
+      value: e.target.value
+    })
   }
-  const UploadImg = () => {}
   const onSaveEvent = e => {
     e.preventDefault()
-    console.log(inputs)
   }
+  const changeImage = e => {
+    setserviceImg(e.target.files[0])
+    const img = URL.createObjectURL(e.target.files[0])
+    setService({ type: 'IMGCHANGE', value: img })
+  }
+  useEffect(() => {
+    CampbellDispatcher(getServiceCat())
+  }, [])
   return (
-    <Container fluid className='vh-100'>
-      <Row>
-        <Col md='6'>
-          <Row>
-            <Image
-              width='100%'
-              src={
-                serviceImg ??
-                'https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg'
-              }
-              height='600px'
-            />
+    <Container fluid className='vh-75 pb-5 mb-3' style={{ width: '80%' }}>
+      <Row className='h-100'>
+        <Col md='6' className='h-100'>
+          <Row className='h-100'>
+            <Card>
+              <Card.Img
+                variant='top'
+                src={
+                  service?.serviceImg ??
+                  'https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg'
+                }
+              />
+              <Card.Body>
+                <Card.Title className='text-center'>
+                  {service?.servicename ?? 'Service Name'}
+                </Card.Title>
+                <Card.Text className='text-center'>
+                  $ {service?.price ?? 0}
+                </Card.Text>
+                <ReactQuill
+                  theme='bubble'
+                  value={service?.desc ?? 'decription...'}
+                  readOnly
+                />
+              </Card.Body>
+            </Card>
           </Row>
-          {/* <Row>{
-            inputs.images.slice( 1 ).map( img => (
-              <Col lg="3" md="4" sm="6">
-              <Image
-                width="100%"
-                src={img?.name}
-              />
-            </Col>
-           ))
-          }
-
-
-            <Col lg="3" md="4" sm="6">
-              <Image
-                width="100%"
-                src="https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
-              />
-            </Col>
-            <Col lg="3" md="4" sm="6">
-              <Image
-                width="100%"
-                src="https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
-              />
-            </Col>
-            <Col lg="3" md="4" sm="6">
-              <Image
-                width="100%"
-                src="https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg"
-              />
-            </Col>
-          </Row> */}
         </Col>
         <Col md='6'>
           <Form>
-            {/* <Form.Group className="mb-3">
-              <Form.Label>Service Id</Form.Label>
-              <Form.Control type="text" placeholder="Service Id" name="serviceid" onChange={onChange} required />
-            </Form.Group> */}
             <Form.Group className='mb-3'>
-              <Form.Label>Title</Form.Label>
+              <Form.Label>Service Name</Form.Label>
               <Form.Control
                 type='title'
                 placeholder='Service Name'
-                name='title'
+                name='servicename'
                 onChange={onChange}
                 required
               />
@@ -98,15 +89,22 @@ export default function AddService () {
                 placeholder='00000.000'
                 onChange={onChange}
                 name='price'
-                required
               />
+            </Form.Group>
+            <Form.Group className='mb-3'>
+              <Form.Label>Category</Form.Label>
+              <Form.Select aria-label='Category' required>
+                <option>Category</option>
+
+                {ServiceCats?.length > 0 &&
+                  ServiceCats?.map(ele => <option value='1'>One</option>)}
+              </Form.Select>
             </Form.Group>
             <Form.Group className='mb-3'>
               <Form.Label>Description</Form.Label>
               <ReactQuill
                 theme='snow'
-                value={description}
-                onChange={setdescription}
+                onChange={value => setService({ type: 'CHANGEDES', value })}
                 placeholder='description'
               />
             </Form.Group>
@@ -115,11 +113,11 @@ export default function AddService () {
               <InputGroup className='mb-3'>
                 <Form.Control
                   type='file'
-                  onChange={onChange}
+                  onChange={changeImage}
                   name='images'
                   accept='images/*'
                 />
-                <Button variant='secoundary' onClick={UploadImg}>
+                <Button variant='secoundary'>
                   <BiUpload size={20} />
                 </Button>
               </InputGroup>

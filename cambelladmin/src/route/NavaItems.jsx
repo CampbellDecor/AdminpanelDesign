@@ -52,21 +52,20 @@ export const NavItems =[
     itemicon: <FaUsers size={is} className='me-3' />
   }
 ]
-export const SuperNavItems =[...NavItems].splice(1, 0, {
+const navbar=[...NavItems].map(ele => {
+  if (ele.itemname === 'Chats') {
+    return {
+      path: '/chats/admin',
+      itemname: 'Chats',
+      itemicon: <BsFillChatFill size={is} className='me-3' />
+    }
+  } else {
+    return ele
+  }
+})
+
+export const SuperNavItems =[...navbar.slice(0,1) ,{
     path: '/admins',
     itemname: 'Admin',
     itemicon: <MdAdminPanelSettings size={is} className='me-3' />
-}).map(ele =>
-{
-  if (ele.itemname === "Chats")
-  {
-       return {
-    path: '/chats/admin',
-    itemname: 'Chats',
-    itemicon: <BsFillChatFill size={is} className='me-3' />
-  }
-  } else
-  {
-    return ele;
-    }
-  })
+},...navbar.slice(1,navbar.length-1)]
