@@ -6,16 +6,25 @@ import Chatting from '../../component/ChatComponent';
 import SearchOption from '../../component/Util/SearchPanel';
 import { Chatuser, Message, Reply } from '../../component/Chats';
 import { useAdminChatStore } from '../../redux/AdminChatStore';
+import {getLocalStorage} from '../../function/LocalStorageHandler'
 export default function ChatApp ()
 {
 
-  const { adminChatDispatcher, adminchatlist, getadminchatList, admichats } = useAdminChatStore();
+  const { adminChatDispatcher, adminchatlist, getadminchatList, admichats,getachat } = useAdminChatStore();
 
   const { chatlist } = adminchatlist;
   const { chats } = admichats;
   useEffect(() =>
   {
-    adminChatDispatcher(getadminchatList());
+    adminChatDispatcher(getadminchatList()).then(res =>
+    {
+      const chatsave = getLocalStorage('chat');
+      if (chatsave)
+      {
+adminChatDispatcher(getachat(chatsave))
+      }
+
+    })
   }, [adminChatDispatcher]);
 
   return (

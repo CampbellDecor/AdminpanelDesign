@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAdminChatStore } from '../redux/AdminChatStore';
 import { useUserChatStore } from '../redux/ChatStore';
-import {useUserContext} from '../contexts/UserContext'
+import { useUserContext } from '../contexts/UserContext'
+import { changeLocalStorage } from '../function/LocalStorageHandler';
 
 export function Chatuser ({
   id,
@@ -22,11 +23,13 @@ export function Chatuser ({
   const onHandleChange =e =>
     {
     e.preventDefault();
+    changeLocalStorage('chat',id)
     adminChatDispatcher(getachat(id));
   }
   const onHandleUserChange =e =>
     {
     e.preventDefault();
+    changeLocalStorage('chat', id)
     adminChatDispatcher(getuChats(id));
   }
 
@@ -119,7 +122,4 @@ export function Reply ({ chatid, message,time,date })
     </div>
   );
 }
-export function chat ({ message, replay, sender, reciver })
-{
-  return <></>;
-}
+

@@ -32,3 +32,27 @@ export const addLocalitem = (name, item) => {
     }
     localStorage.setItem(name, newdata);
 }
+export const getLocalStorage = name => {
+  const exist = localStorage.getItem(name)
+  if (exist !== null) {
+    try {
+      return JSON.parse(exist)
+    } catch (error) {
+      return exist
+    }
+  } else
+  {
+      throw new Error(name + 'Not Found in Local Storage');
+  }
+}
+export const changeLocalStorage = (name, item) => {
+  let newdata,
+    exsit = localStorage.getItem(name)
+    try {
+        const data = JSON.parse(exsit);
+        newdata = data;
+    } catch (error) {
+        newdata = item;
+    }
+  localStorage.setItem(name, newdata)
+}
