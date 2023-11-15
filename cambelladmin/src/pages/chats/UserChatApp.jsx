@@ -3,23 +3,17 @@ import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
 import SearchOption from '../../component/Util/SearchPanel'
 import { useUserChatStore } from '../../redux/ChatStore'
 import { getLocalStorage } from '../../function/LocalStorageHandler'
-import Chatting, { Chatuser, Message, Reply } from '../../component/Chats'
+import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
 export default function ChatApp () {
-  const {
-    getUserChatList,
-    UserChatDispatcher,
-    userChatList,
-    userChatsall,
-    getuChats
-  } = useUserChatStore()
-  const { chatslist } = userChatList
-  const { chats } = userChatsall
+  const { getUserChatList, getuChats, CampbellDispatcher } = useUserChatStore()
+
+  
   useEffect(() => {
-    UserChatDispatcher(getUserChatList()).then(res => {
+    CampbellDispatcher(getUserChatList()).then(res => {
       const chatsave = getLocalStorage('chat')
-      UserChatDispatcher(getuChats(chatsave))
+      CampbellDispatcher(getuChats(chatsave))
     })
-  }, [UserChatDispatcher, getUserChatList])
+  }, [])
 
   return (
     <section className='vh-100 mt-0'>
@@ -38,34 +32,13 @@ export default function ChatApp () {
                     <div className='p-3 h-100'>
                       <SearchOption />
                       <div className='userlist'>
-                        <ul className='list-unstyled h-100'>
-                          {chatslist?.map(chat => (
-                            <Chatuser {...chat} isAdmin={false} />
-                          ))}
-                        </ul>
+                        <ChatList />
                       </div>
                     </div>
                   </Col>
                   <div className='col-md-6 col-lg-7 col-xl-8 position-relative chatting'>
-                    <div
-                      className='py-3 pe-3 h-100'
-                      data-mdb-perfect-scrollbar='true'
-                    >
-                      {chats?.length > 0 &&
-                        chats.map(ele =>
-                          ele.type === 'sent' ? (
-                            <Message {...ele} />
-                          ) : (
-                            <Reply {...ele} />
-                          )
-                        )}
-                    </div>
-
-                    <Chatting
-                      isAdmin={false}
-                      aid={chats?.length > 0 ? chats[0].uid : 0}
-                      userdata={chats?.length > 0 ? chats[0].username : ''}
-                    />
+                    <ChatPanel />
+                    <Chatting />
                   </div>
                 </Row>
               </CardBody>

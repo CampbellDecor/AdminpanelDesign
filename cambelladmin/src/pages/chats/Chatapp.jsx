@@ -1,28 +1,20 @@
-import React, { useEffect } from 'react';
-import { Container, Row, Col, Card, CardBody } from 'react-bootstrap';
-import SearchOption from '../../component/Util/SearchPanel';
-import Chatting,{ Chatuser, Message, Reply } from '../../component/Chats';
-import { useAdminChatStore } from '../../redux/AdminChatStore';
-import {getLocalStorage} from '../../function/LocalStorageHandler'
-export default function ChatApp ()
-{
+import React, { useEffect } from 'react'
+import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
+import SearchOption from '../../component/Util/SearchPanel'
+import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
+import { useAdminChatStore } from '../../redux/AdminChatStore'
+import { getLocalStorage } from '../../function/LocalStorageHandler'
+export default function ChatApp () {
+  const { getadminchatList, getachat, CampbellDispatcher } = useAdminChatStore()
 
-  const { adminChatDispatcher, adminchatlist, getadminchatList, admichats,getachat } = useAdminChatStore();
-
-  const { chatlist } = adminchatlist;
-  const { chats } = admichats;
-  useEffect(() =>
-  {
-    adminChatDispatcher(getadminchatList()).then(res =>
-    {
-      const chatsave = getLocalStorage('chat');
-      if (chatsave)
-      {
-adminChatDispatcher(getachat(chatsave))
+  useEffect(() => {
+    CampbellDispatcher(getadminchatList()).then(res => {
+      const chatsave = getLocalStorage('chat')
+      if (chatsave) {
+        CampbellDispatcher(getachat(chatsave))
       }
-
     })
-  }, [adminChatDispatcher]);
+  }, [])
 
   return (
     <section className='vh-100'>
@@ -41,31 +33,13 @@ adminChatDispatcher(getachat(chatsave))
                     <div className='p-3 h-100'>
                       <SearchOption />
                       <div className='userlist'>
-                        <ul className='list-unstyled h-100'>
-                          {chatlist.length > 0 &&
-                            chatlist?.map(chat => <Chatuser {...chat} id={chat?.aid} />)}
-                        </ul>
+                        <ChatList />
                       </div>
                     </div>
                   </Col>
                   <div className='col-md-6 col-lg-7 col-xl-8 position-relative chatting'>
-                    <div
-                      className='pt-3 pe-3 h-100'
-                      data-mdb-perfect-scrollbar='true'
-                    >
-                      {chats
-                        ?.length > 0 &&
-                        chats
-                          .map(ele =>
-                            ele.type === 'sent' ? (
-                              <Message {...ele} />
-                            ) : (
-                              <Reply {...ele} />
-                            )
-                          )}
-                    </div>
-
-                    <Chatting isAdmin={true} aid={chats?.length > 0 ? chats[0].aid : 0} />
+                    <ChatPanel />
+                    <Chatting />
                   </div>
                 </Row>
               </CardBody>
@@ -74,5 +48,5 @@ adminChatDispatcher(getachat(chatsave))
         </Row>
       </Container>
     </section>
-  );
+  )
 }
