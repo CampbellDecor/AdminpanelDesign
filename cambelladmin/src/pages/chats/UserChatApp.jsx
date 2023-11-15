@@ -1,28 +1,25 @@
-import React, { useEffect } from 'react';
-import
-  {
-    Container,
-    Row,
-    Col,
-    Card,
-    CardBody
-  } from 'react-bootstrap';
-import Chatting from '../../component/ChatComponent';
-import SearchOption from '../../component/Util/SearchPanel';
-import { useUserChatStore } from '../../redux/ChatStore';
-import { Chatuser,Message,Reply } from '../../component/Chats';
-export default function ChatApp ()
-{
-
+import React, { useEffect } from 'react'
+import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
+import SearchOption from '../../component/Util/SearchPanel'
+import { useUserChatStore } from '../../redux/ChatStore'
+import { getLocalStorage } from '../../function/LocalStorageHandler'
+import Chatting, { Chatuser, Message, Reply } from '../../component/Chats'
+export default function ChatApp () {
   const {
-    getUserChatList, UserChatDispatcher, userChatList,userChatsall
-  }
-    = useUserChatStore();
-  const { chatslist } = userChatList;
-  const { chats } = userChatsall;
-useEffect(()=>{
-  UserChatDispatcher(getUserChatList());
-},[UserChatDispatcher,getUserChatList])
+    getUserChatList,
+    UserChatDispatcher,
+    userChatList,
+    userChatsall,
+    getuChats
+  } = useUserChatStore()
+  const { chatslist } = userChatList
+  const { chats } = userChatsall
+  useEffect(() => {
+    UserChatDispatcher(getUserChatList()).then(res => {
+      const chatsave = getLocalStorage('chat')
+      UserChatDispatcher(getuChats(chatsave))
+    })
+  }, [UserChatDispatcher, getUserChatList])
 
   return (
     <section className='vh-100 mt-0'>
@@ -42,22 +39,33 @@ useEffect(()=>{
                       <SearchOption />
                       <div className='userlist'>
                         <ul className='list-unstyled h-100'>
-                          {chatslist?.map(chat => (<Chatuser {...chat} isAdmin={ false} />))}
+                          {chatslist?.map(chat => (
+                            <Chatuser {...chat} isAdmin={false} />
+                          ))}
                         </ul>
                       </div>
-
                     </div>
                   </Col>
                   <div className='col-md-6 col-lg-7 col-xl-8 position-relative chatting'>
-             <div className='py-3 pe-3 h-100' data-mdb-perfect-scrollbar='true'>
-  {chats?.length > 0 &&
-    chats.map(ele =>
-      ele.type === 'sent' ? <Message {...ele} /> : <Reply {...ele} />
-    )}
-</div>
+                    <div
+                      className='py-3 pe-3 h-100'
+                      data-mdb-perfect-scrollbar='true'
+                    >
+                      {chats?.length > 0 &&
+                        chats.map(ele =>
+                          ele.type === 'sent' ? (
+                            <Message {...ele} />
+                          ) : (
+                            <Reply {...ele} />
+                          )
+                        )}
+                    </div>
 
-                    <Chatting isAdmin={false} aid={chats?.length > 0 ? chats[0].uid : 0} userdata={chats?.length > 0 ? chats[0].username :""
-} />
+                    <Chatting
+                      isAdmin={false}
+                      aid={chats?.length > 0 ? chats[0].uid : 0}
+                      userdata={chats?.length > 0 ? chats[0].username : ''}
+                    />
                   </div>
                 </Row>
               </CardBody>
@@ -66,5 +74,5 @@ useEffect(()=>{
         </Row>
       </Container>
     </section>
-  );
+  )
 }

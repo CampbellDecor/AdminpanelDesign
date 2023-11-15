@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
-
 import { Container, Row, Col, Card, CardBody } from 'react-bootstrap';
-
-import Chatting from '../../component/ChatComponent';
 import SearchOption from '../../component/Util/SearchPanel';
-import { Chatuser, Message, Reply } from '../../component/Chats';
+import Chatting,{ Chatuser, Message, Reply } from '../../component/Chats';
 import { useAdminChatStore } from '../../redux/AdminChatStore';
 import {getLocalStorage} from '../../function/LocalStorageHandler'
 export default function ChatApp ()
