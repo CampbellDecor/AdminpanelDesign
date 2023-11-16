@@ -17,11 +17,9 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 import { AiOutlineAppstoreAdd } from 'react-icons/ai'
 import DatePicker from 'react-date-picker'
-import {useBookingStore} from '../../redux/BookStore'
 export default function AddTodo ({ date })
 {
-  const { OneBookingData } = useBookingStore();
-  const { book} = OneBookingData;
+  const book = {};
   const DisabledTodo = useMemo(() => date < new Date(), [date])
 
   const [varyingModal, setVaryingModal] = useState(false)

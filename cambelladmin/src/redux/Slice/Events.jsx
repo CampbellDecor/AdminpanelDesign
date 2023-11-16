@@ -4,7 +4,7 @@ const adminchatadepter = createEntityAdapter({
   selectId: chats => chats.chatid
 })
 
-const AdminChatSlice = createSlice({
+const EventSlice = createSlice({
   name: 'achats',
   initialState: adminchatadepter.getInitialState({
     loading: 'true',
@@ -26,3 +26,4 @@ const AdminChatSlice = createSlice({
       })
   }
 })
+export default EventSlice.reducer;

@@ -7,10 +7,7 @@ import {useEventStore} from '../../redux/EventStore'
 import Event from '../../component/Event'
 export default function Events ()
 {
-  const { EventData
-
-  } = useEventStore();
-  const {events } = EventData;
+const events=[]
 
   return (
     <MDBContainer fluid className='my-5 text-center min-vh-100'>

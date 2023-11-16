@@ -4,7 +4,7 @@ const adminchatadepter = createEntityAdapter({
   selectId: chats => chats.chatid
 })
 
-const AdminChatSlice = createSlice({
+const AdminSlice = createSlice({
   name: 'achats',
   initialState: adminchatadepter.getInitialState({
     loading: 'true',

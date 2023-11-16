@@ -1,38 +1,31 @@
 import { configureStore } from '@reduxjs/toolkit'
 import Thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import user from '../Slice/UserSlice.jsx'
-import admin from '../Slice/AdminSlice.jsx'
-import ServiceCat from '../Slice/ServiceCategorySlice.jsx'
-import service from '../Slice/ServiceSlice.jsx'
-import Book from '../Slice/Book.jsx'
-import adminchatlist from '../Slice/AdminChatListSlice.jsx'
-import userchatlist from '../Slice/NormalChatlistSlice.jsx'
-import adminchats from '../Slice/AdminChats'
-import userChats from '../Slice/UserChats'
-import events from '../Slice/EventsSlice'
-import packs from '../Slice/Packages.jsx'
-import userOne from '../Slice/OneUser.jsx'
-import OneBook from '../Slice/OneBooking'
-import todo from '../Slice/TodoSlice'
-import onePackage from '../Slice/OnePackage'
+import UserSlice from '../Slice/User'
+import AdminSlice from '../Slice/Admins'
+import AdminChatsSlice from '../Slice/Adminchats'
+import SuperAdminchatSlice from '../Slice/SuperAdminChats'
+import EventsSlice from '../Slice/Events'
+import PackageSlice from '../Slice/Packages'
+import ServiceSlice from '../Slice/Service'
+import ServiceCategorySlice from '../Slice/ServiceCategory'
+import BookingSlice from '../Slice/Booking'
+import AdminChatsoneSlice from '../Slice/AdminChatsaone'
+import UserChatsoneSlice from '../Slice/UserChatone'
+
 export const Store = configureStore({
   reducer: {
-    user,
-    admin,
-    ServiceCat,
-    service,
-    Book,
-    adminchatlist,
-    adminchats,
-    userchatlist,
-    userChats,
-    events,
-    packs,
-    userOne,
-    OneBook,
-    todo,
-    onePackage
+    user:UserSlice,
+    admin:AdminSlice,
+    category:ServiceCategorySlice,
+    service:ServiceSlice,
+    book:BookingSlice,
+    events:EventsSlice,
+    packs: PackageSlice,
+    achatlis: SuperAdminchatSlice,
+    uchatlist: AdminChatsSlice,
+    achats: AdminChatsoneSlice,
+    uchats:UserChatsoneSlice
   },
 middleware:[Thunk,logger]
 })

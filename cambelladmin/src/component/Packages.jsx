@@ -10,7 +10,6 @@ import {
 } from 'mdb-react-ui-kit'
 import ReactStars from 'react-rating-stars-component'
 import Swal from 'sweetalert2'
-import axios from 'axios'
 const Services = ({ ser}) =>
 {
   return (<div className='mt-1 mb-0 text-muted small'>

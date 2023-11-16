@@ -1,26 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
 import SearchOption from '../../component/Util/SearchPanel'
 import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
-import { useAdminChatStore } from '../../redux/AdminChatStore'
-import { getLocalStorage,createStorageLocal } from '../../function/LocalStorageHandler'
+
 export default function ChatApp () {
-  const {getachat, CampbellDispatcher } = useAdminChatStore()
 
-  useEffect(() => {
-
-      try {
-        const chatsave = getLocalStorage('chat')
-        if (chatsave) {
-          CampbellDispatcher(getachat(chatsave))
-        }
-      } catch (error)
-      {
-        createStorageLocal('chat', '');
-        console.error(error)
-      }
-
-  }, [])
 
   return (
     <section className='vh-100'>

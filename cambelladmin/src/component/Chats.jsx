@@ -107,17 +107,17 @@ export function Chatuser ({
   unread,
   isAdmin = true
 }) {
-  const { CampbellDispatcher, getachat } = useAdminChatStore()
-  const { getuChats } = useUserChatStore()
+  // const { CampbellDispatcher, getachat } = useAdminChatStore()
+  // const { getuChats } = useUserChatStore()
   const onHandleChange = e => {
     e.preventDefault()
-    changeLocalStorage('chat', id)
-   CampbellDispatcher(getachat(id))
+  //   changeLocalStorage('chat', id)
+  //  CampbellDispatcher(getachat(id))
   }
   const onHandleUserChange = e => {
     e.preventDefault()
-    changeLocalStorage('chat', id)
-    CampbellDispatcher(getuChats(id))
+    // changeLocalStorage('chat', id)
+    // CampbellDispatcher(getuChats(id))
   }
 
   return (
@@ -218,10 +218,10 @@ export function Reply ({ chatid, message, time }) {
 //chatpanel
 export function ChatPanel () {
   const { isSuper } = useUserContext()
-  const { admichats } = useAdminChatStore()
-  const { userChatsall } = useUserChatStore()
-  const { chats } = isSuper ? admichats : userChatsall
-
+  // const { admichats } = useAdminChatStore()
+  // const { userChatsall } = useUserChatStore()
+  // const { chats } = isSuper ? admichats : userChatsall
+  const chats = [];
   return (
     <div className='py-3 pe-3 h-100' data-mdb-perfect-scrollbar='true'>
       {chats?.length > 0 &&
@@ -234,10 +234,12 @@ export function ChatPanel () {
 
 export function ChatList () {
   const { isSuper } = useUserContext()
-  const { adminchatlist } = useAdminChatStore()
-  const { userChatList } = useUserChatStore()
-  const { chatslist } = userChatList
-  const { chatlist } = adminchatlist
+  // const { adminchatlist } = useAdminChatStore()
+  // const { userChatList } = useUserChatStore()
+  // const { chatslist } = userChatList
+  // const { chatlist } = adminchatlist
+  const chatlist=[],chatslist = []
+
   return (
     <ul className='list-unstyled h-100'>
       {isSuper? chatlist.length > 0 &&

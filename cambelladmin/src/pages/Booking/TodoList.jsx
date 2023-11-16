@@ -12,11 +12,11 @@ import {
 import { Form } from 'react-bootstrap'
 import Todo from '../../component/todo'
 import AddToDo from './AddTodo'
-import { useBookingStore } from '../../redux/BookStore'
+
 export default function ToDoList ()
 {
-  const { TodoListData } = useBookingStore()
-  const { todo } = TodoListData;
+
+  const todo=[]
 
   const date = new Date('July 21, 2024 01:15:00')
 

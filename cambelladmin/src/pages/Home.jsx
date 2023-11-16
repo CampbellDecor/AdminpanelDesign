@@ -6,17 +6,10 @@ import { NewAppoint } from '../component/Util/Table'
 import {ListPanel } from '../component/Panels'
 import {HomeCountPanel} from '../component/Home'
 import { MDBListGroup, MDBListGroupItem, MDBBtn } from 'mdb-react-ui-kit'
-import {useBookingStore} from '../redux/BookStore'
 export default function Home ()
 {
-  const { getrecentbookings,CampbellDispatcher} = useBookingStore();
-    useEffect(() =>
-    {
-      CampbellDispatcher(getrecentbookings())
 
 
-
-    }, []);
   return (
     <Container fluid className='home'>
       <Row className='home-countpanel my-3'>

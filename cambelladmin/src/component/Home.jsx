@@ -1,7 +1,9 @@
 import React from 'react'
 import { FaCalendarDay, FaUsers, FaCoins, FaRegThumbsUp } from 'react-icons/fa'
-import {CountPanel} from './Panels'
-export function HomeCountPanel() {
+import { CountPanel } from './Panels'
+export function HomeCountPanel ()
+{
+
   return (
    <div className='w-100  d-flex justify-content-around flex-sm-nowrap flex-wrap'>
   <CountPanel
@@ -9,7 +11,7 @@ export function HomeCountPanel() {
       title: 'Users',
       idenity: <FaUsers className='icon' />,
       path: '/users',
-      count: 3
+      count: usercount??0
     }}
   />
   <CountPanel

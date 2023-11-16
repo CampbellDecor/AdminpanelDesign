@@ -1,9 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-const BASE = '/api/booking'
-
-export const getBooking = createAsyncThunk(
-  'get/Booking',
+const BASE = '/api/event'
+export const getEvents = createAsyncThunk(
+  'get/Events',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${BASE}`)
@@ -14,8 +13,8 @@ return response.data
     }
   }
 )
-export const deleteBooking = createAsyncThunk(
-  'delete/Booking',
+export const deleteEvents = createAsyncThunk(
+  'delete/Events',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()
@@ -24,8 +23,8 @@ export const deleteBooking = createAsyncThunk(
     }
   }
 )
-export const addBooking = createAsyncThunk(
-  'add/Booking',
+export const addEvents = createAsyncThunk(
+  'add/Events',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()
@@ -34,8 +33,8 @@ export const addBooking = createAsyncThunk(
     }
   }
 )
-export const editBooking = createAsyncThunk(
-  'edit/Booking',
+export const editEvents = createAsyncThunk(
+  'edit/Events',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()
@@ -44,8 +43,8 @@ export const editBooking = createAsyncThunk(
     }
   }
 )
-export const blockBooking = createAsyncThunk(
-  'block/Booking',
+export const blockEvents = createAsyncThunk(
+  'block/Events',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()
@@ -54,8 +53,8 @@ export const blockBooking = createAsyncThunk(
     }
   }
 )
-export const unblockBooking = createAsyncThunk(
-  'unblock/Booking',
+export const unblockEvents = createAsyncThunk(
+  'unblock/Events',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()

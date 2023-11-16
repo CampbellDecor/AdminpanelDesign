@@ -1,22 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
 import SearchOption from '../../component/Util/SearchPanel'
-import { useUserChatStore } from '../../redux/ChatStore'
-import { getLocalStorage } from '../../function/LocalStorageHandler'
 import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
 export default function ChatApp () {
-  const {getuChats, CampbellDispatcher } = useUserChatStore()
 
-  useEffect(() => {
-      try {
-        const chatsave = getLocalStorage('chat')
-        if (chatsave) {
-          CampbellDispatcher(getuChats(chatsave))
-        }
-      } catch (error) {
-        console.error(error)
-      }
-  }, [])
 
   return (
     <section className='vh-100 mt-0'>

@@ -1,28 +1,40 @@
-import React, { Suspense } from 'react'
-import { RouterProvider } from 'react-router-dom'
-import router from './route/router'
-import '@fortawesome/fontawesome-free/css/all.min.css'
-import 'mdb-ui-kit/css/mdb.min.css'
-import Cambell from './contexts/CambellContext'
-import LoadingPage from './pages/Bugs/Loding'
-import { Provider } from 'react-redux'
-import { Store } from './redux/Store/store'
-import {getUser} from './redux/Thunks/User'
-import {getadmin} from './redux/Thunks/Admin'
-import {getEvents} from './redux/Thunks/EventThunk'
-import {getPack} from './redux/Thunks/PackThnuk'
-import {getServiceCat} from './redux/Thunks/ServiceCategory'
-import {getservice} from './redux/Thunks/Service'
-import {getadminchatList} from './redux/Thunks/AdminChat'
-import {getUserChatList} from './redux/Thunks/userchat'
-Store.dispatch(getUser())
-Store.dispatch(getadmin())
+import React, { Suspense } from 'react';
+import { RouterProvider } from 'react-router-dom';
+import router from './route/router';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'mdb-ui-kit/css/mdb.min.css';
+import Cambell from './contexts/CambellContext';
+import LoadingPage from './pages/Bugs/Loding';
+import { Provider } from 'react-redux';
+import { Store } from './redux/Store/store';
+
+
+
+
+
+
+import { getAdmins } from './redux/Thunks/Admins';
+import { getEvents } from './redux/Thunks/Events';
+import { getPackages } from './redux/Thunks/Packages';
+import { getServices } from './redux/Thunks/Service';
+import { getUsers } from './redux/Thunks/User';
+import { getCategory } from './redux/Thunks/ServiceCategory';
+import { getSAdminChats } from './redux/Thunks/SuperAdminChats';
+import { getAdminChats } from './redux/Thunks/Adminchats';
+
+
+
+
+
+Store.dispatch(getAdmins())
 Store.dispatch(getEvents())
-Store.dispatch(getServiceCat())
-Store.dispatch(getPack())
-Store.dispatch(getservice())
-Store.dispatch(getadminchatList())
-Store.dispatch(getUserChatList())
+Store.dispatch(getEvents())
+Store.dispatch(getPackages())
+Store.dispatch(getServices())
+Store.dispatch(getUsers())
+Store.dispatch(getCategory())
+Store.dispatch(getSAdminChats())
+Store.dispatch(getAdminChats())
 export default function CambellAdmin () {
 
   return (

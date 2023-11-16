@@ -2,7 +2,6 @@ import React, { useCallback } from 'react'
 import { MdBlockFlipped, MdDelete } from 'react-icons/md'
 import { FaUnlockAlt } from 'react-icons/fa'
 
-
 import {
   MDBCol,
   MDBCard,
@@ -19,6 +18,8 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 export default function Admin ({
+
+  
   profile,
   username,
   email,
@@ -71,11 +72,15 @@ export default function Admin ({
                 </div>
                 <div>
                   <p className='small text-muted mb-1'>Rating</p>
-                  <p className='mb-0'>{ Math.floor(Math.random()*10)}</p>
+                  <p className='mb-0'>{Math.floor(Math.random() * 10)}</p>
                 </div>
               </div>
               <div className='d-flex pt-1'>
-                <MDBBtn outline className='me-1 flex-grow-1' href={'/admins/'+aid}>
+                <MDBBtn
+                  outline
+                  className='me-1 flex-grow-1'
+                  href={'/admins/' + aid}
+                >
                   Edit
                 </MDBBtn>
                 <ButtonGroup aria-label='Basic example'>
@@ -85,7 +90,7 @@ export default function Admin ({
                     <Blocked {...{ username, profile, aid }} />
                   )}
 
-                  <DeleteBox {...{aid,username}} />
+                  <DeleteBox {...{ aid, username }} />
                 </ButtonGroup>
               </div>
             </div>
@@ -254,13 +259,12 @@ export function UnBlocked ({ aid, profile, username }) {
   )
 }
 
-export function DeleteBox ({ aid, username, html, color })
-{
-  const navigate = useNavigate();
+export function DeleteBox ({ aid, username, html, color }) {
+  const navigate = useNavigate()
   const deleteAction = useCallback(async () => {
     const result = await Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to Delete "+username,
+      text: "You won't be able to Delete " + username,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -269,36 +273,30 @@ export function DeleteBox ({ aid, username, html, color })
     })
     if (result.isConfirmed) {
       const admin = await axios.delete('/api/admin/' + aid)
-      if (admin)
-      {
-
+      if (admin) {
         Swal.fire({
           title: 'Deleted!',
           text: 'Your file has been deleted.',
-          icon: 'success',
+          icon: 'success'
         })
-        navigate("/admins")
-
-      } else
-      {
-Swal.fire({
-  title: 'failed!',
-  text: 'You Haven"t delete',
-  icon: 'error',
-})
-
+        navigate('/admins')
+      } else {
+        Swal.fire({
+          title: 'failed!',
+          text: 'You Haven"t delete',
+          icon: 'error'
+        })
       }
     }
   }, [])
   return (
-    <Button variant={color??'warning'} onClick={deleteAction}>
-      {html??<MdDelete color='white' />}
+    <Button variant={color ?? 'warning'} onClick={deleteAction}>
+      {html ?? <MdDelete color='white' />}
     </Button>
   )
 }
 
-export function ResetPassword ({ username,aid}) {
-
+export function ResetPassword ({ username, aid }) {
   const deleteAction = useCallback(async () => {
     const result = await Swal.fire({
       title: 'Are you sure?',
@@ -327,9 +325,8 @@ export function ResetPassword ({ username,aid}) {
     }
   }, [])
   return (
-    <Button variant='info' as='a' href='/resetpw' disabled={aid===undefined}>
+    <Button variant='info' as='a' href='/resetpw' disabled={aid === undefined}>
       <MdOutlinePassword size={29} />
-
     </Button>
   )
 }

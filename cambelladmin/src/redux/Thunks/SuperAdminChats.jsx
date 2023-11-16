@@ -1,31 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-const BASE = '/api/booking'
+const BASE = '/api/adminchat'
 
-export const getBooking = createAsyncThunk(
-  'get/Booking',
+export const getSAdminChats = createAsyncThunk(
+  'get/SAdminChats',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE}`)
-return response.data
-
+      const response = await axios.get(`${BASE}`);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }
   }
 )
-export const deleteBooking = createAsyncThunk(
-  'delete/Booking',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get()
-    } catch (error) {
-      rejectWithValue(error.response.data)
-    }
-  }
-)
-export const addBooking = createAsyncThunk(
-  'add/Booking',
+export const deleteSAdminChats = createAsyncThunk(
+  'delete/SAdminChats',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()
@@ -34,8 +23,8 @@ export const addBooking = createAsyncThunk(
     }
   }
 )
-export const editBooking = createAsyncThunk(
-  'edit/Booking',
+export const addSAdminChats = createAsyncThunk(
+  'add/SAdminChats',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()
@@ -44,8 +33,8 @@ export const editBooking = createAsyncThunk(
     }
   }
 )
-export const blockBooking = createAsyncThunk(
-  'block/Booking',
+export const editSAdminChats = createAsyncThunk(
+  'edit/SAdminChats',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()
@@ -54,8 +43,18 @@ export const blockBooking = createAsyncThunk(
     }
   }
 )
-export const unblockBooking = createAsyncThunk(
-  'unblock/Booking',
+export const blockSAdminChats = createAsyncThunk(
+  'block/SAdminChats',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get()
+    } catch (error) {
+      rejectWithValue(error.response.data)
+    }
+  }
+)
+export const unblockSAdminChats = createAsyncThunk(
+  'unblock/SAdminChats',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get()

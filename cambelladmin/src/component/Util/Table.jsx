@@ -2,10 +2,9 @@ import React from 'react';
 import Table from 'react-data-table-component';
 import {Badge,Image} from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import {useBookingStore} from '../../redux/BookStore'
 export function NewAppoint ()
 {
-    const { BookData } = useBookingStore();
+    const BookData={}
     const onrowclick=(row,event)=>{
 
     }

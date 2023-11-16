@@ -11,7 +11,7 @@ import { MdHomeRepairService} from 'react-icons/md';
 
 
 export default function Service (){
-  const { services, loading, result } = useSelector(state => state.service)
+  const  services=[], loading=false, result='fetched' 
 
 
   return loading ? (

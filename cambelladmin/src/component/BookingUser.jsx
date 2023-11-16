@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { FaRocketchat } from 'react-icons/fa'
 
 import {
@@ -16,15 +16,18 @@ import { useUserChatStore } from '../redux/ChatStore'
 import {useUserStore} from '../redux/UserStore'
 export default function BookingUser ({ userdata })
 {
-  const { UserChatDispatcher, getuChats } = useUserChatStore()
-  const { OneUserdata } = useUserStore();
-  const {user } = OneUserdata;
+const users=[]
+  const user = useMemo(() =>
+  {
+    const result = users?.find(ele => ele.uid === userdata);
+    console.log(users??2323)
+    return result;
+  },[])
   const navigate = useNavigate()
   const OnClick = () =>
   {
     if (user)
     {
-UserChatDispatcher(getuChats(user?.uid))
 navigate('/chats/normal')
 
     } else
