@@ -11,7 +11,7 @@ export function HomeCountPanel ()
       title: 'Users',
       idenity: <FaUsers className='icon' />,
       path: '/users',
-      count: usercount??0
+      count: 0
     }}
   />
   <CountPanel

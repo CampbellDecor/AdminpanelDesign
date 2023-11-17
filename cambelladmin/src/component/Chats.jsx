@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAdminChatStore } from '../redux/AdminChatStore'
-import { useUserChatStore } from '../redux/ChatStore'
 import { useUserContext } from '../contexts/UserContext'
 import { changeLocalStorage,getLocalStorage } from '../function/LocalStorageHandler'
 import { Button } from 'react-bootstrap'
@@ -9,10 +7,9 @@ import axios from 'axios'
 
 //Chatting TextBox
 export default function Chatting () {
-  const { CampbellDispatcher, getachat, admichats } = useAdminChatStore()
-  const { getuChats, userChatsall } = useUserChatStore()
+
   const { currentuser, isSuper } = useUserContext()
-  const { chats } = isSuper ? admichats : userChatsall
+  const { chats } = isSuper ? [] :[]
   const { profile, username } = currentuser
   const [message, setmessage] = useState('')
   const [id, setid] = useState()
@@ -42,7 +39,7 @@ export default function Chatting () {
         aid: id
       })
       if (response.data) {
-        CampbellDispatcher(getachat(id))
+        // CampbellDispatcher(getachat(id))
         setmessage('')
       }
     } catch (error) {
@@ -58,7 +55,7 @@ export default function Chatting () {
         username: userdata ?? ''
       })
       if (response.data) {
-        CampbellDispatcher(getuChats(id))
+        // CampbellDispatcher(getuChats(id))
         setmessage('')
       }
     } catch (error) {

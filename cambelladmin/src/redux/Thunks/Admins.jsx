@@ -4,8 +4,8 @@ const BASE="/api/admin"
 export const getAdmins = createAsyncThunk("get/admins", async (_,{rejectWithValue}) =>
 {
     try {
-       const response = await axios.get(`${BASE}`)
-return response.data
+        const response = await axios.get(`${BASE}`)
+        return response.data
 
     } catch (error) {
         rejectWithValue(error.response.data);
@@ -35,10 +35,11 @@ export const editAdmins = createAsyncThunk("edit/admins", async (_,{rejectWithVa
         rejectWithValue(error.response.data);
     }
 })
-export const blockAdmins = createAsyncThunk("block/admins", async (_,{rejectWithValue}) =>
+export const blockAdmins = createAsyncThunk("block/admins", async (aid,{rejectWithValue}) =>
 {
     try {
-        const response = await axios.get();
+        const response = await axios.post(`${BASE}/block/${aid}`);
+        return response.data;
     } catch (error) {
         rejectWithValue(error.response.data);
     }
@@ -51,3 +52,14 @@ export const unblockAdmins = createAsyncThunk("unblock/admins", async (_,{reject
         rejectWithValue(error.response.data);
     }
 })
+export const getauth = createAsyncThunk(
+  'get/auth',
+  async (_, { rejectWithValue }) => {
+    try {
+        const response = await axios.get(`${BASE}/auth/all`);
+        return response.data;
+    } catch (error) {
+      rejectWithValue(error.response.data)
+    }
+  }
+)

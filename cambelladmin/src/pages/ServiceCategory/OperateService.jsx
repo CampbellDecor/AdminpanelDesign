@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useReducer, useState, useEffect } from 'react'
+import React, { useReducer, useState } from 'react'
 import {
   Container,
   Row,
@@ -12,17 +12,12 @@ import {
 import ReactQuill from 'react-quill'
 import { BiUpload } from 'react-icons/bi'
 import { reducer } from '../../function/ServiceHandle'
-import { useServiceCategoryStore } from '../../redux/ServiceCategoryStore'
 
 export default function AddCategory () {
   const [category, setcategory] = useReducer(reducer, {})
   const [categoryImg, setcategoryImg] = useState(null)
-  const {
-    CampbellDispatcher,
-    getServiceCat,
-    CategoryData
-  } = useServiceCategoryStore()
-  const { ServiceCats } = CategoryData
+
+  const  ServiceCats =[]
   const onChange = e => {
     setcategory({
       type: 'CHANGEINPUT',
@@ -38,9 +33,7 @@ export default function AddCategory () {
     const img = URL.createObjectURL(e.target.files[0])
     setcategory({ type: 'IMGCHANGE', value: img })
   }
-  useEffect(() => {
-    CampbellDispatcher(getServiceCat())
-  }, [])
+
   return (
     <Container fluid className='vh-75 pb-5 mb-3' style={{ width: '80%' }}>
       <Row className='h-100'>

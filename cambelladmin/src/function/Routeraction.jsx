@@ -1,6 +1,4 @@
-import { useBookingStore } from '../redux/BookStore'
-import {useUserStore } from '../redux/UserStore'
-import axios from 'axios'
+
 export const OneBookingaction = async ({ params }) =>
 {
     // const { getbookings, OneBookDispatcher } = useBookingStore();

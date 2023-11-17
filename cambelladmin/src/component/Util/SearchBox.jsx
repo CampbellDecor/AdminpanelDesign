@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import {useUserStore} from '../../redux/UserStore'
+
 import {
   Form,
   FormControl,
@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 export default function SearchBox ()
 {
-  const { getsearchUser,userDispatcher} = useUserStore();
+
     const location = useLocation();
     const [search, searchtext] = useState('');
     const onchange = useCallback(e=>
@@ -18,7 +18,7 @@ export default function SearchBox ()
     }, []);
   const searchHandle = useCallback(() =>
   {try {
-userDispatcher(getsearchUser(search))
+
   } catch (error) {
     console.error(error);
   }

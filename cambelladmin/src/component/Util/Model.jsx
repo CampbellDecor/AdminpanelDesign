@@ -12,7 +12,6 @@ import
         MDBTextArea,
         MDBInput
     } from 'mdb-react-ui-kit';
-import { useUserStore } from '../../redux/UserStore';
 import { RiUserForbidFill, RiUserFollowFill } from 'react-icons/ri';
 import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
@@ -34,10 +33,7 @@ const reducer = (state, action) =>
 export function BlockUnBlock ({ uid, username, isBlock })
 {
     const [loading, setloading] = useState(false);
-    const {
-        getUser,
-        userDispatcher,
-    } = useUserStore();
+
 
     const navigate = useNavigate();
     const [varyingModal, setVaryingModal] = useState(false);
@@ -66,7 +62,7 @@ export function BlockUnBlock ({ uid, username, isBlock })
                 setloading(false);
                 if (data)
                 {
-                    userDispatcher(getUser());
+
                     onClickMOdel();
 
                 }
@@ -78,7 +74,7 @@ export function BlockUnBlock ({ uid, username, isBlock })
             }
 
         },
-        [user, onClickMOdel, userDispatcher, getUser]
+        [user, onClickMOdel]
     );
     const onunBlock = useCallback(
         async e =>
@@ -90,7 +86,7 @@ export function BlockUnBlock ({ uid, username, isBlock })
                 setloading(false);
                 if (data)
                 {
-                    userDispatcher(getUser());
+
 
                     onClickMOdel();
 
@@ -104,7 +100,7 @@ export function BlockUnBlock ({ uid, username, isBlock })
             }
 
         },
-        [user, onClickMOdel, userDispatcher, getUser]
+        [user, onClickMOdel]
     );
 
     return (

@@ -1,22 +1,25 @@
 // @ts-nocheck
 import { Outlet, Navigate } from 'react-router-dom';
-import React, { useEffect, useRef } from 'react';
+import React, {  useRef } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import { useAuthContext } from '../../contexts/AuthContext';
-import { toast } from 'react-toastify';
 import { useUIContext } from '../../contexts/UiContext';
 import { ToggleBtn, SplitToggle } from '../../component/Util/ToggleBtns';
 import CambellBreadCrumb from './BreadCrumb';
-import { isexist } from '../../function/CookieHandler';
-import { useNavigate } from 'react-router-dom';
-import { deleteStorageSession } from '../../function/SessionStorage';
+import { getSAdminChats } from '../../redux/Thunks/SuperAdminChats'
+import { getAdminChats } from '../../redux/Thunks/Adminchats'
+import { getAdmins } from '../../redux/Thunks/Admins'
+
+import {useDispatch} from 'react-redux'
 export function Layout ()
 {
-  const access_token = isexist('access_token');
-  const { islogin, setLogin } = useAuthContext();
-  const navigate = useNavigate();
+  const Dispatch = useDispatch();
+  const { islogin } = useAuthContext();
+Dispatch(getSAdminChats())
+Dispatch(getAdminChats())
+Dispatch(getAdmins())
 
 
   const { splittoggle, responsivetoggle } = useUIContext();
@@ -33,20 +36,7 @@ export function Layout ()
       bodyres?.current.classList.remove('responsiveBlock');
     }
   };
-  useEffect(() =>
-  {
-    setInterval(() =>
-    {
-      if (islogin && !access_token)
-      {
-        setLogin(false);
-        deleteStorageSession('current');
-        toast.warn('Session Timeout');
-        navigate('/');
-      }
-    }, 1000 *60);
 
-  }, [setLogin]);
   return !islogin ? (
     <Navigate to='/' replace={true} />
   ) : (

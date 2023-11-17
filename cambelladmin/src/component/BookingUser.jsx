@@ -12,8 +12,6 @@ import {
 } from 'mdb-react-ui-kit'
 import {toast} from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { useUserChatStore } from '../redux/ChatStore'
-import {useUserStore} from '../redux/UserStore'
 export default function BookingUser ({ userdata })
 {
 const users=[]

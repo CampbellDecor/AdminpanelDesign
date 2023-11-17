@@ -3,7 +3,7 @@ import {
   MDBContainer,
   MDBRow
 } from 'mdb-react-ui-kit'
-import {useEventStore} from '../../redux/EventStore'
+
 import Event from '../../component/Event'
 export default function Events ()
 {

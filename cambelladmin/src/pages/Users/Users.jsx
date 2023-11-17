@@ -3,22 +3,14 @@ import React, { useCallback, useState, useMemo } from 'react'
 import { Container, Form, Pagination, Row, Button, Col } from 'react-bootstrap'
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit'
 import { UserRows } from '../../component/User'
-import { useUserStore } from '../../redux/UserStore'
 import Loading from '../Bugs/FetchedLoading'
 export default function Users () {
-  const {
-    getUser,
-    getBlockUser,
-    userData,
-    userDispatcher,
-    getunBlockUser
-  } = useUserStore()
 
   const [currentPage, setCurrentPage] = useState(1)
 
   const [itemsPerPage] = useState(8)
 
-  const { result, loading, users, block, unblock } = userData
+  const { result, loading, users, block, unblock } = {}
 
   const indexOfLastItem = useMemo(() => currentPage * itemsPerPage, [
     currentPage,
@@ -59,9 +51,9 @@ export default function Users () {
               name='block'
               type='checkbox'
               onChange={() => {
-                block
-                  ? userDispatcher(getUser())
-                  : userDispatcher(getBlockUser())
+              //  block
+                  // ? userDispatcher(getUser())
+                  // : userDispatcher(getBlockUser())
               }}
               checked={block}
             />
@@ -72,9 +64,9 @@ export default function Users () {
               name='block'
               type='checkbox'
               onChange={() => {
-                unblock
-                  ? userDispatcher(getUser())
-                  : userDispatcher(getunBlockUser())
+                // unblock
+                //   ? userDispatcher(getUser())
+                //   : userDispatcher(getunBlockUser())
               }}
             />
 

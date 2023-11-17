@@ -1,28 +1,28 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { getAdminChats } from '../Thunks/Adminchats'
-const adminchatadepter = createEntityAdapter({
-  selectId: chats => chats.chatid
+import { getEvents } from '../Thunks/Events'
+const eventadepter = createEntityAdapter({
+  selectId: (events) => events.eventid
 })
 
 const EventSlice = createSlice({
   name: 'achats',
-  initialState: adminchatadepter.getInitialState({
-    loading: 'true',
+  initialState: eventadepter.getInitialState({
+    loading: false,
     error: ''
   }),
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getAdminChats.pending, (state, action) => {
+      .addCase(getEvents.pending, (state, action) => {
         state.loading = true
       })
-      .addCase(getAdminChats.rejected, (state, action) => {
+      .addCase(getEvents.rejected, (state, action) => {
         state.loading = false
-        state.error = action.data
+        state.error = action.error.data;
       })
-      .addCase(getAdminChats.fulfilled, (state, action) => {
+      .addCase(getEvents.fulfilled, (state, action) => {
         state.loading = false
-        adminchatadepter.upsertMany(state, action.payload)
+        eventadepter.upsertMany(state, action.payload);
       })
   }
 })

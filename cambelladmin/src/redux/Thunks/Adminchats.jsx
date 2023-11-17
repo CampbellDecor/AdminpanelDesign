@@ -23,11 +23,12 @@ export const deleteAdminChats = createAsyncThunk(
     }
   }
 )
-export const addAdminChats = createAsyncThunk(
-  'add/AdminChats',
-  async (_, { rejectWithValue }) => {
+export const getAdminChatsone = createAsyncThunk(
+  'get/AdminChatsone',
+  async (userid, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.get(`${BASE}/${userid}`)
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }

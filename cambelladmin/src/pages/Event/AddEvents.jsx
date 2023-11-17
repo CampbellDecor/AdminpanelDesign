@@ -12,17 +12,12 @@ import {
 import ReactQuill from 'react-quill'
 import { BiUpload } from 'react-icons/bi'
 import { reducer } from '../../function/ServiceHandle'
-import { useServiceCategoryStore } from '../../redux/ServiceCategoryStore'
 
 export default function AddEvent () {
   const [event, setevent] = useReducer(reducer, {})
   const [eventImg, seteventImg] = useState(null)
-  const {
-    CampbellDispatcher,
-    getServiceCat,
-    CategoryData
-  } = useServiceCategoryStore()
-  const { ServiceCats } = CategoryData
+
+ const ServiceCats =[]
   const onChange = e => {
     setevent({
       type: 'CHANGEINPUT',
@@ -38,9 +33,7 @@ export default function AddEvent () {
     const img = URL.createObjectURL(e.target.files[0])
     setevent({ type: 'IMGCHANGE', value: img })
   }
-  useEffect(() => {
-    CampbellDispatcher(getServiceCat())
-  }, [])
+  
   return (
     <Container fluid className='vh-75 pb-5 mb-3' style={{ width: '80%' }}>
       <Row className='h-100'>

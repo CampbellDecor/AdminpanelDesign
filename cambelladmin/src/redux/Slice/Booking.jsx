@@ -1,28 +1,33 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { getAdminChats } from '../Thunks/Adminchats'
-const adminchatadepter = createEntityAdapter({
-  selectId: chats => chats.chatid
+import { getBooking } from '../Thunks/Booking'
+const bookingadepter = createEntityAdapter({
+  selectId:(booking)=>booking.bookid
 })
 
 const BookingSlice = createSlice({
-  name: 'achats',
-  initialState: adminchatadepter.getInitialState({
-    loading: 'true',
+  name: 'booking',
+  initialState: bookingadepter.getInitialState({
+    loading: false,
     error: ''
   }),
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getAdminChats.pending, (state, action) => {
+      .addCase(getBooking.pending, (state, action) =>
+      {
+        console.log(action);
         state.loading = true
       })
-      .addCase(getAdminChats.rejected, (state, action) => {
+      .addCase(getBooking.rejected, (state, action) => {
         state.loading = false
+        console.log(action)
+
         state.error = action.data
       })
-      .addCase(getAdminChats.fulfilled, (state, action) => {
+      .addCase(getBooking.fulfilled, (state, action) => {
         state.loading = false
-        adminchatadepter.upsertMany(state, action.payload)
+        console.log(action)
+       bookingadepter.upsertMany(state,action.payload)
       })
   }
 })

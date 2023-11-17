@@ -6,9 +6,8 @@ export const getBooking = createAsyncThunk(
   'get/Booking',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE}`)
-return response.data
-
+      const response = await axios.get(`${BASE}/all`)
+      return response.data
     } catch (error) {
       rejectWithValue(error.response.data)
     }

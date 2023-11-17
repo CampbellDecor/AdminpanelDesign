@@ -35,9 +35,11 @@ export default function Login ()
 const { setCurrentUser,setisSuper } = useUserContext()
   //State
   const [loginUser, Dispatcher] = useReducer(loginreducer, { email: '', password: '' });
+
   const [loading, setloading] = useState(false);
   const emailref = useRef();
   const paswordref = useRef();
+
   const inputHandle = useCallback(() => {
   emailref.current.value = loginUser?.email
   paswordref.current.value = loginUser?.password
@@ -54,10 +56,6 @@ const { setCurrentUser,setisSuper } = useUserContext()
     Dispatcher({type:'CHANGE_INPUT',input:e.target})
   }
 
-  useEffect(() => {
-  Dispatcher({ type: 'REMIND' })
-  setremberme(true)
-}, [setremberme])
 
   const onSubmit = async e => {
     e.preventDefault();

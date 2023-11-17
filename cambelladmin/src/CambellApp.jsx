@@ -9,32 +9,23 @@ import { Provider } from 'react-redux';
 import { Store } from './redux/Store/store';
 
 
+import { getEvents } from './redux/Thunks/Events'
+import { getPackages } from './redux/Thunks/Packages'
+import { getServices } from './redux/Thunks/Service'
+import { getUsers } from './redux/Thunks/User'
+import { getCategory } from './redux/Thunks/ServiceCategory'
+import {getBooking} from "./redux/Thunks/Booking"
+import { getauth } from "./redux/Thunks/Admins"
+
+Store.dispatch(getauth());
+Store.dispatch(getBooking());
+Store.dispatch(getEvents());
+Store.dispatch(getPackages());
+// Store.dispatch(getServices());
+Store.dispatch(getUsers());
+Store.dispatch(getCategory());
 
 
-
-
-import { getAdmins } from './redux/Thunks/Admins';
-import { getEvents } from './redux/Thunks/Events';
-import { getPackages } from './redux/Thunks/Packages';
-import { getServices } from './redux/Thunks/Service';
-import { getUsers } from './redux/Thunks/User';
-import { getCategory } from './redux/Thunks/ServiceCategory';
-import { getSAdminChats } from './redux/Thunks/SuperAdminChats';
-import { getAdminChats } from './redux/Thunks/Adminchats';
-
-
-
-
-
-Store.dispatch(getAdmins())
-Store.dispatch(getEvents())
-Store.dispatch(getEvents())
-Store.dispatch(getPackages())
-Store.dispatch(getServices())
-Store.dispatch(getUsers())
-Store.dispatch(getCategory())
-Store.dispatch(getSAdminChats())
-Store.dispatch(getAdminChats())
 export default function CambellAdmin () {
 
   return (
