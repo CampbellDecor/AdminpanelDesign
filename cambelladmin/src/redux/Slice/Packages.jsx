@@ -1,5 +1,6 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
 import { getPackages } from '../Thunks/Packages'
+import { useSelector } from 'react-redux';
 const packageadepter = createEntityAdapter({
   selectId: (packs) => packs.packageID
 })
@@ -26,4 +27,17 @@ const PackageSlice = createSlice({
       })
   }
 })
+export const {
+  selectAll: allPacks,
+  selectById: onePack,
+  selectEntities: packentries,
+  selectIds: packset,
+  selectTotal:packcount,
+} = packageadepter.getSelectors(state => state.packs)
+export const SearchpackByName = (search) =>
+{
+  const regx = new RegExp(search, 'ig');
+  const packs = useSelector(allPacks);
+ return packs?.find(pac => regx.test(pac.name));
+}
 export default PackageSlice.reducer;

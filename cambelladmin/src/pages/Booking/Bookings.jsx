@@ -5,12 +5,12 @@ import Calender from 'react-calendar';
 import { Col, Container, Nav, Row } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
 import { MDBTooltip } from 'mdb-react-ui-kit';
-
+import {useSelector } from 'react-redux';
+import {bookentries} from '../../redux/Slice/Booking'
 export default function Bookings ()
 {
 
-  const event = useLoaderData()
-
+  const event = useLoaderData();
   const bookingsHandle = useCallback(({ date }) =>
   {
     const dayEvents = event.length > 0 ? event?.filter(ele => ele.eventDate === date.toLocaleDateString()) : [];

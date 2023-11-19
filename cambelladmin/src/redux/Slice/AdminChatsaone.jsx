@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { getAdminChatsone } from '../Thunks/Adminchats'
+import { getOneSAdminChats, sendSAdminChats } from '../Thunks/SuperAdminChats'
 const adminoneadepter = createEntityAdapter({
-  selectId: chats => chats.chatid
+  selectId: achats => achats.chatid
 })
 
 const AdminChatoneSlice = createSlice({
@@ -13,18 +13,32 @@ const AdminChatoneSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getAdminChatsone.pending, (state, action) => {
+      .addCase(getOneSAdminChats.pending, (state, action) => {
         state.loading = true
       })
-      .addCase(getAdminChatsone.rejected, (state, action) => {
+      .addCase(getOneSAdminChats.rejected, (state, action) => {
         state.loading = false
         state.error = action.data
       })
-      .addCase(getAdminChatsone.fulfilled, (state, action) => {
+      .addCase(getOneSAdminChats.fulfilled, (state, action) => {
         state.loading = false
-        
+        adminoneadepter.setAll(state, action.payload)
+      })
+      .addCase(sendSAdminChats.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(sendSAdminChats.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.data
+      })
+      .addCase(sendSAdminChats.fulfilled, (state, action) => {
+        state.loading = false
+        adminoneadepter.addOne(state, action.payload)
       })
   }
 })
-
-export default AdminChatoneSlice.reducer;
+export const {
+  selectId: chatById,
+  selectEntities: allChats
+} = adminoneadepter.getSelectors(state => state.achats)
+export default AdminChatoneSlice.reducer

@@ -13,21 +13,25 @@ import BookingSlice from '../Slice/Booking'
 import AdminChatsoneSlice from '../Slice/AdminChatsaone'
 import UserChatsoneSlice from '../Slice/UserChatone'
 import AuthSlice from '../Slice/Auth'
+import TodoSlice from '../Slice/Todo'
+import PaymentHisSlice from '../Slice/PaymentHis'
 
 export const Store = configureStore({
   reducer: {
-    user:UserSlice,
-    admin:AdminSlice,
-    category:ServiceCategorySlice,
-    service:ServiceSlice,
-    booking:BookingSlice,
-    events:EventsSlice,
+    user: UserSlice,
+    admin: AdminSlice,
+    category: ServiceCategorySlice,
+    service: ServiceSlice,
+    booking: BookingSlice,
+    events: EventsSlice,
     packs: PackageSlice,
     achatlis: SuperAdminchatSlice,
     uchatlist: AdminChatsSlice,
     achats: AdminChatsoneSlice,
     uchats: UserChatsoneSlice,
-    auth:AuthSlice
+    auth: AuthSlice,
+    todo: TodoSlice,
+    payhis:PaymentHisSlice
   },
-middleware:[Thunk,logger]
+  middleware: [Thunk, logger]
 })

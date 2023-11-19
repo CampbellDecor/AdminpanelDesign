@@ -13,21 +13,25 @@ export const getSAdminChats = createAsyncThunk(
     }
   }
 )
-export const deleteSAdminChats = createAsyncThunk(
-  'delete/SAdminChats',
-  async (_, { rejectWithValue }) => {
+export const getOneSAdminChats = createAsyncThunk(
+  'get/SAdminChatsone',
+  async (aid, { rejectWithValue }) =>
+  {
     try {
-      const response = await axios.get()
+      const response = await axios.get(`${BASE}/${aid}`)
+      console.log(response.data);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }
   }
 )
-export const addSAdminChats = createAsyncThunk(
+export const sendSAdminChats = createAsyncThunk(
   'add/SAdminChats',
-  async (_, { rejectWithValue }) => {
+  async (message, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.post(BASE, message);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }

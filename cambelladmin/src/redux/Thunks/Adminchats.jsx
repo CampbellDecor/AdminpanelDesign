@@ -13,19 +13,12 @@ return response.data
     }
   }
 )
-export const deleteAdminChats = createAsyncThunk(
-  'delete/AdminChats',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get()
-    } catch (error) {
-      rejectWithValue(error.response.data)
-    }
-  }
-)
+
 export const getAdminChatsone = createAsyncThunk(
   'get/AdminChatsone',
-  async (userid, { rejectWithValue }) => {
+  async (userid, { rejectWithValue }) =>
+  {
+    console.log('user',userid)
     try {
       const response = await axios.get(`${BASE}/${userid}`)
       return response.data;
@@ -34,31 +27,12 @@ export const getAdminChatsone = createAsyncThunk(
     }
   }
 )
-export const editAdminChats = createAsyncThunk(
-  'edit/AdminChats',
-  async (_, { rejectWithValue }) => {
+export const sendAdminChat = createAsyncThunk(
+  'send/AdminChats',
+  async (Message, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
-    } catch (error) {
-      rejectWithValue(error.response.data)
-    }
-  }
-)
-export const blockAdminChats = createAsyncThunk(
-  'block/AdminChats',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get()
-    } catch (error) {
-      rejectWithValue(error.response.data)
-    }
-  }
-)
-export const unblockAdminChats = createAsyncThunk(
-  'unblock/AdminChats',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get()
+      const response = await axios.post(BASE, Message);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }

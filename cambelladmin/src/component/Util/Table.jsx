@@ -1,63 +1,79 @@
-import React from 'react';
-import Table from 'react-data-table-component';
-import {Badge,Image} from 'react-bootstrap';
-import { Link } from "react-router-dom";
-export function NewAppoint ()
-{
-    const BookData={}
-    const onrowclick=(row,event)=>{
+import React from 'react'
+import Table from 'react-data-table-component'
+import { Badge } from 'react-bootstrap'
+import { RecentBooking } from '../../redux/Slice/Booking'
+import { UserProfile } from '../User'
+import { useNavigate } from 'react-router-dom'
 
-    }
-    const column = [
-        {
-            bookid: "BookCode",
-            selector: row => row.bookid,
-            omit:true
+export function NewAppoint () {
+  const BookData = RecentBooking()
+  const navigate = useNavigate()
+  const onrowclick = (row, event) => {
+    navigate('/booking/' + row?.bookid)
+  }
+  const column = [
+    {
+      name: 'BookCode',
+      selector: row => row.bookid,
+      omit: true
     },
-        {
-            name: 'Event',
-            selector: row => row.name,
-        },
-        {
-            name: 'User',
-            selector: row => row.user,
-            cell: row => {
-
-                return <div><Link to={`user/${row.user?.uid}`}><Image className="user" src={row.user?.profile??"https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="} title={row.user?.username}/></Link></div>
-            }
-        },
-        {
-            name: 'Date',
-            selector: row => row.eventDate,
-            sortable: true,
-        },
-        {
-            name: 'status',
-            selector: row => row.status,
-            cell: row => {
-                let badge="";
-                switch(row.status){
-                    case "pending":badge="status-pending";break;
-                    case "reject" :badge="status-reject" ;break;
-                    case "accept" :badge="status-agree" ;break;
-                    case "expired":badge="status-reject" ;break;
-                    default:badge="warning";
-                }
-                return <Badge title={`${row.bookdate}`} className={`status ${badge}`}>{row.status}</Badge>
-            }
+    {
+      name: 'Name',
+      selector: row => row.eventname
+    },
+    {
+      name: 'User',
+      selector: row => row.user,
+      cell: row => {
+        return <UserProfile uid={row.user} />
+      }
+    },
+    {
+      name: 'Date',
+      selector: row => row.eventDate,
+      sortable: true
+    },
+    {
+      name: 'status',
+      selector: row => row.status,
+      cell: row => {
+        let badge = ''
+        switch (row.status) {
+          case 'pending':
+            badge = 'status-pending'
+            break
+          case 'reject':
+            badge = 'status-reject'
+            break
+          case 'accept':
+            badge = 'status-agree'
+            break
+          case 'expired':
+            badge = 'status-reject'
+            break
+          default:
+            badge = 'warning'
         }
-    ];
-    return !BookData?.loading&&(
-        <div className="recent-updates my-3">
-            <h3>Recent Bookings</h3>
-       <Table
-
-       data={BookData?.bookings}
-       columns={column}
-    responsive={true}
-    striped={true}
-    onRowClicked={onrowclick}
-       />
-       </div>
-
-    )}
+        return (
+          <Badge title={`${row.bookdate}`} className={`status ${badge}`}>
+            {row.status}
+          </Badge>
+        )
+      }
+    }
+  ]
+  return (
+    <div className='recent-updates my-3'>
+      <h3>Recent Bookings</h3>
+      <Table
+        data={BookData}
+        columns={column}
+        responsive={true}
+        striped={true}
+        onRowClicked={onrowclick}
+        pagination={true}
+        paginationPerPage={5}
+      />
+    </div>
+  )
+}

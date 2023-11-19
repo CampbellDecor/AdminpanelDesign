@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useReducer, useState, useEffect } from 'react'
+import React, { useReducer, useState } from 'react'
 import {
   Container,
   Row,
@@ -7,18 +7,19 @@ import {
   Form,
   Button,
   InputGroup,
-  Card
+  Card,
+  ListGroup
 } from 'react-bootstrap'
+import { RiPlayListAddLine } from 'react-icons/ri'
 import ReactQuill from 'react-quill'
 import { BiUpload } from 'react-icons/bi'
-import { reducer } from '../../function/ServiceHandle'
-
+import { reducer } from '../../function/PackageHandle'
 
 export default function AddPackage () {
-  const [pack, setpack] = useReducer(reducer, {})
+  const [pack, setpack] = useReducer(reducer, {});
+  
   const [packImg, setpackImg] = useState(null)
-
-  const ServiceCats =[]
+  const ServiceaDD = e => {}
   const onChange = e => {
     setpack({
       type: 'CHANGEINPUT',
@@ -34,7 +35,7 @@ export default function AddPackage () {
     const img = URL.createObjectURL(e.target.files[0])
     setpack({ type: 'IMGCHANGE', value: img })
   }
- 
+
   return (
     <Container fluid className='vh-75 pb-5 mb-3' style={{ width: '80%' }}>
       <Row className='h-100'>
@@ -60,6 +61,11 @@ export default function AddPackage () {
                   value={pack?.desc ?? 'decription...'}
                   readOnly
                 />
+                <ListGroup>
+                  {pack?.services?.map((ele, index) => (
+                    <ListGroup.Item key={index}>{ele}</ListGroup.Item>
+                  ))}
+                </ListGroup>
               </Card.Body>
             </Card>
           </Row>
@@ -85,15 +91,25 @@ export default function AddPackage () {
                 name='price'
               />
             </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>Category</Form.Label>
-              <Form.Select aria-label='Category' required>
-                <option>Category</option>
+            <div>
+              <Form.Label>Services</Form.Label>
+              <InputGroup className='mb-3'>
+                <Form.Control
+                  placeholder='add Services'
+                  aria-label="Recipient's username"
+                  aria-describedby='basic-addon2'
+                />
 
-                {ServiceCats?.length > 0 &&
-                  ServiceCats?.map(ele => <option value='1'>One</option>)}
-              </Form.Select>
-            </Form.Group>
+                <Button
+                  variant='outline-info'
+                  id='button-addon2'
+                  onClick={ServiceaDD}
+                >
+                  <RiPlayListAddLine size={20} />
+                </Button>
+              </InputGroup>
+            </div>
+
             <Form.Group className='mb-3'>
               <Form.Label>Description</Form.Label>
               <ReactQuill
@@ -109,9 +125,9 @@ export default function AddPackage () {
                   type='file'
                   onChange={changeImage}
                   name='images'
-                  accept='images/*'
+                  accept='image/*'
                 />
-                <Button variant='secoundary'>
+                <Button variant='outline-info'>
                   <BiUpload size={20} />
                 </Button>
               </InputGroup>

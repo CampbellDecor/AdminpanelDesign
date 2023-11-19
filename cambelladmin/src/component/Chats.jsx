@@ -1,63 +1,56 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useUserContext } from '../contexts/UserContext'
-import { changeLocalStorage,getLocalStorage } from '../function/LocalStorageHandler'
+import { chatIds, selectChatUser } from '../redux/Slice/Adminchats'
+import { SchatSet, SoneAdminChat } from '../redux/Slice/SuperAdminChats'
+import { allChats} from '../redux/Slice/AdminChatsaone'
+import { allChatOne} from '../redux/Slice/UserChatone'
+import { getAdminChatsone,sendAdminChat } from '../redux/Thunks/Adminchats'
+import { getOneSAdminChats,sendSAdminChats } from '../redux/Thunks/SuperAdminChats'
+import { OneAuth } from '../redux/Slice/Auth'
+import { OneUser } from '../redux/Slice/User'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  changeLocalStorage,
+  getLocalStorage
+} from '../function/LocalStorageHandler'
 import { Button } from 'react-bootstrap'
-import axios from 'axios'
 
 //Chatting TextBox
-export default function Chatting () {
-
+export default function Chatting ()
+{
+  const Dispatcher = useDispatch()
   const { currentuser, isSuper } = useUserContext()
-  const { chats } = isSuper ? [] :[]
   const { profile, username } = currentuser
   const [message, setmessage] = useState('')
-  const [id, setid] = useState()
+  const id = getLocalStorage('chat')??0;
   const [userdata, setuserdata] = useState(undefined)
-  useEffect(() => {
-    let myid = 0,
-      myuser
-    if (chats?.length > 0) {
-      myid = isSuper ? chats[0].aid : chats[0].uid
-      myuser = isSuper ? username : chats[0]?.username
-    }
-    setid(myid===0&&getLocalStorage('chat'))
-    setuserdata(myuser)
-  }, [setid])
 
-  const onTyping = useCallback(
-    e => {
+
+  const onTyping =e => {
       setmessage(e.target.value)
-    },
-    [setmessage]
-  )
+    }
   const OnSentAdmin = async e => {
-    e.preventDefault()
-    try {
-      const response = await axios.post('/api/adminchat', {
-        message,
-        aid: id
-      })
-      if (response.data) {
-        // CampbellDispatcher(getachat(id))
-        setmessage('')
-      }
+    e.preventDefault();
+    try
+    {
+      const Message={message,aid:id}
+      Dispatcher(sendSAdminChats(Message));
     } catch (error) {
       throw error
     }
   }
-  const UserChat = async e => {
+  const UserChat =  e => {
     e.preventDefault()
-    try {
-      const response = await axios.post('/api/userchat', {
-        message,
+    const username = getLocalStorage('username') ?? '';
+    try
+    {
+      const Message={  message,
         userid: id,
-        username: userdata ?? ''
-      })
-      if (response.data) {
-        // CampbellDispatcher(getuChats(id))
-        setmessage('')
+        username
       }
+      Dispatcher(sendAdminChat(Message));
+      setmessage('');
     } catch (error) {
       console.error(error)
     }
@@ -86,7 +79,7 @@ export default function Chatting () {
       <Button
         className='ms-3'
         onClick={isSuper ? OnSentAdmin : UserChat}
-        disabled={message==='' || id===0}
+        disabled={message === '' || id === 0}
       >
         <i className='fas fa-paper-plane' />
       </Button>
@@ -95,26 +88,24 @@ export default function Chatting () {
 }
 
 //Chatting userlist
-export function Chatuser ({
-  id,
-  profile,
-  username,
-  message,
-  isOnline,
-  unread,
-  isAdmin = true
-}) {
-  // const { CampbellDispatcher, getachat } = useAdminChatStore()
-  // const { getuChats } = useUserChatStore()
+export function Chatuser ({ id })
+{
+  const { isSuper } = useUserContext();
+  const Dispatcher = useDispatch();
+
+  const SchatUser = useSelector(state => isSuper?SoneAdminChat(state, id):selectChatUser(state,id))
+  const { profile, username, message, unread = 0 } = SchatUser
+  const { isOnline } = useSelector(state => OneAuth(state, id))??{};
   const onHandleChange = e => {
-    e.preventDefault()
-  //   changeLocalStorage('chat', id)
-  //  CampbellDispatcher(getachat(id))
+    e.preventDefault();
+    changeLocalStorage('chat', id)
+   Dispatcher(getOneSAdminChats(id))
   }
   const onHandleUserChange = e => {
     e.preventDefault()
-    // changeLocalStorage('chat', id)
-    // CampbellDispatcher(getuChats(id))
+    changeLocalStorage('chat', id)
+    changeLocalStorage('username', username);
+    Dispatcher(getAdminChatsone(id));
   }
 
   return (
@@ -122,7 +113,7 @@ export function Chatuser ({
       <Link
         className='d-flex justify-content-between'
         as='button'
-        onClick={isAdmin ? onHandleChange : onHandleUserChange}
+        onClick={isSuper ? onHandleChange : onHandleUserChange}
       >
         <div className='d-flex flex-row'>
           <div className='position-relative'>
@@ -215,10 +206,7 @@ export function Reply ({ chatid, message, time }) {
 //chatpanel
 export function ChatPanel () {
   const { isSuper } = useUserContext()
-  // const { admichats } = useAdminChatStore()
-  // const { userChatsall } = useUserChatStore()
-  // const { chats } = isSuper ? admichats : userChatsall
-  const chats = [];
+  const chats = useSelector(isSuper?allChats:allChatOne);
   return (
     <div className='py-3 pe-3 h-100' data-mdb-perfect-scrollbar='true'>
       {chats?.length > 0 &&
@@ -231,20 +219,16 @@ export function ChatPanel () {
 
 export function ChatList () {
   const { isSuper } = useUserContext()
-  // const { adminchatlist } = useAdminChatStore()
-  // const { userChatList } = useUserChatStore()
-  // const { chatslist } = userChatList
-  // const { chatlist } = adminchatlist
-  const chatlist=[],chatslist = []
+  const chatSuper = useSelector(SchatSet)
+  const chatAdmins = useSelector(chatIds)
 
   return (
     <ul className='list-unstyled h-100'>
-      {isSuper? chatlist.length > 0 &&
-        chatlist?.map(chat => <Chatuser {...chat} id={chat?.aid} />)
-        :
-        chatslist.length > 0 &&
-        chatslist?.map(chat => <Chatuser {...chat} id={chat?.aid} />)
-}
+      {isSuper
+        ? chatSuper.length > 0 &&
+          chatSuper?.map(chat => <Chatuser id={chat} key={chat} />)
+        : chatAdmins.length > 0 &&
+          chatAdmins?.map(chat => <Chatuser id={chat} key={chat} />)}
     </ul>
   )
 }

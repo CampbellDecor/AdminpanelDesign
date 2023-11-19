@@ -1,87 +1,24 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { IncomeAnalyze, SmallHomeDonut } from '../component/Util/Graph'
 import { SimpleHomeCalender } from '../component/Util/Calender'
 import { NewAppoint } from '../component/Util/Table'
-import {ListPanel } from '../component/Panels'
-import {HomeCountPanel} from '../component/Home'
+import { ListPanel } from '../component/Panels'
+import { HomeCountPanel, EventPanel, PackPanel } from '../component/Home'
 import { MDBListGroup, MDBListGroupItem, MDBBtn } from 'mdb-react-ui-kit'
-export default function Home ()
-{
-
-
+export default function Home () {
   return (
     <Container fluid className='home'>
       <Row className='home-countpanel my-3'>
-      <HomeCountPanel/>
+        <HomeCountPanel />
       </Row>
       <Row>
         <Col md={6} lg={9} className='home-maincontent'>
           <IncomeAnalyze />
           <NewAppoint />
           <Row className='justify-content-between'>
-            <ListPanel
-              {...{
-                title: 'Cambell Events',
-                items: [
-                  {
-                    content: 'Mankalaya',
-                    count: 3,
-                    url:
-                      'https://vb-events.com/wp-content/uploads/2021/12/hands-of-bride-and-groom.jpg'
-                  },
-                  {
-                    content: 'Mankalaya',
-                    count: 3,
-                    url:
-                      'https://vb-events.com/wp-content/uploads/2021/12/hands-of-bride-and-groom.jpg'
-                  },
-                  {
-                    content: 'Mankalaya',
-                    count: 3,
-                    url:
-                      'https://vb-events.com/wp-content/uploads/2021/12/hands-of-bride-and-groom.jpg'
-                  },
-                  {
-                    content: 'Mankalaya',
-                    count: 3,
-                    url:
-                      'https://vb-events.com/wp-content/uploads/2021/12/hands-of-bride-and-groom.jpg'
-                  }
-                ]
-              }}
-            />
-            <ListPanel
-              {...{
-                title: 'Cambell Services',
-                items: [
-                  {
-                    content: 'Foods',
-                    count: 3,
-                    url:
-                      'https://previews.123rf.com/images/lelik83/lelik831702/lelik83170200215/71611051-catering-wedding-buffet-food-table.jpg'
-                  },
-                  {
-                    content: 'Food',
-                    count: 3,
-                    url:
-                      'https://previews.123rf.com/images/lelik83/lelik831702/lelik83170200215/71611051-catering-wedding-buffet-food-table.jpg'
-                  },
-                  {
-                    content: 'Food',
-                    count: 3,
-                    url:
-                      'https://previews.123rf.com/images/lelik83/lelik831702/lelik83170200215/71611051-catering-wedding-buffet-food-table.jpg'
-                  },
-                  {
-                    content: 'Food',
-                    count: 3,
-                    url:
-                      'https://previews.123rf.com/images/lelik83/lelik831702/lelik83170200215/71611051-catering-wedding-buffet-food-table.jpg'
-                  }
-                ]
-              }}
-            />
+            <EventPanel />
+            <PackPanel />
           </Row>
         </Col>
         <Col md={6} lg={3} className='sidebar-right'>

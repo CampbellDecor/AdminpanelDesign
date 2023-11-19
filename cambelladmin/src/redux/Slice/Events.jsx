@@ -5,7 +5,7 @@ const eventadepter = createEntityAdapter({
 })
 
 const EventSlice = createSlice({
-  name: 'achats',
+  name: 'events',
   initialState: eventadepter.getInitialState({
     loading: false,
     error: ''
@@ -26,4 +26,11 @@ const EventSlice = createSlice({
       })
   }
 })
+export const {
+  selectAll: allEvents,
+  selectById: OneEvent,
+  selectEntities: Eventlist,
+  selectTotal: eventCount,
+  selectIds:eventset
+}=eventadepter.getSelectors(state=>state.events)
 export default EventSlice.reducer;

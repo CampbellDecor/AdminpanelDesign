@@ -14,6 +14,7 @@ import {DeleteBox} from '../../component/Admin'
 import { Link, useLoaderData } from 'react-router-dom'
 import { BsShieldLockFill } from 'react-icons/bs';
 import Table from 'react-data-table-component';
+
 export default function AdminProfile ()
 {
   const [activity,setActivity]=useState([])
@@ -70,13 +71,13 @@ adminprofile-header_userdetails">
                   <div>
                     <MDBCardText className='mb-1 h5'>253</MDBCardText>
                     <MDBCardText className='small text-muted mb-0'>
-                      Ratings
+                      Last Online
                     </MDBCardText>
                   </div>
                   <div className='px-3'>
                     <MDBCardText className='mb-1 h5'>1026</MDBCardText>
                     <MDBCardText className='small text-muted mb-0'>
-                      Chats
+                      join us
                     </MDBCardText>
                   </div>
                   <div>

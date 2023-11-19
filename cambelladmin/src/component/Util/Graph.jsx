@@ -15,7 +15,8 @@ import { Doughnut, Line } from 'react-chartjs-2'
 import randomcolor from 'randomcolor'
 import { CambellContext } from '../../contexts/AppContext'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
+
+import {PayHistorYByYear} from '../../redux/Slice/PaymentHis'
 
 ChartJS.register(
   ArcElement,
@@ -31,10 +32,6 @@ ChartJS.register(
 
 export function SmallHomeDonut () {
   const { mode } = useContext(CambellContext)
-  const dispatcher = useDispatch()
-  //const { loading, result } = useSelector(state => state.religion)
-
-  useEffect(() => {}, [dispatcher])
   const [labels, data] = [
     ['Classic Hindu Wedding', 'Classic Puberty Ceremony',"Classic Muslim Wedding","Happilly Get Together",'Precious Birthday Moment','Classic Christian Wedding '
 ],
@@ -76,8 +73,12 @@ export function SmallHomeDonut () {
   )
 }
 
-export function IncomeAnalyze () {
+export function IncomeAnalyze ()
+{
+
   const x_axis = ['Jan', 'Feb', 'Mar', 'Api', 'May', 'june', 'july', 'Aug', 'Sep',"Oct","Nov","Dec"]
+  const [x, y] = PayHistorYByYear(2023);
+  console.log(x,y)
   const [loading, setloading] = useState(false)
   const { mode } = useContext(CambellContext)
   const color = randomcolor({
@@ -86,14 +87,14 @@ export function IncomeAnalyze () {
     hue: mode === 'light' ? 'blue' : '#0b0d75'
   })
   const datas = {
-    labels: x_axis,
+    labels: x,
     datasets: [
       {
         fill: true,
         label: 'profits',
-        data: [0,45,34,56,67,12,4,98,10,6,54,41],
-        borderColor: color[0],
-        backgroundColor: color[1],
+        data: y,
+        borderColor:"#3c2626",
+        backgroundColor: "#fa7d8d",
         tension: 0.3
       }
     ]

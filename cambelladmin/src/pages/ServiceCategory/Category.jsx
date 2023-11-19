@@ -10,10 +10,12 @@ import FetchedError from '../Bugs/FetchedError';
 import FetchedLoading from '../Bugs/FetchedLoading';
 import { useAppContext } from '../../contexts/AppContext';
 import { MdOutlinePlaylistAdd } from 'react-icons/md'
+import { useSelector } from 'react-redux'
+import { categorySet } from '../../redux/Slice/ServiceCategory'
 
 export default function Category ()
 {
-  const loading=false,result='fetched', ServiceCats = []
+  const loading = false, result = 'fetched', ServiceCats = useSelector(categorySet);
   const { Appname } = useAppContext();
 
   return loading ? (<FetchedLoading />) : (
@@ -29,7 +31,7 @@ export default function Category ()
 
       <MDBRow>
         {
-          result === "fetched" ? ServiceCats.map((servicecat, index) => (<Categorey {...servicecat} key={index} />)) : <FetchedError data='Service Category' />
+          result === "fetched" ? ServiceCats.map(cid => (<Categorey cid={cid} key={cid} />)) : <FetchedError data='Service Category' />
         }
 
       </MDBRow>

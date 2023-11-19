@@ -1,49 +1,45 @@
-import
-  {
-    MDBListGroup,
-    MDBListGroupItem,
-    MDBCheckbox,
-    MDBTooltip,
-    MDBIcon,
-    MDBBtn
-  } from 'mdb-react-ui-kit';
-import React, { useCallback, useMemo, useState } from 'react';
-import { Collapse } from 'react-bootstrap';
-import EditTodo from '../pages/Booking/EditTodo';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import {
+  MDBListGroup,
+  MDBListGroupItem,
+  MDBCheckbox,
+  MDBTooltip,
+  MDBIcon,
+  MDBBtn
+} from 'mdb-react-ui-kit'
+import React, { useCallback, useMemo, useState } from 'react'
+import { Collapse } from 'react-bootstrap'
+import EditTodo from '../pages/Booking/EditTodo'
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { useSelector } from 'react-redux'
+import { TaskById } from '../redux/Slice/Todo'
 export default function Todo ({
-  task,
-  dueDate,
   taskid,
-  desc,
-  createDate,
   status = 'pending',
   bookid,
   todoList = true
-})
-{
+}) {
+  const { task, createDate, dueDate, desc } = useSelector(state =>
+    TaskById(state, taskid)
+  )
   const tasklist = {
     task: 'Hi',
     dueDate: new Date(),
     desc: 'ghghghg',
     status
-  };
-  const [open, isopen] = useState(false);
-  const toggle = useCallback(() => isopen(!open), [isopen, open]);
-  const valid = useMemo(() =>
-  {
-    if (status === 'completed') return 1;
-    else return status === 'pending' && dueDate > new Date() ? 0 : -1;
-  }, [status, dueDate]);
-  const [statuschange, setstatuschange] = useState(valid > 0);
-  const onChangeStatus = useCallback(() =>
-  {
-    setstatuschange(!statuschange);
-  }, [statuschange, setstatuschange]);
-  const onDelete = async () =>
-  {
+  }
+  const [open, isopen] = useState(false)
+  const toggle = useCallback(() => isopen(!open), [isopen, open])
+  const valid = useMemo(() => {
+    if (status === 'completed') return 1
+    else return status === 'pending' && dueDate > new Date() ? 0 : -1
+  }, [status, dueDate])
+  const [statuschange, setstatuschange] = useState(valid > 0)
+  const onChangeStatus = useCallback(() => {
+    setstatuschange(!statuschange)
+  }, [statuschange, setstatuschange])
+  const onDelete = async () => {
     const val = await Swal.fire({
       title: 'Delete',
       text: 'Do you want to Delete This Task',
@@ -52,25 +48,22 @@ export default function Todo ({
       confirmButtonColor: '#19b604',
       cancelButtonColor: '#f60909',
       showCancelButton: true
-    });
-    if (val.value)
-    {
-      try
-      {
+    })
+    if (val.value) {
+      try {
         const del = await axios.delete('/api/booking/todoTask', {
           data: {
             taskid,
             bookid
           }
-        });
-        toast.success('Successfully Deleted!');
-      } catch (error)
-      {
-        toast.error('Failed To Delete Task!');
-        console.error(error);
+        })
+        toast.success('Successfully Deleted!')
+      } catch (error) {
+        toast.error('Failed To Delete Task!')
+        console.error(error)
       }
     }
-  };
+  }
   return (
     <>
       <MDBListGroup
@@ -90,16 +83,17 @@ export default function Todo ({
           />
         </MDBListGroupItem>
         <MDBListGroupItem className='px-3  d-flex align-items-center flex-grow-1 border-0 bg-transparent'>
-          <p className='lead fw-normal mb-0'>Renew car insurance</p>
+          <p className='lead fw-normal mb-0'>{task}</p>
         </MDBListGroupItem>
         <MDBListGroupItem className='px-3  d-flex align-items-center border-0 bg-transparent'>
           <div
-            className={`py-1 px-2 me-2 border ${valid > 0
+            className={`py-1 px-2 me-2 border ${
+              valid > 0
                 ? 'border-success'
                 : valid === 0
-                  ? 'border-warning'
-                  : 'border-danger'
-              } rounded-3 d-flex align-items-center bg-light`}
+                ? 'border-warning'
+                : 'border-danger'
+            } rounded-3 d-flex align-items-center bg-light`}
           >
             <p className='small mb-0'>
               <MDBTooltip
@@ -126,7 +120,7 @@ export default function Todo ({
                   />
                 )}
               </MDBTooltip>
-              28th Jun 2020
+              {dueDate}
             </p>
           </div>
         </MDBListGroupItem>
@@ -151,7 +145,7 @@ export default function Todo ({
             >
               <p className='small text-muted mb-0'>
                 <MDBIcon fas icon='info-circle' className='me-2' />
-                28th Jun 2020
+                {createDate}
               </p>
             </MDBTooltip>
           </div>
@@ -166,5 +160,5 @@ export default function Todo ({
         </Collapse>
       )}
     </>
-  );
+  )
 }

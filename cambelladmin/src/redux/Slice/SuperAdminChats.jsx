@@ -26,4 +26,9 @@ const SuperAdminChatSlice = createSlice({
       })
   }
 })
+export const {
+  selectAll: SallChats,
+  selectById: SoneAdminChat,
+  selectIds:SchatSet
+} = SadminChatadepter.getSelectors(state => state.achatlis);
 export default SuperAdminChatSlice.reducer;

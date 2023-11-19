@@ -51,6 +51,6 @@ export const getSessionStorage = (name) =>
         }
     } else
     {
-        throw new Error(name + ' Not Found!');
+        return null;
     }
 }

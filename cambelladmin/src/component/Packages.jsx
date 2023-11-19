@@ -10,6 +10,8 @@ import {
 } from 'mdb-react-ui-kit'
 import ReactStars from 'react-rating-stars-component'
 import Swal from 'sweetalert2'
+import {onePack} from '../redux/Slice/Packages'
+import { useSelector } from 'react-redux';
 const Services = ({ ser}) =>
 {
   return (<div className='mt-1 mb-0 text-muted small'>
@@ -24,9 +26,13 @@ const Services = ({ ser}) =>
 </div>
 )
 }
-export function Packages ({ services, imgURL, packageName,price,avg_rating,rating_count,packageID
+export function Packages ({packageID
  })
 {
+  const {
+    services, imgURL, packageName, price, avg_rating, rating_count
+  } = useSelector(state => onePack(state, packageID))??{};
+
   const chunkService = useMemo(() =>
   {
     const chunkarr = [];

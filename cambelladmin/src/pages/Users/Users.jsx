@@ -4,13 +4,15 @@ import { Container, Form, Pagination, Row, Button, Col } from 'react-bootstrap'
 import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit'
 import { UserRows } from '../../component/User'
 import Loading from '../Bugs/FetchedLoading'
+import {UserIds} from '../../redux/Slice/User'
+import { useSelector } from 'react-redux';
 export default function Users () {
-
+  const users = useSelector(UserIds);
   const [currentPage, setCurrentPage] = useState(1)
 
   const [itemsPerPage] = useState(8)
 
-  const { result, loading, users, block, unblock } = {}
+  const result = 'fetched', loading = false, block = false, unblock = false;
 
   const indexOfLastItem = useMemo(() => currentPage * itemsPerPage, [
     currentPage,
@@ -91,8 +93,8 @@ export default function Users () {
           </MDBTableHead>
           <MDBTableBody>
             {result === 'fetched' ? (
-              currentItems.map((userdataset, index) => (
-                <UserRows {...userdataset} key={index} />
+              currentItems.map(uid => (
+                <UserRows uid={uid} key={uid} />
               ))
             ) : (
               <tr>

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useId, useMemo, useReducer, useState } from 'react'
 import {
   MDBBtn,
   MDBModal,
@@ -14,51 +14,69 @@ import {
   MDBIcon
 } from 'mdb-react-ui-kit'
 import { toast } from 'react-toastify'
-import axios from 'axios'
 import { AiOutlineAppstoreAdd } from 'react-icons/ai'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { addNewTask } from "../../redux/Thunks/Booking";
+import { OneBooking } from "../../redux/Slice/Booking";
 import DatePicker from 'react-date-picker'
+import {TodoReducer} from '../../function/Todohandle'
+
+
+
+
+
+
+
+
 export default function AddTodo ({ date })
 {
-  const book = {};
-  const DisabledTodo = useMemo(() => date < new Date(), [date])
-
+  // Default Set Variables
+  const Dispatcher = useDispatch();
+  const { bookcode } = useParams();
+  const bookingForTodo = useSelector(state => OneBooking(state, bookcode));
+  const [DefaultDate, setDefaultDate] = useState(new Date());
   const [varyingModal, setVaryingModal] = useState(false)
-  const [value, setValue] = useState(new Date())
-  const [task, setTask] = useState({})
-  const onChangeInput =event =>
-    {
-      console.log(task)
-      setTask(pre => ({ ...pre, [event.target.name]: event.target.value }))
-    }
-  const onClickMOdel = useCallback(() => setVaryingModal(!varyingModal), [varyingModal])
-  const Disabled = useMemo(() => !task.task || value < new Date(), [
+
+  const DisabledTodo = useMemo(() => date < new Date(), [date])
+  const [task, setTask] = useReducer(TodoReducer, {bookid:bookcode,status:'pending'});
+
+  //functions
+
+  const onClickMOdel = () => setVaryingModal(!varyingModal);
+
+  const onChangeInput = event => setTask({type:"CHANGEINPUT",payload:event})
+
+  const OnChangeDate = value =>
+  {
+    setDefaultDate(value);
+
+    setTask({ type: 'DATECHANGE', payload:DefaultDate });
+  }
+
+
+  const Disabled = useMemo(() => !task.task || DefaultDate < new Date(), [
     task,
-    value
+    DefaultDate
   ])
 
-  const AddTask = useCallback(async e => {
+  const AddTask = e => {
     e.preventDefault()
-    task.dueDate = value
-    task.bookid = book?.bookid;
+    console.log(task);
     try {
-     const add = await axios.post('/api/booking/todoTask',task)
-      if (add) {
+      Dispatcher(addNewTask(task));
         toast.success('Scussfully Added New Task')
         onClickMOdel()
-      } else {
-        toast.error('Failed to Add Task Try Again')
-        onClickMOdel()
-      }
-
-    } catch (error) {
+    } catch (error)
+    {
+      toast.error('faileld to added!');
       console.error(error)
     }
-  }, [])
+  }
 
   return (
     <>
       <MDBBtn onClick={onClickMOdel} rounded size='sm' disabled={DisabledTodo}>
-
         <AiOutlineAppstoreAdd size={24} />
       </MDBBtn>
       <MDBModal show={varyingModal} setShow={setVaryingModal} tabIndex='-1'>
@@ -96,7 +114,7 @@ export default function AddTodo ({ date })
                         title='Set due date'
                       >
                         <DatePicker
-                          value={value}
+                          value={DefaultDate}
                           calendarIcon={
                             <MDBIcon
                               fas
@@ -106,7 +124,7 @@ export default function AddTodo ({ date })
                               color='primary'
                             />
                           }
-                          onChange={value => setValue(value)}
+                          onChange={value=>OnChangeDate(value)}
                           className='w-100 addtododatepicker'
                           clearIcon={false}
                         />
@@ -132,7 +150,7 @@ export default function AddTodo ({ date })
               <MDBBtn color='danger' onClick={onClickMOdel}>
                 Close
               </MDBBtn>
-              <MDBBtn disabled={Disabled} onClick={AddTask}>
+              <MDBBtn onClick={AddTask}>
                 Add
               </MDBBtn>
             </MDBModalFooter>

@@ -1,11 +1,11 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { getAdminChats } from '../Thunks/Adminchats'
+import {getAdminChatsone,sendAdminChat} from '../Thunks/Adminchats'
 const UserChatOneadepter = createEntityAdapter({
-  selectId: chats => chats.chatid
+  selectId: (uchats) => uchats.chatid
 })
 
 const UserChatOneSlice = createSlice({
-  name: 'chatall',
+  name: 'userchatall',
   initialState: UserChatOneadepter.getInitialState({
     loading: false,
     error: ''
@@ -13,18 +13,32 @@ const UserChatOneSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getAdminChats.pending, (state, action) => {
+      .addCase(getAdminChatsone.pending, (state, action) => {
         state.loading = true
       })
-      .addCase(getAdminChats.rejected, (state, action) => {
+      .addCase(getAdminChatsone.rejected, (state, action) => {
         state.loading = false
         state.error = action.data
       })
-      .addCase(getAdminChats.fulfilled, (state, action) => {
+      .addCase(getAdminChatsone.fulfilled, (state, action) => {
         state.loading = false
-
+        UserChatOneadepter.setAll(state, action.payload);
+      })
+      .addCase(sendAdminChat.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(sendAdminChat.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.data
+      })
+      .addCase(sendAdminChat.fulfilled, (state, action) => {
+        state.loading = false
+        console.log(action.payload);
+        UserChatOneadepter.addOne(state, action.payload);
       })
   }
 })
-
+export const {
+selectAll:allChatOne
+} = UserChatOneadepter.getSelectors(state => state.uchats);
 export default UserChatOneSlice.reducer;

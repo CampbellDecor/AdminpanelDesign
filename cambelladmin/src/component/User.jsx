@@ -1,30 +1,28 @@
 import { MDBBadge, MDBBtn } from 'mdb-react-ui-kit'
 import React from 'react'
 import { BlockUnBlock } from './Util/Model'
-import { FaUserPen } from 'react-icons/fa6';
-import { useNavigate } from 'react-router-dom';
-export function UserRows ({
-  username,
-  profile,
-  isBlock,
-  isOnline,
-  email,
-  religion,
-  uid,
-  mobile,
-  booking
-})
-{
-  const navigate = useNavigate();
-  const onClickEvent = (e) =>
-  {
-    e.preventDefault();
-    navigate('/user/profile/' + uid)
+import { FaUserPen } from 'react-icons/fa6'
+import { useNavigate,Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { OneUser } from '../redux/Slice/User'
+import { OneAuth } from '../redux/Slice/Auth'
+import { UserBookCount } from '../redux/Slice/Booking'
+import {  Image } from 'react-bootstrap'
 
+export function UserRows ({ uid }) {
+  const { email, religion, mobile, username, profile, isBlock } = useSelector(
+    state => OneUser(state, uid)
+  )
+  const { isOnline } = useSelector(state => OneAuth(state, uid)) ?? {};
+  const booking = UserBookCount(uid);
+  const navigate = useNavigate()
+  const onClickEvent = e => {
+    e.preventDefault()
+    navigate('/user/profile/'+uid)
   }
   return (
-    <tr >
-      <td onClick = { onClickEvent }>
+    <tr>
+      <td onClick={onClickEvent}>
         <div className='d-flex align-items-center'>
           <img
             src={profile}
@@ -38,11 +36,11 @@ export function UserRows ({
           </div>
         </div>
       </td>
-      <td onClick = { onClickEvent }>
+      <td onClick={onClickEvent}>
         <p className='fw-normal mb-1'>{religion}</p>
         <p className='text-muted mb-0'>{mobile}</p>
       </td>
-      <td onClick = { onClickEvent }>
+      <td onClick={onClickEvent}>
         {isBlock ? (
           <MDBBadge color='danger' pill>
             Blocked/{isOnline ? 'Online' : 'Offline'}
@@ -55,12 +53,32 @@ export function UserRows ({
       </td>
       <td>{booking}</td>
       <td>
-        <MDBBtn color='link' href={'/user/profile/'+uid} rounded size='sm'>
-          <FaUserPen size={20} color='navy'/>
-        </MDBBtn >
-          <BlockUnBlock {...{uid,username,isBlock}}/>
-
+        <MDBBtn color='link' href={'/user/profile/' + uid} rounded size='sm'>
+          <FaUserPen size={20} color='navy' />
+        </MDBBtn>
+        <BlockUnBlock {...{ uid, username, isBlock }} />
       </td>
     </tr>
+  )
+}
+
+export function UserProfile ({ uid })
+{
+
+  const {profile,username} = useSelector(state => OneUser(state, uid))??{};
+  return (
+    <div>
+  <Link to={`user/profile/${uid}`}>
+    <Image
+      className='user'
+      src={
+        profile??
+        'https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI='
+      }
+      title={username}
+    />
+  </Link>
+</div>
+
   )
 }

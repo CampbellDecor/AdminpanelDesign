@@ -1,13 +1,11 @@
 import React from 'react'
-import {
-  MDBContainer,
-  MDBRow
-} from 'mdb-react-ui-kit'
+import { MDBContainer, MDBRow } from 'mdb-react-ui-kit'
 
 import Event from '../../component/Event'
-export default function Events ()
-{
-const events=[]
+import { useSelector } from 'react-redux'
+import { eventset } from '../../redux/Slice/Events'
+export default function Events () {
+  const events = useSelector(eventset)
 
   return (
     <MDBContainer fluid className='my-5 text-center min-vh-100'>
@@ -16,8 +14,10 @@ const events=[]
       </h4>
 
       <MDBRow>
-
-        {events && events.map((ev,index) => <Event {...ev} index={index} />)}
+        {events &&
+          events.map((eventcode,index) => (
+            <Event eventcode={eventcode} index={index} />
+          ))}
       </MDBRow>
     </MDBContainer>
   )

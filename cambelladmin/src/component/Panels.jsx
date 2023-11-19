@@ -19,20 +19,20 @@ export function CountPanel ({ index, idenity, title, count, path }) {
   )
 }
 
-export function ListPanel ({ title, items }) {
+export function ListPanel ({title,items }) {
   return (
     <Col md={5} className='my-3 mx-3 count-panel'>
-      <h5>Events Bookings</h5>
+      <h5>{title} Bookings</h5>
       <Stack gap={2}>
         {items.map(item => (
           <div className='d-flex justify-content-between count-panel-component border p-2 rounded rounded-2'>
             <div className='d-flex count-panel-component--name bg-image hover-zoom'>
               <Image
                 className='count-panel-component--name--img'
-                src={item?.url}
+                src={item.imgURL}
               />
               <h6 className='count-panel-component--name--text text-muted ms-2'>
-                {item?.content}
+                {item?.name}
               </h6>
             </div>
             <div>
@@ -46,4 +46,3 @@ export function ListPanel ({ title, items }) {
     </Col>
   )
 }
-

@@ -1,21 +1,16 @@
-import React, {useMemo } from 'react'
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-} from 'mdb-react-ui-kit'
-
+import React from 'react'
+import
+  {
+    MDBCard,
+    MDBCardBody,
+    MDBCardImage,
+    MDBCardTitle,
+  } from 'mdb-react-ui-kit';
+import  { SearchpackByName} from '../redux/Slice/Packages';
 export default function BookingEvents ({search})
 {
-  const packs = [];
-  const BookItem = useMemo(() =>
-  {
-    const regx = new RegExp(search, 'ig');
-    const res = packs.find(ele => regx.test(ele.name))
-    console.log(res)
-    return res
-},[packs,search])
+    const BookItem =SearchpackByName(search);
+
   return (
           <MDBCard className='text-black'>
             <MDBCardImage

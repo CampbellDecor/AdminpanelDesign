@@ -1,9 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
 import SearchOption from '../../component/Util/SearchPanel'
 import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
+import { useDispatch } from 'react-redux'
+import {
+  getLocalStorage,
+  changeLocalStorage
+} from '../../function/LocalStorageHandler'
+import { useUserContext } from '../../contexts/UserContext'
+import { getAdminChatsone } from '../../redux/Thunks/Adminchats'
+import {} from 'firebase/auth'
 export default function ChatApp () {
+  const Dispatcher = useDispatch()
+  const { currentuser } = useUserContext()
+  const chatlist = getLocalStorage('username')
 
+  useEffect(() => {
+    if (chatlist) {
+      const id = getLocalStorage('chat')
+      Dispatcher(getAdminChatsone(id))
+    } else {
+      changeLocalStorage('username', 'CampbellDecor')
+      changeLocalStorage('chat', currentuser?.uid)
+      Dispatcher(getAdminChatsone(currentuser?.uid))
+    }
+  }, [])
 
   return (
     <section className='vh-100 mt-0'>

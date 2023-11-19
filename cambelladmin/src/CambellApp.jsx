@@ -16,6 +16,7 @@ import { getUsers } from './redux/Thunks/User'
 import { getCategory } from './redux/Thunks/ServiceCategory'
 import {getBooking} from "./redux/Thunks/Booking"
 import { getauth } from "./redux/Thunks/Admins"
+import { getPayment } from "./redux/Thunks/Payment"
 
 Store.dispatch(getauth());
 Store.dispatch(getBooking());
@@ -24,7 +25,7 @@ Store.dispatch(getPackages());
 // Store.dispatch(getServices());
 Store.dispatch(getUsers());
 Store.dispatch(getCategory());
-
+Store.dispatch(getPayment());
 
 export default function CambellAdmin () {
 

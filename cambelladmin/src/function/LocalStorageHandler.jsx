@@ -42,14 +42,15 @@ export const getLocalStorage = name => {
     }
   } else
   {
-      throw new Error(name + 'Not Found in Local Storage');
+      return null;
   }
 }
-export const changeLocalStorage = (name, item) => {
-  let newdata,
-    exsit = localStorage.getItem(name)
+export const changeLocalStorage = (name, item) =>
+{
+    console.log(item)
+    let newdata;
     try {
-        const data = JSON.parse(exsit);
+        const data = JSON.parse(item);
         newdata = data;
     } catch (error) {
         newdata = item;

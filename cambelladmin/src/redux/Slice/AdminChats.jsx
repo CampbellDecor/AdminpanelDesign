@@ -28,5 +28,11 @@ const AdminChatSlice = createSlice({
   }
 })
 
-
+export const {
+  selectAll: Alladminchatlist,
+  selectIds: chatIds,
+  selectById: selectChatUser,
+  selectTotal: listcount
+} = adminadepter.getSelectors(state => state.uchatlist
+);
 export default AdminChatSlice.reducer

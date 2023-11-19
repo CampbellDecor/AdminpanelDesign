@@ -8,9 +8,14 @@ import
   MDBCardImage,
   MDBRipple
 } from 'mdb-react-ui-kit'
+import { useSelector } from 'react-redux'
+import { OneEvent } from '../redux/Slice/Events'
 
-export default function Event({index,imgURL,eventid,name,added,price=0}) {
+export default function Event ({ index, eventcode})
+{
+  const {imgURL,name, added,price = 0} = useSelector(state => OneEvent(state, eventcode));
   return (
+
     <MDBCol md={((index+1)*3-1)!==0 || (index+1) % 3 === 0?'6':'12'} lg='4' className='mb-4' >
   <MDBCard>
     <MDBRipple

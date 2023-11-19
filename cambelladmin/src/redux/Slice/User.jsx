@@ -5,7 +5,7 @@ const useradepter = createEntityAdapter({
 })
 
 const UserSlice = createSlice({
-  name: 'achats',
+  name: 'user',
   initialState: useradepter.getInitialState({
     loading: false,
     error: ''
@@ -26,4 +26,10 @@ const UserSlice = createSlice({
       })
   }
 })
+export const {
+  selectAll: AllUser,
+  selectById: OneUser,
+  selectIds: UserIds,
+  selectTotal: userCount
+} = useradepter.getSelectors(state => state.user);
 export default UserSlice.reducer;

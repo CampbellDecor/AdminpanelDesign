@@ -43,21 +43,23 @@ export const editBooking = createAsyncThunk(
     }
   }
 )
-export const blockBooking = createAsyncThunk(
-  'block/Booking',
-  async (_, { rejectWithValue }) => {
+export const getTasks = createAsyncThunk(
+  'get/Tasks',
+  async (taskid, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.get(`${BASE}/todoTask/${taskid}`);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }
   }
 )
-export const unblockBooking = createAsyncThunk(
-  'unblock/Booking',
-  async (_, { rejectWithValue }) => {
+export const addNewTask = createAsyncThunk(
+  'add/newTask',
+  async (task, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.post(`${BASE}/todoTask`, task);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }

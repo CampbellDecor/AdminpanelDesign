@@ -78,8 +78,7 @@ const { setCurrentUser,setisSuper } = useUserContext()
       } else
       {
         setloading(false);
-        setloading(false)
-
+        setloading(false);
         Dispatcher({ type: 'AUTHERROR' })
         toast.error("login failed !")
       }

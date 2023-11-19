@@ -26,7 +26,7 @@ export default async function Authentication (user)
         const response = await axios.get('/api/admin/login');
         const User = response.data;
 
-        createStorageSession('current',User.user);
+        createStorageSession('current', { uid:User.uid,...User.user });
         return User;
     } catch (error)
     {
