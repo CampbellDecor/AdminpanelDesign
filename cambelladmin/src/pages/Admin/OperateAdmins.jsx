@@ -2,7 +2,6 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { Storage } from '../../Fire'
-
 import {
   Row,
   Container,
@@ -22,22 +21,26 @@ import {
   BiSolidEditLocation,
   BiUpload
 } from 'react-icons/bi'
-import { MdAdminPanelSettings
- } from 'react-icons/md'
+import { MdAdminPanelSettings } from 'react-icons/md'
 import { AvatarGenerator } from 'random-avatar-generator'
 import PhoneInput from 'react-phone-number-input'
 import { useNavigate, useLoaderData, useParams } from 'react-router-dom'
 import { AdminFormReducer } from '../../function/AdminHandle'
 import axios from 'axios'
-import {ResetPassword} from '../../component/Admin'
-export default function Opreateadmin ()
-{
-    const adminid = useParams();
+import {SubmitButton} from '../../component/Util/Button'
+import { ResetPassword } from '../../component/Admin'
+
+import { addAdmins,getauth } from '../../redux/Thunks/Admins'
+import { useDispatch } from 'react-redux'
+export default function Opreateadmin () {
+  const Dispatcher = useDispatch()
+  const adminid = useParams()
   //state
   const adminload = useLoaderData()
   const navigate = useNavigate()
   const [progrss, setProgress] = useState(0)
   const [profile, setProfile] = useState(null)
+  const [loading, setLoading] = useState(false);
   const [admin, setAdmin] = useReducer(AdminFormReducer, {})
   useEffect(() => {
     if (adminload !== null) {
@@ -56,37 +59,39 @@ export default function Opreateadmin ()
   }
 
   const addHandle = async e => {
-    e.preventDefault()
-    try {
-      const response = await axios.post('/api/admin/add', admin)
-      if (response.data.aid) {
-        toast.success('ScussFully Add New Admin')
-        navigate('/admins')
-      } else {
-        setAdmin({ type: 'CLEAR' })
-        toast.error("You Can't Add This Admin")
-      }
+    e.preventDefault();
+
+    try
+    {
+      setLoading(true);
+      Dispatcher(addAdmins(admin));
+      Dispatcher(getauth());
+      setLoading(false)
+      toast.success('ScussFully Add New Admin');
     } catch (error) {
+      setAdmin({ type: 'CLEAR' })
+      toast.error("You Can't Add This Admin")
+      setLoading(false);
       console.error(error)
-      toast.error(error.code)
     }
   }
   const editHandle = async e => {
     e.preventDefault()
     try {
       if (progrss < 1 || progrss === 100) {
-          const response = await axios.put('/api/admin/', {...admin,aid:adminid.aid
-          });
-         navigate('/admins/profile/'+response.data)
-          toast.success('ScussFully Edited')
+        const response = await axios.put('/api/admin/', {
+          ...admin,
+          aid: adminid.aid
+        })
+        navigate('/admins/profile/' + response.data)
+        toast.success('ScussFully Edited')
       } else {
         toast.warning('profile not uploaded')
       }
-    } catch (error)
-    {
-      toast.error(error?.code);
+    } catch (error) {
+      toast.error(error?.code)
 
-        console.error(error);
+      console.error(error)
     }
   }
 
@@ -106,7 +111,7 @@ export default function Opreateadmin ()
   }
   const ImageChange = e => {
     setProfile(e.target.files[0])
-      setProgress(1)
+    setProgress(1)
 
     const pro = URL.createObjectURL(e.target.files[0])
     setAdmin({ type: 'PROFILECHANGE', payload: pro })
@@ -143,12 +148,12 @@ export default function Opreateadmin ()
 
   return (
     <Container
-      className='vh-100 mt-5 justify-content-center'
+      className='vh-75 mt-5 mb-4 justify-content-center'
       style={{ width: '80%' }}
     >
       <Row>
         <Col lg='4' md='6'>
-          <Card>
+          <Card className='pb-3'>
             <Card.Img
               variant='top'
               src={
@@ -189,8 +194,7 @@ export default function Opreateadmin ()
                   </div>
                 </Stack>
               </Card.Text>
-              <ResetPassword/>
-            
+              {/* <ResetPassword/> */}
             </Card.Body>
           </Card>
         </Col>
@@ -326,9 +330,7 @@ export default function Opreateadmin ()
             </Row>
             <Row>
               <div className='w-50'>
-                <Button variant='primary' type='submit' className='me-2'>
-                  {adminload === null ? 'Add' : 'Edit'}
-                </Button>
+<SubmitButton btncontent={adminload === null ? 'Add' : 'Edit'} loading={loading} className='me-2'/>
                 <Button variant='danger' type='reset' className='ms-2'>
                   Clear
                 </Button>

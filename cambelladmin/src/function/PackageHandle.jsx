@@ -4,19 +4,13 @@ export const reducer = (state, action) => {
       return { ...state, [action.name]: action.value }
     }
     case 'CHANGEDES': {
-      return { ...state, desc: action.value }
+      return { ...state, services: action.value }
     }
     case 'IMGCHANGE': {
       return {
         ...state,
-        serviceImg: action.value
+        packImg: action.value
       }
-      }
-      case "SERVICECHANGE": {
-          const { services,...others } = state;
-          return {
-              ...others,services:{...services,[services?.length]:action.value}
-          }
       }
     default:
       return {}

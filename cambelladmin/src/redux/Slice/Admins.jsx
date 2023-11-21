@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { getAdmins } from '../Thunks/Admins'
+import { getAdmins,addAdmins } from '../Thunks/Admins'
 const adminadepter = createEntityAdapter({
   selectId: (admin) => admin.aid
 })
@@ -23,6 +23,18 @@ const AdminSlice = createSlice({
       .addCase(getAdmins.fulfilled, (state, action) => {
         state.loading = false
         adminadepter.upsertMany(state,action.payload)
+      })
+      .addCase(addAdmins.pending, (state, action) =>
+      {
+        state.loading = true
+      })
+      .addCase(addAdmins.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.data
+      })
+      .addCase(addAdmins.fulfilled, (state, action) => {
+        state.loading = false
+        adminadepter.addOne(state, action.payload);
       })
   }
 })

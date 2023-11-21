@@ -8,18 +8,18 @@ import {
   Button,
   InputGroup,
   Card,
-  ListGroup
 } from 'react-bootstrap'
-import { RiPlayListAddLine } from 'react-icons/ri'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import { Storage } from '../../Fire'
+import {toast} from 'react-toastify'
 import ReactQuill from 'react-quill'
 import { BiUpload } from 'react-icons/bi'
 import { reducer } from '../../function/PackageHandle'
 
 export default function AddPackage () {
   const [pack, setpack] = useReducer(reducer, {});
-  
-  const [packImg, setpackImg] = useState(null)
-  const ServiceaDD = e => {}
+
+  const [packImg, setpackImg] = useState(null);
   const onChange = e => {
     setpack({
       type: 'CHANGEINPUT',
@@ -35,6 +35,30 @@ export default function AddPackage () {
     const img = URL.createObjectURL(e.target.files[0])
     setpack({ type: 'IMGCHANGE', value: img })
   }
+const ImageUploadAndShow = async e => {
+  if (packImg) {
+    const filename = 'Packages/' + pack?.packname + ".jpg";
+    const storageref = await ref(Storage, filename)
+    const upload = uploadBytesResumable(storageref, packImg)
+    upload.on(
+      'state_changed',
+      snapshot => {
+        const progressd =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+       console.log(progressd)
+      },
+      error => {
+        console.error(error)
+      },
+      () => {
+        getDownloadURL(upload.snapshot.ref).then(url => {
+          toast.success('upload scussFully')
+          setpack({ type: 'IMGCHANGE', value: url })
+        })
+      }
+    )
+  }
+}
 
   return (
     <Container fluid className='vh-75 pb-5 mb-3' style={{ width: '80%' }}>
@@ -61,11 +85,6 @@ export default function AddPackage () {
                   value={pack?.desc ?? 'decription...'}
                   readOnly
                 />
-                <ListGroup>
-                  {pack?.services?.map((ele, index) => (
-                    <ListGroup.Item key={index}>{ele}</ListGroup.Item>
-                  ))}
-                </ListGroup>
               </Card.Body>
             </Card>
           </Row>
@@ -91,27 +110,8 @@ export default function AddPackage () {
                 name='price'
               />
             </Form.Group>
-            <div>
-              <Form.Label>Services</Form.Label>
-              <InputGroup className='mb-3'>
-                <Form.Control
-                  placeholder='add Services'
-                  aria-label="Recipient's username"
-                  aria-describedby='basic-addon2'
-                />
-
-                <Button
-                  variant='outline-info'
-                  id='button-addon2'
-                  onClick={ServiceaDD}
-                >
-                  <RiPlayListAddLine size={20} />
-                </Button>
-              </InputGroup>
-            </div>
-
             <Form.Group className='mb-3'>
-              <Form.Label>Description</Form.Label>
+              <Form.Label>Services</Form.Label>
               <ReactQuill
                 theme='snow'
                 onChange={value => setpack({ type: 'CHANGEDES', value })}
@@ -127,7 +127,7 @@ export default function AddPackage () {
                   name='images'
                   accept='image/*'
                 />
-                <Button variant='outline-info'>
+                <Button variant='outline-info' onClick={ImageUploadAndShow}>
                   <BiUpload size={20} />
                 </Button>
               </InputGroup>

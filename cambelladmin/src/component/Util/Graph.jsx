@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import {
   Chart as ChartJS,
   ArcElement,
@@ -13,10 +13,10 @@ import {
 } from 'chart.js'
 import { Doughnut, Line } from 'react-chartjs-2'
 import randomcolor from 'randomcolor'
-import { CambellContext } from '../../contexts/AppContext'
-import { useSelector, useDispatch } from 'react-redux'
-
+import { useThemeContext } from '../../contexts/ThemeContext'
+import { useAppContext } from '../../contexts/AppContext'
 import {PayHistorYByYear} from '../../redux/Slice/PaymentHis'
+import {PackageRatings} from '../../redux/Slice/Packages'
 
 ChartJS.register(
   ArcElement,
@@ -31,12 +31,9 @@ ChartJS.register(
 )
 
 export function SmallHomeDonut () {
-  const { mode } = useContext(CambellContext)
-  const [labels, data] = [
-    ['Classic Hindu Wedding', 'Classic Puberty Ceremony',"Classic Muslim Wedding","Happilly Get Together",'Precious Birthday Moment','Classic Christian Wedding '
-],
-    [87.4567,67.6792,100,46.44,90.435,45.67]
-  ]
+  const { mode } = useThemeContext();
+  const { Appname } = useAppContext();
+  const [labels, data] =PackageRatings();
   const colors = randomcolor({
     count: labels?.length,
     luminosity: mode === 'light' ? 'bright' : 'dark',
@@ -56,12 +53,14 @@ export function SmallHomeDonut () {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    options: {
       plugins: {
       legend: {
-        display: false, // Hide legends
-      },
-    },
+          display: false, // Hide legends
+        },
+        title: {
+          display: true,
+          text:`${Appname} Packages`
+        }
     }
   }
 
@@ -75,17 +74,8 @@ export function SmallHomeDonut () {
 
 export function IncomeAnalyze ()
 {
-
-  const x_axis = ['Jan', 'Feb', 'Mar', 'Api', 'May', 'june', 'july', 'Aug', 'Sep',"Oct","Nov","Dec"]
   const [x, y] = PayHistorYByYear(2023);
   console.log(x,y)
-  const [loading, setloading] = useState(false)
-  const { mode } = useContext(CambellContext)
-  const color = randomcolor({
-    count: 2,
-    luminosity: mode,
-    hue: mode === 'light' ? 'blue' : '#0b0d75'
-  })
   const datas = {
     labels: x,
     datasets: [

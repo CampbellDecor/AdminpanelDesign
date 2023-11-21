@@ -1,9 +1,31 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Container, Row, Col, Card, CardBody } from 'react-bootstrap'
 import SearchOption from '../../component/Util/SearchPanel'
 import Chatting, { ChatPanel, ChatList } from '../../component/Chats'
+import {
+  getLocalStorage,
+  changeLocalStorage
+} from '../../function/LocalStorageHandler'
+import { useDispatch } from 'react-redux'
+import { useUserContext } from '../../contexts/UserContext'
+import { getOneSAdminChats } from '../../redux/Thunks/SuperAdminChats'
 
-export default function ChatApp () {
+export default function ChatApp ()
+{
+  const Dispatcher = useDispatch()
+  const chatlist = getLocalStorage('chat')
+  const { currentuser } = useUserContext()
+
+useEffect(() => {
+  if (chatlist) {
+    const id = getLocalStorage('chat')
+    Dispatcher(getOneSAdminChats(id))
+  } else {
+    changeLocalStorage('username', currentuser?.username);
+    changeLocalStorage('chat', currentuser?.uid)
+    Dispatcher(getOneSAdminChats(currentuser?.uid))
+  }
+}, [])
 
 
   return (

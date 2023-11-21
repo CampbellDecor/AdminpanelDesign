@@ -11,6 +11,7 @@ import {
   MDBTypography
 } from 'mdb-react-ui-kit'
 import {DeleteBox} from '../../component/Admin'
+import {NormalButton} from '../../component/Util/Button'
 import { Link, useLoaderData } from 'react-router-dom'
 import { BsShieldLockFill } from 'react-icons/bs';
 import Table from 'react-data-table-component';
@@ -133,8 +134,8 @@ adminprofile-header_userdetails">
 
                   </div>
                   <div className='w-100 d-flex justify-content-end'>
-                      <DeleteBox aid={aid} username={username} color='danger' html='Delete Account'/>
-
+                      {/* <DeleteBox aid={aid} username={username} color='danger' html='Delete Account'/> */}
+                      <NormalButton btncontent={"Delete Account"}/>
                   </div>
 
                 </div>

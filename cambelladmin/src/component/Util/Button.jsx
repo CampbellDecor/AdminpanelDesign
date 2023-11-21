@@ -5,7 +5,7 @@ import { Spinner } from 'react-bootstrap';
 export function SubmitButton ({ attribute, btncontent,loading=false,disabled=false})
 {
   return (
-    <MDBBtn {...attribute} type='submit' disabled={disabled}>
+    <MDBBtn {...attribute} type='submit' disabled={disabled} style={{backgroundColor:"#c59290"}}>
       {
         loading ? <Spinner as='span'
           animation='border'
@@ -26,7 +26,7 @@ export function NormalButton ({
 
 }) {
   return (
-    <MDBBtn {...attribute} onClick={onClick} disabled={disabled}>
+    <MDBBtn {...attribute} onClick={onClick} disabled={disabled} style={{ backgroundColor: "#c59290" }}>
       {loading ? (
         <Spinner
           as='span'

@@ -1,5 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { getEvents } from '../Thunks/Events'
+import { useSelector } from 'react-redux';
 const eventadepter = createEntityAdapter({
   selectId: (events) => events.eventid
 })
@@ -31,6 +32,13 @@ export const {
   selectById: OneEvent,
   selectEntities: Eventlist,
   selectTotal: eventCount,
-  selectIds:eventset
-}=eventadepter.getSelectors(state=>state.events)
+  selectIds: eventset
+} = eventadepter.getSelectors(state => state.events);
+
+
+export const EventBySearchName = (name) =>
+{
+  const Events = useSelector(allEvents);
+  return Events.find(ele => ele.name === name);
+}
 export default EventSlice.reducer;

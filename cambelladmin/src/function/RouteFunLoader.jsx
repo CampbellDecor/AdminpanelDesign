@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 export async function ProfileLoader ({ params }) {
   try {
     const aid = params.aid === 'self' ? 'self' : params.aid
-    const admin = await axios.get('/api/admin/' + aid)
+    const admin = await axios.get('/api/admin/'+ aid)
     return admin.data
   } catch (error) {
     console.error(error)

@@ -40,4 +40,16 @@ export const SearchpackByName = (search) =>
   const packs = useSelector(allPacks);
  return packs?.find(pac => regx.test(pac.name));
 }
+export const PackageRatings = () =>
+{
+  const Packages = useSelector(allPacks);
+  const Data = [[], []];
+  Packages.forEach(ele =>
+  {
+    Data[0].push(ele.name);
+    Data[1].push((ele?.avg_rating/ele?.rating_count))
+  })
+  return Data;
+}
+
 export default PackageSlice.reducer;

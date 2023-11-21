@@ -48,6 +48,13 @@
   }
 }
 .count-panel{
+  height: 300px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  transition: 0.05s;
+  &::-webkit-scrollbar{
+    display: none;
+  }
   &-component{
     &--name{
       &--img{

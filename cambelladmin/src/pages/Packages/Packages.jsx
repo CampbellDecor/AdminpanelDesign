@@ -13,7 +13,7 @@ export default function PackagePages ()
   const packs = useSelector(packset);
   return (
     <MDBContainer className='min-vh-100'>
-      <MDBBtn href='/pack/add' className='position-fixed' style={{right:"10px"}}>
+      <MDBBtn href='/pack/add' className='position-fixed' style={{right:"10px",backgroundColor:"#c59290"}}>
 <IoMdAddCircle size={25}/>
       </MDBBtn>
       {packs.map(p => <Packages packageID={p} key={p}/>)}

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import Todo from './TodoList'
 import User from '../../component/BookingUser'
+import BookingPayment,{QRShow} from '../../component/BookingPayment'
 import { Container, Row } from 'react-bootstrap'
 import { MDBCol } from 'mdb-react-ui-kit'
 import Events from '../../component/BookingEvents'
@@ -30,15 +31,17 @@ export default function OneBooking ()
                 status={loader?.status}
                 bookDate={loader?.bookDate}
               />
+              <QRShow bookcode={loader.bookid}/>
             </MDBCol>
             <MDBCol md='6' lg='8'>
-              <Events search={loader.name}/>
+              <Events search={loader?.name} bookcode={loader?.bookid}/>
             </MDBCol>
           </Row>
         </MDBCol>
 
         <MDBCol md='6' lg='3'>
           <User userdata={loader.user} />
+          <BookingPayment bookcode={loader.bookid} />
         </MDBCol>
       </Row>
       <Row>

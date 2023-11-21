@@ -164,7 +164,7 @@ const { setCurrentUser,setisSuper } = useUserContext()
               <SubmitButton className='mb-4 login-container-btn' btncontent="Log In" loading={loading} />
           </MDBValidation>
           <div>
-            <Link className='text-decoration-none' to='/resetpw'>
+            <Link className='text-decoration-none text-muted' to='/resetpw'>
               forget Password?
             </Link>
           </div>
