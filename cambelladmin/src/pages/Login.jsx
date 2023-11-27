@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react'
+import React, { useCallback, useReducer, useRef, useState } from 'react'
 import Authuntication,{loginreducer,Remeberme} from '../function/Auth'
 import { SubmitButton} from '../component/Util/Button';
 import {
@@ -130,7 +130,7 @@ const { setCurrentUser,setisSuper } = useUserContext()
                 type='email'
                 onChange={onChange}
               />
-            </MDBValidationItem>
+              </MDBValidationItem>
             <MDBValidationItem
               feedback='Please enter valid password[8-12]'
               invalid
