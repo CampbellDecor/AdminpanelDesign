@@ -1,5 +1,4 @@
 @use "./cambell"as *;
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
 @import url('../../node_modules/react-phone-number-input/style.css');
 @import url("../../node_modules/react-quill/dist/quill.snow.css");
 @import url("../../node_modules/react-quill/dist/quill.bubble.css");
@@ -7,6 +6,9 @@
 @import url("../../node_modules/react-date-picker/dist/DatePicker.css");
 @import url("../../node_modules/animate.css");
 @import url('../../node_modules/react-calendar/dist/Calendar.css');
+@import url('../../node_modules/@fortawesome/fontawesome-free/css/all.min.css');
+@import url('../../node_modules/mdb-ui-kit/css/mdb.min.css');
+@import url('../../node_modules/react-toastify/dist/ReactToastify.css');
 //Side bar Split btn
 .sidebar-toggole {
   @include fixedbtn(expandSidebar("splitbtn"), 25px, 10000);

@@ -33,5 +33,5 @@ export const Store = configureStore({
     todo: TodoSlice,
     payhis:PaymentHisSlice
   },
-  middleware: [Thunk, logger]
+  middleware: [Thunk]
 })

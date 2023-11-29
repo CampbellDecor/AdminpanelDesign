@@ -5,7 +5,7 @@ import { BsEnvelopeCheckFill } from 'react-icons/bs'
 import { SuccessAlert, WrongAlert } from '../component/Util/Alert'
 import { AiOutlineRedo } from 'react-icons/ai'
 import { Image, OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useAppContext } from '../contexts/AppContext'
 import { useAuthContext } from '../contexts/AuthContext'
 import { useUserContext } from '../contexts/UserContext'
@@ -43,7 +43,7 @@ export default function Logout () {
     }
   }
 
-  return (
+  return islogin? (
     <MDBContainer fluid className='vh-100 login'>
       <div className='p-5 bg-image'></div>
 
@@ -53,16 +53,12 @@ export default function Logout () {
             <Image src={Applogo} roundedCircle width={100} />
             <h3 className='mt-1 mb-3'>{Appname}</h3>
           </div>
-          {!islogin ? (
-            <LogOutAlert action={logoutStatus} />
-          ) : (
             <NormalButton
               className='mt-2 login-container-btn'
               btncontent='Logout'
               loading={loading}
               onClick={logouthandle}
             />
-          )}
           <div className='mt-2'>
             go To
                       <Link className='text-decoration-none' to={islogin?'/home':'/'}>
@@ -72,7 +68,7 @@ export default function Logout () {
         </MDBCardBody>
       </MDBCard>
     </MDBContainer>
-  )
+  ) : (<Navigate to='/' replace={ true} />)
 }
 
 function LogOutAlert ({ action = 'normal' }) {

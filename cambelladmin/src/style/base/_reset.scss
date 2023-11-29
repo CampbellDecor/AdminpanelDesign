@@ -1,15 +1,26 @@
-@use "../abstract/variable" as *;
+@use "../abstract/variable"as *;
+
 * {
-    padding: 0;
-    margin: 0;
-    transition:trns("t_1");
-  
-    // body design
-    body {
-      width: 100%;
-      min-height: 100vh;
-      margin: 0px 0px;
-      transition:trns("t_1");
-     
-    }  
+  padding   : 0px;
+  margin    : 0px;
+  transition: trns("t_1");
+  font-family: 'Roboto',
+    sans-serif;
+
+  // body design
+  body {
+    width     : 100%;
+    min-height: 100vh;
+    margin    : 0px;
+    padding   : 5px;
+    position  : relative;
+    transition: trns("t_1");
   }
+
+  a {
+    text-decoration: none;
+  }
+.anchor{
+    text-decoration: none;
+}
+}

@@ -75,6 +75,7 @@ export async function ResetPasswordApi(email) {
     try
     {
         await sendPasswordResetEmail(auth, email);
+        addCookie('pswreset', { email, date: new Date() }, 1)
     } catch (error)
     {
         console.log(error)

@@ -40,6 +40,9 @@ import Error from '../pages/Bugs/Error'
 //Bookings
 import Bookings from '../pages/Booking/Bookings'
 import OneBooking from '../pages/Booking/OneBooking'
+
+//System
+import System from '../pages/System/System'
 import {
   ProfileLoader,
   addAdminLoader,
@@ -99,6 +102,9 @@ const router = createBrowserRouter([
         //service Category
         path: '/servicecat',
         element: <ServiceCat />
+      }, {
+        path: '/sys',
+        element:<System/>
       },
       {
         //Bookings

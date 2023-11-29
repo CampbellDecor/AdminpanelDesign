@@ -1,7 +1,7 @@
 @use "./Sidebarmd" as *;
 @use "./mainmd" as *;
 @use "./home" as *;
-  
+@use "./Auth" as *;
 @media (max-width: 768px) {
   @include sidebar;
   @include maincontent;
@@ -10,7 +10,6 @@
     .sidebar-toggole {
       display: none;
     }
-  
+
 
   }
-  

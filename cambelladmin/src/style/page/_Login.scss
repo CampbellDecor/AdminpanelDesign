@@ -1,17 +1,45 @@
-
-.login{
-    .bg-image{
-        height: 300px;
+.reset {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    .bg-image {
+        height    : 320px;
+        object-fit: cover;
+        width     : 100%;
+        margin    : 0;
     }
-    &-container{
-backdrop-filter: blur(30px);
-background: hsla(0, 0%, 100%, 0.8);
-margin-top: -200px;
-&-btn{
-  border-radius: 10px !important;
-  width: 100px;
-  padding: 4px;
-  font-weight: 600;
+
+    &-container {
+        backdrop-filter: blur(30px);
+        background     : #ffffffcc;
+        margin-top     : -200px;
+
+        &-logo {
+            width: 100px;
+        }
+
+    }
 }
+.login {
+    background-size    : cover;
+    background-position: center;
+    background-repeat  : no-repeat;
+
+    .bg-image {
+        height    : 320px;
+        object-fit: cover;
+        width     : 100%;
+        margin    : 0;
+    }
+
+    &-container {
+        backdrop-filter: blur(30px);
+        background     : #ffffffcc;
+        margin-top     : -200px;
+
+        &-logo {
+            width: 100px;
+        }
+
     }
 }

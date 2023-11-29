@@ -1,0 +1,56 @@
+  @media (max-width: 576px) {
+      .login {
+          background-image: url("../../../images/LoginBg/smLoginBG.gif");
+
+          .bg-image {
+              background: none;
+          }
+
+          &-container {
+              height: 550px;
+
+              &-logo {
+                  width: 70px;
+              }
+
+              &-input {
+                  font-size: 12px;
+
+              }
+          }
+      }
+
+      .reset {
+          background-image: url("../../../images/LoginBg/resetShadow.gif");
+
+          .bg-image {
+              background: none;
+          }
+
+          &-container {
+              height: 400px;
+
+              &-logo {
+                  width: 70px;
+              }
+
+              &-input {
+                  font-size: 12px;
+
+              }
+
+              .custom-alert {
+                  width  : 100% !important;
+                  padding: 5px 20px !important;
+
+                  .h4 {
+                      font-size: 17px;
+                  }
+
+                  p {
+                      font-size: 12px;
+                  }
+              }
+          }
+      }
+  }

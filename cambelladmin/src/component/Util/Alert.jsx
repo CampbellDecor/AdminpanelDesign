@@ -7,7 +7,7 @@ import { AiFillCloseCircle } from 'react-icons/ai'
 export function SuccessAlert ({title,body,icon=null})
 {
   return (
-   <Alert variant='success'>
+   <Alert variant='success custom-alert'>
           <Alert.Heading>{title }</Alert.Heading>
   <p>
             {icon??<BsExclamationCircleFill/> } {body}
@@ -18,7 +18,8 @@ export function SuccessAlert ({title,body,icon=null})
 }
 export function WrongAlert ({ title, body,icon=null }) {
   return (
-    <Alert variant='danger'>
+    <Alert variant='danger custom-alert
+'>
           <Alert.Heading>{ title}</Alert.Heading>
       <p>
         {

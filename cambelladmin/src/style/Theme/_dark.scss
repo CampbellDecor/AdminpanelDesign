@@ -92,7 +92,19 @@
     }
 
 }
-@include Login("dark");
+ .login,.reset {
+     background-color: var.color("dark", "bodybg");
+
+   .bg-image {
+     background-image: url("../../images/LoginBg/LoginDark.gif");
+   }
+   &-container {
+     background: var.color("dark", "w");
+     &-btn {
+       background-color: var.color("dark", "secoundary") !important;
+     }
+   }
+ }
 @include BookingCalender("dark");
  @include OneBooking("dark");
 }

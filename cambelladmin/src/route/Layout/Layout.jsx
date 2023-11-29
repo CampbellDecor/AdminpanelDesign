@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Outlet, Navigate } from 'react-router-dom';
-import React, {  useRef } from 'react';
+import React, {  useMemo, useRef } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
@@ -38,11 +38,11 @@ Dispatch(getAdmins())
     }
   };
 
-  return !islogin ? (
+  return useMemo(()=>( !islogin ? (
     <Navigate to='/' replace={true} />
   ) : (
     <div ref={splittoggle}>
-      <Sidebar />
+      <Sidebar/>
       <ToggleBtn />
       <SplitToggle
         toggleAction={responsiveAction}
@@ -56,15 +56,15 @@ Dispatch(getAdmins())
         <Footer />
       </main>
     </div>
-  );
+  )),[]);
 }
 
 export function InnerLayout ()
 {
-  return (
+  return useMemo(()=> (
     <>
-      <CambellBreadCrumb Title='Hi' />
+      <CambellBreadCrumb/>
       <Outlet />
     </>
-  );
+  ),[]);
 }

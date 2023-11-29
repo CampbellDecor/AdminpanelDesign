@@ -1,10 +1,15 @@
 import React from 'react'
-import {ValidationInput} from '../component/Util/Input'
-export default function Test() {
+import {fmessage} from '../Fire.js'
+export default function Test ()
+{
+  const Oncli =async () =>
+  {
+   const hj= await fmessage.getToken()
+  }
   return (
     <div>
-      <ValidationInput/>
-
+      <br />
+      <button className='btn btn-primary' onClick={Oncli}>fdfdfd</button>
     </div>
   )
 }

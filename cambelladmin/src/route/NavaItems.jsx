@@ -7,8 +7,13 @@ import { TbPackages, TbDeviceAnalytics } from "react-icons/tb";
 const is=25;
 export const NavItems =[
   {
-    path: '/',
+    path: '/home',
     itemname: 'DashBoard',
+    itemicon: <FaTachometerAlt size={is} className='me-3' />,
+  },
+  {
+    path: '/sys',
+    itemname: 'System',
     itemicon: <FaTachometerAlt size={is} className='me-3' />,
   },
   // {

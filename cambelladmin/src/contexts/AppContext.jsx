@@ -8,11 +8,11 @@ export const CambellContext=createContext();
 export default function AppContext ({childern}){
     const [Appname, setAppname] = useState("Campbell Decor");
     const [Applogo, setApplogo] = useState(logo);
+    const [website,setWebsite]=useState('')
 
 
     return(
-        <CambellContext.Provider value={{Appname, setAppname,Applogo, setApplogo
-
+        <CambellContext.Provider value={{Appname, setAppname,Applogo, setApplogo,website, setWebsite
 
 } }>
             {childern}

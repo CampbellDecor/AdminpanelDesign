@@ -1,8 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import router from './route/router';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'mdb-ui-kit/css/mdb.min.css';
 import Cambell from './contexts/CambellContext';
 import LoadingPage from './pages/Bugs/Loding';
 import { Provider } from 'react-redux';
@@ -29,15 +27,15 @@ Store.dispatch(getPayment());
 
 export default function CambellAdmin () {
 
-  return (
+  return useMemo(()=> (
     <Cambell
       childern={
         <Provider store={Store}>
-          <Suspense fallback={<LoadingPage />}>
+          <Suspense fallback={<LoadingPage/>}>
             <RouterProvider router={router} />
           </Suspense>
         </Provider>
       }
     />
-  )
+  ),[])
 }

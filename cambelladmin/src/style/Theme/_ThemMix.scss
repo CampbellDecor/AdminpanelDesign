@@ -12,6 +12,10 @@
     .navlink {
       @include component.CText($theme,"textprim");
       background-color: var.color($theme, "tertery");
+      &.active{
+        font-weight: 700;
+        border-bottom:1px ridge black;
+      }
     }
   }
 
@@ -120,31 +124,6 @@
         }
     }
   }
-}
-@mixin Login($theme:"light"){
-  .login{
-    @if($theme:"dark"){
-      background-color:var.color($theme, "bodybg") ;
-    }@else{
-      background-color:var.color($theme, "w") ;
-    }
-
-    .bg-image{
-      @if($theme:"dark"){
-        background-image: url("../../images/LoginBg/LoginDark.jpg");
-      }@else{
-        background-image: url("../../images/LoginBg/LoginWallpaper2.jpg");
-      }
-
-    }
-    &-container{
-background: var.color($theme, "w");
-
-&-btn{
-background-color: var.color($theme, "secoundary") !important;
-}
-    }
-}
 }
 @mixin Adminbadge($theme:"light"){
   color: var.color($theme, "warning") !important
