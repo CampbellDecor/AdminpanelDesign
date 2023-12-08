@@ -1,11 +1,10 @@
-// Import the functions you need from the SDKs you need
+
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage"
 import {getFirestore} from "firebase/firestore"
-import {getMessaging} from "firebase/messaging"
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getMessaging } from "firebase/messaging"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -24,4 +23,4 @@ export default app;
 export const auth = getAuth( app );
 export const Storage = getStorage( app );
 export const fstore = getFirestore(app);
-export const fmessage = getMessaging(app);
+export const fmessage = getMessaging();

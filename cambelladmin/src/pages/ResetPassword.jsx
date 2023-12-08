@@ -35,7 +35,6 @@ export default function ResetPassword () {
 
   const resetHandle = async e => {
     e.preventDefault();
-    alert('hi')
     setloading(true)
     try {
       if (!sent) {

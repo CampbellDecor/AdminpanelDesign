@@ -4,14 +4,15 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../../images/errorpage/2.jpg");
-    
+    background-image: url("../../images/errorpage/Error.gif");
+
         .inner-error{
             width: max-content;
+            text-align: center;
             padding: 10px;
             border-radius: 5px;
         }
-        
-        
-    
+
+
+
 }

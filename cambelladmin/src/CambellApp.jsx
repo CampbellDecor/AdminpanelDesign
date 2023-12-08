@@ -1,12 +1,10 @@
-import React, { Suspense, useMemo } from 'react';
-import { RouterProvider } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import {  RouterProvider } from 'react-router-dom';
 import router from './route/router';
 import Cambell from './contexts/CambellContext';
 import LoadingPage from './pages/Bugs/Loding';
 import { Provider } from 'react-redux';
 import { Store } from './redux/Store/store';
-
-
 import { getEvents } from './redux/Thunks/Events'
 import { getPackages } from './redux/Thunks/Packages'
 import { getServices } from './redux/Thunks/Service'
@@ -27,7 +25,7 @@ Store.dispatch(getPayment());
 
 export default function CambellAdmin () {
 
-  return useMemo(()=> (
+  return (
     <Cambell
       childern={
         <Provider store={Store}>
@@ -37,5 +35,5 @@ export default function CambellAdmin () {
         </Provider>
       }
     />
-  ),[])
+  )
 }

@@ -74,8 +74,9 @@ export async function ResetPasswordApi(email) {
 
     try
     {
-        await sendPasswordResetEmail(auth, email);
+        const result = await axios.post("/api/admin/reset", { email });
         addCookie('pswreset', { email, date: new Date() }, 1)
+        return result;
     } catch (error)
     {
         console.log(error)
