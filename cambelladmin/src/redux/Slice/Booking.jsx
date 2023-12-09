@@ -2,7 +2,8 @@ import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { getBooking } from '../Thunks/Booking'
 import { useSelector } from 'react-redux'
 import { allEvents } from './Events'
-import {allPacks } from './Packages'
+import { allPacks } from './Packages'
+import { UserIds, AllUser } from './User'
 const bookingadepter = createEntityAdapter({
   selectId: booking => booking.bookid
 })
@@ -17,18 +18,14 @@ const BookingSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getBooking.pending, (state, action) => {
-        console.log(action)
         state.loading = true
       })
       .addCase(getBooking.rejected, (state, action) => {
         state.loading = false
-        console.log(action)
-
         state.error = action.data
       })
       .addCase(getBooking.fulfilled, (state, action) => {
         state.loading = false
-        console.log(action)
         bookingadepter.upsertMany(state, action.payload)
       })
   }
@@ -54,39 +51,71 @@ export const RecentBooking = () => {
 }
 
 export const EventBooking = () => {
-  const events = useSelector(allEvents)?.map(ele =>
-  {
-    const { name, imgURL,eventid } = ele;
-    return {name, imgURL, eventid}
+  const events = useSelector(allEvents)?.map(ele => {
+    const { name, imgURL, eventid } = ele
+    return { name, imgURL, eventid }
   })
   const Bookings = useSelector(AllBookings)
   const EventBook = []
-  events.forEach(ele =>
-  {
-    const regex = new RegExp(ele?.name, 'ig');
+  events.forEach(ele => {
+    const regex = new RegExp(ele?.name, 'ig')
     EventBook.push({
       ...ele,
       count: Bookings.filter(ele => regex.test(ele.eventname))?.length
     })
   })
-  return EventBook;
+  return EventBook
 }
 export const PackageBooking = () => {
   const packs = useSelector(allPacks)?.map(ele => {
     const { name, imgURL, packageID } = ele
-    return { name, imgURL,packageID}
+    return { name, imgURL, packageID }
   })
   const Bookings = useSelector(AllBookings)
   const packBook = []
-  packs.forEach(ele =>
-  {
-    const regx = new RegExp(ele?.name, 'ig');
+  packs.forEach(ele => {
+    const regx = new RegExp(ele?.name, 'ig')
     packBook.push({
       ...ele,
       count: Bookings.filter(ele => regx.test(ele.eventname))?.length
     })
   })
-  return packBook;
+  return packBook
+}
+
+export const AlluserBooking = () => {
+  const bookings = useSelector(AllBookings)
+  const users = useSelector(UserIds)
+  const usernames = useSelector(AllUser)
+  const Bookingtypes = [[], [], [], [], []]
+  const status = ['active', 'pending', 'cancelled', 'expired']
+  users.forEach(ele => {
+    const userbook = bookings.filter(book => book.user === ele)
+    Bookingtypes[0].push(usernames.find(eler => eler.uid === ele).username)
+    status.forEach((eles, index) => {
+      Bookingtypes[index + 1].push(
+        userbook.filter(ele => ele.status === eles).length
+      )
+    })
+  })
+  return Bookingtypes
+}
+export const AllDateBooking = (dates=new Date()) => {
+  const bookings = useSelector(AllBookings)
+  const Bookingtypes = [[], [], [], [], []]
+  const status = ['active', 'pending', 'cancelled', 'expired']
+  for (let index = 1; index <= 31; index++) {
+    const date = `${dates.getMonth() + 1}/${index}/${new Date().getFullYear()}`
+    Bookingtypes[0].push(index)
+    const monthbook = bookings.filter(book => book.eventDate === date)
+    status.forEach((eles, index) => {
+      Bookingtypes[index + 1].push(
+        monthbook.filter(ele => ele.status === eles).length
+      )
+    })
+  }
+  console.log(Bookingtypes)
+  return Bookingtypes
 }
 
 export default BookingSlice.reducer

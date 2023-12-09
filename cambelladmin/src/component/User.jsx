@@ -1,7 +1,7 @@
 import { MDBBadge, MDBBtn } from 'mdb-react-ui-kit'
 import React from 'react'
-import { BlockUnBlock } from './Util/Model'
-import { FaUserPen } from 'react-icons/fa6'
+import { BlockUnBlock,UserNotes } from './Util/Model'
+
 import { useNavigate,Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { OneUser } from '../redux/Slice/User'
@@ -10,7 +10,7 @@ import { UserBookCount } from '../redux/Slice/Booking'
 import {  Image } from 'react-bootstrap'
 
 export function UserRows ({ uid }) {
-  const { email, religion, mobile, username, profile, isBlock } = useSelector(
+  const { email, religion, mobile, username, profile, isBlock,note } = useSelector(
     state => OneUser(state, uid)
   )
   const { isOnline } = useSelector(state => OneAuth(state, uid)) ?? {};
@@ -53,8 +53,8 @@ export function UserRows ({ uid }) {
       </td>
       <td>{booking}</td>
       <td>
-        <MDBBtn color='link' href={'/user/profile/' + uid} rounded size='sm'>
-          <FaUserPen size={20} color='navy' />
+        <MDBBtn color='link'  rounded size='sm'>
+          <UserNotes {...{uid,username,note}}/>
         </MDBBtn>
         <BlockUnBlock {...{ uid, username, isBlock }} />
       </td>

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-const BASE='/api/userchat'
+const BASE='/api/service'
 export const getServices = createAsyncThunk(
   'get/Services',
   async (_, { rejectWithValue }) => {

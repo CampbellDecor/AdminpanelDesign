@@ -8,7 +8,6 @@ import SuperAdminchatSlice from '../Slice/SuperAdminChats'
 import EventsSlice from '../Slice/Events'
 import PackageSlice from '../Slice/Packages'
 import ServiceSlice from '../Slice/Service'
-import ServiceCategorySlice from '../Slice/ServiceCategory'
 import BookingSlice from '../Slice/Booking'
 import AdminChatsoneSlice from '../Slice/AdminChatsaone'
 import UserChatsoneSlice from '../Slice/UserChatone'
@@ -20,7 +19,6 @@ export const Store = configureStore({
   reducer: {
     user: UserSlice,
     admin: AdminSlice,
-    category: ServiceCategorySlice,
     service: ServiceSlice,
     booking: BookingSlice,
     events: EventsSlice,

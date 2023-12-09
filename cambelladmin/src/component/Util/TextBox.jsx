@@ -11,6 +11,7 @@ export const InValidationInput = forwardRef(function (props,ref) {
     feedback,
     invalidclassName,
     inputclassName,
+    onChange,
     required = true,
     autoComplete = 'off',
     ...attr
@@ -23,6 +24,7 @@ export const InValidationInput = forwardRef(function (props,ref) {
         {...attr}
         ref={ref}
         required={required}
+        onChange={e=>onChange(e)}
         autoComplete={autoComplete}
       />
     </MDBValidationItem>

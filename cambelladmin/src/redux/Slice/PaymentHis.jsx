@@ -46,7 +46,7 @@ export const PayHistorYByYear=(year)=>{
   const PayHis = useSelector(PaymentAll);
   const month = ['Jan', 'Feb', 'Mar','Api', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const yearfil = PayHis.filter(ele => new Date(ele.date).getFullYear() == year);
-  console.log(yearfil)
+
   const total = [];
   for (let index = 0; index < 12; index++) {
     const sub = yearfil.filter(ele => new Date(ele.date).getMonth() === index)

@@ -1,7 +1,8 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { getServices } from '../Thunks/Service'
 const serviceadepter = createEntityAdapter({
-  selectId: chats => chats.chatid
+  selectId: service => service.servicecode
+
 })
 
 const ServiceSlice = createSlice({
@@ -22,8 +23,17 @@ const ServiceSlice = createSlice({
       })
       .addCase(getServices.fulfilled, (state, action) => {
         state.loading = false
+        serviceadepter.upsertMany(state, action.payload);
 
       })
   }
 })
+export const {
+  selectAll: allService,
+  selectById: oneService,
+  selectEntities: serviceEntries,
+  selectIds: serviceset,
+  selectTotal: serviceCount
+} = serviceadepter.getSelectors(state => state.service)
+
 export default ServiceSlice.reducer

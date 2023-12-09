@@ -6,13 +6,13 @@ import { UserRows } from '../../component/User'
 import Loading from '../Bugs/FetchedLoading'
 import {UserIds} from '../../redux/Slice/User'
 import { useSelector } from 'react-redux';
+import { UserAnalysis } from '../../component/Util/Graph';
 export default function Users () {
   const users = useSelector(UserIds);
   const [currentPage, setCurrentPage] = useState(1)
-
   const [itemsPerPage] = useState(8)
 
-  const result = 'fetched', loading = false, block = false, unblock = false;
+  const result = 'fetched',  block = false, unblock = false;
 
   const indexOfLastItem = useMemo(() => currentPage * itemsPerPage, [
     currentPage,
@@ -35,7 +35,7 @@ export default function Users () {
 
   return (
     <Container className='position-relative min-vh-100'>
-      <Row className='pb-3'>
+      <Row className='pb-3 h-100'>
         <Col md='5'>
           <Form.Select className='w-50' onChange={SlectOnchange}>
             <option value='*'>All</option>
@@ -78,9 +78,7 @@ export default function Users () {
           </div>
         </Col>
       </Row>
-      {loading ? (
-        <Loading />
-      ) : (
+
         <MDBTable align='middle'>
           <MDBTableHead>
             <tr>
@@ -133,7 +131,9 @@ export default function Users () {
             </tr>
           </MDBTableBody>
         </MDBTable>
-      )}
+      <Row className='mt-3'>
+        <UserAnalysis/>
+      </Row>
     </Container>
   )
 }

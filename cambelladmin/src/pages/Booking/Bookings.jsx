@@ -5,11 +5,10 @@ import Calender from 'react-calendar';
 import { Col, Container, Nav, Row } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
 import { MDBTooltip } from 'mdb-react-ui-kit';
-import {useSelector } from 'react-redux';
-import {bookentries} from '../../redux/Slice/Booking'
+import {BookingAnalyze } from '../../component/Util/Graph'
+
 export default function Bookings ()
 {
-
   const event = useLoaderData();
   const bookingsHandle = useCallback(({ date }) =>
   {
@@ -60,6 +59,9 @@ export default function Bookings ()
             tileContent={bookingsHandle}
           />
         </Col>
+      </Row>
+      <Row>
+        <BookingAnalyze date={11}/>
       </Row>
     </Container>
   );

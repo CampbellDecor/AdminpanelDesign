@@ -46,18 +46,20 @@ export default function Login () {
 
   const onSubmit = async e => {
     e.preventDefault()
+    console.log(loginUser)
     try {
-      setloading(true)
+      setloading(true);
       const login = await Authuntication(loginUser)
+      console.log(login);
       setloading(false)
       setCurrentUser(login.user)
       setisSuper(login.user?.isSuper ?? false)
 
-      if (login.login) {
+     if (login.login) {
         setLogin(true)
 
         toast.success('Login Successfully.')
-        Remeberme(loginUser, rememberme)
+      //   Remeberme(loginUser, rememberme)
         navigate('/home')
       } else {
         setloading(false)
@@ -68,7 +70,7 @@ export default function Login () {
     } catch (error) {
       setLogin(false)
       setloading(false)
-      Dispatcher({ type: 'ERROR' })
+
       toast.error('login failed !')
       console.error(error)
     }

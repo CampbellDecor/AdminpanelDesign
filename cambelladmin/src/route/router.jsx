@@ -21,8 +21,6 @@ import AddUser from '../pages/Users/AddUser'
 import Login from '../pages/Login'
 import ResetPassword from '../pages/ResetPassword'
 import Logout from '../pages/Logout'
-//ServiceCategory
-import ServiceCat from '../pages/ServiceCategory/Category'
 
 //Services
 import Service from '../pages/Services/Service'
@@ -98,11 +96,7 @@ const router = createBrowserRouter([
         path: '/event',
         element: <Events />
       },
-      {
-        //service Category
-        path: '/servicecat',
-        element: <ServiceCat />
-      }, {
+       {
         path: '/sys',
         element:<System/>
       },

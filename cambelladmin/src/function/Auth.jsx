@@ -14,19 +14,17 @@ import Swal  from 'sweetalert2'
 
 export default async function Authentication (user)
 {
-
+console.log(user);
     try {
         const loguser = await signInWithEmailAndPassword(
             auth,
             user.email,
             user.password
         )
-        const token = await getIdToken(loguser.user);
-        addCookie('access_token', token,1000*60, '/');
+        addCookie('access_token',loguser.user.uid,1000*60*60*2, '/');
         const response = await axios.get('/api/admin/login');
         const User = response.data;
-
-        createStorageSession('current', { uid:User.uid,...User.user });
+        createStorageSession('current', { uid:loguser.user.uid,...User.user });
         return User;
     } catch (error)
     {
@@ -48,7 +46,6 @@ export async function LogOut(user) {
     try {
         await signOut(auth);
         const admincol = await axios.get('/api/admin/logout');
-        console.log(admincol);
         if (admincol)
         {
            Remeberme(user, false);
@@ -74,7 +71,7 @@ export async function ResetPasswordApi(email) {
 
     try
     {
-        const result = await axios.post("/api/admin/reset", { email });
+        const result = await sendPasswordResetEmail(email);
         addCookie('pswreset', { email, date: new Date() }, 1)
         return result;
     } catch (error)

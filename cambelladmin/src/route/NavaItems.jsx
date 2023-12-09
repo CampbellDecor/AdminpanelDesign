@@ -42,11 +42,6 @@ export const NavItems =[
     itemicon: <TbPackages size={is} className='me-3' />
   },
   {
-    path: '/servicecat',
-    itemname: 'ServiceCategory',
-    itemicon: <MdHomeRepairService size={is} className='me-3' />
-  },
-  {
     path: '/service',
     itemname: 'Services',
     itemicon: <MdHomeRepairService size={is} className='me-3' />
