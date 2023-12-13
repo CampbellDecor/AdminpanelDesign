@@ -12,6 +12,7 @@ import { SearchpackByName } from '../redux/Slice/Packages'
 import { EventBySearchName } from '../redux/Slice/Events'
 import { OneBooking } from '../redux/Slice/Booking'
 import { useSelector } from 'react-redux'
+import {Card } from 'react-bootstrap'
 export default function BookingEvents ({ search, bookcode }) {
   let BookItem
   if (SearchpackByName(search)) {
@@ -20,6 +21,10 @@ export default function BookingEvents ({ search, bookcode }) {
     BookItem = EventBySearchName(search)
   }
   const booking = useSelector(state => OneBooking(state, bookcode))
+  const onApprove = () =>
+  {
+
+  }
   return (
     <MDBCard className='text-black'>
       <MDBCardImage
@@ -58,5 +63,21 @@ export default function BookingEvents ({ search, bookcode }) {
         </div>
       </MDBCardFooter>
     </MDBCard>
+  )
+}
+
+
+export function QrPanal ({bookcode})
+{
+  return (
+    <Card>
+  <Card.Img variant='top' src='holder.js/100px180' />
+  <Card.Body>
+    <Card.Text>
+      {bookcode}
+    </Card.Text>
+  </Card.Body>
+</Card>
+
   )
 }

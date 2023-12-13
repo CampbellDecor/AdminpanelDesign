@@ -7,19 +7,19 @@ import {
   Form,
   Button,
   InputGroup,
-  Card,
+  ListGroup,
+  Card
 } from 'react-bootstrap'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { Storage } from '../../Fire'
-import {toast} from 'react-toastify'
-import ReactQuill from 'react-quill'
+import { toast } from 'react-toastify'
 import { BiUpload } from 'react-icons/bi'
 import { reducer } from '../../function/PackageHandle'
 
 export default function AddPackage () {
-  const [pack, setpack] = useReducer(reducer, {});
-
-  const [packImg, setpackImg] = useState(null);
+  const [pack, setpack] = useReducer(reducer, {})
+  const [serviceadd, setServiceAdd] = useState('')
+  const [packImg, setpackImg] = useState(null)
   const onChange = e => {
     setpack({
       type: 'CHANGEINPUT',
@@ -35,31 +35,37 @@ export default function AddPackage () {
     const img = URL.createObjectURL(e.target.files[0])
     setpack({ type: 'IMGCHANGE', value: img })
   }
-const ImageUploadAndShow = async e => {
-  if (packImg) {
-    const filename = 'Packages/' + pack?.packname + ".jpg";
-    const storageref = await ref(Storage, filename)
-    const upload = uploadBytesResumable(storageref, packImg)
-    upload.on(
-      'state_changed',
-      snapshot => {
-        const progressd =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-       console.log(progressd)
-      },
-      error => {
-        console.error(error)
-      },
-      () => {
-        getDownloadURL(upload.snapshot.ref).then(url => {
-          toast.success('upload scussFully')
-          setpack({ type: 'IMGCHANGE', value: url })
-        })
-      }
-    )
+  const ImageUploadAndShow = async e => {
+    if (packImg) {
+      const filename = 'Packages/' + pack?.packname + '.jpg'
+      const storageref = await ref(Storage, filename)
+      const upload = uploadBytesResumable(storageref, packImg)
+      upload.on(
+        'state_changed',
+        snapshot => {
+          const progressd =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          console.log(progressd)
+        },
+        error => {
+          console.error(error)
+        },
+        () => {
+          getDownloadURL(upload.snapshot.ref).then(url => {
+            toast.success('upload scussFully')
+            setpack({ type: 'IMGCHANGE', value: url })
+          })
+        }
+      )
+    }
   }
-}
+  const ServiceAdd = () => {
+    if (!serviceadd) return
 
+    setpack({ type: 'ADDSERVICE', value: serviceadd })
+    console.log(pack)
+    setServiceAdd('')
+  }
   return (
     <Container fluid className='vh-75 pb-5 mb-3' style={{ width: '80%' }}>
       <Row className='h-100'>
@@ -80,11 +86,12 @@ const ImageUploadAndShow = async e => {
                 <Card.Text className='text-center'>
                   $ {pack?.price ?? 0}
                 </Card.Text>
-                <ReactQuill
-                  theme='bubble'
-                  value={pack?.desc ?? 'decription...'}
-                  readOnly
-                />
+
+                <ListGroup>
+                  {Object.entries(pack?.services ?? {}).forEach(ele => (
+                      <ListGroup.Item key={ele[0]}>dfdfdf</ListGroup.Item>
+                    ))}
+                </ListGroup>
               </Card.Body>
             </Card>
           </Row>
@@ -112,11 +119,22 @@ const ImageUploadAndShow = async e => {
             </Form.Group>
             <Form.Group className='mb-3'>
               <Form.Label>Services</Form.Label>
-              <ReactQuill
-                theme='snow'
-                onChange={value => setpack({ type: 'CHANGEDES', value })}
-                placeholder='description'
-              />
+              <InputGroup>
+                <Button
+                  style={{ backgroundColor: '#c59290' }}
+                  onClick={ServiceAdd}
+                >
+                  +
+                </Button>
+                <Form.Control
+                  type='text'
+                  placeholder='services'
+                  aria-label='services'
+                  value={serviceadd}
+                  aria-describedby='services'
+                  onChange={e => setServiceAdd(e.target.value)}
+                />
+              </InputGroup>
             </Form.Group>
             <Form.Group className='mb-3'>
               <Form.Label>packs Images</Form.Label>

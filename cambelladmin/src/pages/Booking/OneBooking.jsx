@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import Todo from './TodoList'
 import User from '../../component/BookingUser'
-import BookingPayment, { QRShow } from '../../component/BookingPayment'
+import BookingPayment from '../../component/BookingPayment'
 import { Container, Row } from 'react-bootstrap'
 import { MDBCol, MDBRow } from 'mdb-react-ui-kit'
-import Events from '../../component/BookingEvents'
+import Events,{QrPanal} from '../../component/BookingEvents'
 import { BookingEvents } from '../../component/Util/Calender'
 import { useLoaderData } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { getTasks } from '../../redux/Thunks/Booking'
+import { BsQrCode } from 'react-icons/bs';
 
 export default function OneBooking () {
   const Dispatcher = useDispatch()
@@ -32,7 +33,9 @@ export default function OneBooking () {
                 bookDate={loader?.bookDate}
               />
             </MDBCol>
-            <MDBCol></MDBCol>
+            <MDBCol>
+              <QrPanal bookcode={loader.bookid}/>
+            </MDBCol>
           </MDBRow>
           <MDBRow className='my-2'>
             <MDBCol>

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 import { TiArrowRightThick, TiArrowLeftThick } from 'react-icons/ti';
 import Calender from 'react-calendar';
-import { Col, Container, Nav, Row } from 'react-bootstrap';
+import { Col, Container, Nav, NavLink, Row } from 'react-bootstrap';
 import { useLoaderData } from 'react-router-dom';
 import { MDBTooltip } from 'mdb-react-ui-kit';
 import {BookingAnalyze } from '../../component/Util/Graph'
@@ -22,15 +22,14 @@ export default function Bookings ()
               dayEvents.map(ele => (
                 <Nav.Item className='events-set_one'>
                   <MDBTooltip tag='a' wrapperProps={{ href: '#!' }} title={`booked at ${ele.bookDate}`}>
-                  <Nav.Link href={`/booking/${ele.bookid}`} className={`${ele.status === 'pending'
+                  <NavLink href={`/booking/${ele.bookid}`} className={`${ele.status === 'pending'
                     ? 'text-warning'
                     : ele.status === 'active'
                       ? 'text-success'
                       : 'text-danger'
-                    } events-set_one--name`}>{ele.eventname}</Nav.Link>
+                    } events-set_one--name`}>{ele.eventname}</NavLink>
                     </MDBTooltip>
                 </Nav.Item>
-
               ))
             }
 
