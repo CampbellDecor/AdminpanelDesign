@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import ReactSwitch from 'react-switch'
 import { Navbar, Nav, Container, Badge, Image } from 'react-bootstrap'
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
@@ -8,8 +8,7 @@ import { useUIContext } from '../../contexts/UiContext'
 import SearchBox from '../../component/Util/SearchBox'
 export default function Header () {
   const { currentuser } = useUserContext()
-  return useMemo(
-    () => (
+  return useMemo(()=>(
       <>
         <Navbar id='main-navbar' expand='sm' sticky='top'>
           <Container fluid>
@@ -53,16 +52,15 @@ export default function Header () {
           </Container>
         </Navbar>
       </>
-    ),
-    []
-  )
+    ),[currentuser])
+
 }
 
 function ModeChangeBtn () {
   const { mode, setmode } = useThemeContext()
   const { splittoggle } = useUIContext()
 
-  const changeMode = () => {
+  const changeMode =useCallback( () => {
     if (mode === 'dark') {
       setmode('light')
       splittoggle.current.classList.remove('dark-page')
@@ -70,7 +68,7 @@ function ModeChangeBtn () {
       setmode('dark')
       splittoggle.current.classList.add('dark-page')
     }
-  }
+  },[mode])
 
   return useMemo(
     () => (
@@ -100,6 +98,6 @@ function ModeChangeBtn () {
         onChange={changeMode}
       />
     ),
-    []
+    [mode,changeMode]
   )
 }

@@ -39,6 +39,6 @@ const AdminChatoneSlice = createSlice({
 })
 export const {
   selectId: chatById,
-  selectEntities: allChats
+  selectAll: allChats
 } = adminoneadepter.getSelectors(state => state.achats)
 export default AdminChatoneSlice.reducer

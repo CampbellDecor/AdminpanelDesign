@@ -16,7 +16,6 @@ import AdminProfile from '../pages/Admin/AdminProfile'
 //User
 import Users from '../pages/Users/Users'
 import UserProfile from '../pages/Users/UserProfile'
-import AddUser from '../pages/Users/AddUser'
 //Auth
 import Login from '../pages/Login'
 import ResetPassword from '../pages/ResetPassword'
@@ -26,7 +25,6 @@ import Logout from '../pages/Logout'
 import Service from '../pages/Services/Service'
 import OprateService from '../pages/Services/OperateService'
 //Events
-import AddEvent from '../pages/Event/AddEvents'
 import Events from '../pages/Event/Events'
 
 //packages
@@ -39,14 +37,11 @@ import Error from '../pages/Bugs/Error'
 import Bookings from '../pages/Booking/Bookings'
 import OneBooking from '../pages/Booking/OneBooking'
 
-//System
-import System from '../pages/System/System'
 import {
   ProfileLoader,
   addAdminLoader,
   editAdminLoader,
-  adduserLoader,
-  edituserLoader,  bookings,
+  bookings,
   UserLoader,
   OneBookloads
 } from '../function/RouteFunLoader'
@@ -96,10 +91,6 @@ const router = createBrowserRouter([
         path: '/event',
         element: <Events />
       },
-       {
-        path: '/sys',
-        element:<System/>
-      },
       {
         //Bookings
         path: '/booking',
@@ -140,22 +131,6 @@ const router = createBrowserRouter([
             //service edit
             path: '/service/edit',
             element: <OprateService />
-          },
-          {
-            //event add
-            path: '/event/add',
-            element: <AddEvent />
-          },
-          {
-            //user add
-            path: '/users/add',
-            element: <AddUser />,
-            loader:adduserLoader
-          },
-          {//user edit
-            path: '/users/:uid',
-            element: <AddUser />,
-            loader:edituserLoader
           },
           {
             //package add

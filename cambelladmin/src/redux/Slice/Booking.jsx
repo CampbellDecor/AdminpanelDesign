@@ -84,7 +84,7 @@ export const PackageBooking = () => {
 }
 
 export const AlluserBooking = () => {
-  const bookings = useSelector(AllBookings)
+  const bookings = useSelector(AllBookings);
   const users = useSelector(UserIds)
   const usernames = useSelector(AllUser)
   const Bookingtypes = [[], [], [], [], []]
@@ -114,7 +114,6 @@ export const AllDateBooking = (dates=new Date()) => {
       )
     })
   }
-  console.log(Bookingtypes)
   return Bookingtypes
 }
 

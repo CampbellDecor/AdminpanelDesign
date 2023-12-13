@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { IncomeAnalyze, SmallHomeDonut } from '../component/Util/Graph'
 import { SimpleHomeCalender } from '../component/Util/Calender'
@@ -7,7 +7,7 @@ import { ListPanel } from '../component/Panels'
 import { HomeCountPanel, EventPanel, PackPanel } from '../component/Home'
 import { MDBListGroup, MDBListGroupItem, MDBBtn } from 'mdb-react-ui-kit'
 export default function Home () {
-  return (
+  return useMemo(()=>(
     <Container fluid className='home'>
       <Row className='home-countpanel my-3'>
         <HomeCountPanel />
@@ -30,7 +30,7 @@ export default function Home () {
         </Col>
       </Row>
     </Container>
-  )
+  ),[])
 }
 
 function ReveiwPanel () {

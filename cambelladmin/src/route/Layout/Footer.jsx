@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   MDBFooter,
   MDBContainer,
@@ -12,7 +12,7 @@ import { useAppContext } from '../../contexts/AppContext'
 export default function Footer ()
 {
   const { website} = useAppContext();
-  return (
+  return useMemo(()=> (
     <MDBFooter id='Footer' className='text-white'>
       <MDBContainer className='px-4 py-2'>
         <section>
@@ -45,5 +45,5 @@ export default function Footer ()
         </Link>
       </div>
     </MDBFooter>
-  )
+  ),[website])
 }

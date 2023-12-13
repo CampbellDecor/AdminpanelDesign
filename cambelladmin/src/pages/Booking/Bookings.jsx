@@ -47,7 +47,7 @@ export default function Bookings ()
   return  (
     <Container fluid className='min-vh-100 booking'>
       <Row className='h-100 sheduler'>
-        <Col className='h-100'>
+        <Col>
 
           <Calender
             className="w-100 h-100 simple-calender"
@@ -60,8 +60,8 @@ export default function Bookings ()
           />
         </Col>
       </Row>
-      <Row>
-        <BookingAnalyze date={11}/>
+      <Row className='h-100'>
+        <BookingAnalyze date={new Date()}/>
       </Row>
     </Container>
   );

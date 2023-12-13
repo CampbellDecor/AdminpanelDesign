@@ -62,7 +62,7 @@
 @include Footer("dark");
 .adminprofile{
  &-header{
-  background-image: url('../../images/uselightprofile.jpg');
+  background-image: url('../../images/uselightprofile.gif');
   filter: grayscale(100%);
   &_user{
     &--badge{

@@ -14,7 +14,15 @@ import Swal  from 'sweetalert2'
 
 export default async function Authentication (user)
 {
-console.log(user);
+    if (!user?.email || !user?.password)
+    {
+        Swal.fire({
+            title: "InCorrect Inputs",
+            icon: 'error',
+            text: 'Sorry! your Input is wrong try with correct input'
+        })
+        throw new Error("Email or password Empty");
+    }
     try {
         const loguser = await signInWithEmailAndPassword(
             auth,

@@ -70,7 +70,6 @@ export default function Todo ({
         horizontal
         className='rounded-0 bg-transparent'
         onClick={toggle}
-        onMouseEnter={toggle}
       >
         <MDBListGroupItem className='d-flex align-items-center ps-0 pe-3  rounded-0 border-0 bg-transparent'>
           <MDBCheckbox

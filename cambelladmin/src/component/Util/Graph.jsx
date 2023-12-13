@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   Chart as ChartJS,
   ArcElement,
@@ -8,26 +8,25 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+    RadialLinearScale,
   Title,
   BarElement,
   Filler
 } from 'chart.js'
-
-
-
-import { Doughnut, Line,Bar } from 'react-chartjs-2'
+import { Doughnut, Line,Bar,PolarArea } from 'react-chartjs-2'
 import randomcolor from 'randomcolor'
 import { useThemeContext } from '../../contexts/ThemeContext'
 import { useAppContext } from '../../contexts/AppContext'
 import {PayHistorYByYear} from '../../redux/Slice/PaymentHis'
 import {PackageRatings} from '../../redux/Slice/Packages'
-import {AlluserBooking,AllDateBooking} from '../../redux/Slice/Booking'
+import {AlluserBooking,AllDateBooking,PackageBooking} from '../../redux/Slice/Booking'
 
 ChartJS.register(
   ArcElement,
   Tooltip,
   Legend,
   CategoryScale,
+    RadialLinearScale,
   LinearScale,
   PointElement,
   LineElement,
@@ -36,7 +35,7 @@ ChartJS.register(
   Filler
 )
 
-export function SmallHomeDonut () {
+export function SmallHomeDonut ({maintainAspectRatio=false}) {
   const { mode } = useThemeContext();
   const { Appname } = useAppContext();
   const [labels, data] =PackageRatings();
@@ -45,7 +44,7 @@ export function SmallHomeDonut () {
     luminosity: mode === 'light' ? 'bright' : 'dark',
   })
 
-  const datas = {
+  const datas = useMemo(() => ({
     labels: labels,
     datasets: [
       {
@@ -55,10 +54,10 @@ export function SmallHomeDonut () {
         borderWidth: 1
       }
     ]
-  }
-  const options = {
+  }), [data,labels])
+  const options =useMemo(()=> ({
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio,
       plugins: {
       legend: {
           display: false, // Hide legends
@@ -68,20 +67,20 @@ export function SmallHomeDonut () {
           text:`${Appname} Packages`
         }
     }
-  }
+  }),[maintainAspectRatio])
 
-  return (
+  return useMemo(()=>(
     <div className='my-3 w-100 chart-container'>
       <Doughnut data={datas} options={options}
 />
     </div>
-  )
+  ),[datas,options])
 }
 
 export function IncomeAnalyze ()
 {
   const [x, y] = PayHistorYByYear(2023);
-  const datas = {
+  const datas =useMemo(()=>({
     labels: x,
     datasets: [
       {
@@ -90,11 +89,20 @@ export function IncomeAnalyze ()
         data: y,
         borderColor:"#3c2626",
         backgroundColor: "#fa7d8d",
-        tension: 0.3
+        animations: {
+      tension: {
+        duration: 1000,
+        easing: 'easeInOutElastic',
+        from:1,
+        to: 0.3,
+        loop: true
+      },
+    }
+        // tension: 0.3
       }
     ]
-  }
-  const options = {
+  }),[x,y])
+  const options =useMemo(()=>({
     scales: {
       x: {
         grid: {
@@ -118,23 +126,25 @@ export function IncomeAnalyze ()
         display: true,
         text: 'Profit of Cambell'
       }
+
+
     }
-  }
-  return (
+  }),[])
+  return useMemo(()=> (
     <div className='chart-container'>
       <Line
         options={options}
         data={datas}
       />
     </div>
-  )
+  ),[datas,options])
 }
 
 export function UserAnalysis ()
 {
   const labels = AlluserBooking()[0];
 
-  const data = {
+  const data =useMemo(()=>({
   labels,
   datasets: [
     {
@@ -158,8 +168,8 @@ export function UserAnalysis ()
       backgroundColor: 'rgb(235, 53, 53)'
     }
   ]
-}
-const options = {
+}),[labels])
+const options = useMemo(()=>({
   plugins: {
     title: {
       display: true,
@@ -175,7 +185,7 @@ const options = {
       stacked: true
     }
   }
-}
+}),[])
 return (
 <div className='chart-container'>
   <Bar options={options} data={data} />
@@ -192,30 +202,30 @@ const datefilter = AllDateBooking(date)
     datasets: [
       {
         fill: false,
-        label: 'profits',
+        label: 'Active',
         data: y1,
-        borderColor: '#3c2626',
+        borderColor: '#10e345',
       },
        {
         fill: false,
-        label: 'profits',
+        label: 'Pending',
         data: y2,
-        borderColor: '#3c2626',
+        borderColor: '#c9ed00',
 
       },
         {
         fill: false,
-        label: 'profits',
+        label: 'Cancelled',
         data: y3,
-        borderColor: '#3c2626',
+        borderColor: '#f80000',
 
       }
         ,
         {
         fill: false,
-        label: 'profits',
+        label: 'Expired',
         data: y4,
-        borderColor: '#3c2626',
+        borderColor: '#1e0808',
 
       }
     ]
@@ -228,6 +238,11 @@ const datefilter = AllDateBooking(date)
         }
       },
       y: {
+        ticks: {
+            pricision:1
+
+
+        },
         grid: {
           display: false // Hide y-axis grid lines
         }
@@ -241,13 +256,72 @@ const datefilter = AllDateBooking(date)
       },
       title: {
         display: true,
-        text: 'Profit of Cambell'
+        text: 'Booking Summary of Cambell'
       }
+    },
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 0.6,
+        to: 0,
+        loop: true
+      },
     }
   }
   return (
-    <div className='chart-container'>
-      <Line options={options} data={datas} />
+    <div>
+      <Line options={options} data={datas} width={100}
+  height='500px'/>
     </div>
   )
+}
+
+export function PackageBookingAnyalis ()
+{
+  const { Appname } = useAppContext()
+  const packageBooking = PackageBooking();
+  const bookPack = [[], []];
+  packageBooking.forEach(ele =>
+  {
+    bookPack[0].push(ele?.name);
+    bookPack[1].push(ele.count);
+  })
+  const [x, y] = bookPack
+  const colors = randomcolor({
+  count: x?.length,
+  luminosity:  'bright'
+})
+
+  const datas = useMemo(()=>({
+  labels: x,
+  datasets: [
+    {
+      data: y,
+      backgroundColor: colors,
+      borderColor: colors,
+      borderWidth: 1
+    }
+  ]
+}),[x,y])
+
+  const options = useMemo(() =>
+  ({
+    responsive: true,
+      plugins: {
+      legend: {
+        display: false // Hide legends
+      },
+      title: {
+        display: true,
+          text: `${Appname} Packages Bookings`
+      }
+    }
+  }),[Appname]);
+
+  return useMemo(()=>(
+    <div>
+      <PolarArea data={datas} options={options}/>
+    </div>
+  ),[datas,options])
 }

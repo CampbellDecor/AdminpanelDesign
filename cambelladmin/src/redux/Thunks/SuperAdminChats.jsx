@@ -19,7 +19,6 @@ export const getOneSAdminChats = createAsyncThunk(
   {
     try {
       const response = await axios.get(`${BASE}/${aid}`)
-      console.log(response.data);
       return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)

@@ -17,8 +17,8 @@ export default function BookingPayment ({bookcode})
 {
   const { paid} = useSelector(state => OneBooking(state,bookcode))??{};
   return (
-    <MDBCard className='mt-3'>
-     <MDBCardBody className="mx-1 my-2">
+    <MDBCard>
+     <MDBCardBody className="my-1">
               <div className="d-flex align-items-center">
                 <div>
                   <MDBIcon

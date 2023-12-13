@@ -1,136 +1,141 @@
-// @ts-nocheck
-import React, { useReducer, useState, useEffect } from 'react'
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  InputGroup,
-  Card
-} from 'react-bootstrap'
-import ReactQuill from 'react-quill'
+import { useState } from 'react'
+import { MDBBtn } from 'mdb-react-ui-kit'
+import { Button, Form, Image, ProgressBar, InputGroup, Badge } from 'react-bootstrap'
+import { IoMdAddCircle } from 'react-icons/io'
+import Modal from 'react-bootstrap/Modal'
+import { useAppContext } from '../../contexts/AppContext'
+import { UploadFile } from '../../function/FirebaseFun'
+import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { addEvents } from '../../redux/Thunks/Events'
 import { BiUpload } from 'react-icons/bi'
-import { reducer } from '../../function/ServiceHandle'
-import { useServiceCategoryStore } from '../../redux/ServiceCategoryStore'
 
-export default function AddEvent () {
-  const [event, setevent] = useReducer(reducer, {})
-  const [eventImg, seteventImg] = useState(null)
-  const {
-    CampbellDispatcher,
-    getServiceCat,
-    CategoryData
-  } = useServiceCategoryStore()
-  const { ServiceCats } = CategoryData
-  const onChange = e => {
-    setevent({
-      type: 'CHANGEINPUT',
-      name: e.target.name,
-      value: e.target.value
-    })
+function OprationEvent () {
+  const Dispatcher = useDispatch()
+  const { Applogo } = useAppContext()
+  const [show, setShow] = useState(false)
+  const [imgURL, SetimgURL] = useState(null)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  const [eventDetails, setEvent] = useState({})
+  const [uploadse, setuploadse] = useState(0)
+  const onUpload = async e => {
+    await UploadFile(
+      `Events/${eventDetails?.name}`,
+      imgURL,
+      url => setEvent(pre => ({ ...pre, imgURL: url })),
+      err => {
+        toast.error(err.message)
+      },
+      setuploadse
+    )
   }
-  const onSaveEvent = e => {
-    e.preventDefault()
+  const onchange = e => {
+    setEvent(pre => ({ ...pre, [e.target.name]: e.target.value }))
   }
-  const changeImage = e => {
-    seteventImg(e.target.files[0])
-    const img = URL.createObjectURL(e.target.files[0])
-    setevent({ type: 'IMGCHANGE', value: img })
+  const onSubmit = async e => {
+    if (imgURL === null || !eventDetails?.name || !eventDetails?.description) {
+      toast.warn('All Fields Are Required')
+      return
+    }
+    if (!eventDetails.imgURL) {
+      toast.warn("Image Didn't added")
+      return
+    }
+    setuploadse(0);
+    Dispatcher(addEvents(eventDetails))
+    toast.success('Scucessfully added')
+    handleClose()
   }
-  useEffect(() => {
-    CampbellDispatcher(getServiceCat())
-  }, [])
   return (
-    <Container fluid className='vh-75 pb-5 mb-3' style={{ width: '80%' }}>
-      <Row className='h-100'>
-        <Col md='6' className='h-100'>
-          <Row className='h-100'>
-            <Card>
-              <Card.Img
-                variant='top'
-                src={
-                  event?.eventImg ??
-                  'https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg'
-                }
-              />
-              <Card.Body>
-                <Card.Title className='text-center'>
-                  {event?.eventname ?? 'event Name'}
-                </Card.Title>
-                <Card.Text className='text-center'>
-                  $ {event?.price ?? 0}
-                </Card.Text>
-                <ReactQuill
-                  theme='bubble'
-                  value={event?.desc ?? 'decription...'}
-                  readOnly
-                />
-              </Card.Body>
-            </Card>
-          </Row>
-        </Col>
-        <Col md='6'>
-          <Form>
-            <Form.Group className='mb-3'>
-              <Form.Label>event Name</Form.Label>
-              <Form.Control
-                type='title'
-                placeholder='event Name'
-                name='eventname'
-                onChange={onChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                type='number'
-                placeholder='00000.000'
-                onChange={onChange}
-                name='price'
-              />
-            </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>Category</Form.Label>
-              <Form.Select aria-label='Category' required>
-                <option>Category</option>
+    <>
+      <MDBBtn
+        className='position-fixed'
+        style={{ right: '10px', top: '70px', backgroundColor: '#c59290' }}
+        onClick={handleShow}
+      >
+        <IoMdAddCircle size={25} />
+      </MDBBtn>
 
-                {ServiceCats?.length > 0 &&
-                  ServiceCats?.map(ele => <option value='1'>One</option>)}
-              </Form.Select>
-            </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>Description</Form.Label>
-              <ReactQuill
-                theme='snow'
-                onChange={value => setevent({ type: 'CHANGEDES', value })}
-                placeholder='description'
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop='static'
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Events</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+              <Form.Label>Event Name</Form.Label>
+              <Form.Control
+                type='text'
+                name='name'
+                placeholder='event Name'
+                autoFocus
+                onChange={onchange}
               />
             </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>events Images</Form.Label>
-              <InputGroup className='mb-3'>
-                <Form.Control
-                  type='file'
-                  onChange={changeImage}
-                  name='images'
-                  accept='images/*'
-                />
-                <Button variant='secoundary'>
-                  <BiUpload size={20} />
-                </Button>
-              </InputGroup>
+            <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as='textarea'
+                rows={2}
+                placeholder='description....'
+                onChange={onchange}
+                name='description'
+              />
             </Form.Group>
-            <Button type='submit' onClick={onSaveEvent} className='me-2'>
-              Save
-            </Button>
-            <Button type='reset' variant='danger' className='ms-2'>
-              Clear
-            </Button>
+            <InputGroup
+              className='mb-3'
+              controlId='exampleForm.ControlTextarea1'
+            >
+              <Form.Control
+                type='file'
+                placeholder='imgURL'
+                onChange={e => {
+                  SetimgURL(e.target.files[0])
+                }}
+                accept='image/*'
+              />
+
+              <Button
+                id='basic-addon2'
+                onClick={onUpload}
+                disabled={imgURL === null}
+                style={{
+                  backgroundColor: '#c59290'
+                }}
+              >
+                <BiUpload size={20} color='#fff' />
+
+              </Button>
+            </InputGroup>
+            <div className='w-100 d-flex justify-content-center'>
+              <Image
+                style={{ height: '100px' }}
+                src={imgURL === null ? Applogo : URL.createObjectURL(imgURL)}
+                className='w-25 mx-auto'
+              />
+              {imgURL!==null && uploadse!==0&&<Badge pill className='bg-notification position-absolute right-100' style={{
+                backgroundColor: '#c59290'
+              }}>{Math.floor(uploadse)}</Badge>}
+            </div>
           </Form>
-        </Col>
-      </Row>
-    </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='danger' disabled={uploadse>0} onClick={handleClose}>
+            Close
+          </Button>
+          <Button style={{ backgroundColor: '#c59290' }} onClick={onSubmit}>
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   )
 }
+
+export default OprationEvent

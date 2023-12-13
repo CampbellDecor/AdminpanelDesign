@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Outlet, Navigate } from 'react-router-dom';
-import React, {  useMemo, useRef } from 'react';
+import React, {  useCallback, useMemo, useRef } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
@@ -25,7 +25,7 @@ Dispatch(getAdmins())
 
   const { splittoggle, responsivetoggle } = useUIContext();
   const bodyres = useRef(null);
-  const responsiveAction = action =>
+  const responsiveAction =useCallback( action =>
   {
     if (action)
     {
@@ -36,7 +36,7 @@ Dispatch(getAdmins())
       responsivetoggle.current.classList.remove('responsiveBlock');
       bodyres?.current.classList.remove('responsiveBlock');
     }
-  };
+  },[responsivetoggle]);
 
   return useMemo(()=>( !islogin ? (
     <Navigate to='/' replace={true} />
@@ -56,7 +56,7 @@ Dispatch(getAdmins())
         <Footer />
       </main>
     </div>
-  )),[]);
+  )),[islogin,responsiveAction,splittoggle]);
 }
 
 export function InnerLayout ()

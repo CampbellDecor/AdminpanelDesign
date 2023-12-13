@@ -205,8 +205,8 @@ export function Reply ({ chatid, message, time }) {
 }
 //chatpanel
 export function ChatPanel () {
-  const { isSuper } = useUserContext()
-  const chats = useSelector(isSuper?allChats:allChatOne);
+  const { isSuper } = useUserContext();
+  const chats = useSelector(isSuper ? allChats : allChatOne);
   return (
     <div className='py-3 pe-3 h-100' data-mdb-perfect-scrollbar='true'>
       {chats?.length > 0 &&

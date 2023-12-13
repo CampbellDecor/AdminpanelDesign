@@ -148,6 +148,6 @@ export default function Login () {
           </MDBCard>
         </MDBContainer>
       ),
-    [islogin]
+    [islogin,loginUser]
   )
 }

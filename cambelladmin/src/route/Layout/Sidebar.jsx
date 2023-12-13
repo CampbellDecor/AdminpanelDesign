@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useId, useMemo, useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { Nav, Navbar, Image } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
 import { useAppContext } from '../../contexts/AppContext'
@@ -6,7 +6,7 @@ import { useUIContext } from '../../contexts/UiContext'
 import { useUserContext } from '../../contexts/UserContext'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
 import { SuperNavItems, NavItems } from '../NavaItems'
-import { IoBalloon } from 'react-icons/io5'
+// import { IoBalloon } from 'react-icons/io5'
 
 const NavItem = props => {
   const { path, itemname, itemicon, className = '' } = props
@@ -26,7 +26,7 @@ className}`
         {itemicon}
 
         <span>{itemname} </span>
-        <IoBalloon size={19} className='shadow-lg balloon' />
+        {/* <IoBalloon size={19} className='shadow-lg balloon' /> */}
 
       </Nav.Link>
     ),
@@ -73,6 +73,6 @@ export default function SideBar () {
         </div>
       </Nav>
     ),
-    []
+    [responsivetoggle]
   )
 }

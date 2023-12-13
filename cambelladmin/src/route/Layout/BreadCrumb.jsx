@@ -30,7 +30,7 @@ export default function BreadCrumb () {
     }
   }, [])
 
-  
+
   const urlset = useMemo(() => {
     let pathbase = '/'
 
@@ -43,7 +43,7 @@ export default function BreadCrumb () {
         active: pathbase.length === index + 1
       }
     })
-  }, [pathname])
+  }, [pathname,pathnameElement])
 
   return useMemo(
     () => (
@@ -65,6 +65,6 @@ export default function BreadCrumb () {
         </MDBContainer>
       </div>
     ),
-    []
+    [title,urlset]
   )
 }

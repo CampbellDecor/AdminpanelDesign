@@ -10,7 +10,7 @@ const UserSlice = createSlice({
     loading: false,
     error: ''
   }),
-  reducers: {},
+
   extraReducers: builder => {
     builder
       .addCase(getUsers.pending, (state, action) => {

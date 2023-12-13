@@ -8,17 +8,17 @@
     transition: var.trans("t_1");
 
     @if($split=="max"){
-      width: var.expandSidebar("expand");  
+      width: var.expandSidebar("expand");
     }@else{
-        width: var.expandSidebar("collapse") !important;  
+        width: var.expandSidebar("collapse") !important;
     }
     /* Height of navbar */
     z-index: 1000;
-    
+
     .logo {
       padding: 6.5px 5px;
 
-      //logo image 
+      //logo image
       .logo-img {
        @include compo.image(45px,45px);
       }
@@ -29,7 +29,7 @@
     }
 
   }
- 
+
 }
 
 @mixin base_main($split:"max"){
@@ -37,11 +37,12 @@
       transition: var.trans("t_1");
         @include compo.position;
         margin-top: 0px;
+        padding-top: 0px;
         @if($split=="max"){
-            padding-left: var.expandSidebar("expand");  
+            padding-left: var.expandSidebar("expand");
           }@else{
-              padding-left: var.expandSidebar("collapse") !important;  
+              padding-left: var.expandSidebar("collapse") !important;
           }
-    
+
         }
 }

@@ -15,9 +15,10 @@ return response.data
 )
 export const deleteEvents = createAsyncThunk(
   'delete/Events',
-  async (_, { rejectWithValue }) => {
+  async (eventid, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.delete(`${BASE}/${eventid}`);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }
@@ -25,9 +26,10 @@ export const deleteEvents = createAsyncThunk(
 )
 export const addEvents = createAsyncThunk(
   'add/Events',
-  async (_, { rejectWithValue }) => {
+  async (event, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.post(`${BASE}`, event);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }
@@ -43,23 +45,5 @@ export const editEvents = createAsyncThunk(
     }
   }
 )
-export const blockEvents = createAsyncThunk(
-  'block/Events',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get()
-    } catch (error) {
-      rejectWithValue(error.response.data)
-    }
-  }
-)
-export const unblockEvents = createAsyncThunk(
-  'unblock/Events',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axios.get()
-    } catch (error) {
-      rejectWithValue(error.response.data)
-    }
-  }
-)
+
+

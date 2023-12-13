@@ -23,7 +23,7 @@ export function HomeCountPanel ()
     {...{
       title: 'Earn',
       idenity: <FaCoins className='icon' />,
-      count:'$ '+Totalpay()??0,
+      count:'$ '+Math.round(Totalpay())??0,
       path: '/users'
     }}
   />
