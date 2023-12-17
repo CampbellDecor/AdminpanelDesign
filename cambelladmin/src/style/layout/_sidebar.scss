@@ -2,6 +2,7 @@
  //Sidebar on normal stage
  @include baseSidebar;
  .navlink{
+    cursor:url("../../images/baloonpoint.jpg"),pointer;
     &:hover{
         transform:translate(1.5px,1.5px);
         margin: 0.5px 0px;

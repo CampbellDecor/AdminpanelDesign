@@ -8,18 +8,24 @@ import {
   Button,
   InputGroup,
   ListGroup,
-  Card
+  Card,
+  Spinner
 } from 'react-bootstrap'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { Storage } from '../../Fire'
 import { toast } from 'react-toastify'
 import { BiUpload } from 'react-icons/bi'
 import { reducer } from '../../function/PackageHandle'
+import {useDispatch } from 'react-redux';
+import { addPackages} from '../../redux/Thunks/Packages'
 
 export default function AddPackage () {
   const [pack, setpack] = useReducer(reducer, {})
+  const [packImageUp, setUpImg] = useState(false)
   const [serviceadd, setServiceAdd] = useState('')
   const [packImg, setpackImg] = useState(null)
+  const [progressd, setprogressd] = useState(0);
+  const Dispatcher = useDispatch();
   const onChange = e => {
     setpack({
       type: 'CHANGEINPUT',
@@ -29,6 +35,17 @@ export default function AddPackage () {
   }
   const onSaveEvent = e => {
     e.preventDefault()
+    const { packname, services, packImg, price } = pack
+    if (!packImageUp) {
+      toast.error('Image Not Perfect set')
+    } else {
+      if (!services || !packname || !price || !packImg) {
+        toast.error('Package Not Properly Set')
+      } else
+      {
+        Dispatcher( addPackages(pack));
+      }
+    }
   }
   const changeImage = e => {
     setpackImg(e.target.files[0])
@@ -43,9 +60,9 @@ export default function AddPackage () {
       upload.on(
         'state_changed',
         snapshot => {
-          const progressd =
+          const p =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log(progressd)
+          setprogressd(p);
         },
         error => {
           console.error(error)
@@ -54,6 +71,7 @@ export default function AddPackage () {
           getDownloadURL(upload.snapshot.ref).then(url => {
             toast.success('upload scussFully')
             setpack({ type: 'IMGCHANGE', value: url })
+            setUpImg(true);
           })
         }
       )
@@ -61,8 +79,9 @@ export default function AddPackage () {
   }
   const ServiceAdd = () => {
     if (!serviceadd) return
-
-    setpack({ type: 'ADDSERVICE', value: serviceadd })
+    const ServiceList = pack?.services ?? []
+    ServiceList.push(serviceadd)
+    setpack({ type: 'ADDSERVICE', value: ServiceList })
     console.log(pack)
     setServiceAdd('')
   }
@@ -72,13 +91,16 @@ export default function AddPackage () {
         <Col md='6' className='h-100'>
           <Row className='h-100'>
             <Card>
+              <div className='mt-1 position-relative'>
               <Card.Img
                 variant='top'
                 src={
                   pack?.packImg ??
                   'https://people.com/thmb/IEPTFBRdIU8Qin6ggf2vCcDfO2I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/simone-biles-wedding-vg-168-10506202393-186fb90cbfc047249abd0d5e934dc334.jpg'
                 }
-              />
+                />
+                {progressd<100 && progressd>0&&(<Spinner className='position-absolute top-50 right-50' animation='grow' variant='secondary' />)}
+                </div>
               <Card.Body>
                 <Card.Title className='text-center'>
                   {pack?.packname ?? 'pack Name'}
@@ -88,8 +110,9 @@ export default function AddPackage () {
                 </Card.Text>
 
                 <ListGroup>
-                  {Object.entries(pack?.services ?? {}).forEach(ele => (
-                      <ListGroup.Item key={ele[0]}>dfdfdf</ListGroup.Item>
+                  {pack?.services &&
+                    pack?.services?.map((ele, index) => (
+                      <ListGroup.Item key={index}>{ele}</ListGroup.Item>
                     ))}
                 </ListGroup>
               </Card.Body>
@@ -123,6 +146,7 @@ export default function AddPackage () {
                 <Button
                   style={{ backgroundColor: '#c59290' }}
                   onClick={ServiceAdd}
+                  disabled={serviceadd===''}
                 >
                   +
                 </Button>
@@ -150,7 +174,7 @@ export default function AddPackage () {
                 </Button>
               </InputGroup>
             </Form.Group>
-            <Button type='submit' onClick={onSaveEvent} className='me-2'>
+            <Button disabled={!packImageUp} type='submit' onClick={onSaveEvent} className='me-2' style={{ right: "10px", backgroundColor: "#c59290" }}>
               Save
             </Button>
             <Button type='reset' variant='danger' className='ms-2'>

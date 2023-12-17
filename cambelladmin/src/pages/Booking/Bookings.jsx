@@ -16,13 +16,13 @@ export default function Bookings ()
 
     return (
       <Container fluid className='events'>
-        <Row>
-          <Nav className='events-set justify-content-around'>
+        <Row className='event-row'>
+          <Nav style={{textDecrotion:'none'}} className='events-set justify-content-around'>
             {
               dayEvents.map(ele => (
                 <Nav.Item className='events-set_one'>
                   <MDBTooltip tag='a' wrapperProps={{ href: '#!' }} title={`booked at ${ele.bookDate}`}>
-                  <NavLink href={`/booking/${ele.bookid}`} className={`${ele.status === 'pending'
+                  <NavLink style={{textDecrotion:'none'}} href={`/booking/${ele.bookid}`} className={`${ele.status === 'pending'
                     ? 'text-warning'
                     : ele.status === 'active'
                       ? 'text-success'

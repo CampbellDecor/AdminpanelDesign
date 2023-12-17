@@ -13,7 +13,10 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
-import { TaskById } from '../redux/Slice/Todo'
+import {TaskById } from '../redux/Slice/Todo'
+import {AlltodoTask } from '../redux/Slice/TaskList'
+import { AllBookings } from '../redux/Slice/Booking'
+
 export default function Todo ({
   taskid,
   status = 'pending',
@@ -23,12 +26,7 @@ export default function Todo ({
   const { task, createDate, dueDate, desc } = useSelector(state =>
     TaskById(state, taskid)
   )
-  const tasklist = {
-    task: 'Hi',
-    dueDate: new Date(),
-    desc: 'ghghghg',
-    status
-  }
+
   const [open, isopen] = useState(false)
   const toggle = useCallback(() => isopen(!open), [isopen, open])
   const valid = useMemo(() => {
@@ -125,7 +123,7 @@ export default function Todo ({
         </MDBListGroupItem>
         <MDBListGroupItem className='ps-3 pe-0  rounded-0 border-0 bg-transparent'>
           <div className='d-flex flex-row justify-content-end mb-1'>
-            <EditTodo taskDoc={tasklist} />
+            <EditTodo  />
             <MDBBtn color='link' onClick={onDelete}>
               <MDBTooltip
                 tag='a'
@@ -160,4 +158,70 @@ export default function Todo ({
       )}
     </>
   )
+}
+
+
+export function TaskList ()
+{
+
+  const Bookings = useSelector(AllBookings);
+  const Tasks = [];
+  Bookings.filter(ele => ele.bookDate === new Date().toDateString()).forEach(ele =>
+  {
+    Tasks.push({
+      Task: ele.eventname,
+      subtitle: "Today Booking",
+      path: '/booking/' + ele.bookid
+    });
+  });
+  Bookings.filter(
+    ele => ele.eventDate === new Date().toDateString()
+  ).forEach(ele =>
+  {
+    Tasks.push({
+      Task: ele.eventname,
+      subtitle: "Today Event",
+      path: '/booking/' + ele.bookid
+    });
+  });
+  const tasklist = [];
+  useSelector(AlltodoTask).forEach(ele => ele.List.forEach(e => tasklist.push({ todoId: ele.todoID, ...e })));
+  tasklist.filter(ele => ele.dueDate
+    === new Date().toDateString()).forEach(ele =>
+    {
+      Tasks.push({
+        Task: ele.task,
+        subtitle: 'Today Task',
+        path: '/booking/' + ele.todoId
+      });
+
+    });
+
+
+  return (
+    <MDBListGroup className='w-100' light>
+      {
+        Tasks.length < 0 ? Tasks.map(task => (<MDBListGroupItem className='d-flex justify-content-between align-items-center'>
+          <div className='d-flex align-items-center'>
+            <img
+              src='https://mdbootstrap.com/img/new/avatars/8.jpg'
+              alt=''
+              style={{ width: '45px', height: '45px' }}
+              className='rounded-circle'
+            />
+            <div className='ms-3'>
+              <p className='fw-bold mb-1'>{task.title}</p>
+              <p className='text-muted mb-0 text-wrap w-25'>john.doe@gmail.com</p>
+            </div>
+          </div>
+          <MDBBtn size='sm' href='#' rounded color='link'>
+            See
+          </MDBBtn>
+        </MDBListGroupItem>)
+        ) : <MDBListGroupItem className='d-flex justify-content-between align-items-center fw-bold'><span className='text-center'>No Event Today</span></MDBListGroupItem>
+
+      }
+
+    </MDBListGroup>
+  );
 }

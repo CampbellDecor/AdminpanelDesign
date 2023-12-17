@@ -13,13 +13,14 @@ import {
   BarElement,
   Filler
 } from 'chart.js'
-import { Doughnut, Line,Bar,PolarArea } from 'react-chartjs-2'
+import { Doughnut, Line,Bar,PolarArea,Pie} from 'react-chartjs-2'
 import randomcolor from 'randomcolor'
 import { useThemeContext } from '../../contexts/ThemeContext'
 import { useAppContext } from '../../contexts/AppContext'
 import {PayHistorYByYear} from '../../redux/Slice/PaymentHis'
-import {PackageRatings} from '../../redux/Slice/Packages'
-import {AlluserBooking,AllDateBooking,PackageBooking} from '../../redux/Slice/Booking'
+import { PackageRatings } from '../../redux/Slice/Packages'
+import {arrayAddition} from '../../function/DSA'
+import {AlluserBooking,AllDateBooking,PackageBooking,SatusBookingAnaysis,EventBooking} from '../../redux/Slice/Booking'
 
 ChartJS.register(
   ArcElement,
@@ -64,17 +65,81 @@ export function SmallHomeDonut ({maintainAspectRatio=false}) {
         },
         title: {
           display: true,
-          text:`${Appname} Packages`
+          text:`${Appname} Packages Ratings`
         }
     }
   }),[maintainAspectRatio])
 
   return useMemo(()=>(
-    <div className='my-3 w-100 chart-container'>
+    <div className='my-3  chart-container
+'>
       <Doughnut data={datas} options={options}
 />
     </div>
   ),[datas,options])
+}
+
+export function SmaallPieForHome ({ maintainAspectRatio = false }) {
+  const { mode } = useThemeContext()
+  const { Appname } = useAppContext()
+  const [labels,data] = SatusBookingAnaysis();
+  const colors = randomcolor({
+    count: labels?.length,
+    luminosity: mode === 'light' ? 'bright' : 'dark'
+  })
+
+  const datas = useMemo(
+    () => ({
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+          backgroundColor: colors,
+          borderColor: colors,
+          borderWidth: 1
+        }
+      ]
+    }),
+    [data, labels]
+  )
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      animationEnabled: true,
+      maintainAspectRatio,
+      plugins: {
+        legend: {
+          display: false // Hide legends
+        },
+        title: {
+          display: true,
+          text: `${Appname} Booking status`
+        }
+      },
+        animations: {
+      fill: {
+        duration: 1000,
+        easing: 'linear',
+        from: 0,
+        to: 100,
+        loop: true
+      }
+    }
+    }),
+    [maintainAspectRatio]
+  )
+
+  return useMemo(
+    () => (
+      <div
+        className='my-3  chart-container
+'
+      >
+        <Pie data={datas} options={options} />
+      </div>
+    ),
+    [datas, options]
+  )
 }
 
 export function IncomeAnalyze ()
@@ -138,6 +203,63 @@ export function IncomeAnalyze ()
       />
     </div>
   ),[datas,options])
+}
+
+export function SmallBookingAnalysis ({ date=new Date() }) {
+  const datefilter = AllDateBooking(date)
+const { mode } = useThemeContext()
+  const [x, y1, y2, y3, y4] = datefilter
+  const colors = randomcolor({
+  count: x?.length,
+  luminosity: mode === 'light' ? 'bright' : 'dark'
+})
+
+  const bookings = arrayAddition(y1, y2, y3, y4);
+  const datas = {
+    labels: x,
+    datasets: [
+      {
+        fill: false,
+        label: 'Bookings',
+        data: bookings,
+        backgroundColor:colors
+      }
+    ]
+  }
+  const options = {
+    zoomEnabled: true,
+    scales: {
+      x: {
+        grid: {
+          display: false // Hide x-axis grid lines
+        }
+      },
+      y: {
+        ticks: {
+          pricision: 1
+        },
+        grid: {
+          display: false // Hide y-axis grid lines
+        }
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top'
+      },
+      title: {
+        display: true,
+        text: 'Booking Summary of Cambell'
+      }
+    }
+  }
+  return (
+    <div>
+      <Bar options={options} data={datas} width={100} height='500px' />
+    </div>
+  )
 }
 
 export function UserAnalysis ()
@@ -324,4 +446,63 @@ export function PackageBookingAnyalis ()
       <PolarArea data={datas} options={options}/>
     </div>
   ),[datas,options])
+}
+
+export function EventAnylsis ({ date }) {
+
+  const label = EventBooking().map(ele => ele.name);
+  const data = EventBooking().map(ele => ele.count);
+  const datas = {
+    labels: label,
+    datasets: [
+      {
+        fill: false,
+        label: 'Active',
+        data: data,
+        borderColor: '#532e12'
+      }
+    ]
+  }
+  const options = {
+    scales: {
+      x: {
+        grid: {
+          display: false // Hide x-axis grid lines
+        }
+      },
+      y: {
+        ticks: {
+          pricision: 1
+        },
+        grid: {
+          display: false // Hide y-axis grid lines
+        }
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top'
+      },
+      title: {
+        display: true,
+        text: ' Event Booking Summary of Campbell'
+      }
+    },
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 0.6,
+        to: 0,
+        loop: true
+      }
+    }
+  }
+  return (
+    <div>
+      <Line options={options} data={datas} width={100} height='500px' />
+    </div>
+  )
 }

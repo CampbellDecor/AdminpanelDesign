@@ -21,11 +21,11 @@ export function CountPanel ({ index, idenity, title, count, path }) {
 
 export function ListPanel ({title,items }) {
   return (
-    <Col md={5} className='my-3 mx-3 count-panel'>
+    <Col md={5} className='my-3 w-100 count-panel'>
       <h5>{title} Bookings</h5>
-      <Stack gap={2}>
+      <Stack gap={2} className='count-panel-list'>
         {items.map(item => (
-          <div className='d-flex justify-content-between count-panel-component border p-2 rounded rounded-2'>
+          <div className='d-flex justify-content-between count-panel-component  p-2 rounded rounded-2'>
             <div className='d-flex count-panel-component--name bg-image hover-zoom'>
               <Image
                 className='count-panel-component--name--img'

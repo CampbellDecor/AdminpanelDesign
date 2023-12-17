@@ -45,6 +45,24 @@ export default async function Authentication (user)
 })
 
         }
+        if (error.code === `auth/wrong-password`)
+        {
+            Swal.fire({
+                title: "Wrong password",
+                text: "Sorry! , Your Password is Incorrect Checek and Try again",
+                icon: 'error',
+                confirmButtonColor:"#c59290"
+             })
+         }
+        if (error.code === `auth/user-not-found`)
+        {
+            Swal.fire({
+                title: "Wrong Email",
+                text: "Sorry! , Your Email is Incorrect Checek and Try again",
+                icon: 'error',
+                confirmButtonColor:"#c59290"
+             })
+         }
        throw error;
     }
 }

@@ -22,6 +22,7 @@ const TodoSlice = createSlice({
       })
       .addCase(getTasks.fulfilled, (state, action) => {
         state.loading = false
+
 todoadepter.upsertMany(state,action.payload)
       })
      .addCase(addNewTask.pending, (state, action) => {

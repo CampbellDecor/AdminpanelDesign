@@ -15,16 +15,17 @@ export default function ChatApp () {
   const { currentuser } = useUserContext()
   const chatlist = getLocalStorage('username')
 
-  useEffect(() => {
-    if (chatlist) {
-      const id = getLocalStorage('chat')
-      Dispatcher(getAdminChatsone(id))
-    } else {
-      changeLocalStorage('username', 'CampbellDecor')
-      changeLocalStorage('chat', currentuser?.uid)
-      Dispatcher(getAdminChatsone(currentuser?.uid))
-    }
-  }, [])
+  if (chatlist) {
+    const id = getLocalStorage('chat')
+    Dispatcher(getAdminChatsone(id))
+    // setInterval(() => {
+    //   Dispatcher(getAdminChatsone(id))
+    // }, 1000)
+  } else {
+    changeLocalStorage('username', 'CampbellDecor')
+    changeLocalStorage('chat', currentuser?.uid)
+    Dispatcher(getAdminChatsone(currentuser?.uid))
+  }
 
   return (
     <section className='vh-100 mt-0'>

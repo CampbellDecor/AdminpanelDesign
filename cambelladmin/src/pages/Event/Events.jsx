@@ -5,6 +5,7 @@ import Event from '../../component/Event'
 import { useSelector } from 'react-redux'
 import { eventset } from '../../redux/Slice/Events'
 import OprationEvent from './AddEventsEdit';
+import {EventAnylsis} from '../../component/Util/Graph';
 export default function Events () {
   const events = useSelector(eventset)
 
@@ -21,6 +22,9 @@ export default function Events () {
           events.map((eventcode,index) => (
             <Event eventcode={eventcode} index={index} />
           ))}
+      </MDBRow>
+      <MDBRow>
+        <EventAnylsis/>
       </MDBRow>
     </MDBContainer>
   )

@@ -1,4 +1,3 @@
-import React from 'react'
 
 import
   {
@@ -11,14 +10,23 @@ import
 import { useSelector } from 'react-redux'
 import { OneEvent } from '../redux/Slice/Events'
 import { MdDeleteOutline } from 'react-icons/md'
-import { Button } from 'react-bootstrap';
+import { Button,Modal} from 'react-bootstrap';
 import { useDispatch } from 'react-redux'
 import { deleteEvents } from '../redux/Thunks/Events'
 import swal from "sweetalert2";
+import Edit from '../pages/Event/EditEvents';
+import { useState } from 'react';
+
 export default function Event ({ index, eventcode})
 {
   const Dispatcher = useDispatch();
-  const { imgURL, name, added, price = 0 } = useSelector(state => OneEvent(state, eventcode));
+  const eventDetails = useSelector(state => OneEvent(state, eventcode));
+  const [modalShow, setModalShow] = useState(false)
+
+  const {
+    imgURL, name, added
+  } = eventDetails;
+
   const onDelete = async() =>
   {
    const result=await swal.fire({
@@ -42,14 +50,25 @@ export default function Event ({ index, eventcode})
 }
 
   }
+  const onClickEvent = () =>
+  {
+    setModalShow(true);
+
+  }
   return (
+    <>
+      <ShowEvents
+  show={modalShow}
+  onHide={() => setModalShow(false)}
+/>
 
     <MDBCol md={((index+1)*3-1)!==0 || (index+1) % 3 === 0?'6':'12'} lg='4' className='mb-4' >
   <MDBCard>
     <MDBRipple
       rippleColor='light'
       rippleTag='div'
-      className='bg-image rounded hover-zoom'
+            className='bg-image rounded hover-zoom'
+            onClick={onClickEvent}
     >
       <MDBCardImage
         src={imgURL}
@@ -80,16 +99,52 @@ export default function Event ({ index, eventcode})
       <a href='#!' className='text-reset'>
             <p>added:{ added}</p>
       </a>
-          <h6 className='mb-3'>$ {price}</h6>
           <h5 className='d-flex justify-content-end'>
-  <Button onClick={onDelete} className='badge bg-primary ms-2 bg-danger'>
-    <MdDeleteOutline size={20}/>
-  </Button>
+          <Button onClick={onDelete} className='badge bg-primary ms-2 bg-danger'>
+  <MdDeleteOutline size={20} />
+</Button>
+
+  <Edit event={eventDetails}/>
 </h5>
 
     </MDBCardBody>
   </MDBCard>
 </MDBCol>
+</>
+  )
+}
 
+
+function ShowEvents (props)
+{
+  const { eventid, ...others } = props;
+  return (
+    <Modal
+      {...others}
+      fullscreen={true}
+      aria-labelledby='contained-modal-title-vcenter'
+
+
+    >
+      <Modal.Header closeButton  style={{backgroundColor:'rgba(239, 204, 202, 0.52)'
+}}>
+        <Modal.Title id='contained-modal-title-vcenter'>
+          Campbell Decor Events
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body   style={{backgroundColor:'#efccca6c'
+}}>
+        <h4>Centered Modal</h4>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+          consectetur ac, vestibulum at eros.
+        </p>
+      </Modal.Body>
+      <Modal.Footer style={{backgroundColor:'rgba(239, 204, 202, 0.52)'
+}}>
+        <Button style={{backgroundColor:"#c59290"}} onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
   )
 }

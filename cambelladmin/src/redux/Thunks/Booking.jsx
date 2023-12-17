@@ -33,11 +33,12 @@ export const addBooking = createAsyncThunk(
     }
   }
 )
-export const editBooking = createAsyncThunk(
+export const allTaskList = createAsyncThunk(
   'edit/Booking',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.get(`${BASE}/todoTask/all/todoList`);
+      return response.data
     } catch (error) {
       rejectWithValue(error.response.data)
     }

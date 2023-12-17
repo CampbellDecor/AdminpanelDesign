@@ -6,28 +6,44 @@
       .simple-calender--tile {
         height   : 120px;
         font-size: 20px;
-        overflow-y: scroll;
 
         .events {
-          height   : 100%;
-          display  : flex;
-          flex-wrap: wrap;
-          overflow: scroll;
-          &::-webkit-scrollbar{
-            display: none;
+          height    : 100%;
+          display   : flex;
+          flex-wrap : wrap;
+          overflow  : auto;
+          transition: 0.23s;
+
+          &-row {
+            transition: 0.5s;
+
+            &:hover {
+              width   : 300px;
+              position: absolute;
+              top     : 300px;
+              right   : 500px;
+              height  : 300px;
+            }
           }
+
+          &::-webkit-scrollbar {
+            display: none;
+
+          }
+
           &-set {
-            display:flex;
-            flex-wrap: wrap;
+            display        : flex;
+            flex-wrap      : wrap;
             justify-content: space-between;
-            align-items: center;
+            align-items    : center;
+
             &_one {
               padding: 5px;
 
               &--name {
-                font-size: 9px;
-                padding: 5px;
-                font-weight: 600;
+                font-size      : 9px;
+                padding        : 5px;
+                font-weight    : 600;
                 text-decoration: none;
               }
 
@@ -47,13 +63,13 @@
   outline      : none;
   border       : none;
 }
+
 .Onebook {
   .todo {
     border-radius: 75rem;
   }
 
   .bookEvent {
-    .simple-calender {
-
-
-    }}}
+    .simple-calender {}
+  }
+}

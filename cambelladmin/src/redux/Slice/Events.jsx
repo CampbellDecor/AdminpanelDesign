@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { getEvents,addEvents,deleteEvents } from '../Thunks/Events'
+import { getEvents,addEvents,deleteEvents,editEvents } from '../Thunks/Events'
 import { useSelector } from 'react-redux';
 const eventadepter = createEntityAdapter({
   selectId: (events) => events.eventid
@@ -43,8 +43,18 @@ const EventSlice = createSlice({
       })
       .addCase(deleteEvents.fulfilled, (state, action) => {
         state.loading = false
-        console.log(action.payload);
         eventadepter.removeOne(state,action.payload);
+      })
+    .addCase(editEvents.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(editEvents.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.data;
+      })
+      .addCase(editEvents.fulfilled, (state, action) => {
+        state.loading = false
+        eventadepter.setOne(state, action.payload);
       })
   }
 })

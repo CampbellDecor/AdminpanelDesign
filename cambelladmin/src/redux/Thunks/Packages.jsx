@@ -25,9 +25,10 @@ export const deletePackages = createAsyncThunk(
 )
 export const addPackages = createAsyncThunk(
   'add/Packages',
-  async (_, { rejectWithValue }) => {
+  async (pack, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.post(BASE, pack);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }

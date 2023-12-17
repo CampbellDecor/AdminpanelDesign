@@ -14,6 +14,7 @@ import UserChatsoneSlice from '../Slice/UserChatone'
 import AuthSlice from '../Slice/Auth'
 import TodoSlice from '../Slice/Todo'
 import PaymentHisSlice from '../Slice/PaymentHis'
+import TaskSlice from '../Slice/TaskList'
 
 export const Store = configureStore({
   reducer: {
@@ -29,7 +30,8 @@ export const Store = configureStore({
     uchats: UserChatsoneSlice,
     auth: AuthSlice,
     todo: TodoSlice,
-    payhis:PaymentHisSlice
+    payhis:PaymentHisSlice,
+    task:TaskSlice
   },
   middleware: [Thunk,logger]
 })

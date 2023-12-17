@@ -50,16 +50,16 @@ export default function Login () {
     try {
       setloading(true);
       const login = await Authuntication(loginUser)
-      console.log(login);
-      setloading(false)
+
       setCurrentUser(login.user)
       setisSuper(login.user?.isSuper ?? false)
+setloading(false)
 
      if (login.login) {
         setLogin(true)
 
-        toast.success('Login Successfully.')
-      //   Remeberme(loginUser, rememberme)
+       toast.success('Login Successfully.');
+       Remeberme(loginUser, rememberme);
         navigate('/home')
       } else {
         setloading(false)
@@ -76,9 +76,7 @@ export default function Login () {
     }
   }
 
-  return useMemo(
-    () =>
-      islogin ? (
+  return islogin ? (
         <Navigate to='/home' replace={true} />
       ) : (
         <MDBContainer fluid className='vh-100 login'>
@@ -88,7 +86,7 @@ export default function Login () {
             <MDBCardBody className='p-5 text-center'>
               <div>
                 <Image src={Applogo} roundedCircle className='login-container-logo' />
-                <h3 className='mt-3 mb-3'>{Appname}</h3>
+                <h3 className='mt-3 mb-3' style={{color:'#775655'}}>{Appname}</h3>
               </div>
 
               <MDBValidation onSubmit={onSubmit}>
@@ -99,8 +97,7 @@ export default function Login () {
                     wrapperClass: 'mb-4',
                     label: 'Email',
                     name: 'email',
-                    defaultValue: '',
-                    value: loginUser?.email,
+                    defaultValue:loginUser?.email,
                     type: 'email',
                     feedback: 'Please choose correct email',
                     invalidclassName: 'py-2',
@@ -123,9 +120,10 @@ export default function Login () {
                 />
                 <MDBValidationItem invalid feedback='not remember you!'>
                   <div className='d-flex justify-content-center mb-4'>
-                    <MDBCheckbox
-                      name='remember'
-                      checked={rememberme}
+                      <MDBCheckbox
+                        style={{backgroundColor:"#c59290"}}
+                        name='remember'
+                        defaultChecked={rememberme}
                       onChange={() => {
                         setremberme(!rememberme)
                       }}
@@ -147,7 +145,5 @@ export default function Login () {
             </MDBCardBody>
           </MDBCard>
         </MDBContainer>
-      ),
-    [islogin,loginUser]
-  )
+      )
 }

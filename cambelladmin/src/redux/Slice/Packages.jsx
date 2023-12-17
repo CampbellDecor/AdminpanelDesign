@@ -1,5 +1,5 @@
-import { createEntityAdapter, createSelector, createSlice } from '@reduxjs/toolkit'
-import { getPackages } from '../Thunks/Packages'
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { getPackages,addPackages } from '../Thunks/Packages'
 import { useSelector } from 'react-redux';
 const packageadepter = createEntityAdapter({
   selectId: (packs) => packs.packageID
@@ -24,6 +24,16 @@ const PackageSlice = createSlice({
       .addCase(getPackages.fulfilled, (state, action) => {
         state.loading = false
         packageadepter.upsertMany(state, action.payload);
+      }).addCase(addPackages.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(addPackages.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.data
+      })
+      .addCase(addPackages.fulfilled, (state, action) => {
+        state.loading = false
+        console.log(action.payload);
       })
   }
 })

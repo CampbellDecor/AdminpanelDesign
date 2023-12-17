@@ -1,6 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { getauth } from '../Thunks/Admins'
-const authadepter = createEntityAdapter({
+ const authadepter = createEntityAdapter({
   selectId: (auth) => auth.id
 })
 
@@ -10,7 +10,12 @@ const AuthSlice = createSlice({
     loading: false,
     error: ''
   }),
-  reducers: {},
+  reducers: {
+    addNew: (state, action) =>
+    {
+      authadepter.addOne(action.payload);
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(getauth.pending, (state, action) => {
@@ -24,6 +29,7 @@ const AuthSlice = createSlice({
         state.loading = false
         authadepter.upsertMany(state, action.payload)
       })
+
   }
 })
 export const {
@@ -31,5 +37,5 @@ export const {
   selectById: OneAuth,
   selectIds: AuthIDs
 } = authadepter.getSelectors(state => state.auth)
-
+export const  {addNew }= AuthSlice.actions;
 export default AuthSlice.reducer

@@ -37,13 +37,12 @@ export const addEvents = createAsyncThunk(
 )
 export const editEvents = createAsyncThunk(
   'edit/Events',
-  async (_, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.put(BASE, data);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }
   }
 )
-
-

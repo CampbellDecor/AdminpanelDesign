@@ -3,6 +3,8 @@
 @mixin baseSidebar($split:"max"){
 #sidebarMenu {
     margin-top: 0px;
+    background-image: url("../../images/sidebar.gif");
+    background-blend-mode: lighten;
     @include compo.position("fix",0px,auto,0px, 0px);
     padding: 0px 0 58px 0px;
     transition: var.trans("t_1");
@@ -34,7 +36,11 @@
 
 @mixin base_main($split:"max"){
     main {
-      transition: var.trans("t_1");
+      transition: 0.5s;
+         background-image: url("../../images/Background.gif");
+   background-blend-mode:soft-light;
+   background-size: cover;
+   background-repeat: no-repeat;
         @include compo.position;
         margin-top: 0px;
         padding-top: 0px;

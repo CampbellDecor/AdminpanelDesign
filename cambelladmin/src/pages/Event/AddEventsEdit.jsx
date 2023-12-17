@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { MDBBtn } from 'mdb-react-ui-kit'
-import { Button, Form, Image, ProgressBar, InputGroup, Badge } from 'react-bootstrap'
+import { Button, Form, Image, InputGroup, Badge } from 'react-bootstrap'
 import { IoMdAddCircle } from 'react-icons/io'
 import Modal from 'react-bootstrap/Modal'
 import { useAppContext } from '../../contexts/AppContext'

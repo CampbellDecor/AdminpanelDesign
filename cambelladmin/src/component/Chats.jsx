@@ -41,7 +41,7 @@ export default function Chatting ()
     }
   }
   const UserChat =  e => {
-    e.preventDefault()
+    e.preventDefault();
     const username = getLocalStorage('username') ?? '';
     try
     {
@@ -78,6 +78,7 @@ export default function Chatting ()
       />
       <Button
         className='ms-3'
+        style={{backgroundColor:"#c59290"}}
         onClick={isSuper ? OnSentAdmin : UserChat}
         disabled={message === '' || id === 0}
       >
@@ -111,9 +112,10 @@ export function Chatuser ({ id })
   return (
     <li className='p-2 border-bottom useitem' key={id}>
       <Link
-        className='d-flex justify-content-between'
+        className='d-flex justify-content-between text-decoration-none'
         as='button'
         onClick={isSuper ? onHandleChange : onHandleUserChange}
+
       >
         <div className='d-flex flex-row'>
           <div className='position-relative'>
@@ -130,7 +132,10 @@ export function Chatuser ({ id })
               }
               alt='avatar'
               className='d-flex d-block d-lg-none align-self-center me-3'
+              style={{borderRadius:'50px'}}
               width={40}
+              height={40}
+
             />
             {isOnline ? (
               <span className='badge bg-success badge-dot' />
@@ -139,7 +144,7 @@ export function Chatuser ({ id })
             )}
           </div>
           <div className='pt-1'>
-            <p className='fw-bold mb-0'>{username}</p>
+            <p className='fw-bold mb-0' style={{color:'#473939'}}>{username}</p>
             <p className='small text-muted'>{message}</p>
           </div>
         </div>
@@ -168,10 +173,10 @@ export function Message ({ chatid, profile, message, time, status }) {
         alt='avatar 1'
         style={{ width: '45px', height: '100%' }}
       />
-      <div>
+      <div style={{maxWidth:"75%"}}>
         <p
           className='small p-2 ms-3 mb-1 rounded-3'
-          style={{ backgroundColor: '#f5f6f7' }}
+          style={{ backgroundColor: 'rgba(222, 192, 191,0.3)' }}
         >
           {message}
         </p>
@@ -185,9 +190,9 @@ export function Reply ({ chatid, message, time }) {
   const { currentuser } = useUserContext()
 
   return (
-    <div className='d-flex flex-row justify-content-end p-1' key={chatid}>
-      <div className='position-relative'>
-        <p className='small p-2 me-3 mb-1 text-white rounded-3 bg-primary'>
+    <div className='d-flex flex-row justify-content-end p-1 mr-0' key={chatid}>
+      <div className='position-relative ' style={{maxWidth:"75%"}}>
+        <p className='small p-2 me-3 mb-1 text-white rounded-3 text-wrap' style={{backgroundColor:"#c59290"}}>
           {message}
         </p>
         <p className='small me-3 mb-3 rounded-3 text-muted'>{time}</p>

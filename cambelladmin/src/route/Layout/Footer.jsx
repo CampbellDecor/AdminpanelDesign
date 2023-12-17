@@ -24,7 +24,7 @@ export default function Footer ()
                     rippleColor='light'
                     className='bg-image hover-overlay shadow-1-strong rounded'
                   >
-                    <img src={img.url} className='w-100' alt={img.name} />
+                    <img src={img.url} className='w-100' alt={img.name} height={"150px"} />
                     <Link to='#!' className='anchor'>
                       <div
                         className='mask'

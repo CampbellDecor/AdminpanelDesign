@@ -1,3 +1,5 @@
+import { MdOtherHouses } from "react-icons/md";
+
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'CHANGEINPUT': {
@@ -13,24 +15,8 @@ export const reducer = (state, action) => {
       }
     }
     case 'ADDSERVICE': {
-      const { services, ...others } = state;
-      const servicesdata = services ? Object.entries(services) : [];
-      const dataset=[]
-      servicesdata.forEach(ele =>
-      {
-        dataset.push(ele[1])
-      })
-      dataset?.push(action.value);
-      const obj = {};
-      dataset.forEach((item, index) =>
-      {
-        const key = '0' + (index + 1);
-        obj[key]= item;
-      })
-      return {
-        ...others,services:obj
-      }
-      }
+      return {...state,services:action.value};
+    }
     default:
       return {}
   }

@@ -84,7 +84,7 @@ export const PackageBooking = () => {
 }
 
 export const AlluserBooking = () => {
-  const bookings = useSelector(AllBookings);
+  const bookings = useSelector(AllBookings)
   const users = useSelector(UserIds)
   const usernames = useSelector(AllUser)
   const Bookingtypes = [[], [], [], [], []]
@@ -100,7 +100,7 @@ export const AlluserBooking = () => {
   })
   return Bookingtypes
 }
-export const AllDateBooking = (dates=new Date()) => {
+export const AllDateBooking = (dates = new Date()) => {
   const bookings = useSelector(AllBookings)
   const Bookingtypes = [[], [], [], [], []]
   const status = ['active', 'pending', 'cancelled', 'expired']
@@ -116,5 +116,16 @@ export const AllDateBooking = (dates=new Date()) => {
   }
   return Bookingtypes
 }
-
+export const SatusBookingAnaysis = () =>
+{
+const status = ['active', 'pending', 'cancelled', 'expired']
+const bookings = useSelector(AllBookings)
+  const Bookingtypes = [[], []];
+  Bookingtypes[0] = status;
+  status.forEach((ele,index) =>
+  {
+    Bookingtypes[1].push(bookings.filter(b=>b.status===ele).length)
+  })
+  return Bookingtypes;
+}
 export default BookingSlice.reducer
