@@ -34,7 +34,12 @@ export default function OneBooking () {
               />
             </MDBCol>
             <MDBCol>
-              <QrPanal bookcode={loader.bookid}/>
+      <BookingEvents
+  eventDate={loader?.eventDate}
+  status={loader?.status}
+  bookDate={loader?.bookDate}
+/>
+
             </MDBCol>
           </MDBRow>
           <MDBRow className='my-2'>
@@ -47,9 +52,9 @@ export default function OneBooking () {
           </MDBRow>
         </MDBCol>
       </Row>
-      <Row>
+      {loader?.status!=='cancelled' && loader?.status!=='rejected'&&<Row>
         <Todo bookingcode={loader.bookid} />
-      </Row>
+      </Row>}
     </Container>
   )
 }

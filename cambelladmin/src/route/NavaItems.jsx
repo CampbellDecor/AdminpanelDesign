@@ -11,11 +11,11 @@ export const NavItems =[
     itemname: 'DashBoard',
     itemicon: <FaTachometerAlt size={is} className='me-3' />,
   },
-  {
-    path: '/sys',
-    itemname: 'System',
-    itemicon: <FaTachometerAlt size={is} className='me-3' />,
-  },
+  // {
+  //   path: '/sys',
+  //   itemname: 'System',
+  //   itemicon: <FaTachometerAlt size={is} className='me-3' />,
+  // },
   // {
   //   path: '/analysis',
   //   itemname: "Analysis",

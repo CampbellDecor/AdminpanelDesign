@@ -42,14 +42,12 @@ export default function EditTodo ({taskDoc,date}) {
     task.dueDate = value
     task.bookid = 'APedgnvVkSWJl3elTIz2'
     try {
-      const add = await axios.post('/api/booking/todoTask', task)
-      if (add.data) {
-        toast.success('Scussfully Added New Task')
+      toast.success('Scussfully Edited');
         onChangeInput()
-      } else {
-        toast.error('Failed to Add Task Try Again')
       }
-    } catch (error) {
+    catch (error)
+    {
+      toast.error("Failed");
       console.error(error)
     }
   }, [])

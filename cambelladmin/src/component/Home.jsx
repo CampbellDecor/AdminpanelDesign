@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useEffect ,useState} from 'react'
 import { FaCalendarDay, FaUsers, FaCoins, FaRegThumbsUp } from 'react-icons/fa'
 import { CountPanel,ListPanel } from './Panels'
 import { userCount } from '../redux/Slice/User'
 import { bookingcount,EventBooking,PackageBooking } from '../redux/Slice/Booking'
 import {  Totalpay} from '../redux/Slice/PaymentHis'
 import { useSelector } from 'react-redux'
+import axios from 'axios';
 
 export function HomeCountPanel ()
 {
   const ucount = useSelector(userCount);
   const bcount = useSelector(bookingcount);
+  const [likecount,setlikecount]=useState(1)
+  useEffect(() =>
+  {
+    axios.get("/CambellFbCount").then(res => setlikecount(res)).catch(console.error);
+
+  },[])
   return (
    <div className='w-100  d-flex justify-content-around flex-sm-nowrap flex-wrap'>
   <CountPanel
@@ -38,10 +45,10 @@ export function HomeCountPanel ()
   />
   <CountPanel
     {...{
-      title: 'Likes',
+      title: 'FBLikes',
       idenity: <FaRegThumbsUp className='icon' />,
-      count: 10,
-      path: '/users'
+      count: likecount??0,
+      path: 'https://web.facebook.com/profile.php?id=100092188970585'
     }}
   />
 </div>

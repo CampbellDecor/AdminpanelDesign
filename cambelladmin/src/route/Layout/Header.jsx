@@ -20,10 +20,10 @@ export default function Header () {
                 id='navbarDropdownMenuLink'
               >
                 <span>
-                  <i className='fas fa-bell text-white'></i>
+                  {/* <i className='fas fa-bell text-white'></i>
                   <Badge className='badge-notification' pill bg='danger'>
                     1
-                  </Badge>
+                  </Badge> */}
                 </span>
               </Nav.Item>
 

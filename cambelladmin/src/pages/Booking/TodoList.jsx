@@ -13,12 +13,13 @@ import { Form } from 'react-bootstrap'
 import Todo from '../../component/todo'
 import AddToDo from './AddTodo'
 import { useSelector } from 'react-redux'
+import {useUserContext} from '../../contexts/UserContext'
 
 import {taskset} from '../../redux/Slice/Todo'
 export default function ToDoList ({bookingcode})
 {
 
-
+  const {isSuper } = useUserContext();
 const TodoTask=useSelector(taskset)
 
   const date = new Date('July 21, 2024 01:15:00')
@@ -53,8 +54,8 @@ const TodoTask=useSelector(taskset)
                 <MDBCard>
                   <MDBCardHeader>
                     <div className='w-100 d-flex justify-content-between'>
-                      {Duration}
 
+{bookingcode}
                       <MDBTooltip
                         tag='a'
                         wrapperProps={{ href: '#!' }}

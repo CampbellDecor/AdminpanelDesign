@@ -1,6 +1,7 @@
 import React, {
   createContext,
   useContext,
+  useEffect,
   useMemo,
   useReducer,
   useState
@@ -20,54 +21,73 @@ import { oneService } from '../redux/Slice/Service'
 import { useSelector } from 'react-redux'
 
 import { Modal, Button, Form } from 'react-bootstrap'
+import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 const ServiceContext = createContext()
-const BandService = ({ ser, nextline = false }) => {
+const BandService = ({ ser, nextline = false }) =>
+{
+  const [searchSubservice, setSubser] = useSearchParams();
+  const subservice = searchSubservice.get('subservice');
   const { serviceName, serviceImage, setShow, setEditService } = useContext(
     ServiceContext
   )
-  const onClick = async () => {
+  const onServiceShow = async () =>
+  {
     const serviceaction = await Swal.fire({
-      title: ser?.sername,
-      imageUrl: serviceImage,
-      imageHeight: '200px',
-      width: '350px',
-      height: '300px',
-      imageWidth: '90%',
-      showClass: {
-        popup: `
+  title: ser?.sername,
+  imageUrl: serviceImage,
+  imageHeight: '200px',
+  width: '350px',
+  height: '300px',
+  imageWidth: '90%',
+  showClass: {
+    popup: `
       animate__animated
       animate__fadeInUp
       animate__faster
     `
-      },
-      hideClass: {
-        popup: `
+  },
+  hideClass: {
+    popup: `
       animate__animated
       animate__fadeOutDown
       animate__faster
     `
-      },
-      padding: '5px',
-      html: `
+  },
+  padding: '5px',
+  html: `
    <div className='text-center'>
    <p className='text-small'>${serviceName}</p>
   <p>$${ser?.serprice}</p>
    </div>
   `,
-      showCloseButton: true,
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonText: "<i class='fa-solid fa-pen'></i>",
-      confirmButtonColor: '#c59290',
-      cancelButtonColor: '#b20802',
-      cancelButtonText: "<i class='fa fa-trash' aria-hidden='true'></i>"
-    })
+  showCloseButton: true,
+  showCancelButton: true,
+  focusConfirm: false,
+  confirmButtonText: "<i class='fa-solid fa-pen'></i>",
+  confirmButtonColor: '#c59290',
+  cancelButtonColor: '#b20802',
+  cancelButtonText: "<i class='fa fa-trash' aria-hidden='true'></i>"
+})
 
-    if (serviceaction.isConfirmed) {
-      setEditService(ser)
-      setShow(true)
-    }
+if (serviceaction.isConfirmed) {
+  setEditService(ser)
+  setShow(true)
+}
+
   }
+  const onClick = async () => {
+    await onServiceShow();
+  }
+  useEffect(() =>
+  {
+    if (subservice === ser.serid)
+    {
+      onServiceShow();
+
+    }
+  },[searchSubservice])
   return (
     <>
       <span style={{cursor:'pointer'}} onClick={onClick}>{ser?.sername}</span>
@@ -150,7 +170,9 @@ function SebServiceEdit () {
   const [subservice, setsubService] = useReducer(reducer, {})
 
   const handleClose = () => setShow(false)
-  const Save = () => {
+  const Save = () =>
+  {
+    toast.success("Edited");
     handleClose()
   }
   return (
@@ -211,7 +233,9 @@ function SebServiceEdit () {
   )
 }
 
-function SebServiceAdd () {
+function SebServiceAdd ()
+{
+  const {servicecode}=useContext(ServiceContext)
   const [show, setShow] = useState(false)
   const reducer = (state, action) => {
     switch (action.type) {
@@ -226,8 +250,19 @@ function SebServiceAdd () {
   const [subservice, setsubService] = useReducer(reducer, {})
 
   const handleClose = () => setShow(false)
-  const Save = () => {
-    handleClose()
+  const Save = async() =>
+  {
+    try
+    {
+
+      // await axios.post(`/api/service/SubService/${servicecode}`, subservice);
+      toast.success("Added");
+  handleClose()
+
+} catch (error) {
+      toast.error('Error');
+}
+
   }
   return (
     <>

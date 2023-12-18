@@ -13,21 +13,26 @@ export const getBooking = createAsyncThunk(
     }
   }
 )
-export const deleteBooking = createAsyncThunk(
+export const RejectBooking = createAsyncThunk(
   'delete/Booking',
-  async (_, { rejectWithValue }) => {
+  async (bookid, { rejectWithValue }) => {
     try {
-      const response = await axios.get()
+      const response = await axios.get(BASE + '/approve/' + bookid);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }
   }
 )
-export const addBooking = createAsyncThunk(
+export const ApproveBooking = createAsyncThunk(
   'add/Booking',
-  async (_, { rejectWithValue }) => {
+  async (bookid, { rejectWithValue }) =>
+  {
+
     try {
-      const response = await axios.get()
+      const response = await axios.get(BASE+"/approve/" + bookid);
+      console.log(response.data);
+      return response.data;
     } catch (error) {
       rejectWithValue(error.response.data)
     }

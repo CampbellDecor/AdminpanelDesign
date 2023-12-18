@@ -103,7 +103,7 @@ export function Packages ({packageID
             {/* <h6 className='text-success'>Free shipping</h6> */}
             <div className='d-flex flex-column mt-4'>
             <DeletePackages packageID={packageID}/>
-              <MDBBtn outline color='warning' size='sm' className='mt-2'>
+                  <MDBBtn outline color='warning' href={'/pack/edit/'+packageID} size='sm' className='mt-2'>
                 Edit
               </MDBBtn>
             </div>

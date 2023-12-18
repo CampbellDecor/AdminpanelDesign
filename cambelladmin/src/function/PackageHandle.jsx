@@ -17,6 +17,7 @@ export const reducer = (state, action) => {
     case 'ADDSERVICE': {
       return {...state,services:action.value};
     }
+      case "SET": return action.value
     default:
       return {}
   }

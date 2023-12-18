@@ -62,6 +62,10 @@ export default function Todo ({
       }
     }
   }
+  const taskDoc={
+  task, createDate, dueDate, desc
+}
+
   return (
     <>
       <MDBListGroup
@@ -123,7 +127,7 @@ export default function Todo ({
         </MDBListGroupItem>
         <MDBListGroupItem className='ps-3 pe-0  rounded-0 border-0 bg-transparent'>
           <div className='d-flex flex-row justify-content-end mb-1'>
-            <EditTodo  />
+            <EditTodo taskDoc={taskDoc} />
             <MDBBtn color='link' onClick={onDelete}>
               <MDBTooltip
                 tag='a'

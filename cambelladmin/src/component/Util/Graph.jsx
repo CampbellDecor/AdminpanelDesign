@@ -39,12 +39,33 @@ ChartJS.register(
 export function SmallHomeDonut ({maintainAspectRatio=false}) {
   const { mode } = useThemeContext();
   const { Appname } = useAppContext();
-  const [labels, data] =PackageRatings();
+  const labels=[
+  'Classic Hindu Wedding',
+  'Classic Puberty Ceremony',
+  'Classic Muslim Wedding',
+  'Happilly Get Together ',
+  'Tabel Decrotion',
+  'Precious Birthday Moment',
+  'Classic Christian Wedding ',
+  'hghgh'
+  ]
+  const data =[
+  6.326530612244897,
+  25.454545465,
+  5.043565653243,
+  6.133333333333334,
+  7.4545,
+  14.444444444444445,
+  17.6,
+  3.4349
+]
+
+  const idea = PackageRatings();
+
   const colors = randomcolor({
     count: labels?.length,
     luminosity: mode === 'light' ? 'bright' : 'dark',
   })
-
   const datas = useMemo(() => ({
     labels: labels,
     datasets: [
@@ -55,7 +76,7 @@ export function SmallHomeDonut ({maintainAspectRatio=false}) {
         borderWidth: 1
       }
     ]
-  }), [data,labels])
+  }), [idea])
   const options =useMemo(()=> ({
     responsive: true,
     maintainAspectRatio,

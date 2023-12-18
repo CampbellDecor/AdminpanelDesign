@@ -1,5 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { getBooking } from '../Thunks/Booking'
+import { getBooking,ApproveBooking,RejectBooking
+ } from '../Thunks/Booking'
 import { useSelector } from 'react-redux'
 import { allEvents } from './Events'
 import { allPacks } from './Packages'
@@ -16,8 +17,7 @@ const BookingSlice = createSlice({
   }),
   reducers: {},
   extraReducers: builder => {
-    builder
-      .addCase(getBooking.pending, (state, action) => {
+    builder.addCase(getBooking.pending, (state, action) => {
         state.loading = true
       })
       .addCase(getBooking.rejected, (state, action) => {
@@ -27,6 +27,27 @@ const BookingSlice = createSlice({
       .addCase(getBooking.fulfilled, (state, action) => {
         state.loading = false
         bookingadepter.upsertMany(state, action.payload)
+      })
+      .addCase(ApproveBooking.pending, (state, action) =>
+      {
+        state.loading = true
+      }).addCase(ApproveBooking.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.data
+      })
+      .addCase(ApproveBooking.fulfilled, (state, action) => {
+        state.loading = false
+        bookingadepter.setOne(state, action.payload)
+      }).addCase(RejectBooking.pending, (state, action) =>
+      {
+        state.loading = true
+      }).addCase(RejectBooking.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.data
+      })
+      .addCase(RejectBooking.fulfilled, (state, action) => {
+        state.loading = false
+        bookingadepter.setOne(state, action.payload)
       })
   }
 })
@@ -68,19 +89,26 @@ export const EventBooking = () => {
 }
 export const PackageBooking = () => {
   const packs = useSelector(allPacks)?.map(ele => {
-    const { name, imgURL, packageID } = ele
-    return { name, imgURL, packageID }
+    const { packageName, imgURL, packageID } = ele
+    return { packageName, imgURL, packageID }
   })
   const Bookings = useSelector(AllBookings)
   const packBook = []
   packs.forEach(ele => {
-    const regx = new RegExp(ele?.name, 'ig')
+    const regx = new RegExp(ele?.packageName, 'ig')
     packBook.push({
       ...ele,
       count: Bookings.filter(ele => regx.test(ele.eventname))?.length
     })
   })
-  return packBook
+  return packBook.map(ele =>
+  {
+    const {
+      packageName,...others
+    } = ele;
+
+return {...others,name:packageName}
+  })
 }
 
 export const AlluserBooking = () => {

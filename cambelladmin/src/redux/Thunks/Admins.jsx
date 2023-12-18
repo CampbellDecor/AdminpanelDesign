@@ -11,10 +11,11 @@ export const getAdmins = createAsyncThunk("get/admins", async (_,{rejectWithValu
         rejectWithValue(error.response.data);
     }
 })
-export const deleteAdmins = createAsyncThunk("delete/admins", async (_,{rejectWithValue}) =>
+export const deleteAdmins = createAsyncThunk("delete/admins", async (aid,{rejectWithValue}) =>
 {
     try {
-        const response = await axios.get();
+        const response = await axios.delete(`${BASE}/${aid}`);
+        return response.data;
     } catch (error) {
         rejectWithValue(error.response.data);
     }
@@ -23,7 +24,6 @@ export const addAdmins = createAsyncThunk("add/admins", async (admin,{rejectWith
 {
     try {
         const response = await axios.post(`${BASE}/add`, admin);
-        console.log(response.data);
         return response.data;
     } catch (error) {
         rejectWithValue(error.response.data);

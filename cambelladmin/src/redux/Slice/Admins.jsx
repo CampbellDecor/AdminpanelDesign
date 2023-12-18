@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
-import { getAdmins, addAdmins } from '../Thunks/Admins'
+import { getAdmins, addAdmins,deleteAdmins } from '../Thunks/Admins'
 const adminadepter = createEntityAdapter({
   selectId: admin => admin.aid
 })
@@ -34,6 +34,16 @@ const AdminSlice = createSlice({
       .addCase(addAdmins.fulfilled, (state, action) => {
         state.loading = false
         adminadepter.addOne(state, action.payload.storeData);
+      }).addCase(deleteAdmins.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(deleteAdmins.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.data
+      })
+      .addCase(deleteAdmins.fulfilled, (state, action) => {
+        state.loading = false
+        adminadepter.removeOne(state, action.payload);
       })
   }
 })

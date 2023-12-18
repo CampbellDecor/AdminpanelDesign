@@ -18,8 +18,11 @@ import { BiUpload } from 'react-icons/bi'
 import { reducer } from '../../function/PackageHandle'
 import {useDispatch } from 'react-redux';
 import { addPackages} from '../../redux/Thunks/Packages'
+import { useNavigate } from 'react-router-dom';
 
-export default function AddPackage () {
+export default function AddPackage ()
+{
+  const Navi = useNavigate();
   const [pack, setpack] = useReducer(reducer, {})
   const [packImageUp, setUpImg] = useState(false)
   const [serviceadd, setServiceAdd] = useState('')
@@ -44,6 +47,9 @@ export default function AddPackage () {
       } else
       {
         Dispatcher( addPackages(pack));
+        toast.success('Package Added');
+        Navi("/pack");
+
       }
     }
   }

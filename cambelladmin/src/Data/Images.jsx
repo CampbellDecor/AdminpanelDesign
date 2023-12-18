@@ -13,7 +13,7 @@ export const FooterImg = [
         url: 'https://experiencesaga.com/cdn/shop/products/Screenshot_20221221-180137_d32d8e4e-5fe2-45a8-9192-ccf188ee2d1b.jpg?v=1678094005',
         name:'footer'
     }, {
-        url: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fbuffet-table-decor&psig=AOvVaw2ipg-UIsugZCC-J9vtPB62&ust=1702917431805000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCPiRmvbzloMDFQAAAAAdAAAAABAE',
+        url:'https://c.ndtvimg.com/2020-11/2q4i9sco_lights3_625x300_13_November_20.jpg',
         name:"footerimg"
     }, {
         url: 'https://images.shaadisaga.com/shaadisaga_production/photos/pictures/000/533/405/new_medium/WishTree_Weddings.jpg?1537783776',

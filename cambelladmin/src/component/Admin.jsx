@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { MdBlockFlipped, MdDelete } from 'react-icons/md';
 import { FaUnlockAlt } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import
   {
     MDBCol,
@@ -15,6 +15,7 @@ import
 import { MdOutlinePassword } from 'react-icons/md';
 import { OneAdmin } from '../redux/Slice/Admins';
 import { OneAuth } from '../redux/Slice/Auth';
+import { deleteAdmins } from '../redux/Thunks/Admins';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -23,7 +24,7 @@ export default function Admin ({ aid })
 {
   const admin = useSelector(state => OneAdmin(state, aid));
   const auth = useSelector(state => OneAuth(state, aid));
-  const { join, lastOnline } = auth;
+  const { join, lastOnline } = auth??{};
   const { profile, username, email, mobile, isBlock } = admin;
   const navigate = useNavigate();
   const onClickHandle = () =>
@@ -294,6 +295,7 @@ export function UnBlocked ({ aid })
 export function DeleteBox ({ aid, html, color })
 {
   const navigate = useNavigate();
+  const Dispatcher = useDispatch();
   const admin = useSelector(state => OneAdmin(state, aid));
   const { username } = admin;
 
@@ -310,23 +312,12 @@ export function DeleteBox ({ aid, html, color })
     });
     if (result.isConfirmed)
     {
-      const admin = await axios.delete('/api/admin/' + aid);
-      if (admin)
-      {
-        Swal.fire({
+      await Dispatcher(deleteAdmins(aid));
+        await Swal.fire({
           title: 'Deleted!',
           text: 'Your file has been deleted.',
           icon: 'success'
         });
-        navigate('/admins');
-      } else
-      {
-        Swal.fire({
-          title: 'failed!',
-          text: 'You Haven"t delete',
-          icon: 'error'
-        });
-      }
     }
   }, []);
   return (

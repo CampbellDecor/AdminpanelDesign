@@ -34,6 +34,7 @@ const PackageSlice = createSlice({
       .addCase(addPackages.fulfilled, (state, action) => {
         state.loading = false
         console.log(action.payload);
+        packageadepter.addOne(state,action.payload);
       })
   }
 })
@@ -48,7 +49,7 @@ export const SearchpackByName = (search) =>
 {
   const regx = new RegExp(search, 'ig');
   const packs = useSelector(allPacks);
- return packs?.find(pac => regx.test(pac.name));
+ return packs?.find(pac => regx.test(pac.packageName));
 }
 export const PackageRatings = () =>
 {
@@ -56,7 +57,7 @@ export const PackageRatings = () =>
   const Data = [[], []];
   Packages.forEach(ele =>
   {
-    Data[0].push(ele.name);
+    Data[0].push(ele.packageName);
     Data[1].push((ele?.avg_rating/ele?.rating_count))
   })
   return Data;

@@ -15,14 +15,24 @@ import { useDispatch } from 'react-redux'
 import { deleteEvents } from '../redux/Thunks/Events'
 import swal from "sweetalert2";
 import Edit from '../pages/Event/EditEvents';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Event ({ index, eventcode})
 {
   const Dispatcher = useDispatch();
   const eventDetails = useSelector(state => OneEvent(state, eventcode));
   const [modalShow, setModalShow] = useState(false)
+  const [searchEvent, setsearchEvent] = useSearchParams();
+  const [selected, setSeleted] = useState(true);
+  useEffect(() =>
+  {
+    if (searchEvent.get('search') === eventcode)
+    {
+setSeleted(true)
+    }
 
+  }, [searchEvent]);
   const {
     imgURL, name, added
   } = eventDetails;
@@ -50,9 +60,9 @@ export default function Event ({ index, eventcode})
 }
 
   }
+
   const onClickEvent = () =>
   {
-    setModalShow(true);
 
   }
   return (
@@ -62,7 +72,7 @@ export default function Event ({ index, eventcode})
   onHide={() => setModalShow(false)}
 />
 
-    <MDBCol md={((index+1)*3-1)!==0 || (index+1) % 3 === 0?'6':'12'} lg='4' className='mb-4' >
+      <MDBCol md={((index + 1) * 3 - 1) !== 0 || (index + 1) % 3 === 0 ? '6' : '12'} lg='4' className={`mb-4 ${selected?'shadow':''}`} >
   <MDBCard>
     <MDBRipple
       rippleColor='light'

@@ -29,6 +29,7 @@ import Events from '../pages/Event/Events'
 
 //packages
 import OpratePackage from '../pages/Packages/OperatePackages'
+import EditPackage from '../pages/Packages/EditPackages'
 import Package from '../pages/Packages/Packages'
 
 import Test from '../function/test'
@@ -136,7 +137,13 @@ const router = createBrowserRouter([
             //package add
             path: '/pack/add',
             element: <OpratePackage />
-          }, {
+          },
+          {
+            path:"/pack/edit/:packid",
+            element:<EditPackage/>
+
+},
+          {
             path: "/booking/:bookcode",
             element: <OneBooking />,
             action: OneBookingaction,

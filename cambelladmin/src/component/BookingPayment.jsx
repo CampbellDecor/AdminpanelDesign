@@ -13,25 +13,31 @@ import { useSelector } from 'react-redux'
 import {OneBooking} from '../redux/Slice/Booking'
 import { FaRegFilePdf } from 'react-icons/fa'
 import {useAppContext} from '../contexts/AppContext'
+import { FaCcPaypal,FaMoneyBill
+ } from 'react-icons/fa6'
+
 export default function BookingPayment ({bookcode})
 {
-  const { paid} = useSelector(state => OneBooking(state,bookcode))??{};
+  const { paid,paymentType} = useSelector(state => OneBooking(state,bookcode))??{};
   return (
     <MDBCard>
      <MDBCardBody className="my-1">
               <div className="d-flex align-items-center">
                 <div>
-                  <MDBIcon
-                    fab
-                    icon="cc-visa"
-                    size="4x"
-                    className="text-black pe-3"
-                  />
+            {paymentType === 'Paypal' ? <FaCcPaypal size={100} /> :
+              <FaMoneyBill size={100} />
+
+}
+
                 </div>
                 <div>
                   <p className="d-flex flex-column mb-0">
-                    <b>Card</b>
-                    <span className="small text-muted">**** 8880</span>
+                  {paymentType==='Paypal'?<b>Paypal</b>:<b>Cash On Hand</b>
+
+}
+                   {paymentType === 'Paypal' &&<span className='small text-muted'>**** 888*</span>
+
+}
                   </p>
                 </div>
               </div>
@@ -63,7 +69,10 @@ export default function BookingPayment ({bookcode})
                     <MDBRadio name="radioNoLabelX" id="radioNoLabel11" />
                   </div>
                   <div className="d-flex flex-column py-1">
-                    <p className="mb-1 small text-primary">Other amount</p>
+                    <p className="mb-1 small text-primary">{
+  paymentType === 'Paypal' ? 'Refund' : 'Pay'
+}
+ amount</p>
                     <div className="d-flex flex-row align-items-center">
                       <h6 className="mb-0 text-primary pe-1">$</h6>
                       <MDBInput
@@ -80,7 +89,8 @@ export default function BookingPayment ({bookcode})
                 <a href="#!" className="text-muted">
                   <FaRegFilePdf size='22'/>
                 </a>
-                <MDBBtn color='info'>Refund</MDBBtn>
+          <MDBBtn color='info'>{paymentType === 'Paypal'?
+"Refund":"Pay"}</MDBBtn>
               </div>
             </MDBCardBody>
           </MDBCard>
@@ -94,7 +104,7 @@ export function QRShow ({ bookcode })
   const {Applogo } = useAppContext();
   return (
     <MDBContainer className='mt-2'>
-      <Image thumbnail rounded className='w-100' src={qr??Applogo} />
+      <Image thumbnail rounded className='w-100' src="https://images.ctfassets.net/lzny33ho1g45/6TK1TbLNZQ4iHr0PjdZS2Y/ffb5c5646b914435f10b085b012bc78d/zap-qr-1.png?w=1400" />
     </MDBContainer>
   )
 }

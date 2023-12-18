@@ -33,5 +33,5 @@ export const Store = configureStore({
     payhis:PaymentHisSlice,
     task:TaskSlice
   },
-  middleware: [Thunk,logger]
+  middleware: [Thunk]
 })

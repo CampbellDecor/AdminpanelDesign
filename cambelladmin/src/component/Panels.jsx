@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { redirect, useNavigate } from 'react-router-dom'
 import { Col, Badge, Stack, Image } from 'react-bootstrap'
 
 export function CountPanel ({ index, idenity, title, count, path }) {
@@ -8,7 +8,13 @@ export function CountPanel ({ index, idenity, title, count, path }) {
     <div
       className='d-flex  flex-md-row flex-column align-items-center justify-content-lg-around  shadow rounded mx-2 my-2 py-3 my-sm-0 py-sm-2 py-md-5 border-1 home-countpanel-componet'
       key={index}
-      onClick={() => navigate(path)}
+      onClick={() => {
+        if (title === 'FBLikes') {
+          redirect(path);
+        } else {
+          navigate(path)
+        }
+      }}
     >
       <div className='home-countpanel-componet--identiy'>{idenity}</div>
       <div className='home-countpanel-componet--des text-center'>
@@ -19,7 +25,7 @@ export function CountPanel ({ index, idenity, title, count, path }) {
   )
 }
 
-export function ListPanel ({title,items }) {
+export function ListPanel ({ title, items }) {
   return (
     <Col md={5} className='my-3 w-100 count-panel'>
       <h5>{title} Bookings</h5>

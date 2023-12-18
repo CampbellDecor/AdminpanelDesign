@@ -11,10 +11,14 @@ import {
 import { SearchpackByName } from '../redux/Slice/Packages'
 import { EventBySearchName } from '../redux/Slice/Events'
 import { OneBooking } from '../redux/Slice/Booking'
-import { useSelector } from 'react-redux'
-import {Card } from 'react-bootstrap'
-export default function BookingEvents ({ search, bookcode }) {
-  let BookItem
+import { useSelector,useDispatch } from 'react-redux'
+import { Card } from 'react-bootstrap'
+import {ApproveBooking,RejectBooking} from "../redux/Thunks/Booking"
+import { toast } from 'react-toastify';
+export default function BookingEvents ({ search, bookcode })
+{
+  const Dispatcher = useDispatch();
+  let BookItem;
   if (SearchpackByName(search)) {
     BookItem = SearchpackByName(search)
   } else {
@@ -23,8 +27,14 @@ export default function BookingEvents ({ search, bookcode }) {
   const booking = useSelector(state => OneBooking(state, bookcode))
   const onApprove = () =>
   {
-
+    Dispatcher(ApproveBooking(bookcode));
+    toast.success("Active the Event");
   }
+  const onReject = () => {
+  Dispatcher(RejectBooking(bookcode))
+  toast.success('Rejected the Event')
+}
+
   return (
     <MDBCard className='text-black'>
       <MDBCardImage
@@ -51,12 +61,14 @@ export default function BookingEvents ({ search, bookcode }) {
             color='warning'
             className='mx-2'
             disabled={booking?.status !== 'pending'}
+            onClick={onApprove}
           >
             Approve
           </MDBBtn>
           <MDBBtn
             color='danger'
             className='mx-2'
+            onClick={onReject}
           >
             Cancel
           </MDBBtn>

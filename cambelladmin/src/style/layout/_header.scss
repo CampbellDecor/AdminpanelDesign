@@ -3,4 +3,15 @@
 
     .searchbar {
       transition: trns("t_1");
+
+      #searchlist{
+
+        transition: 0.25ms;
+        &::-webkit-scrollbar-button{
+          display: none;
+        }
+        option{
+          background-color: #b07a78;
+        }
+      }
     }}
